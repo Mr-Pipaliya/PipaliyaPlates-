@@ -1,0 +1,174 @@
+  <!DOCTYPE html>
+  <html lang="en">  
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PipaliyaPlates | Gujarati Menu</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+
+    <!-- Header Section -->
+    <header class="main-header">
+      <div class="header-logo">
+        <h1>PipaliyaPlates 🍔</h1>
+      </div>
+      <nav>
+        <a href="Home.htmlssssss" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+        <a href="checkout.html" class="nav-link">Cart</a>
+        <a href="profile.html" class="nav-link profile-link">👤</a>
+      </nav>
+    </header>
+
+    <!-- Cart Info Section -->
+    <section class="cart-info">
+      <h3>Your Cart</h3>
+      <ul id="cart-items"></ul>
+      <p id="cart-total">Total: Rs. 0</p>
+      <button id="checkout-btn" onclick="window.location.href='checkout.html'">Proceed to Checkout</button>
+    </section>
+    
+    <!-- Page Navigation -->
+  <div class="page-nav">
+    <span>Categories:</span>
+    <a href="gujarati.html">1</a>
+    <a href="punjabi.html">2</a>
+    <a href="chinese.html">3</a>
+    <a href="italian.html">4</a>
+    <a href="korean.html">5</a>
+    <a href="southindian.html">6</a>
+    <a href="mexican.html">7</a>
+    <a href="french.html">8</a>
+  </div>
+
+  <div class="nav-buttons">
+  <a href="french.html" class="back-btn">← Back</a>
+  <a href="punjabi.html" class="next-btn">Next →</a>
+</div>
+
+
+    <!-- Menu Section -->
+    <section class="menu-list">
+      <h2>Gujarati Delights</h2>
+    </section>
+
+    <div></div>
+    
+  <div class="menu-grid">
+
+    <div class="menu-item" data-id="1">
+      <img src="https://media.vogue.in/wp-content/uploads/2020/12/oondhiya-1920x1080.jpg" alt="Undhiyu" class="menu-image">
+      <h3>1. Undhiyu</h3>
+      <p>Rs. 220</p>
+      <button class="add-to-cart" onclick="addToCart(1, 'Undhiyu', 220)">Add to Cart</button>
+    </div>
+
+    <div class="menu-item" data-id="2">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbS8ar7AzR1l1fsd45B_IwIWJX42F8EDHG1w&s" alt="Thepla" class="menu-image">
+      <h3>2.   Thepla</h3>
+      <p>Rs. 60</p>
+      <button class="add-to-cart" onclick="addToCart(2, 'Thepla', 60)">Add to Cart</button>
+    </div>
+
+    <div class="menu-item" data-id="3">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQo6q0y_o8gJ68NdtQ9QCSaNSDggj78kZclpg&s" alt="Handvo" class="menu-image">
+      <h3>3. Handvo</h3>
+      <p>Rs. 110</p>
+      <button class="add-to-cart" onclick="addToCart(3, 'Handvo', 110)">Add to Cart</button>
+    </div>
+
+    <div class="menu-item" data-id="4">
+      <img src="https://i.ytimg.com/vi/maUHg3kNE-M/maxresdefault.jpg" alt="Fafda Jalebi" class="menu-image">
+      <h3>4. Fafda Jalebi</h3>
+      <p>Rs. 100</p>
+      <button class="add-to-cart" onclick="addToCart(4, 'Fafda Jalebi', 100)">Add to Cart</button>
+    </div>
+
+    <div class="menu-item" data-id="5">
+      <img src="https://i.ytimg.com/vi/fb73K5-0z6U/maxresdefault.jpg" alt="Sev Tameta Nu Shaak" class="menu-image">
+      <h3>5. Sev Tameta Nu Shaak ane bajarano rotlo </h3>
+      <p>Rs. 130</p>
+      <button class="add-to-cart" onclick="addToCart(5, 'Sev Tameta Nu Shaak', 130)">Add to Cart</button>
+    </div>
+
+    <div class="menu-item" data-id="6">
+      <img src="https://i.ytimg.com/vi/Lc6isU5walM/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLByAP_sFo77FTHK9PrmseOYBQPVRA" alt="Bajri Rotla & Ringan" class="menu-image">
+      <h3>6. Bajri Rotla & Ringan nu sak</h3>
+      <p>Rs. 150</p>
+      <button class="add-to-cart" onclick="addToCart(6, 'Bajri Rotla & Ringan', 150)">Add to Cart</button>
+    </div>
+
+    <div class="menu-item" data-id="7">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqaMPDPpclks7JTiX4LhMEL3S3r73waaBZng&s" alt="Khichdi Kadhi" class="menu-image">
+      <h3>7. Khichdi Kadhi</h3>
+      <p>Rs. 120</p>
+      <button class="add-to-cart" onclick="addToCart(7, 'Khichdi Kadhi', 120)">Add to Cart</button>
+    </div>
+
+    <div class="menu-item" data-id="8">
+      <img src="https://www.nehascookbook.com/wp-content/uploads/2020/11/Lasuni-dal-bhaat-WS.jpg" alt="dal-bhat" class="menu-image">
+      <h3>8. dal-bhat</h3>
+      <p>Rs. 70</p>
+      <button class="add-to-cart" onclick="addToCart(8, 'dal-bhat', 70)">Add to Cart</button>
+    </div>
+
+    <div class="menu-item" data-id="9">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBwlDm4qDYBQOY-KUGB3s1vjKy7VKUNmirJw&s" alt="gujarati special full bhanu" class="menu-image">
+      <h3>9. gujarati special full bhanu </h3>
+      <p>Rs. 170</p>
+      <button class="add-to-cart" onclick="addToCart(9, 'gujarati special full bhanu', 170)">Add to Cart</button>
+    </div>
+
+    <div class="menu-item" data-id="10">
+      <img src="https://www.chezshuchi.com/images/patra-2020.JPG" alt="Patra" class="menu-image">
+      <h3>10. Patra</h3>
+      <p>Rs. 90</p>
+      <button class="add-to-cart" onclick="addToCart(10, 'Patra', 90)">Add to Cart</button>
+    </div>
+
+    <div class="menu-item" data-id="11">
+      <img src="https://images.tv9hindi.com/wp-content/uploads/2021/09/Surti-Locho.jpg" alt="Surti Locho" class="menu-image">
+      <h3>11. Surti Locho</h3>
+      <p>Rs. 110</p>
+      <button class="add-to-cart" onclick="addToCart(11, 'Surti Locho', 110)">Add to Cart</button>
+    </div>
+
+    <div class="menu-item" data-id="12">
+      <img src="https://www.indianhealthyrecipes.com/wp-content/uploads/2019/10/shrikhand-recipe.jpg" alt="Shrikhand" class="menu-image">
+      <h3>12. Shrikhand</h3>
+      <p>Rs. 80</p>
+      <button class="add-to-cart" onclick="addToCart(12, 'Shrikhand', 80)">Add to Cart</button>
+    </div>
+
+    <div class="menu-item" data-id="13">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUFa7aL3dCaRYdtx_7nxnOQA-GCld5ja7dMA&s" alt="Basundi " class="menu-image">
+      <h3>13. Basundi </h3>
+      <p>Rs. 70</p>
+      <button class="add-to-cart" onclick="addToCart(13, 'Basundi ', 70)">Add to Cart</button>
+    </div>
+    
+    <div class="menu-item" data-id="14">
+      <img src="https://static.india.com/wp-content/uploads/2023/01/Winter-Special-Recipe-Gur-Papdi-Sukhdi-From-Gujarat-is-Healthy-Evening-Snack.jpg##image/jpg" alt="Sukhdi" class="menu-image">
+      <h3>14. Sukhdi</h3>
+      <p>Rs. 100</p>
+      <button class="add-to-cart" onclick="addToCart(14, 'Sukhdi', 100)">Add to Cart</button>
+    </div>
+
+    <div class="menu-item" data-id="15">
+      <img src="https://img-cdn.thepublive.com/fit-in/1200x675/filters:format(webp)/sanjeev-kapoor/media/post_banners/5dd6d5e3f51b62b9be8b1ecf3e7d7e9906136873431401f25d2f087d0216bf21.jpg" alt="Doodhpak" class="menu-image">
+      <h3>15. Doodhpak</h3>
+      <p>Rs. 110</p>
+      <button class="add-to-cart" onclick="addToCart(15, 'Doodhpak', 110)">Add to Cart</button>
+    </div>
+  </div>
+
+    <!-- Footer Section -->
+    <footer>
+      <p>&copy; 2025 PipaliyaPlates. Eat Fresh, Eat Desi.</p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+  </html>

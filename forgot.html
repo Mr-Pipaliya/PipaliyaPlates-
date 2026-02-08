@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Forgot Password | PipaliyaPlates</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      background: linear-gradient(135deg, #fff0f5, #ffe4e1);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+      min-height: 100vh;
+      animation: fadeIn 1s ease-in;
+    }
+    header.main-header {
+      background-color: #ff5e5e;
+      width: 100%;
+      padding: 20px;
+      color: white;
+      font-size: 2rem;
+      font-weight: bold;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 20px;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+    h2 {
+      color: #ff5e5e;
+      margin-bottom: 20px;
+      font-size: 2rem;
+      animation: fadeInUp 1s ease-in;
+    }
+    form.forgot-form {
+      background-color: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+      width: 100%;
+      max-width: 400px;
+      display: flex;
+      flex-direction: column;
+      animation: fadeInUp 1.2s ease-in;
+    }
+    label {
+      text-align: left;
+      margin-bottom: 8px;
+      font-weight: bold;
+      color: #333;
+    }
+    input[type="email"] {
+      padding: 12px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: border-color 0.3s;
+    }
+    input:focus {
+      border-color: #ff5e5e;
+      outline: none;
+    }
+    button[type="submit"] {
+      padding: 12px;
+      background-color: #ff5e5e;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    button[type="submit"]:hover {
+      background-color: #e14c4c;
+      transform: scale(1.05);
+    }
+    .extra-links {
+      margin-top: 15px;
+      text-align: center;
+      font-size: 0.95rem;
+    }
+    .extra-links a {
+      color: #ff5e5e;
+      text-decoration: none;
+      margin: 0 5px;
+      transition: color 0.3s;
+    }
+    .extra-links a:hover {
+      color: #e14c4c;
+    }
+    footer.main-footer {
+      margin-top: auto;
+      font-size: 0.9rem;
+      color: #888;
+      text-align: center;
+      animation: fadeInUp 1.4s ease-in;
+    }
+  </style>
+</head>
+<body>
+  <header class="main-header">PipaliyaPlates 🍕</header>
+  <h2>Forgot Password</h2>
+  
+  <form class="forgot-form" onsubmit="return handleForgot(event)">
+    <label for="forgot-email">Enter your email to reset password</label>
+    <input type="email" id="forgot-email" name="forgot-email" required placeholder="Enter your email">
+    <button type="submit">Send Reset Link</button>
+  </form>
+
+  <div class="extra-links">
+    <p><a href="index.html">← Back to Login</a></p>
+  </div>
+
+  <footer class="main-footer">&copy; 2025 PipaliyaPlates. All Rights Reserved.</footer>
+
+  <script>
+    function handleForgot(event) {
+      event.preventDefault();
+      alert('Reset link sent to your email!');
+      window.location.href = "index.html"; // back to login
+      return false;
+    }
+  </script>
+</body>
+</html>

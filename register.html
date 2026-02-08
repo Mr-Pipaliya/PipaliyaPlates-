@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Register | PipaliyaPlates</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      background: linear-gradient(135deg, #fff0f5, #ffe4e1);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+      min-height: 100vh;
+      animation: fadeIn 1s ease-in;
+    }
+    header.main-header {
+      background-color: #ff5e5e;
+      width: 100%;
+      padding: 20px;
+      color: white;
+      font-size: 2rem;
+      font-weight: bold;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 20px;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+    h2 {
+      color: #ff5e5e;
+      margin-bottom: 20px;
+      font-size: 2rem;
+      animation: fadeInUp 1s ease-in;
+    }
+    form.register-form {
+      background-color: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+      width: 100%;
+      max-width: 400px;
+      display: flex;
+      flex-direction: column;
+      animation: fadeInUp 1.2s ease-in;
+    }
+    label {
+      text-align: left;
+      margin-bottom: 8px;
+      font-weight: bold;
+      color: #333;
+    }
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+      padding: 12px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: border-color 0.3s;
+    }
+    input:focus {
+      border-color: #ff5e5e;
+      outline: none;
+    }
+    button {
+      padding: 12px;
+      background-color: #ff5e5e;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    button:hover {
+      background-color: #e14c4c;
+      transform: scale(1.05);
+    }
+    .extra-links {
+      margin-top: 15px;
+      text-align: center;
+      font-size: 0.95rem;
+    }
+    .extra-links a {
+      color: #ff5e5e;
+      text-decoration: none;
+      margin: 0 5px;
+      transition: color 0.3s;
+    }
+    .extra-links a:hover {
+      color: #e14c4c;
+    }
+    footer.main-footer {
+      margin-top: auto;
+      font-size: 0.9rem;
+      color: #888;
+      text-align: center;
+      animation: fadeInUp 1.4s ease-in;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @media (max-width: 768px) {
+      h2 { font-size: 1.8rem; }
+      form.register-form { padding: 20px; }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="main-header">PipaliyaPlates 🍕</header>
+  <h2>Create Your Account</h2>
+  <form class="register-form" onsubmit="return handleRegister(event)">
+    <label for="name">Full Name</label>
+    <input type="text" id="name" name="name" required placeholder="Enter your full name">
+
+    <label for="email">Email Address</label>
+    <input type="email" id="email" name="email" required placeholder="Enter your email">
+
+    <label for="password">Password</label>
+<div class="password-container">
+  <input type="password" id="password" name="password" required placeholder="Create a password">
+  <button type="button" class="toggle-password" onclick="togglePassword()">👁️</button>
+</div>
+
+    <button type="submit">Register</button>
+  </form>
+  <div class="extra-links">
+    <p>Already have an account? <a href="index.html">Login</a></p>
+    <p><a href="home.html">← Back to Home</a></p>
+  </div>
+  <footer class="main-footer">&copy; 2025 PipaliyaPlates. All Rights Reserved.</footer>
+
+  <script>
+  function handleRegister(event) {
+    event.preventDefault();
+    // For now, just redirect after "register"
+    window.location.href = "index.html"; // back to login page after register
+    return false;
+  }
+
+  function togglePassword() {
+  const passwordField = document.getElementById('password');
+  const toggleBtn = document.querySelector('.toggle-password');
+  if (passwordField.type === 'password') {
+    passwordField.type = 'text';
+    toggleBtn.textContent = '🙈';
+  } else {
+    passwordField.type = 'password';
+    toggleBtn.textContent = '👁️';
+  }
+}
+
+  </script>
+</body>
+</html>

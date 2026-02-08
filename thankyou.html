@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Thank You | PipaliyaPlates</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background: linear-gradient(135deg, #fff0f5, #ffe4e1);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      text-align: center;
+      padding: 40px 20px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      animation: fadeIn 1s ease-in;
+    }
+    header {
+      background-color: #ff5e5e;
+      width: 100%;
+      padding: 20px;
+      color: white;
+      font-size: 2.5rem;
+      font-weight: bold;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 20px;
+      margin-bottom: 30px;
+    }
+    .thank-you-icon {
+      font-size: 6rem;
+      animation: bounce 1.5s infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+    h1 {
+      font-size: 3.5rem;
+      color: #ff5e5e;
+      margin-top: 20px;
+      animation: fadeInUp 1s ease-in;
+    }
+    p {
+      font-size: 1.3rem;
+      color: #444;
+      margin-top: 15px;
+      max-width: 600px;
+      animation: fadeInUp 1.2s ease-in;
+    }
+    .order-details {
+      margin-top: 40px;
+      background-color: white;
+      display: inline-block;
+      padding: 25px 30px;
+      border-radius: 15px;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+      text-align: left;
+      animation: fadeInUp 1.4s ease-in;
+    }
+    .order-details h2 {
+      font-size: 1.8rem;
+      color: #ff5e5e;
+      margin-bottom: 15px;
+    }
+    .order-details p {
+      margin: 8px 0;
+      font-size: 1.1rem;
+      color: #555;
+    }
+    a {
+      display: inline-block;
+      margin-top: 40px;
+      padding: 14px 30px;
+      background-color: #ff5e5e;
+      color: white;
+      text-decoration: none;
+      border-radius: 10px;
+      font-weight: bold;
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+      animation: fadeInUp 1.6s ease-in;
+    }
+    a:hover {
+      background-color: #e14c4c;
+      transform: scale(1.05);
+    }
+    footer {
+      margin-top: 50px;
+      font-size: 0.9rem;
+      color: #888;
+      animation: fadeInUp 1.8s ease-in;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    /* Confetti Styling */
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: #ff5e5e;
+      animation: confetti-fall 4s linear infinite;
+    }
+    @keyframes confetti-fall {
+      0% { transform: translateY(-10px) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+    }
+    @media (max-width: 768px) {
+      h1 { font-size: 2.5rem; }
+      .order-details { padding: 20px; }
+      a { padding: 12px 25px; font-size: 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>PipaliyaPlates</header>
+
+  <!-- Confetti Elements -->
+  <script>
+    for (let i = 0; i < 100; i++) {
+      let confetti = document.createElement('div');
+      confetti.classList.add('confetti');
+      confetti.style.left = Math.random() * 100 + 'vw';
+      confetti.style.backgroundColor = ['#ff5e5e', '#ffc107', '#28a745', '#17a2b8'][Math.floor(Math.random() * 4)];
+      confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
+      document.body.appendChild(confetti);
+    }
+  </script>
+
+  <div class="thank-you-icon">🎉</div>
+
+  <h1>Payment Successful!</h1>
+  <p>Thank you for ordering from <strong>PipaliyaPlates</strong>
+    <br>Your delicious meal is on its way! 🚀🍽️</p>
+
+  <div class="order-details">
+    <h2>📦 Order Summary</h2>
+    <p><strong>Order Number:</strong> #PF123456</p>
+    <p><strong>Estimated Delivery:</strong> 30-40 Minutes</p> 
+    <p><strong>Payment Method:</strong> Online (UPI/Card)</p>
+    <p><strong>Need Help?</strong> Contact us: <a href="tel:1800800600" style="color: #ffffff;">1800-800-600</a></p>
+  </div>
+
+  <a href="Home.html">Go Back to Home</a>
+
+  <footer>&copy; 2025 PipaliyaPlates. All rights reserved.</footer>
+</body>
+</html>

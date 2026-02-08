@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PipaliyaPlates | Korean Menu</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Header Section -->
+  <header class="main-header">
+    <div class="header-logo">
+      <h1>PipaliyaPlates 🍜</h1>
+    </div>
+    <nav>
+      <a href="Home.html" class="nav-link">Home</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+      <a href="checkout.html" class="nav-link">Cart</a>
+      <a href="profile.html" class="nav-link profile-link">👤</a>
+    </nav>
+  </header>
+
+   <!-- Cart Info Section -->
+   <section class="cart-info">
+    <h3>Your Cart</h3>
+    <ul id="cart-items"></ul>
+    <p id="cart-total">Total: Rs. 0</p>
+    <button id="checkout-btn" onclick="window.location.href='checkout.html'">Proceed to Checkout</button>
+  </section>
+
+   <!-- Page Navigation -->
+<div class="page-nav">
+  <span>Categories:</span>
+  <a href="gujarati.html">1</a>
+  <a href="punjabi.html">2</a>
+  <a href="chinese.html">3</a>
+  <a href="italian.html">4</a>
+  <a href="korean.html">5</a>
+  <a href="southindian.html">6</a>
+  <a href="mexican.html">7</a>
+  <a href="french.html">8</a>
+</div>
+
+<div class="nav-buttons">
+  <a href="italian.html" class="back-btn">← Back</a>
+  <a href="southindian.html" class="next-btn">Next →</a>
+</div>
+
+
+
+  <!-- Menu Section -->
+  <section class="menu-list">
+    <h2>Korean Vegetarian Delights</h2>
+  </section>
+
+  <div class="menu-grid">
+    <div class="menu-item" data-id="1">
+      <img src="https://sugaryums.com/wp-content/uploads/2023/03/Baechu-Kimchi-Cabbage-Kimchi-Recipe-SugarYums-17.jpg" class="menu-image">
+      <h3>1. Kimchi</h3>
+      <p>Rs. 150</p>
+      <button class="add-to-cart" onclick="addToCart(1, 'Kimchi', 150)">Add to Cart</button>
+    </div>
+
+    <div class="menu-item" data-id="2">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRt9GmEpSLuWFNPQRjcA2ksMS2MbkGepVcOZA&s">
+      <h3>2. Vegetarian Bulgogi</h3>
+      <p>Rs. 280</p>
+      <button class="add-to-cart" onclick="addToCart(2, 'Vegetarian Bulgogi', 280)">Add to Cart</button>
+    </div>
+
+    <div class="menu-item" data-id="3">
+      <img src="https://okonomikitchen.com/wp-content/uploads/2019/08/vegan-kimchi-pancakes-1-of-1-1024x683.jpg" alt="Vegetarian Kimbap" class="menu-image">
+      <h3>3. Vegetarian Kimbap</h3>
+      <p>Rs. 200</p>
+      <button class="add-to-cart" onclick="addToCart(3, 'Vegetarian Kimbap', 200)">Add to Cart</button>
+    </div>
+
+    <div class="menu-item" data-id="4">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTB3y-a8nO-pc7hc4YcmXW51ksWX_WoJOK6uQ&s" alt="Tofu Bulgogi" class="menu-image">
+      <h3>4. Tofu Bulgogi</h3>
+      <p>Rs. 270</p>
+      <button class="add-to-cart" onclick="addToCart(4, 'Tofu Bulgogi', 270)">Add to Cart</button>
+    </div>
+
+    <div class="menu-item" data-id="5">
+      <img src="https://gastroplant.com/wp-content/uploads/2019/11/1910_Vegan-Kimchi-Jjigae_001.jpg" alt="Vegetable Jjigae" class="menu-image">
+      <h3>5. Vegetable Jjigae</h3>
+      <p>Rs. 230</p>
+      <button class="add-to-cart" onclick="addToCart(5, 'Vegetable Jjigae', 230)">Add to Cart</button>
+    </div>
+
+    <div class="menu-item" data-id="6">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZFn7YYRg2yZF6eykj2lgYrUY6jmPI2POH6A&s" alt="Kimchi Bokkeumbap" class="menu-image">
+      <h3>6. Kimchi Bokkeumbap (Kimchi Fried Rice)</h3>
+      <p>Rs. 220</p>
+      <button class="add-to-cart" onclick="addToCart(6, 'Kimchi Bokkeumbap', 220)">Add to Cart</button>
+    </div>
+
+    <div class="menu-item" data-id="7">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiYv0E8mRZ88g5GgLwlJRfsxRXDhpXRrbRUA&s" alt="Vegetable Ddukbokki" class="menu-image">
+      <h3>7. Vegetable Ddukbokki</h3>
+      <p>Rs. 250</p>
+      <button class="add-to-cart" onclick="addToCart(7, 'Vegetable Ddukbokki', 250)">Add to Cart</button>
+    </div>
+
+    <div class="menu-item" data-id="8">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0glPy23F_xS4qZe91Zh415MOjVTNEtSAdjQ&s" alt="Vegetable Pajeon" class="menu-image">
+      <h3>8. Vegetable Pajeon</h3>
+      <p>Rs. 210</p>
+      <button class="add-to-cart" onclick="addToCart(8, 'Vegetable Pajeon', 210)">Add to Cart</button>
+    </div>
+
+    <div class="menu-item" data-id="9">
+      <img src="https://www.koreanbapsang.com/wp-content/uploads/2016/08/putbaechu-doenjang-muchim-photo-e1471843121939.jpg " alt="Vegetarian Banchan" class="menu-image">
+      <h3>9. Vegetarian Banchan (Korean Side Dishes)</h3>
+      <p>Rs. 150</p>
+      <button class="add-to-cart" onclick="addToCart(9, 'Vegetarian Banchan', 150)">Add to Cart</button>
+    </div>
+
+    <div class="menu-item" data-id="10">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6Njv8zdx44KD528gaxi4DOsmAb7_V5_HulA&s" alt="Vegetarian Sundubu Jjigae" class="menu-image">
+      <h3>10. Vegetarian Sundubu Jjigae</h3>
+      <p>Rs. 280</p>
+      <button class="add-to-cart" onclick="addToCart(10, 'Vegetarian Sundubu Jjigae', 280)">Add to Cart</button>
+    </div>
+
+    <div class="menu-item" data-id="11">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdPgxuYFkdLM5wAcL6rhyLBkrTE-0Iyrr82w&s" alt="Vegetarian Bibimbap" class="menu-image">
+      <h3>11. Vegetarian Bibimbap</h3>
+      <p>Rs. 270</p>
+      <button class="add-to-cart" onclick="addToCart(11, 'Vegetarian Bibimbap', 270)">Add to Cart</button>
+    </div>
+
+    <div class="menu-item" data-id="12">
+      <img src="https://mykoreankitchen.com/wp-content/uploads/2006/12/1.-Tofu-Kimchi-Dubu-Kimchi-480x270.jpg" alt="Tofu Kimchi Bap" class="menu-image">
+      <h3>12. Tofu Kimchi Bap</h3>
+      <p>Rs. 240</p>
+      <button class="add-to-cart" onclick="addToCart(12, 'Tofu Kimchi Bap', 240)">Add to Cart</button>
+    </div>
+
+    <div class="menu-item" data-id="13">
+      <img src="https://vegan8korean.wordpress.com/wp-content/uploads/2012/03/dongchimi-2.jpg" alt="Vegetable Dongchimi" class="menu-image">
+      <h3>13. Vegetable Dongchimi (Korean Radish Kimchi)</h3>
+      <p>Rs. 180</p>
+      <button class="add-to-cart" onclick="addToCart(13, 'Vegetable Dongchimi', 180)">Add to Cart</button>
+    </div>
+
+    <div class="menu-item" data-id="14">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTixNxKr0n0LQKBnMPX-vn1to3jT7e4EmVvcg&s" alt="Vegetable Tteokguk" class="menu-image">
+      <h3>14. Vegetable Tteokguk</h3>
+      <p>Rs. 250</p>
+      <button class="add-to-cart" onclick="addToCart(14, 'Vegetable Tteokguk', 250)">Add to Cart</button>
+    </div>
+
+    <div class="menu-item" data-id="15">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKZ34xWuZldCxHDzEiuwBdqLXYy9P_oFtIfg&s" alt="Vegetarian Jajangmyeon" class="menu-image">
+      <h3>15. Vegetarian Jajangmyeon</h3>
+      <p>Rs. 290</p>
+      <button class="add-to-cart" onclick="addToCart(15, 'Vegetarian Jajangmyeon', 290)">Add to Cart</button>
+    </div>
+  </div>
+
+  <!-- Footer Section -->
+  <footer>
+    <p>&copy; 2025 PipaliyaPlates. Eat Fresh, Eat Korean.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
