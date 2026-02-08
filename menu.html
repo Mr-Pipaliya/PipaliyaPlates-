@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PipaliyaPlates | Menu</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Header Section -->
+  <header class="main-header">
+    <div class="header-logo">
+      <h1>PipaliyaPlates 🍔</h1>
+    </div>
+    <nav>
+      <a href="Home.html" class="nav-link">Home</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+      <a href="checkout.html" class="nav-link">Cart</a>
+      <a href="profile.html" class="nav-link profile-link">👤</a>
+    </nav>
+  </header>
+
+  <!-- Cart Info Section -->
+  <section class="cart-info">
+    <h3>Your Cart</h3>
+    <ul id="cart-items">
+      <!-- Items will appear here dynamically -->
+    </ul>
+    <p id="cart-total">Total: Rs. 0</p>
+    <button id="checkout-btn" onclick="window.location.href='checkout.html'">Proceed to Checkout</button>
+  </section>
+
+  <!-- Menu Section -->
+  <section class="menu-list">
+    <h2>Delicious Dishes</h2>
+    <!-- Your dishes go here -->
+  </section>
+
+  <div class="menu-grid">
+    <div class="menu-item" data-id="25">
+      <img src="https://static.toiimg.com/thumb/61050397.cms?width=1200&height=900" alt="Samosa" class="menu-image">
+      <h3>Samosa</h3>
+      <p>Rs. 40 </p>
+      <p>2 Piece</p>
+      <button class="add-to-cart" onclick="addToCart(25, 'Samosa', 40)">Add to Cart</button>
+    </div>    
+    <div class="menu-item" data-id="10">
+      <img src="https://www.awesomecuisine.com/wp-content/uploads/2007/11/Pani-Puri-500x375.jpg" alt="Pani Puri" class="menu-image">
+      <h3>Pani Puri</h3>
+      <p>Rs. 50</p>
+      <p>10 Balls</p>
+      <button class="add-to-cart" onclick="addToCart(10, 'Pani Puri', 50)">Add to Cart</button>
+    </div> 
+    <div class="menu-item" data-id="9">
+      <img src="https://www.simplyrecipes.com/thmb/M3LEdeKC37xv52FUmIBFJVXKBFY=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Simply-Recipes-Mango-Lassi-LEAD-13-73719759cc3f4a2ca7fe8be72baaeaab.jpg" alt="Mango Lassi" class="menu-image">
+      <h3>Mango Lassi</h3>
+      <p>Rs. 60</p>
+      <p>1 glass</p>
+      <button class="add-to-cart" onclick="addToCart(9, 'Mango Lassi', 60)">Add to Cart</button>
+    </div>
+    <div class="menu-item" data-id="19">
+      <img src="https://www.allrecipes.com/thmb/RdyL1EgIB0Qq_fr5HjdsAmcpMlU=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/228553-moist-chocolate-muffins-DDMFS-4x3-a9f73a46938547c99d921613dc167741.jpg" alt="Chocolate Muffin" class="menu-image">
+      <h3>Chocolate Muffin</h3>
+      <p>Rs. 60</p>
+      <p>4 Piece</p>
+      <button class="add-to-cart" onclick="addToCart(19, 'Chocolate Muffin', 60)">Add to Cart</button>
+    </div> 
+    <div class="menu-item" data-id="17">
+      <img src="https://www.jagranimages.com/images/newimg/khanakhazana/02_2024-french_fries_recipe.webp" alt="French Fries" class="menu-image">
+      <h3>French Fries</h3>
+      <p>Rs. 70</p>
+      <p>1 plate</p>
+      <button class="add-to-cart" onclick="addToCart(17, 'French Fries', 70)">Add to Cart</button>
+    </div>  
+    <div class="menu-item" data-id="8">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpridNzzU09HIIGpVPQ9XhWqay-q7NrMj1yg&s" alt="Gulab Jamun" class="menu-image">
+      <h3>Gulab Jamun</h3>
+      <p>Rs. 80</p>
+      <p>6 piece</p>
+      <button class="add-to-cart" onclick="addToCart(8, 'Gulab Jamun', 80)">Add to Cart</button>
+    </div>
+    <div class="menu-item" data-id="16">
+      <img src="https://www.maggi.in/sites/default/files/srh_recipes/9cc96dc3b0168582c17fe2d98218026a.jpg" alt="Aloo Paratha" class="menu-image">
+      <h3>Aloo Paratha</h3>
+      <p>Rs. 90</p>
+      <p>3 piece</p>
+      <button class="add-to-cart" onclick="addToCart(16, 'Aloo Paratha', 90)">Add to Cart</button>
+    </div>
+    <div class="menu-item" data-id="20">
+      <img src="https://lorcoffee.com/cdn/shop/articles/Dark-Chocolate-Ice-Coffee-with-Provocateur-exc.jpg?v=1675806078" alt="Cold Coffee" class="menu-image">
+      <h3>Cold Coffee</h3>
+      <p>Rs. 90</p>
+      <p>1 cup</p>
+      <button class="add-to-cart" onclick="addToCart(20, 'Cold Coffee', 90)">Add to Cart</button>
+    </div>
+    <div class="menu-item" data-id="24">
+      <img src="https://img-global.cpcdn.com/recipes/2ece5f8426d2b1c2/680x482cq70/rabdi-rasgulla-recipe-main-photo.jpg" alt="Rasgulla" class="menu-image">
+      <h3>Rasgulla</h3>
+      <p>Rs. 90</p>
+      <p>6 piece</p>
+      <button class="add-to-cart" onclick="addToCart(24, 'Rasgulla', 90)">Add to Cart</button>
+    </div>  
+    <div class="menu-item" data-id="5">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQACh1yWbIwNiWJOZ-8lkt9oGkf5cdMK4DV8Q&s" alt="Masala Dosa" class="menu-image">
+      <h3>Masala Dosa</h3>
+      <p>Rs. 100</p>
+      <p>2 paper</p>
+      <p>chutney + sambhar</p>
+      <button class="add-to-cart" onclick="addToCart(5, 'Masala Dosa', 100)">Add to Cart</button>
+    </div>
+    <div class="menu-item" data-id="14">
+      <img src="https://www.simplyrecipes.com/thmb/0NrKQlJ691l6L9tZXpL06uOuWis=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Simply-Recipes-Easy-Greek-Salad-LEAD-2-4601eff771fd4de38f9722e8cafc897a.jpg" alt="Greek Salad" class="menu-image">
+      <h3>Greek Salad</h3>
+      <p>Rs. 110</p>
+      <p>1 plate</p>
+      <button class="add-to-cart" onclick="addToCart(14, 'Greek Salad', 110)">Add to Cart</button>
+    </div> 
+    <div class="menu-item" data-id="21">
+      <img src="https://californiaavocado.com/wp-content/uploads/2023/04/AvoBaconGrilledCheese_0011-scaled-e1682914545487.jpg" alt="Grilled Cheese Sandwich" class="menu-image">
+      <h3>Grilled Cheese Sandwich</h3>
+      <p>Rs. 110</p>
+      <p>2 piece</p>
+      <button class="add-to-cart" onclick="addToCart(21, 'Grilled Cheese Sandwich', 110)">Add to Cart</button>
+    </div>  
+    <div class="menu-item" data-id="1">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6d6HsMbInzzAryQqK9xwyP6wYepKKx7pS1g&s" alt="Gujarati Thali" class="menu-image">
+      <h3>Gujarati Thali</h3>
+      <p>Rs. 120</p>
+      <p>full dish </p>
+      <button class="add-to-cart" onclick="addToCart(1, 'Gujarati Thali', 120)">Add to Cart</button>
+    </div> 
+    <div class="menu-item" data-id="12">
+      <img src="https://thumbs.dreamstime.com/b/burger-french-fries-basket-tartan-tablecloth-ketchup-mustard-bottle-background-close-up-135319836.jpg" alt="Cheese Burger" class="menu-image">
+      <h3>Cheese Burger</h3>
+      <p>Rs. 130</p>
+      <p>1 piece </p>
+      <p>cold drink + French Fries</p>
+      <button class="add-to-cart" onclick="addToCart(12, 'Cheese Burger', 130)">Add to Cart</button>
+    </div> 
+    <div class="menu-item" data-id="18">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPyUSqrcFI8HMayp8V6IhE4FM9pun9HA_FwA&s" alt="Falafel Wrap" class="menu-image">
+      <h3>Falafel Wrap</h3>
+      <p>Rs. 130</p>
+      <p>2 piece</p>
+      <button class="add-to-cart" onclick="addToCart(18, 'Falafel Wrap', 130)">Add to Cart</button>
+    </div>  
+    <div class="menu-item" data-id="3">
+      <img src="https://www.mygingergarlickitchen.com/wp-content/rich-markup-images/4x3/4x3-vegetable-hakka-noodles.jpg" alt="Veg Hakka Noodles" class="menu-image">
+      <h3>Veg Hakka Noodles</h3>
+      <p>Rs. 140</p>
+      <p>1 Bowl</p>
+      <button class="add-to-cart" onclick="addToCart(3, 'Veg Hakka Noodles', 140)">Add to Cart</button>
+    </div> 
+    <div class="menu-item" data-id="7">
+      <img src="https://www.thespruceeats.com/thmb/ereeBcFkDEbDT2VSlDe34sqXO_8=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/chicken-tinga-tinga-de-pollo-4773239-Hero_01-1bd1d960c02a4fdb812323b8c60fd55b.jpg" alt="Mexican Tacos" class="menu-image">
+      <h3>Mexican Tacos</h3>
+      <p>Rs. 150</p>
+      <p>4 piece</p>
+      <button class="add-to-cart" onclick="addToCart(7, 'Mexican Tacos', 150)">Add to Cart</button>
+    </div>  
+    <div class="menu-item" data-id="23">
+      <img src="https://img-global.cpcdn.com/recipes/90da6123069afe1e/680x482cq70/gujarati-undhiyu-recipe-main-photo.jpg" alt="Undhiyu" class="menu-image">
+      <h3>Undhiyu</h3>
+      <p>Rs. 150</p>
+      <p>chass included</p>
+      <button class="add-to-cart" onclick="addToCart(23, 'Undhiyu', 150)">Add to Cart</button>
+    </div> 
+    <div class="menu-item" data-id="2">
+      <img src="https://vegecravings.com/wp-content/uploads/2017/04/paneer-butter-masala-recipe-step-by-step-instructions.jpg" alt="Paneer Butter Masala" class="menu-image">
+      <h3>Paneer Butter Masala</h3>
+      <p>Rs. 160</p>
+      <p>Paratha + Lassi</p>    
+      <button class="add-to-cart" onclick="addToCart(2, 'Paneer Butter Masala', 160)">Add to Cart</button>
+    </div> 
+    <div class="menu-item" data-id="15">
+      <img src="https://static.toiimg.com/thumb/msid-112019658,width-1280,height-720,resizemode-4/112019658.jpg" alt="ice-cream" class="menu-image">
+      <h3>ice-cream</h3>
+      <p>Rs. 160</p>
+      <p>1 Bowl</p>
+      <button class="add-to-cart" onclick="addToCart(15, 'ice-cream', 160)">Add to Cart</button>
+    </div>
+    <div class="menu-item" data-id="6">
+      <img src="https://www.australianeggs.org.au/assets/Uploads/Egg-fried-rice-2.jpg" alt="Fried Rice" class="menu-image">
+      <h3>Fried Rice</h3>
+      <p>Rs. 170</p>
+      <p>1 plate</p>
+      <button class="add-to-cart" onclick="addToCart(6, 'Fried Rice', 170)">Add to Cart</button>
+    </div> 
+    <div class="menu-item" data-id="4">
+      <img src="https://www.yumcurry.com/wp-content/uploads/2020/06/pizza-margherita-recipe-480x270.jpg" alt="Margherita Pizza" class="menu-image">
+      <h3>Margherita Pizza</h3>
+      <p>Rs. 180</p>
+      <p>cold drink Free</p>
+      <button class="add-to-cart" onclick="addToCart(4, 'Margherita Pizza', 180)">Add to Cart</button>
+    </div>
+    <div class="menu-item" data-id="13">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQaeBlIywcv4RMaVlvzAk-ygkpjyiX0juwM6Q&s" alt="Hyderabadi veg Dum Biryani" class="menu-image">
+      <h3>Hyderabadi veg Dum Biryani</h3>
+      <p>Rs. 190</p>
+      <p>1 Bowl</p>
+      <button class="add-to-cart" onclick="addToCart(13, 'Hyderabadi veg Dum Biryani', 190)">Add to Cart</button>
+    </div>  
+    <div class="menu-item" data-id="22">
+      <img src="https://vaya.in/recipes/wp-content/uploads/2018/12/Authentic-Thai-Green-Curry.jpg" alt="Thai Green Curry" class="menu-image">
+      <h3>Thai Green Curry</h3>
+      <p>Rs. 200</p>
+      <p>1 Bowl</p>
+      <button class="add-to-cart" onclick="addToCart(22, 'Thai Green Curry', 200)">Add to Cart</button>
+    </div> 
+    <div class="menu-item" data-id="11">
+      <img src="https://i0.wp.com/s.lightorangebean.com/media/20240914151841/Veggie-Sushi-Rolls_-done.png?resize=480%2C270&quality=80&ssl=1" alt="veg Sushi Roll" class="menu-image">
+      <h3>veg Sushi Roll</h3>
+      <p>Rs. 220</p>
+      <p>8 piece</p>
+      <button class="add-to-cart" onclick="addToCart(11, 'vwg==eg Sushi Roll', 220)">Add to Cart</button>
+    </div>
+
+    <div class="menu-item" data-id="12">
+      <img src="https://i.ytimg.com/vi/lvQn9VNjqkM/maxresdefault.jpg" alt="Kulfi (Malai, Pista, Mango)" class="menu-image">
+      <h3>Kulfi (Malai, Pista, Mango)</h3>
+      <p>Rs. 60</p>
+      <p>3 piece</p>
+      <button class="add-to-cart" onclick="addToCart(11, 'Kulfi (Malai, Pista, Mango)', 60)">Add to Cart</button>
+    </div>
+
+    <div class="menu-item" data-id="13">
+      <img src="https://t3.ftcdn.net/jpg/08/59/46/76/360_F_859467637_WZvuoqUI9NjK9SPqku8EurxLq8vq5nlt.jpg" alt="stick ice cream" class="menu-image">
+      <h3>stick ice cream</h3>
+      <p>Rs. 50</p>
+      <p>3 piece</p>
+      <p>bye on get one free</p>
+      <button class="add-to-cart" onclick="addToCart(11, 'stick ice cream', 50)">Add to Cart</button>
+    </div>
+
+    <div class="menu-item" data-id="12">
+      <img src="https://i.ytimg.com/vi/lvQn9VNjqkM/maxresdefault.jpg" alt="veg Sushi Roll" class="menu-image">
+      <h3>Kulfi (Malai, Pista, Mango)</h3>
+      <p>Rs. 60</p>
+      <p>3 piece</p>
+      <button class="add-to-cart" onclick="addToCart(11, 'Kulfi (Malai, Pista, Mango)', 60)">Add to Cart</button>
+    </div>
+
+    <div class="menu-item" data-id="12">
+      <img src="https://i.ytimg.com/vi/lvQn9VNjqkM/maxresdefault.jpg" alt="veg Sushi Roll" class="menu-image">
+      <h3>Kulfi (Malai, Pista, Mango)</h3>
+      <p>Rs. 60</p>
+      <p>3 piece</p>
+      <button class="add-to-cart" onclick="addToCart(11, 'Kulfi (Malai, Pista, Mango)', 60)">Add to Cart</button>
+    </div>
+
+    <div class="menu-item" data-id="12">
+      <img src="https://i.ytimg.com/vi/lvQn9VNjqkM/maxresdefault.jpg" alt="veg Sushi Roll" class="menu-image">
+      <h3>Kulfi (Malai, Pista, Mango)</h3>
+      <p>Rs. 60</p>
+      <p>3 piece</p>
+      <button class="add-to-cart" onclick="addToCart(11, 'Kulfi (Malai, Pista, Mango)', 60)">Add to Cart</button>
+    </div>
+    
+  </div> 
+      
+  </section>
+
+  <!-- Footer Section -->
+  <footer>
+    <p>&copy; 2025 PipaliyaPlates. Eat Fresh, Eat Desi.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>      

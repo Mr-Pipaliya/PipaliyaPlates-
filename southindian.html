@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PipaliyaPlates | South Indian Menu</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Header Section -->
+  <header class="main-header">
+    <div class="header-logo">
+      <h1>PipaliyaPlates 🍛</h1>
+    </div>
+    <nav>
+      <a href="Home.html" class="nav-link">Home</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+      <a href="checkout.html" class="nav-link">Cart</a>
+      <a href="profile.html" class="nav-link profile-link">👤</a>
+    </nav>
+  </header>
+
+  <!-- Cart Info Section -->
+  <section class="cart-info">
+    <h3>Your Cart</h3>
+    <ul id="cart-items"></ul>
+    <p id="cart-total">Total: Rs. 0</p>
+    <button id="checkout-btn" onclick="window.location.href='checkout.html'">Proceed to Checkout</button>
+  </section> 
+
+   <!-- Page Navigation -->
+<div class="page-nav">
+  <span>Categories:</span>
+  <a href="gujarati.html">1</a>
+  <a href="punjabi.html">2</a>
+  <a href="chinese.html">3</a>
+  <a href="italian.html">4</a>
+  <a href="korean.html">5</a>
+  <a href="southindian.html">6</a>
+  <a href="mexican.html">7</a>
+  <a href="french.html">8</a>
+</div>
+
+<div class="nav-buttons">
+  <a href="korean.html" class="back-btn">← Back</a>
+  <a href="mexican.html" class="next-btn">Next →</a>
+</div>
+
+
+  <!-- Menu Section -->
+  <section class="menu-list">
+    <h2>South Indian Vegetarian Specialties</h2>
+  </section>
+
+  <div class="menu-grid">
+    <div class="menu-item" data-id="1">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQACh1yWbIwNiWJOZ-8lkt9oGkf5cdMK4DV8Q&s" alt="Dosa" class="menu-image">
+      <h3>1. Dosa</h3>
+      <p>Rs. 120</p>
+      <button class="add-to-cart" onclick="addToCart(1, 'Dosa', 120)">Add to Cart</button>
+    </div>
+
+    <div class="menu-item" data-id="2">
+      <img src="https://yummy-valley.com/wp-content/uploads/2024/01/millet-idli.webp" alt="Idli" class="menu-image">
+      <h3>2. Idli</h3>
+      <p>Rs. 100</p>
+      <button class="add-to-cart" onclick="addToCart(2, 'Idli', 100)">Add to Cart</button>
+    </div>
+
+    <div class="menu-item" data-id="3">
+      <img src="https://aahaaramonline.com/wp-content/uploads/2012/10/Coconut_Rice_Thengai_Sadam_Kobbari_Annam_Tenginakayi_Anna.jpg" alt="VadaCoconut Rice" class="menu-image">
+      <h3>3. Coconut Rice</h3>
+      <p>Rs. 120</p>
+      <button class="add-to-cart" onclick="addToCart(3, 'Coconut Rice', 120)">Add to Cart</button>
+    </div>
+
+    <div class="menu-item" data-id="4">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnKhCM7ASZHUTnLmduwvl371zKWhLwTCphew&s" alt="Uttapam" class="menu-image">
+      <h3>4. Uttapam</h3>
+      <p>Rs. 150</p>
+      <button class="add-to-cart" onclick="addToCart(4, 'Uttapam', 150)">Add to Cart</button>
+    </div>
+
+    <div class="menu-item" data-id="5">
+      <img src="https://ranveerbrar.com/wp-content/uploads/2021/02/Masala-dosa-scaled.jpg" alt="Masala Dosa" class="menu-image">
+      <h3>5. Masala Dosa</h3>
+      <p>Rs. 130</p>
+      <button class="add-to-cart" onclick="addToCart(5, 'Masala Dosa', 130)">Add to Cart</button>
+    </div>
+
+    <div class="menu-item" data-id="6">
+      <img src="https://en-media.thebetterindia.com/uploads/2025/02/sambhar-1740568837.jpg" alt="Sambar" class="menu-image">
+      <h3>6. Sambar</h3>
+      <p>Rs. 80</p>
+      <button class="add-to-cart" onclick="addToCart(6, 'Sambar', 80)">Add to Cart</button>
+    </div>
+
+    <div class="menu-item" data-id="7">
+      <img src="https://aahaaramonline.com/wp-content/uploads/2023/12/Sathukudi_Rasam_Sweet_Lime_Rasam_Mosambi_Rasam.jpg" alt="Rasam" class="menu-image">
+      <h3>7. Rasam</h3>
+      <p>Rs. 70</p>
+      <button class="add-to-cart" onclick="addToCart(7, 'Rasam', 70)">Add to Cart</button>
+    </div>
+
+    <div class="menu-item" data-id="8">
+      <img src="https://www.chefkunalkapur.com/wp-content/uploads/2023/05/DSC09411-scaled.jpg?v=1684031938" alt="Curd Rice" class="menu-image">
+      <h3>8. Curd Rice</h3>
+      <p>Rs. 110</p>
+      <button class="add-to-cart" onclick="addToCart(8, 'Curd Rice', 110)">Add to Cart</button>
+    </div>
+
+    <div class="menu-item" data-id="9">
+      <img src="https://www.indianhealthyrecipes.com/wp-content/uploads/2021/01/pongal-ven-pongal.jpg" alt="Pongal" class="menu-image">
+      <h3>9. Pongal</h3>
+      <p>Rs. 120</p>
+      <button class="add-to-cart" onclick="addToCart(9, 'Pongal', 120)">Add to Cart</button>
+    </div>
+
+    <div class="menu-item" data-id="10">
+      <img src="https://c.ndtvimg.com/2023-09/u113o4r_medu-vada_625x300_06_September_23.jpg" alt="Medu Vada" class="menu-image">
+      <h3>10. Medu Vada</h3>
+      <p>Rs. 100</p>
+      <button class="add-to-cart" onclick="addToCart(10, 'Medu Vada', 100)">Add to Cart</button>
+    </div>
+
+    <div class="menu-item" data-id="11">
+      <img src="https://manjilas.com/wp-content/uploads/2021/03/Onion-Coriander-Podi-Dosa.jpg" alt="Podiy Dosa" class="menu-image">
+      <h3>11. Podiy Dosa</h3>
+      <p>Rs. 140</p>
+      <button class="add-to-cart" onclick="addToCart(11, 'Podiy Dosa', 140)">Add to Cart</button>
+    </div>
+
+    <div class="menu-item" data-id="12">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYGDTiCrfu5FB9j-6BR_40l7DE0RKVJp1tAw&s" alt="Appam" class="menu-image">
+      <h3>12. Appam</h3>
+      <p>Rs. 160</p>
+      <button class="add-to-cart" onclick="addToCart(12, 'Appam', 160)">Add to Cart</button>
+    </div>
+
+    <div class="menu-item" data-id="13">
+      <img src="https://www.tastycircle.com/wp-content/uploads/2014/06/kerala-parotta.jpg" alt="Kerala Paratha" class="menu-image">
+      <h3>13. Kerala Paratha</h3>
+      <p>Rs. 120</p>
+      <button class="add-to-cart" onclick="addToCart(13, 'Kerala Paratha', 120)">Add to Cart</button>
+    </div>
+
+    <div class="menu-item" data-id="14">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSu50X8MAijCzQRHAcMFACBJGDnlQaryAw8lQ&s" alt="Puri Bhaji" class="menu-image">
+      <h3>14. Puri Bhaji</h3>
+      <p>Rs. 130</p>
+      <button class="add-to-cart" onclick="addToCart(14, 'Puri Bhaji', 130)">Add to Cart</button>
+    </div>
+
+    <div class="menu-item" data-id="15">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6J-IWDVWgKhDd8mD_zfa4YSvs3m94PFWtIA&s" alt="Bisi Bela Bath" class="menu-image">
+      <h3>15. Bisi Bela Bath</h3>
+      <p>Rs. 150</p>
+      <button class="add-to-cart" onclick="addToCart(15, 'Bisi Bela Bath', 150)">Add to Cart</button>
+    </div>
+  </div>
+
+  <!-- Footer Section -->
+  <footer>
+    <p>&copy; 2025 PipaliyaPlates. Taste the South Indian Tradition.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PipaliyaPlates | Mexican Menu</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Header Section -->
+  <header class="main-header">
+    <div class="header-logo">
+      <h1>PipaliyaPlates 🌮</h1>
+    </div>
+    <nav>
+      <a href="Home.html" class="nav-link">Home</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+      <a href="checkout.html" class="nav-link">Cart</a>
+      <a href="profile.html" class="nav-link profile-link">👤</a>
+    </nav>
+  </header>
+
+   <!-- Cart Info Section -->
+   <section class="cart-info">
+    <h3>Your Cart</h3>
+    <ul id="cart-items"></ul>
+    <p id="cart-total">Total: Rs. 0</p>
+    <button id="checkout-btn" onclick="window.location.href='checkout.html'">Proceed to Checkout</button>
+  </section>
+
+   <!-- Page Navigation -->
+<div class="page-nav">
+  <span>Categories:</span>
+  <a href="gujarati.html">1</a>
+  <a href="punjabi.html">2</a>
+  <a href="chinese.html">3</a>
+  <a href="italian.html">4</a>
+  <a href="korean.html">5</a>
+  <a href="southindian.html">6</a>
+  <a href="mexican.html">7</a>
+  <a href="french.html">8</a>
+</div>
+
+<div class="nav-buttons">
+  <a href="southindian.html" class="back-btn">← Back</a>
+  <a href="french.html" class="next-btn">Next →</a>
+</div>
+
+
+  <!-- Menu Section -->
+  <section class="menu-list">
+    <h2>Mexican Vegetarian Delights</h2>
+  </section>
+
+  <div class="menu-grid">
+    <div class="menu-item" data-id="1">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStek8t6sQNy99yVKJn7JdUfklV3c4e_IsbjQ&s" alt="Vegetarian Tacos" class="menu-image">
+      <h3>1. Vegetarian Tacos</h3>
+      <p>Rs. 180</p>
+      <button class="add-to-cart" onclick="addToCart(1, 'Vegetarian Tacos', 180)">Add to Cart</button>
+    </div>
+
+    <div class="menu-item" data-id="2">
+      <img src="https://cdn.apartmenttherapy.info/image/upload/f_jpg,q_auto:eco,c_fill,g_auto,w_1500,ar_16:9/k%2FPhoto%2FRecipes%2F2025-02-quesadilla%2Fquesadilla-449" alt="Quesadillas" class="menu-image">
+      <h3>2. Quesadillas</h3>
+      <p>Rs. 200</p>
+      <button class="add-to-cart" onclick="addToCart(2, 'Quesadillas', 200)">Add to Cart</button>
+    </div>
+
+    <div class="menu-item" data-id="3">
+      <img src="https://www.southernliving.com/thmb/4t5MImLLoEcEYSqJjTSQmAvgb1c=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Guacamole_099-2000-4bc00b919a0543baaf1ce481c031127d.jpg" alt="Guacamole" class="menu-image">
+      <h3>3. Guacamole</h3>
+      <p>Rs. 150</p>
+      <button class="add-to-cart" onclick="addToCart(3, 'Guacamole', 150)">Add to Cart</button>
+    </div>
+
+    <div class="menu-item" data-id="4">
+      <img src="https://i0.wp.com/smittenkitchen.com/wp-content/uploads/2023/03/vegetable-burrito-10-scaled.jpg?fit=1200%2C800&ssl=1" alt="Vegetarian Burrito" class="menu-image">
+      <h3>4. Vegetarian Burrito</h3>
+      <p>Rs. 220</p>
+      <button class="add-to-cart" onclick="addToCart(4, 'Vegetarian Burrito', 220)">Add to Cart</button>
+    </div>
+
+    <div class="menu-item" data-id="5">
+      <img src="https://www.allrecipes.com/thmb/yn8MArSSJf7cOxPf_YH-KWg8Z9o=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/219646-Authentic-Mexican-Chile-Rellenos-DDMFS-3033-2x1-Beauty-0fd05bac230a491db245b9c7c639bb27.jpg" alt="Chiles Rellenos" class="menu-image">
+      <h3>5. Chiles Rellenos</h3>
+      <p>Rs. 240</p>
+      <button class="add-to-cart" onclick="addToCart(5, 'Chiles Rellenos', 240)">Add to Cart</button>
+    </div>
+
+    <div class="menu-item" data-id="6">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbeeDc6ZaO4gW_6ffg4TflPMOxLK1_M3TUBQ&s" alt="Vegetarian Tostadas" class="menu-image">
+      <h3>6. Vegetarian Tostadas</h3>
+      <p>Rs. 160</p>
+      <button class="add-to-cart" onclick="addToCart(6, 'Vegetarian Tostadas', 160)">Add to Cart</button>
+    </div>
+
+    <div class="menu-item" data-id="7">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4VqGx9Hj-NmvTx6IVfcKTNpVC-2mbt12P_g&s" alt="Bean Soup" class="menu-image">
+      <h3>7. Bean Soup</h3>
+      <p>Rs. 130</p>
+      <button class="add-to-cart" onclick="addToCart(7, 'Bean Soup', 130)">Add to Cart</button>
+    </div>
+
+    <div class="menu-item" data-id="8">
+      <img src="https://e033fcc8.delivery.rocketcdn.me/wp-content/uploads/vegetarian_enchiladas.jpg" alt="Vegetarian Enchiladas" class="menu-image">
+      <h3>8. Vegetarian Enchiladas</h3>
+      <p>Rs. 210</p>
+      <button class="add-to-cart" onclick="addToCart(8, 'Vegetarian Enchiladas', 210)">Add to Cart</button>
+    </div>
+
+    <div class="menu-item" data-id="9">
+      <img src="https://food.fnr.sndimg.com/content/dam/images/food/fullset/2012/9/26/0/RX-MINUTE-RICE_Mexican-Rice_s4x3.jpg.rend.hgtvcom.1280.960.suffix/1371609750976.webp" alt="Mexican Rice" class="menu-image">
+      <h3>9. Mexican Rice</h3>
+      <p>Rs. 90</p>
+      <button class="add-to-cart" onclick="addToCart(9, 'Mexican Rice', 90)">Add to Cart</button>
+    </div>
+    
+    <div class="menu-item" data-id="10">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHpjREYp2oU88SXOtqQP7WgOY4kwePqMts5w&s" alt="Mexican Salad" class="menu-image">
+      <h3>10. Mexican Salad</h3>
+      <p>Rs. 120</p>
+      <button class="add-to-cart" onclick="addToCart(10, 'Mexican Salad', 120)">Add to Cart</button>
+    </div>
+
+    <div class="menu-item" data-id="11">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdw6lBmJ_yrGDcLBnJLC4EXSalI51h4BhX3A&s" alt="Vegetarian Tamales" class="menu-image">
+      <h3>11. Vegetarian Tamales</h3>
+      <p>Rs. 250</p>
+      <button class="add-to-cart" onclick="addToCart(11, 'Vegetarian Tamales', 250)">Add to Cart</button>
+    </div>
+
+    <div class="menu-item" data-id="12">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoxJ-iNPAwaFEG8Rlh9vSFp5T4gjPGK-mu_w&s" alt="Mexican Soups" class="menu-image">
+      <h3>12. Mexican Soups</h3>
+      <p>Rs. 150</p>
+      <button class="add-to-cart" onclick="addToCart(12, 'Mexican Soups', 150)">Add to Cart</button>
+    </div>
+
+    <div class="menu-item" data-id="13">
+      <img src="https://aclassictwist.com/wp-content/uploads/2021/02/Fried-Plantains-with-Hot-Pepper-Sauce-2.jpg" alt="Fried Plantains" class="menu-image">
+      <h3>13. Fried Plantains</h3>
+      <p>Rs. 110</p>
+      <button class="add-to-cart" onclick="addToCart(13, 'Fried Plantains', 110)">Add to Cart</button>
+    </div>
+
+    <div class="menu-item" data-id="14">
+      <img src="https://i2.wp.com/www.downshiftology.com/wp-content/uploads/2024/03/Pico-De-Gallo-main-2.jpg" alt="Mexican Pico de Gallo" class="menu-image">
+      <h3>14. Mexican Pico de Gallo</h3>
+      <p>Rs. 70</p>
+      <button class="add-to-cart" onclick="addToCart(14, 'Mexican Pico de Gallo', 70)">Add to Cart</button>
+    </div>
+
+    <div class="menu-item" data-id="16">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0UlZJAmoDFMnsg2daOXGXFmZvOOVj-y2ANg&s" alt="" class="menu-image">
+      <h3>15. Churros</h3>
+      <p>Rs. 130</p>
+      <button class="add-to-cart" onclick="addToCart(15, 'Churros', 130)">Add to Cart</button>
+    </div>
+  </div>
+
+  <!-- Footer Section -->
+  <footer>
+    <p>&copy; 2025 PipaliyaPlates. Savor the Mexican Flavors!</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PipaliyaPlates | About Us</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <styl>
+ <!-- Replace your <style> tag with this one -->
+<style>
+  body {
+    font-family: 'Open Sans', sans-serif;
+    line-height: 1.6;
+    background: linear-gradient(to right, #fff7f0, #f7f7f7);
+    margin: 0;
+    padding: 0;
+    color: #333;
+    animation: fadeIn 1s ease-in-out;
+  }
+ 
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  header {
+    background: linear-gradient(90deg, #ff7043, #ff5722);
+    padding: 25px 15px;
+    color: white;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    animation: fadeIn 1.5s ease;
+  }
+
+  header nav a {
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+  }
+
+  header nav a:hover {
+    color: #ffe0b2;
+    text-decoration: underline;
+  }
+
+  .main-header h1 {
+    font-size: 2.8rem;
+    margin: 0;
+    font-weight: 700;
+  }
+
+  .about-section {
+    padding: 80px 50px;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    margin-top: 40px;
+    animation: fadeIn 1.2s ease;
+  }
+
+  .about-header h2, .about-offer h2, .about-vision h2 {
+    font-size: 2rem;
+    color: #ff5722;
+    margin-bottom: 20px;
+    position: relative;
+    display: inline-block;
+  }
+
+  .about-header h2::after,
+  .about-offer h2::after,
+  .about-vision h2::after,
+  .team-section h2::after {
+    content: "";
+    display: block;
+    height: 3px;
+    width: 60%;
+    margin-top: 8px;
+    background: linear-gradient(to right, #ff5722, #ff7043);
+    border-radius: 8px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-left: auto;
+    margin-right: 0%;
+    background-color: #ff5722(to right, #ff7043, #ff5722);
+    animation: fadeIn 1s ease;
+  }
+
+  .about-header p, .about-offer ul, .about-vision p {
+    font-size: 1.15rem;
+    color: #444;
+  }
+
+  .about-offer ul {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  .about-offer ul li {
+    margin-bottom: 12px;
+    padding-left: 36px;
+    position: relative;
+    font-size: 1.1rem;
+    color: #555;
+  }
+
+  .about-offer ul li::before {
+    content: "🍽️";
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 1.2rem;
+  }
+
+  .about-vision {
+    margin-top: 50px;
+  }
+
+  .about-section img {
+    border-radius: 12px;
+    margin-top: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
+  }
+
+  .about-section img:hover {
+    transform: scale(1.02);
+  }
+
+  .testimonials {
+    margin: 80px auto;
+    background-color: #fff8f4;
+    padding: 60px;
+    max-width: 1000px;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    text-align: center;
+    animation: fadeIn 1.5s ease;
+  }
+
+  .testimonial {
+    margin: 0cqmax;
+    border-left: #222;
+    margin-bottom: 40px;
+    padding: 20px;
+    border-left: 5px solid #ff7043;
+    background-color: #fff;
+    border-radius: 8px;
+    font-style: italic;
+    position: relative;
+    transition: all 0.3s ease;
+  }
+
+  .testimonial:hover {
+    background-color: #fff3e0;
+    transform: scale(1.02);
+  }
+
+  .testimonial::before {
+    content: "❝";
+    font-size: 3rem;
+    position: absolute;
+    top: -20px;
+    left: -10px;
+    color: #ff7043;
+  }
+
+  .testimonial p {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 10px;
+  }
+
+  .testimonial .customer-name {
+    font-weight: bold;
+    color: #333;
+  }
+
+  .team-section {
+    margin: 60px auto;
+    text-align: center;
+    max-width: 1200px;
+  }
+
+  .team-section h2 {
+    font-size: 2.5rem;
+    color: #ff5722;
+    margin-bottom: 40px;
+    position: relative;
+  }
+
+  .team-members {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+  }
+
+  .team-member {
+    width: 220px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .team-member:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 30px rgba(255, 112, 67, 0.3);
+  }
+
+  .team-member img {
+    width: 100%;
+    height: auto;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    border: 4px solid #ff7043;
+  }
+
+  .team-member h3 {
+    font-size: 1.4rem;
+    color: #333;
+    margin: 5px 0;
+  }
+
+  .team-member p {
+    font-size: 1rem;
+    color: #777;
+  }
+
+  footer {
+    background-color: #222;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 80px;
+    font-size: 1rem;
+    animation: fadeIn 1s ease;
+  }
+
+  @media (max-width: 768px) {
+    .about-section, .testimonials, .team-section {
+      padding: 20px;
+    }
+    .team-members {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+</style>
+
+</head>
+<body>
+  <!-- Header Section -->
+  <header class="main-header">
+    <h1>About PipaliyaPlates 🥗</h1>
+    <nav>
+      <a href="Home.html">Home</a>
+      <a href="menu.html">Menu</a>
+      <a href="contact.html">Contact</a>
+      <a href="checkout.html">Cart</a>
+      <a href="profile.html" class="nav-link profile-link">👤</a>
+    </nav>
+  </header>
+
+  <!-- About Section -->
+  <section class="about-section">
+    <!-- Who We Are Section -->
+    <div class="about-header">
+      <h2>Who We Are</h2>
+      <p>PipaliyaPlates was founded in 2025 with a mission to bring flavor, freshness, and fast delivery together in one sizzling platform. Whether you crave traditional Gujarati, spicy Punjabi, or cheesy Italian—our chefs cook it all with love. 💖</p>
+      <img src="images/chefs-in-action.jpg" alt="Chefs cooking" style="width: 100%; height: auto; margin-top: 20px;">
+    </div>
+
+    <!-- What We Offer Section -->
+    <div class="about-offer">
+      <h2>What We Offer</h2>
+      <ul>
+        <li>🔥 Wide variety of Indian & International dishes</li>
+        <li>🛵 Fast, reliable delivery</li>
+        <li>💳 Secure online payments</li>
+        <li>📦 Easy-to-use cart and checkout system</li>
+      </ul>
+    </div>
+
+    <!-- Our Vision Section -->
+    <div class="about-vision">
+      <h2>Our Vision</h2>
+      <p>To be your go-to digital kitchen across India, known for consistency, care, and comfort food you can trust!</p>
+      <img src="images/vision.jpg" alt="Vision" style="width: 100%; height: auto; margin-top: 20px;">
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="testimonials">
+    <h2>What Our Customers Say</h2>
+    <div class="testimonial">
+      <p>"PipaliyaPlates is my go-to place for comfort food! The delivery is fast, and the taste is always spot on. I love the variety!"</p>
+      <p class="customer-name">- Neha Patel</p>
+    </div>
+    <div class="testimonial">
+      <p>"I’ve been ordering regularly, and the food is always fresh, delicious, and exactly what I crave. Highly recommend!"</p>
+      <p class="customer-name">- Rohit Sharma</p>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section class="team-section">
+    <h2>Meet Our Team</h2>
+    <div class="team-members">
+      <div class="team-member">
+        <img src="images/team1.jpg" alt="Team Member 1">
+        <h3>Rajesh Kumar</h3>
+        <p>Founder & CEO</p>
+      </div>
+      <div class="team-member">
+        <img src="images/team2.jpg" alt="Team Member 2">
+        <h3>Suman Patel</h3>
+        <p>Head Chef</p>
+      </div>
+      <div class="team-member">
+        <img src="images/team3.jpg" alt="Team Member 3">
+        <h3>Priya Verma</h3>
+        <p>Operations Manager</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer Section -->
+  <footer>
+    <p>&copy; 2025 PipaliyaPlates. Taste the joy, every bite!</p>
+  </footer>
+</body>
+</html>

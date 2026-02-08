@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PipaliyaPlates | French Menu</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Header Section -->
+  <header class="main-header">
+    <div class="header-logo">
+      <h1>PipaliyaPlates 🥖</h1> 
+      
+    </div>
+    <nav>
+      <a href="Home.html" class="nav-link">Home</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+      <a href="checkout.html" class="nav-link">Cart</a>
+      <a href="profile.html" class="nav-link profile-link">👤</a>
+    </nav>
+  </header>
+
+  <!-- Cart Info Section -->
+  <section class="cart-info">
+    <h3>Your Cart</h3>
+    <ul id="cart-items"></ul>
+    <p id="cart-total">Total: Rs. 0</p>
+    <button id="checkout-btn" onclick="window.location.href='checkout.html'">Proceed to Checkout</button>
+  </section>
+
+   <!-- Page Navigation -->
+<div class="page-nav">
+  <span>Categories:</span>
+  <a href="gujarati.html">1</a>
+  <a href="punjabi.html">2</a>
+  <a href="chinese.html">3</a>
+  <a href="italian.html">4</a>
+  <a href="korean.html">5</a>
+  <a href="southindian.html">6</a>
+  <a href="mexican.html">7</a>
+  <a href="french.html">8</a>
+</div>
+
+<div class="nav-buttons">
+  <a href="mexican.html" class="back-btn">← Back</a>
+  <a href="gujarati.html" class="next-btn">Next →</a>
+</div>
+
+  <!-- Menu Section -->
+  <section class="menu-list">
+    <h2>French Vegetarian Delights</h2>
+  </section>
+
+  <div class="menu-grid">
+    <div class="menu-item" data-id="1">
+      <img src="https://www.allrecipes.com/thmb/J96_s7wY7k0vQtMZ9l5_XQZn4cg=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/7028-french-baguettes-DDMFS-4x3-a3f7e7cc53654c8db2c9919148e7c915.jpg" alt="French Baguette" class="menu-image">
+      <h3>1. French Baguette</h3>
+      <p>Rs. 80</p>
+      <button class="add-to-cart" onclick="addToCart(1, 'French Baguette', 80)">Add to Cart</button>
+    </div>
+
+    <div class="menu-item" data-id="2">
+      <img src="https://www.seriouseats.com/thmb/xo2aRvBxNaMMxMSTT_od8UUDuME=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/SEA-french-onion-soup-recipe-hero-01-cbeea4db88344d00bc2254d4d2df602e.jpg" alt="French Onion Soup" class="menu-image">
+      <h3>2. French Onion Soup</h3>
+      <p>Rs. 150</p>
+      <button class="add-to-cart" onclick="addToCart(2, 'French Onion Soup', 150)">Add to Cart</button>
+    </div>
+
+    <div class="menu-item" data-id="3">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXyQUc7JLW5LFuusafciLHwRiD1vd7JRE59w&s     " alt="Ratatouille" class="menu-image">
+      <h3>3. Ratatouille</h3>
+      <p>Rs. 200</p>
+      <button class="add-to-cart" onclick="addToCart(3, 'Ratatouille', 200)">Add to Cart</button>
+    </div>
+
+    <div class="menu-item" data-id="4">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSn2gYIAaG9_5xopuKszi1ol7UAGi8OgrTbPw&s" alt="French Crepes" class="menu-image">
+      <h3>4. French Crepes</h3>
+      <p>Rs. 180</p>
+      <button class="add-to-cart" onclick="addToCart(4, 'French Crepes', 180)">Add to Cart</button>
+    </div>
+
+    <div class="menu-item" data-id="5">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMTP1Nh_4pzlJAo-N3MgeRuqvLHJxsby3yhw&s" alt="Quiche" class="menu-image">
+      <h3>5. Quiche</h3>
+      <p>Rs. 220</p>
+      <button class="add-to-cart" onclick="addToCart(5, 'Quiche', 220)">Add to Cart</button>
+    </div>
+
+    <div class="menu-item" data-id="6">
+      <img src="https://www.verdantfeast.com/wp-content/uploads/2022/02/IMG_0421-1024x683-1.webp" alt="French Salad" class="menu-image">
+      <h3>6. French Salad</h3>
+      <p>Rs. 150</p>
+      <button class="add-to-cart" onclick="addToCart(6, 'French Salad', 150)">Add to Cart</button>
+    </div>
+
+    <div class="menu-item" data-id="7">
+      <img src="https://www.marthastewart.com/thmb/uWDq1T-iEz1ZiK76RWvt7eNq2GI=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/MS-332674-duxelles-hero-3x2-13885-9fb832f3c41a40a0a283313097f8a1c2.jpeg" alt="Mushroom Duxelles" class="menu-image">
+      <h3>7. Mushroom Duxelles</h3>
+      <p>Rs. 170</p>
+      <button class="add-to-cart" onclick="addToCart(7, 'Mushroom Duxelles', 170)">Add to Cart</button>
+    </div>
+
+    <div class="menu-item" data-id="8">
+      <img src="https://images.eatsmarter.com/sites/default/files/styles/1600x1200/public/french-potato-gratin-dauphinois-628696.jpg" alt="French Potato Gratin" class="menu-image">
+      <h3>8. French Potato Gratin</h3>
+      <p>Rs. 210</p>
+      <button class="add-to-cart" onclick="addToCart(8, 'French Potato Gratin', 210)">Add to Cart</button>
+    </div>
+
+    <div class="menu-item" data-id="9">
+      <img src="https://www.agardenforthehouse.com/wp-content/uploads/2021/05/puff-pastry-vegetable-tart-cut.jpg" alt="Vegetarian Tart" class="menu-image">
+      <h3>9. Vegetarian Tart</h3>
+      <p>Rs. 180</p>
+      <button class="add-to-cart" onclick="addToCart(9, 'Vegetarian Tart', 180)">Add to Cart</button>
+    </div>
+
+    <div class="menu-item" data-id="10">
+      <img src="https://images.squarespace-cdn.com/content/v1/59bc4b7f017db254b3b5b7f7/1592279792656-E7NS9GQQ5485UDSB0YAH/springvegetablestew.jpg" alt="French Vegetable Stew" class="menu-image">
+      <h3>10. French Vegetable Stew</h3>
+      <p>Rs. 200</p>
+      <button class="add-to-cart" onclick="addToCart(10, 'French Vegetable Stew', 200)">Add to Cart</button>
+    </div>
+
+    <div class="menu-item" data-id="11">
+      <img src="https://assets.zuckerjagdwurst.com/3skyrrco0xe4pw5bk4plh4aa48z1/1110/701/55/true/center/bistrobaguette-11.jpg?animated=false" alt="Vegetarian French Bread" class="menu-image">
+      <h3>11. Vegetarian French Bread</h3>
+      <p>Rs. 90</p>
+      <button class="add-to-cart" onclick="addToCart(11, 'Vegetarian French Bread', 90)">Add to Cart</button>
+    </div>
+
+    <div class="menu-item" data-id="12">
+      <img src="https://www.allrecipes.com/thmb/8famGKY0cu85BVU2Icxe5iDfyM8=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/AR-35963-french-fried-potatoes-DDMFS-Beauty-2x1-cd577577385146fbb2391ff60a2e2f8d.jpg" alt="French Fried Potatoes" class="menu-image">
+      <h3>12. French Fried Potatoes</h3>
+      <p>Rs. 120</p>
+      <button class="add-to-cart" onclick="addToCart(12, 'French Fried Potatoes', 120)">Add to Cart</button>
+    </div>
+
+    <div class="menu-item" data-id="13">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqEaIBEqyO9L0gF5ARI9lZ1xCY2bfshhVr8A&s" alt="French Vegetable Soup" class="menu-image">
+      <h3>13. French Vegetable Soup</h3>
+      <p>Rs. 150</p>
+      <button class="add-to-cart" onclick="addToCart(13, 'French Vegetable Soup', 150)">Add to Cart</button>
+    </div>
+
+    <div class="menu-item" data-id="14">
+      <img src="https://cdn.apartmenttherapy.info/image/upload/v1707842829/k/Photo/Recipes/2024-02-roasted-vegetables/roasted-vegetables-279.jpg" alt="French Baked Vegetables" class="menu-image">
+      <h3>14. French Baked Vegetables</h3>
+      <p>Rs. 180</p>
+      <button class="add-to-cart" onclick="addToCart(14, 'French Baked Vegetables', 180)">Add to Cart</button>
+    </div>
+
+    <div class="menu-item" data-id="15">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTetSO5qbm9TJ1JBWrPLBUu-xiG71WnWpPPEA&s" alt="Vegetarian Croissant" class="menu-image">
+      <h3>15. Vegetarian Croissant</h3>
+      <p>Rs. 160</p>
+      <button class="add-to-cart" onclick="addToCart(15, 'Vegetarian Croissant', 160)">Add to Cart</button>
+    </div>
+    
+  </div>
+
+  <!-- Footer Section -->
+  <footer>
+    <p>&copy; 2025 PipaliyaPlates. Savor the French Flavors!</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
