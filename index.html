@@ -189,27 +189,36 @@
 
   <script>
     function handleLogin(event) {
-      event.preventDefault(); // prevent form from reloading the page
-    
+      event.preventDefault();
+  
       const email = document.getElementById('email').value;
       const password = document.getElementById('password').value;
-    
-      if (email && password) { // if both fields are not empty
-        window.location.href = "home.html"; // go directly to home
+  
+      if (email && password) {
+        // store login state
+        sessionStorage.setItem("isLoggedIn", "true");
+        sessionStorage.setItem("userEmail", email);
+  
+        // go to home
+        window.location.href = "home.html";
       } else {
         alert("Please enter both email and password.");
       }
     }
-    
+  
     function togglePassword() {
       const passField = document.getElementById('password');
-      if (passField.type === "password") {
-        passField.type = "text";
-      } else {
-        passField.type = "password";
-      }
+      passField.type = passField.type === "password" ? "text" : "password";
     }
-    </script>
+  </script>
+  <a href="#" onclick="logout()">Logout</a>
+
+  <script>
+    function logout() {
+      sessionStorage.clear();
+      window.location.href = "login.html";
+    }
+  </script>
 
 </body>
 </html>

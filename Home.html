@@ -9,6 +9,13 @@
 </head>
 
 <body>
+  <script>
+    // block access if not logged in
+    if (sessionStorage.getItem("isLoggedIn") !== "true") {
+      window.location.href = "login.html";
+    }
+  </script>
+  
   <header class="main-header">
     <h1>PipaliyaPlates 🍕</h1>
     <nav>
