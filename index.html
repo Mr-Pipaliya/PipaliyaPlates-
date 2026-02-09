@@ -1,209 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PipaliyaPlates | Home</title>
   <style>
-    /* Reset & Base Styles */
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    /* basic reset & setup */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; background-color: #fff9fa; color: #333; }
 
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      line-height: 1.6;
-      background-color: #f9f9f9;
-      color: #333;
-    }
+    /* Header & Navigation - Responsive */
+    .main-header { background-color: #ff4d6d; color: white; padding: 20px 10px; text-align: center; }
+    .main-header h1 { font-size: 2rem; margin-bottom: 10px; }
+    nav { display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; }
+    nav a { color: white; text-decoration: none; font-weight: bold; font-size: 0.95rem; }
 
-    /* Header & Nav */
-    .main-header {
-      background-color: #ff4d6d;
-      color: white;
-      padding: 1rem;
-      text-align: center;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
+    /* Hero Section - Responsive */
+    .hero { background: #ffe4e1; padding: 60px 20px; text-align: center; }
+    .hero h2 { font-size: 2.2rem; color: #ff4d6d; margin-bottom: 10px; }
+    .btn { display: inline-block; background: #ff4d6d; color: white; padding: 12px 25px; text-decoration: none; border-radius: 30px; margin-top: 15px; font-weight: bold; }
 
-    .main-header h1 {
-      font-size: 1.8rem;
-      margin-bottom: 10px;
-    }
+    /* Titles */
+    section h2 { text-align: center; margin: 40px 0 20px; color: #ff4d6d; font-size: 1.8rem; }
 
-    nav {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap; /* મોબાઈલમાં લિંક્સ નીચે આવી જશે */
-      gap: 15px;
-    }
-
-    nav a {
-      color: white;
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 0.9rem;
-    }
-
-    /* Hero Section */
-    .hero {
-      background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
-                  url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1000&q=80');
-      background-size: cover;
-      background-position: center;
-      height: 60vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      text-align: center;
-      padding: 0 20px;
-    }
-
-    .hero-text h2 {
-      font-size: clamp(1.5rem, 8vw, 3rem);
-      margin-bottom: 10px;
-    }
-
-    .btn {
-      display: inline-block;
-      background: #ff4d6d;
-      color: white;
-      padding: 10px 20px;
-      text-decoration: none;
-      border-radius: 25px;
-      margin-top: 15px;
-      font-weight: bold;
-    }
-
-    /* Sections Common Style */
-    section {
-      padding: 40px 20px;
-      max-width: 1200px;
-      margin: auto;
-    }
-
-    section h2 {
-      text-align: center;
-      margin-bottom: 30px;
-      color: #ff4d6d;
-    }
-
-    /* Grid for Categories & Dishes */
+    /* Responsive Grid System (Mobile & Web) */
     .category-grid, .dish-grid, .offers-grid {
       display: grid;
-      /* ઓટોમેટિક રિસ્પોન્સિવ ગ્રીડ: ઓછામાં ઓછું 250px */
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      /* મોબાઈલમાં 1 ખાનું, વેબ પર આપમેળે 3-4 ખાના સેટ થશે */
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 20px;
+      padding: 0 20px;
+      max-width: 1200px;
+      margin: 0 auto;
     }
 
-    .category-card, .dish-card, .offer-card {
+    /* Cards Styling */
+    .category-card, .dish-card, .offer-card, .testimonial-card {
       background: white;
+      padding: 20px;
       border-radius: 15px;
-      overflow: hidden;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
       text-decoration: none;
       color: inherit;
-      transition: 0.3s;
-      padding-bottom: 15px;
-    }
-
-    .category-card:hover, .dish-card:hover {
-      transform: translateY(-5px);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      border: 1px solid #eee;
     }
 
     .category-card img, .dish-card img {
       width: 100%;
       height: 200px;
       object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 15px;
     }
 
-    .category-card h3, .dish-card h3 {
-      padding: 15px 15px 5px;
-    }
+    .category-card ul { list-style: none; margin-top: 10px; font-size: 0.9rem; color: #666; }
 
-    .category-card ul {
-      list-style: none;
-      padding: 0 15px 15px;
-      font-size: 0.85rem;
-      color: #666;
-    }
+    /* Testimonials & Ratings */
+    .testimonial-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; padding: 0 20px; max-width: 1000px; margin: 0 auto; }
+    .rating-stars { text-align: center; padding: 30px; font-size: 1.5rem; }
+    .floating { display: inline-block; color: gold; animation: bounce 2s infinite; }
 
-    .dish-card p {
-      padding: 0 15px;
-      font-size: 0.9rem;
-    }
+    /* Newsletter Responsive */
+    .newsletter { text-align: center; padding: 50px 20px; background: #ffeff2; margin-top: 40px; }
+    .newsletter input { padding: 12px; width: 100%; max-width: 350px; border: 1px solid #ddd; border-radius: 5px; margin-bottom: 10px; }
+    .newsletter button { padding: 12px 30px; background: #ff4d6d; color: white; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; }
 
-    /* Special Offers & Testimonials */
-    .offer-card {
-      padding: 20px;
-      text-align: center;
-      background: #fff0f5;
-      border: 1px dashed #ff4d6d;
-    }
+    /* Footer */
+    .main-footer { background: #333; color: white; text-align: center; padding: 25px; margin-top: 50px; }
 
-    .testimonial-cards {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
+    @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
 
-    .testimonial-card {
-      background: white;
-      padding: 20px;
-      border-left: 5px solid #ff4d6d;
-      border-radius: 8px;
-    }
-
-    /* Newsletter */
-    .newsletter {
-      text-align: center;
-      background: #ff4d6d;
-      color: white;
-      padding: 40px 20px;
-    }
-
-    .newsletter input {
-      padding: 10px;
-      width: 80%;
-      max-width: 300px;
-      border-radius: 5px;
-      border: none;
-      margin-bottom: 10px;
-    }
-
-    .newsletter button {
-      padding: 10px 20px;
-      background: #333;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    footer {
-      text-align: center;
-      padding: 20px;
-      background: #333;
-      color: white;
-      font-size: 0.8rem;
-    }
-
-    /* Animation */
-    .floating {
-      display: inline-block;
-      font-size: 2rem;
-      color: gold;
-      animation: float 2s ease-in-out infinite;
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
+    /* Mobile specific adjustments */
+    @media (max-width: 600px) {
+      .main-header h1 { font-size: 1.6rem; }
+      .hero h2 { font-size: 1.6rem; }
+      nav { gap: 10px; }
     }
   </style>
 </head>
@@ -218,18 +90,18 @@
   <header class="main-header">
     <h1>PipaliyaPlates 🍕</h1>
     <nav>
-      <a href="menu.html">Menu</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
-      <a href="checkout.html">Cart</a>
-      <a href="profile.html">👤 Profile</a>
+      <a href="menu.html" class="nav-link">Menu</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+      <a href="checkout.html" class="nav-link">Cart</a>
+      <a href="profile.html" class="nav-link profile-link">👤</a>
     </nav>
   </header>
 
   <section class="hero">
     <div class="hero-text">
       <h2>Crave. Click. Eat. Repeat.</h2>
-      <p>Delicious food at your doorstep in minutes.</p>
+      <p>Delicious food at your doorstep in minutes. Order now and indulge in culinary delight!</p>
       <a href="menu.html" class="btn">Explore Menu</a>
     </div>
   </section>
@@ -238,27 +110,99 @@
     <h2>Popular Categories</h2>
     <div class="category-grid">
       <a href="gujarati.html" class="category-card">
-        <img src="https://miro.medium.com/v2/resize:fit:800/1*gmC9-iW7VtxsO-TiTtULFw.jpeg" alt="Gujarati" />
+        <img src="https://miro.medium.com/v2/resize:fit:800/1*gmC9-iW7VtxsO-TiTtULFw.jpeg" alt="Gujarati Food" />
         <h3>Gujarati</h3>
-        <ul><li>Dal Dhokli, Thali, Undhiyu</li></ul>
+        <ul>
+          <li>Dal Dhokli</li>
+          <li>Gujarati Thali</li>
+          <li>Fafda Jalebi</li>
+          <li>Khichdi</li>
+          <li>Undhiyu</li>
+        </ul>
       </a>
 
       <a href="punjabi.html" class="category-card">
-        <img src="https://www.shutterstock.com/image-photo/punjabi-thali-home-cooked-indian-260nw-1755363179.jpg" alt="Punjabi" />
+        <img src="https://www.shutterstock.com/image-photo/punjabi-thali-home-cooked-indian-260nw-1755363179.jpg" alt="Punjabi Food" />
         <h3>Punjabi</h3>
-        <ul><li>Chole Bhature, Butter Paneer</li></ul>
+        <ul>
+          <li>Sarson da Saag & Makki di Roti</li>
+          <li>Paneer Tikka</li>
+          <li>Butter Paneer</li>
+          <li>Amritsari Kulcha</li>
+          <li>Chole Bhature</li>
+        </ul>
+      </a>
+
+      <a href="chinese.html" class="category-card">
+        <img src="https://i.ndtvimg.com/i/2018-05/chinese-food_620x350_51525941624.jpg" alt="Chinese Food" />
+        <h3>Chinese</h3>
+        <ul>
+          <li>Chili Paneer</li>
+          <li>Spring Rolls</li>
+          <li>Hakka Noodles</li>
+          <li>Manchurian Balls</li>
+          <li>Fried Rice</li>
+        </ul>
       </a>
 
       <a href="italian.html" class="category-card">
-        <img src="https://i.ytimg.com/vi/Nqf3Ha1NbiY/maxresdefault.jpg" alt="Italian" />
+        <img src="https://i.ytimg.com/vi/Nqf3Ha1NbiY/maxresdefault.jpg" alt="Italian Food" />
         <h3>Italian</h3>
-        <ul><li>Pizza, Pasta, Lasagna</li></ul>
+        <ul>
+          <li>Margherita Pizza</li>
+          <li>Spaghetti Carbonara</li>
+          <li>Lasagna</li>
+          <li>Pasta Alfredo</li>
+          <li>Bruschetta</li>
+        </ul>
       </a>
-      
+
+      <a href="korean.html" class="category-card">
+        <img src="https://cf.creatrip.com/original/blog/6948/mx06br6efy1mf5z2n86u254u447kthhp.jpg?d=800x600&q=75&f=webp" alt="Korean Food" />
+        <h3>Korean</h3>
+        <ul>
+          <li>Kimchi Bokkeumbap</li>
+          <li>Vegetable Japchae</li>
+          <li>Tofu Bibimbap</li>
+          <li>Korean Mandu</li>
+          <li>Korean Pancakes</li>
+        </ul>
+      </a>
+
+      <a href="southindian.html" class="category-card">
+        <img src="https://c.ndtvimg.com/2023-01/n0aamqh_south-indian-food_625x300_17_January_23.jpg?im=FeatureCrop,algorithm=dnn,width=1200,height=675" alt="South Indian Food" />
+        <h3>South Indian</h3>
+        <ul>
+          <li>Masala Dosa</li>
+          <li>Idli Sambar</li>
+          <li>Vada</li>
+          <li>Uttapam</li>
+          <li>Pongal</li>
+        </ul>
+      </a>
+
       <a href="mexican.html" class="category-card">
-        <img src="https://www.shutterstock.com/image-photo/mexican-food-many-dishes-cuisine-260nw-1539082802.jpg" alt="Mexican" />
+        <img src="https://www.shutterstock.com/image-photo/mexican-food-many-dishes-cuisine-260nw-1539082802.jpg" alt="Mexican Food" />
         <h3>Mexican</h3>
-        <ul><li>Tacos, Nachos, Burrito</li></ul>
+        <ul>
+          <li>Veggie Tacos</li>
+          <li>Cheese Quesadilla</li>
+          <li>Nachos Supreme</li>
+          <li>Burrito Bowl</li>
+          <li>Spicy Salsa</li>
+        </ul>
+      </a>
+
+      <a href="french.html" class="category-card">
+        <img src="https://frenchly.us/wp-content/uploads/elementor/thumbs/5-qkdu6dupk4uyxsww3jqztm8bn18jxcm5y75ticyf0o.jpg" alt="French Food" />
+        <h3>French</h3>
+        <ul>
+          <li>Croissant</li>
+          <li>Ratatouille</li>
+          <li>Crêpes</li>
+          <li>Quiche Lorraine</li>
+          <li>Baguette</li>
+        </ul>
       </a>
     </div>
   </section>
@@ -269,26 +213,81 @@
       <div class="dish-card">
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDB5SHmiSc3i8yC5NmVHd9CGAAm71gDuNTpw&s" alt="Pizza" />
         <h3>Deluxe Pizza</h3>
-        <p><strong>₹420</strong></p>
-        <p>Loaded with fresh veggies and cheese.</p>
+        <p>420. rs</p>
+        <p>A "Deluxe Pizza" typically refers to a pizza loaded with a variety of toppings.</p>
+      </div>
+      <div class="dish-card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOxnefDdlWlRoNRfin-uRzQ4H27HvQVxLErQ&s" alt="Pasta" />
+        <h3>Spaghetti Bolognese</h3>
+        <p>499. rs</p>
+        <p>Spaghetti bolognese consists of spaghetti with an Italian ragù.</p>
       </div>
       <div class="dish-card">
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRf9tC5sOxSUzsCHVLWLjMY7HnphyZe_HiDhw&s" alt="Paneer Tikka" />
         <h3>Paneer Tikka</h3>
-        <p><strong>₹249</strong></p>
-        <p>Classic grilled paneer with spices.</p>
+        <p>249. rs</p>
+        <p>Paneer tikka is a popular Indian vegetarian dish where paneer is marinated.</p>
       </div>
+    </div>
+  </section>
+
+  <section class="special-offers">
+    <h2>Special Offers</h2>
+    <div class="offers-grid">
+      <div class="offer-card">
+        <h3>20% Off on First Order</h3>
+        <p>Use code: FIRST20 on checkout.</p>
+      </div>
+      <div class="offer-card">
+        <h3>Free Delivery on Orders Over Rs. 500</h3>
+        <p>Enjoy free delivery when you order more than Rs. 500.</p>
+      </div>
+      <div class="offer-card">
+        <h3>Buy 1 Get 1 Free</h3>
+        <p>Get a free pizza when you buy another of the same size.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="delivery-info">
+    <h2 style="text-align: center;">Fast and Reliable Delivery</h2>
+    <p style="text-align: center;">We ensure fast and secure delivery to your doorstep.</p>
+  </section>
+
+  <section class="testimonials">
+    <h2>What Our Customers Say</h2>
+    <div class="testimonial-cards">
+      <div class="testimonial-card">
+        <p>"Best food delivery service! The pizzas are always fresh and delicious!"</p>
+        <h3>- Neha Patel</h3>
+      </div>
+      <div class="testimonial-card">
+        <p>"Quick delivery and amazing Gujarati food. Highly recommend PipaliyaPlates!"</p>
+        <h3>- Ravi Shah</h3>
+      </div>
+    </div>
+  </section>
+
+  <section class="ratings">
+    <h2>Customer Ratings</h2>
+    <div class="rating-stars">
+      <span class="floating">&#9733;</span>
+      <span class="floating" style="animation-delay: 0.2s;">&#9733;</span>
+      <span class="floating" style="animation-delay: 0.4s;">&#9733;</span>
+      <span class="floating" style="animation-delay: 0.6s;">&#9733;</span>
+      <span class="floating" style="animation-delay: 0.8s;">&#9733;</span>
+      <p>4.6/5 based on 1200+ reviews</p>
     </div>
   </section>
 
   <section class="newsletter">
     <h2>Stay Updated</h2>
-    <p>Get special offers in your inbox.</p><br>
+    <p>Sign up for our newsletter to receive special offers.</p><br>
     <input type="email" placeholder="Enter your email" />
     <button>Subscribe</button>
   </section>
 
-  <footer>
+  <footer class="main-footer">
     <p>&copy; 2025 PipaliyaPlates. All Rights Reserved.</p>
   </footer>
 
