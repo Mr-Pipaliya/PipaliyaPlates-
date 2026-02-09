@@ -4,60 +4,61 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Login | PipaliyaPlates</title>
-  <link rel="stylesheet" href="style.css" />
   <style>
+    /* Reset & Base Styles */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
       background: linear-gradient(135deg, #fff0f5, #ffe4e1);
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 40px 20px;
       min-height: 100vh;
-      animation: fadeIn 1s ease-in;
+      padding: 0 15px; /* સાઈડમાં થોડી જગ્યા છોડવા */
     }
 
+    /* Header Styles */
     header.main-header {
       background-color: #ff4d6d;
       width: 100%;
       padding: 15px;
       color: white;
-      font-size: 2.2rem;
+      font-size: 1.8rem; /* મોબાઈલ માટે નાનું કર્યું */
       font-weight: bold;
       box-shadow: 0 6px 14px rgba(0,0,0,0.2);
       border-bottom-left-radius: 25px;
       border-bottom-right-radius: 25px;
-      margin-bottom: 35px;
+      margin-bottom: 25px;
       text-align: center;
     }
 
     h2 {
       color: #ff4d6d;
-      margin-bottom: 30px;
-      font-size: 2.5rem;
+      margin-bottom: 20px;
+      font-size: 1.8rem;
+      text-align: center;
       animation: fadeInUp 1s ease-in;
-      text-shadow: 1px 1px 3px rgba(255,77,109,0.2);
     }
 
+    /* Form Styles - Responsive logic */
     form.login-form {
       background-color: #fff;
-      padding: 35px;
+      padding: 25px;
       border-radius: 20px;
       box-shadow: 0 8px 16px rgba(0,0,0,0.12);
       width: 100%;
-      max-width: 420px;
+      max-width: 400px; /* ડેસ્કટોપ પર આટલું મોટું દેખાશે */
       display: flex;
       flex-direction: column;
       animation: fadeInUp 1.2s ease-in;
-      transition: transform 0.3s ease;
-    }
-
-    form.login-form:hover {
-      transform: translateY(-2px);
     }
 
     label {
-      text-align: left;
       margin-bottom: 6px;
       font-weight: 600;
       color: #444;
@@ -65,12 +66,12 @@
 
     input[type="email"],
     input[type="password"] {
-      padding: 14px;
-      margin-bottom: 22px;
+      padding: 12px;
+      margin-bottom: 20px;
       border: 1px solid #ddd;
       border-radius: 10px;
       font-size: 1rem;
-      transition: border-color 0.3s, box-shadow 0.3s;
+      width: 100%; /* પુરી પહોળાઈ લેશે */
     }
 
     input:focus {
@@ -79,24 +80,28 @@
       box-shadow: 0 0 0 3px rgba(255,77,109,0.2);
     }
 
+    /* Password Container Fix */
     .password-container {
       display: flex;
+      position: relative; /* આનાથી બટન અંદર ગોઠવી શકાશે */
       align-items: center;
-      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .password-container input {
+      margin-bottom: 0; /* આની જરૂર નથી કારણ કે કન્ટેનરને માર્જિન આપ્યું છે */
+      padding-right: 50px; /* બટન માટે જગ્યા છોડી */
     }
 
     .toggle-password {
-      padding: 10px;
-      background-color: #ff4d6d;
+      position: absolute;
+      right: 5px;
+      padding: 8px 12px;
+      background: none;
       border: none;
-      color: white;
-      border-radius: 10px;
+      font-size: 1.2rem;
       cursor: pointer;
-      transition: background 0.3s;
-    }
-
-    .toggle-password:hover {
-      background-color: #e03d5e;
+      color: #ff4d6d;
     }
 
     button[type="submit"] {
@@ -108,71 +113,63 @@
       font-size: 1.1rem;
       font-weight: bold;
       cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 12px rgba(255,77,109,0.3);
+      transition: 0.3s;
+      margin-top: 10px;
     }
 
     button[type="submit"]:hover {
       background-color: #e03d5e;
-      transform: scale(1.05);
+      transform: scale(1.02);
     }
 
     .extra-links {
-      margin-top: 18px;
+      margin-top: 20px;
       text-align: center;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
     }
+
+    .extra-links p { margin-bottom: 8px; }
 
     .extra-links a {
       color: #ff4d6d;
       text-decoration: none;
-      margin: 0 8px;
-      transition: color 0.3s, text-decoration 0.3s;
-    }
-
-    .extra-links a:hover {
-      color: #d83854;
-      text-decoration: underline;
+      font-weight: bold;
     }
 
     footer.main-footer {
       margin-top: auto;
-      font-size: 0.9rem;
+      padding: 20px 0;
+      font-size: 0.85rem;
       color: #777;
-      text-align: center;
-      animation: fadeInUp 1.4s ease-in;
-      padding-top: 30px;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
+    /* Animations */
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    @media (max-width: 768px) {
-      h2 { font-size: 2rem; }
-      form.login-form { padding: 25px; }
-      button[type="submit"] { font-size: 1rem; }
+    /* Media Query for small phones */
+    @media (max-width: 480px) {
+      header.main-header { font-size: 1.5rem; }
+      h2 { font-size: 1.5rem; }
+      form.login-form { padding: 20px; }
     }
   </style>
 </head>
 <body>
 
   <header class="main-header">PipaliyaPlates 🍕</header>
-  <h2>Login to Your Account</h2>
+  
+  <h2>Login</h2>
 
   <form class="login-form" onsubmit="return handleLogin(event)">
     <label for="email">Email Address</label>
-    <input type="email" id="email" name="email" required placeholder="Enter your email">
+    <input type="email" id="email" required placeholder="example@mail.com">
 
     <label for="password">Password</label>
     <div class="password-container">
-      <input type="password" id="password" name="password" required placeholder="Enter your password">
+      <input type="password" id="password" required placeholder="Enter password">
       <button type="button" class="toggle-password" onclick="togglePassword()">👁️</button>
     </div>
 
@@ -190,33 +187,20 @@
   <script>
     function handleLogin(event) {
       event.preventDefault();
-  
       const email = document.getElementById('email').value;
       const password = document.getElementById('password').value;
-  
+
       if (email && password) {
-        // store login state
         sessionStorage.setItem("isLoggedIn", "true");
         sessionStorage.setItem("userEmail", email);
-  
-        // go to home
-        window.location.href = "index.html";
-      } else {
-        alert("Please enter both email and password.");
+        alert("Login Successful!");
+        window.location.href = "index.html"; 
       }
     }
-  
+
     function togglePassword() {
       const passField = document.getElementById('password');
-      passField.type = passField.type === "password" ? "text" : "password";
-    }
-  </script>
-  <a href="#" onclick="logout()">Logout</a>
-
-  <script>
-    function logout() {
-      sessionStorage.clear();
-      window.location.href = "login.html";
+      passField.type = (passField.type === "password") ? "text" : "password";
     }
   </script>
 
