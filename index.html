@@ -5,83 +5,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PipaliyaPlates | Home</title>
-  <style>
-    /* basic reset & setup */
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; background-color: #fff9fa; color: #333; }
-
-    /* Header & Navigation - Responsive */
-    .main-header { background-color: #ff4d6d; color: white; padding: 20px 10px; text-align: center; }
-    .main-header h1 { font-size: 2rem; margin-bottom: 10px; }
-    nav { display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; }
-    nav a { color: white; text-decoration: none; font-weight: bold; font-size: 0.95rem; }
-
-    /* Hero Section - Responsive */
-    .hero { background: #ffe4e1; padding: 60px 20px; text-align: center; }
-    .hero h2 { font-size: 2.2rem; color: #ff4d6d; margin-bottom: 10px; }
-    .btn { display: inline-block; background: #ff4d6d; color: white; padding: 12px 25px; text-decoration: none; border-radius: 30px; margin-top: 15px; font-weight: bold; }
-
-    /* Titles */
-    section h2 { text-align: center; margin: 40px 0 20px; color: #ff4d6d; font-size: 1.8rem; }
-
-    /* Responsive Grid System (Mobile & Web) */
-    .category-grid, .dish-grid, .offers-grid {
-      display: grid;
-      /* મોબાઈલમાં 1 ખાનું, વેબ પર આપમેળે 3-4 ખાના સેટ થશે */
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
-      padding: 0 20px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    /* Cards Styling */
-    .category-card, .dish-card, .offer-card, .testimonial-card {
-      background: white;
-      padding: 20px;
-      border-radius: 15px;
-      text-decoration: none;
-      color: inherit;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-      border: 1px solid #eee;
-    }
-
-    .category-card img, .dish-card img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      border-radius: 10px;
-      margin-bottom: 15px;
-    }
-
-    .category-card ul { list-style: none; margin-top: 10px; font-size: 0.9rem; color: #666; }
-
-    /* Testimonials & Ratings */
-    .testimonial-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; padding: 0 20px; max-width: 1000px; margin: 0 auto; }
-    .rating-stars { text-align: center; padding: 30px; font-size: 1.5rem; }
-    .floating { display: inline-block; color: gold; animation: bounce 2s infinite; }
-
-    /* Newsletter Responsive */
-    .newsletter { text-align: center; padding: 50px 20px; background: #ffeff2; margin-top: 40px; }
-    .newsletter input { padding: 12px; width: 100%; max-width: 350px; border: 1px solid #ddd; border-radius: 5px; margin-bottom: 10px; }
-    .newsletter button { padding: 12px 30px; background: #ff4d6d; color: white; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; }
-
-    /* Footer */
-    .main-footer { background: #333; color: white; text-align: center; padding: 25px; margin-top: 50px; }
-
-    @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-
-    /* Mobile specific adjustments */
-    @media (max-width: 600px) {
-      .main-header h1 { font-size: 1.6rem; }
-      .hero h2 { font-size: 1.6rem; }
-      nav { gap: 10px; }
-    }
-  </style>
+  <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
   <script>
+    // block access if not logged in
     if (sessionStorage.getItem("isLoggedIn") !== "true") {
       window.location.href = "login.html";
     }
@@ -214,19 +143,19 @@
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDB5SHmiSc3i8yC5NmVHd9CGAAm71gDuNTpw&s" alt="Pizza" />
         <h3>Deluxe Pizza</h3>
         <p>420. rs</p>
-        <p>A "Deluxe Pizza" typically refers to a pizza loaded with a variety of toppings.</p>
+        <p>A "Deluxe Pizza" typically refers to a pizza loaded with a variety of toppings, offering a mix of flavors and textures.</p>
       </div>
       <div class="dish-card">
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOxnefDdlWlRoNRfin-uRzQ4H27HvQVxLErQ&s" alt="Pasta" />
         <h3>Spaghetti Bolognese</h3>
         <p>499. rs</p>
-        <p>Spaghetti bolognese consists of spaghetti with an Italian ragù.</p>
+        <p>Spaghetti bolognese consists of spaghetti with an Italian ragù made with minced beef, bacon and tomatoes.</p>
       </div>
       <div class="dish-card">
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRf9tC5sOxSUzsCHVLWLjMY7HnphyZe_HiDhw&s" alt="Paneer Tikka" />
         <h3>Paneer Tikka</h3>
         <p>249. rs</p>
-        <p>Paneer tikka is a popular Indian vegetarian dish where paneer is marinated.</p>
+        <p>Paneer tikka is a popular Indian vegetarian dish where paneer is marinated in yogurt and spices, then grilled.</p>
       </div>
     </div>
   </section>
@@ -247,11 +176,12 @@
         <p>Get a free pizza when you buy another of the same size.</p>
       </div>
     </div>
+    
   </section>
 
   <section class="delivery-info">
-    <h2 style="text-align: center;">Fast and Reliable Delivery</h2>
-    <p style="text-align: center;">We ensure fast and secure delivery to your doorstep.</p>
+    <h2>Fast and Reliable Delivery</h2>
+    <p>We ensure fast and secure delivery to your doorstep.</p>
   </section>
 
   <section class="testimonials">
@@ -282,7 +212,7 @@
 
   <section class="newsletter">
     <h2>Stay Updated</h2>
-    <p>Sign up for our newsletter to receive special offers.</p><br>
+    <p>Sign up for our newsletter to receive special offers.</p>
     <input type="email" placeholder="Enter your email" />
     <button>Subscribe</button>
   </section>
