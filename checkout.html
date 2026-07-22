@@ -441,16 +441,15 @@
       loadCart();
     }
 
-    async function handleCheckout(e) {
+    function handleCheckout(e) {
       e.preventDefault();
       const btn = document.getElementById('place-order-btn');
       btn.textContent = '⏳ Processing...';
       btn.disabled = true;
 
-      // ── Gather all order data ──
-      const cart        = JSON.parse(localStorage.getItem('cart')) || [];
-      const userEmail   = sessionStorage.getItem('userEmail') || 'guest@pipaliyaplates.com';
-      const userName    = (() => {
+      const cart      = JSON.parse(localStorage.getItem('cart')) || [];
+      const userEmail = sessionStorage.getItem('userEmail') || 'guest@pipaliyaplates.com';
+      const userName  = (() => {
         const stored = sessionStorage.getItem('userName');
         if (stored) return stored;
         const users = JSON.parse(localStorage.getItem('registeredUsers')) || [];
@@ -458,25 +457,16 @@
         return found ? found.name : (userEmail === 'hardik@gmail.com' ? 'Hardik Pipaliya' : 'Guest User');
       })();
 
-      // Payment method from selected tab
       const selectedTab = document.querySelector('.pay-tab.selected');
       const payMethod   = selectedTab ? selectedTab.textContent.trim() : '💳 Card';
-
-      // Items string
-      const itemsStr = cart.map(i => `${i.name} ×${i.quantity}`).join(', ') || 'No items';
-
-      // Totals
-      let subtotal = cart.reduce((s, i) => s + i.price * i.quantity, 0);
-      const delivery = subtotal >= 500 ? 0 : 40;
-      const total    = subtotal + delivery;
-
-      // Unique order ID
-      const orderId = '#PP-' + Date.now().toString().slice(-6);
+      const itemsStr    = cart.map(i => `${i.name} ×${i.quantity}`).join(', ') || 'No items';
+      const subtotal    = cart.reduce((s, i) => s + i.price * i.quantity, 0);
+      const delivery    = subtotal >= 500 ? 0 : 40;
+      const total       = subtotal + delivery;
+      const orderId     = '#PP-' + Date.now().toString().slice(-6);
 
       const orderData = {
-        orderId,
-        userEmail,
-        userName,
+        orderId, userEmail, userName,
         items:         itemsStr,
         total,
         paymentMethod: payMethod,
@@ -487,35 +477,16 @@
         pincode:       document.getElementById('del-pin')?.value    || '',
       };
 
-      // ── Save to localStorage (for Admin Panel) ──
+      // Save to localStorage (for Admin Panel)
       const orders = JSON.parse(localStorage.getItem('orders')) || [];
       orders.push(orderData);
       localStorage.setItem('orders', JSON.stringify(orders));
 
-      // ── Notify Server Terminal (only on localhost) ──
-      const IS_LOCAL = ['localhost', '127.0.0.1'].includes(window.location.hostname);
-      if (IS_LOCAL) {
-        try {
-          const ctrl = new AbortController();
-          setTimeout(() => ctrl.abort(), 3000);
-          await fetch('http://localhost:5000/api/order', {
-            method:  'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body:    JSON.stringify(orderData),
-            signal:  ctrl.signal
-          });
-        } catch (_) { /* server offline — ignore */ }
-      }
-
-      // Save for thank-you page
       sessionStorage.setItem('lastOrderId',    orderId);
       sessionStorage.setItem('lastOrderTotal', '₹' + total);
-
       localStorage.removeItem('cart');
 
-      setTimeout(() => {
-        window.location.href = 'thankyou.html';
-      }, 400);
+      setTimeout(() => { window.location.href = 'thankyou.html'; }, 400);
     }
   </script>
 </body>

@@ -60,16 +60,16 @@
     <div class="auth-logo"><a href="index.html">PipaliyaPlates 🍕</a></div>
     <p class="auth-title">Create Account</p>
 
-    <form class="register-form" onsubmit="return handleRegister(event)">
+    <form class="register-form" onsubmit="handleRegister(event); return false;">
       <label for="name">Full Name</label>
-      <input type="text" id="name" name="name" required placeholder="Enter your full name">
+      <input type="text" id="name" required placeholder="Enter your full name">
 
       <label for="email">Email Address</label>
-      <input type="email" id="email" name="email" required placeholder="Enter your email">
+      <input type="email" id="email" required placeholder="Enter your email">
 
       <label for="password">Password</label>
       <div class="password-container">
-        <input type="password" id="password" name="password" required placeholder="Create a password">
+        <input type="password" id="password" required placeholder="Create a password">
         <button type="button" class="toggle-password" onclick="togglePassword()">👁️</button>
       </div>
 
@@ -93,53 +93,31 @@
   </footer>
 
   <script>
-    const IS_LOCAL = ['localhost', '127.0.0.1'].includes(window.location.hostname);
-
-    async function handleRegister(event) {
+    function handleRegister(event) {
       event.preventDefault();
       const name     = document.getElementById('name').value.trim();
       const email    = document.getElementById('email').value.trim();
       const password = document.getElementById('password').value;
 
-      if (name && email && password) {
-        let registeredUsers = JSON.parse(localStorage.getItem("registeredUsers")) || [];
-        if (registeredUsers.some(u => u.email === email)) {
-          alert("An account with this email already exists!");
-          return false;
-        }
-        registeredUsers.push({ name, email, password, registeredAt: new Date().toISOString() });
-        localStorage.setItem("registeredUsers", JSON.stringify(registeredUsers));
+      if (!name || !email || !password) return;
 
-        // ── Notify server terminal (only on localhost) ──
-        if (IS_LOCAL) {
-          try {
-            const ctrl = new AbortController();
-            setTimeout(() => ctrl.abort(), 3000);
-            await fetch('http://localhost:5000/api/register', {
-              method:  'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body:    JSON.stringify({ name, email, password }),
-              signal:  ctrl.signal
-            });
-          } catch (_) { /* server offline — ignore */ }
-        }
-
-        alert("Registration Successful! Please login.");
-        window.location.href = "login.html";
+      let users = JSON.parse(localStorage.getItem("registeredUsers")) || [];
+      if (users.some(u => u.email === email)) {
+        alert("An account with this email already exists!");
+        return;
       }
-      return false;
+
+      users.push({ name, email, password, registeredAt: new Date().toISOString() });
+      localStorage.setItem("registeredUsers", JSON.stringify(users));
+      alert("Registration Successful! Please login.");
+      window.location.href = "login.html";
     }
 
     function togglePassword() {
-      const passwordField = document.getElementById('password');
-      const toggleBtn = document.querySelector('.toggle-password');
-      if (passwordField.type === 'password') {
-        passwordField.type = 'text';
-        toggleBtn.textContent = '🙈';
-      } else {
-        passwordField.type = 'password';
-        toggleBtn.textContent = '👁️';
-      }
+      const f = document.getElementById('password');
+      const b = document.querySelector('.toggle-password');
+      if (f.type === 'password') { f.type = 'text'; b.textContent = '🙈'; }
+      else { f.type = 'password'; b.textContent = '👁️'; }
     }
   </script>
 </body>
