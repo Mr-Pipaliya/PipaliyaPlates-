@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -63,14 +64,223 @@
       margin-top: 4px;
     }
 
+    /* ─── Payment Methods Card Styling ─── */
+    .payment-methods {
+      padding: 20px;
+    }
+
+    .payment-methods ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .payment-methods li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #fff;
+      border: 1px solid #eee;
+      border-radius: 12px;
+      padding: 14px 18px;
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      color: var(--poy-plum);
+      box-shadow: 0 2px 6px rgba(115, 64, 96, 0.08);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .payment-methods li:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 14px rgba(115, 64, 96, 0.15);
+      border-color: var(--poy-lavender);
+    }
+
+    /* ─── Subscriptions & Memberships ─── */
+    .subscriptions {
+      padding: 20px;
+      background: #fff8f5;
+      border-radius: 14px;
+      border: 1px solid #f0e0e8;
+    }
+
+    .subscriptions p {
+      font-family: var(--font-body);
+      color: var(--poy-plum);
+      margin: 6px 0;
+      font-size: 0.95rem;
+    }
+
+    .subscriptions p:first-of-type {
+      font-weight: 700;
+      font-size: 1.05rem;
+    }
+
+    /* ─── Upcoming Reservations ─── */
+    .reservations {
+      padding: 20px;
+    }
+
+    .reservations ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .reservations li {
+      background: #fff;
+      border-left: 4px solid var(--poy-lavender);
+      border-radius: 10px;
+      padding: 12px 16px;
+      font-family: var(--font-body);
+      color: var(--poy-plum);
+      box-shadow: 0 2px 6px rgba(115, 64, 96, 0.08);
+      transition: transform 0.2s ease;
+    }
+
+    .reservations li:hover {
+      transform: translateX(4px);
+    }
+
+    /* ─── Recent Reviews ─── */
+    .reviews {
+      padding: 20px;
+    }
+
+    .reviews ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .reviews li {
+      background: #fff;
+      border-radius: 10px;
+      padding: 12px 16px;
+      font-family: var(--font-body);
+      color: var(--poy-plum);
+      font-size: 0.9rem;
+      box-shadow: 0 2px 6px rgba(115, 64, 96, 0.08);
+    }
+
+    /* ─── Support Requests ─── */
+    .support-tickets {
+      padding: 20px;
+    }
+
+    .support-tickets ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .support-tickets li {
+      background: #fff;
+      border-radius: 10px;
+      padding: 12px 16px;
+      font-family: var(--font-body);
+      color: var(--poy-plum);
+      font-size: 0.9rem;
+      border: 1px dashed #e2c9d6;
+    }
+
+    /* ─── Connected Social Accounts ─── */
+    .social-links {
+      padding: 20px;
+    }
+
+    .social-links ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .social-links li {
+      background: #fff;
+      border-radius: 30px;
+      padding: 8px 16px;
+      font-family: var(--font-body);
+      color: var(--poy-plum);
+      font-size: 0.9rem;
+      box-shadow: 0 2px 6px rgba(115, 64, 96, 0.08);
+    }
+
+    .social-links a {
+      color: var(--poy-plum);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .social-links a:hover {
+      text-decoration: underline;
+    }
+
+    /* ─── Account Settings ─── */
+    .settings {
+      padding: 20px;
+    }
+
+    .settings ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .settings li a {
+      display: block;
+      background: #fff;
+      border-radius: 10px;
+      padding: 12px 16px;
+      font-family: var(--font-body);
+      color: var(--poy-plum);
+      text-decoration: none;
+      font-size: 0.95rem;
+      box-shadow: 0 2px 6px rgba(115, 64, 96, 0.08);
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .settings li a:hover {
+      background: var(--poy-lavender);
+      color: #fff;
+      transform: translateX(4px);
+    }
+
     /* Hidden file input */
-    #avatar-input { display: none; }
+    #avatar-input {
+      display: none;
+    }
 
     /* Upload success ring animation */
     @keyframes avatarRing {
-      0%   { box-shadow: 0 0 0 0 rgba(115,64,96,0.5); }
-      70%  { box-shadow: 0 0 0 14px rgba(115,64,96,0); }
-      100% { box-shadow: 0 0 0 0 rgba(115,64,96,0); }
+      0% {
+        box-shadow: 0 0 0 0 rgba(115, 64, 96, 0.5);
+      }
+
+      70% {
+        box-shadow: 0 0 0 14px rgba(115, 64, 96, 0);
+      }
+
+      100% {
+        box-shadow: 0 0 0 0 rgba(115, 64, 96, 0);
+      }
     }
 
     .avatar-uploaded {
@@ -91,10 +301,11 @@
     }
   </style>
 </head>
+
 <body>
 
   <!-- 🍕 Header -->
-    <header class="main-header">
+  <header class="main-header">
     <h1><a href="index.html">PipaliyaPlates 🍕</a></h1>
     <nav>
       <a href="index.html" class="">Home</a>
@@ -115,9 +326,8 @@
       <!-- ── Clickable Avatar with camera overlay ── -->
       <div class="avatar-wrap" onclick="document.getElementById('avatar-input').click()" title="Click to change photo">
         <img id="profile-avatar-img"
-             src="https://ui-avatars.com/api/?name=User&background=f0e8ec&color=734060&size=200&font-size=0.42&bold=true"
-             alt="Profile Picture"
-             class="profile-avatar">
+          src="https://ui-avatars.com/api/?name=User&background=f0e8ec&color=734060&size=200&font-size=0.42&bold=true"
+          alt="Profile Picture" class="profile-avatar">
 
         <!-- Hover overlay -->
         <div class="avatar-overlay">
@@ -141,20 +351,28 @@
       </div>
     </section>
 
-    <hr/>
+    <hr />
 
     <!-- Quick Stats -->
     <section class="profile-stats">
       <h3>📊 Your Stats</h3>
       <div class="stats-grid">
-        <div class="stat-card">🍽️ <p class="stat-number">28</p><p class="stat-label">Orders</p></div>
-        <div class="stat-card">⭐ <p class="stat-number">250</p><p class="stat-label">Points</p></div>
-        <div class="stat-card">🏅 <p class="stat-number">5</p><p class="stat-label">Badges</p></div>
-        <div class="stat-card">🌟 <p class="stat-number">4.8</p><p class="stat-label">Rating</p></div>
+        <div class="stat-card">🍽️ <p class="stat-number">28</p>
+          <p class="stat-label">Orders</p>
+        </div>
+        <div class="stat-card">⭐ <p class="stat-number">250</p>
+          <p class="stat-label">Points</p>
+        </div>
+        <div class="stat-card">🏅 <p class="stat-number">5</p>
+          <p class="stat-label">Badges</p>
+        </div>
+        <div class="stat-card">🌟 <p class="stat-number">4.8</p>
+          <p class="stat-label">Rating</p>
+        </div>
       </div>
     </section>
 
-    <hr/>
+    <hr />
 
     <!-- Badges -->
     <section class="achievements">
@@ -168,15 +386,16 @@
       </ul>
     </section>
 
-    <hr/>
+    <hr />
 
     <!-- About -->
     <section class="about-user">
       <h3>👋 About Me</h3>
-      <p>Hi! I'm Mr. Hardik. I love spicy Indian dishes, trying Korean food, and building beautiful web apps. Food motto: “Eat what makes you happy!” 😋</p>
+      <p>Hi! I'm Mr. Hardik. I love spicy Indian dishes, trying Korean food, and building beautiful web apps. Food
+        motto: “Eat what makes you happy!” 😋</p>
     </section>
 
-    <hr/>
+    <hr />
 
     <!-- Favorites & Wishlist in a row -->
     <section class="favorites-wishlist">
@@ -200,7 +419,7 @@
       </div>
     </section>
 
-    <hr/>
+    <hr />
 
     <!-- Preferences -->
     <section class="preferences">
@@ -210,7 +429,7 @@
       <p><strong>Allergies:</strong> None</p>
     </section>
 
-    <hr/>
+    <hr />
 
     <!-- Recent Orders -->
     <section class="order-history">
@@ -225,14 +444,29 @@
           </tr>
         </thead>
         <tbody>
-          <tr><td>#12345</td><td>2x Paneer Wrap, Coke</td><td>25 June 2025</td><td>Delivered</td></tr>
-          <tr><td>#12312</td><td>Cheese Pizza</td><td>18 June 2025</td><td>Delivered</td></tr>
-          <tr><td>#12298</td><td>Veggie Burger, Fries</td><td>10 June 2025</td><td>Cancelled</td></tr>
+          <tr>
+            <td>#12345</td>
+            <td>2x Paneer Wrap, Coke</td>
+            <td>25 June 2025</td>
+            <td>Delivered</td>
+          </tr>
+          <tr>
+            <td>#12312</td>
+            <td>Cheese Pizza</td>
+            <td>18 June 2025</td>
+            <td>Delivered</td>
+          </tr>
+          <tr>
+            <td>#12298</td>
+            <td>Veggie Burger, Fries</td>
+            <td>10 June 2025</td>
+            <td>Cancelled</td>
+          </tr>
         </tbody>
       </table>
     </section>
 
-    <hr/>
+    <hr />
 
     <!-- Saved Addresses -->
     <section class="saved-addresses">
@@ -245,7 +479,7 @@
       </div>
     </section>
 
-    <hr/>
+    <hr />
 
     <!-- Payment -->
     <section class="payment-methods">
@@ -257,16 +491,16 @@
       </ul>
     </section>
 
-    <hr/>
+    <hr />
 
     <!-- Subscriptions -->
     <section class="subscriptions">
       <h3>💎 Subscriptions & Memberships</h3>
       <p>✔️ Pipaliya Premium Member (till Dec 2025)</p>
       <p>🚚 Free delivery, exclusive offers</p>
-    </section> 
+    </section>
 
-    <hr/>
+    <hr />
 
     <!-- Reservations -->
     <section class="reservations">
@@ -277,7 +511,7 @@
       </ul>
     </section>
 
-    <hr/>
+    <hr />
 
     <!-- Reviews -->
     <section class="reviews">
@@ -289,7 +523,7 @@
       </ul>
     </section>
 
-    <hr/>
+    <hr />
 
     <!-- Support -->
     <section class="support-tickets">
@@ -300,7 +534,7 @@
       </ul>
     </section>
 
-    <hr/>
+    <hr />
 
     <!-- Social -->
     <section class="social-links">
@@ -312,7 +546,7 @@
       </ul>
     </section>
 
-    <hr/>
+    <hr />
 
     <!-- Settings -->
     <section class="settings">
@@ -344,8 +578,8 @@
     // ── Load all user data on page load ──
     document.addEventListener("DOMContentLoaded", () => {
       const emailEl = document.getElementById("profile-email");
-      const nameEl  = document.getElementById("profile-name");
-      const bioEl   = document.getElementById("profile-bio");
+      const nameEl = document.getElementById("profile-name");
+      const bioEl = document.getElementById("profile-bio");
       const avatarEl = document.getElementById("profile-avatar-img");
 
       const loggedEmail = sessionStorage.getItem("userEmail") || "hardik@example.com";
@@ -393,7 +627,7 @@
       }
 
       const reader = new FileReader();
-      reader.onload = function(e) {
+      reader.onload = function (e) {
         const avatarEl = document.getElementById('profile-avatar-img');
         avatarEl.src = e.target.result;
 
@@ -406,7 +640,7 @@
         const loggedEmail = sessionStorage.getItem('userEmail') || 'hardik@example.com';
         try {
           localStorage.setItem('profileAvatar_' + loggedEmail, e.target.result);
-        } catch(err) {
+        } catch (err) {
           // localStorage quota exceeded — image too large
           console.warn('Could not save avatar to localStorage:', err);
           alert('Photo displayed but could not be saved (storage full). Try a smaller image.');
@@ -420,12 +654,12 @@
 
     // Edit Profile Handler
     function editProfile() {
-      const nameEl  = document.getElementById("profile-name");
-      const bioEl   = document.getElementById("profile-bio");
+      const nameEl = document.getElementById("profile-name");
+      const bioEl = document.getElementById("profile-bio");
 
       const loggedEmail = sessionStorage.getItem("userEmail") || "hardik@example.com";
       const currentName = nameEl.textContent.replace(/✨/g, "").trim();
-      const currentBio  = bioEl.textContent.replace(/🍱/g, "").trim();
+      const currentBio = bioEl.textContent.replace(/🍱/g, "").trim();
 
       const newName = prompt("Enter new name:", currentName);
       if (newName === null) return;
@@ -438,10 +672,10 @@
       }
 
       nameEl.textContent = "✨ " + newName.trim() + " ✨";
-      bioEl.textContent  = "🍱 " + newBio.trim();
+      bioEl.textContent = "🍱 " + newBio.trim();
 
       localStorage.setItem("profileName_" + loggedEmail, newName.trim());
-      localStorage.setItem("profileBio_" + loggedEmail,  newBio.trim());
+      localStorage.setItem("profileBio_" + loggedEmail, newBio.trim());
 
       // Also update default avatar if no custom photo yet
       const savedAvatar = localStorage.getItem("profileAvatar_" + loggedEmail);
@@ -473,7 +707,7 @@
       // Retrieve user's actual password
       let registeredUsers = JSON.parse(localStorage.getItem("registeredUsers")) || [];
       let userIndex = registeredUsers.findIndex(u => u.email === loggedEmail);
-      
+
       let actualPassword = "Hardik@2005"; // Default
       if (userIndex !== -1) {
         actualPassword = registeredUsers[userIndex].password;
@@ -523,7 +757,7 @@
     // Delete Account Handler
     function deleteAccount() {
       const loggedEmail = sessionStorage.getItem("userEmail") || "hardik@example.com";
-      
+
       const confirmText = `Are you sure you want to delete your account (${loggedEmail})?\nThis action is permanent and cannot be undone!`;
       if (!confirm(confirmText)) return;
 
@@ -549,4 +783,5 @@
     }
   </script>
 </body>
+
 </html>
