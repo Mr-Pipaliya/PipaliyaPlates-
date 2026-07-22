@@ -1,197 +1,456 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PipaliyaPlates | Checkout</title>
+  <title>Cart &amp; Checkout | PipaliyaPlates</title>
   <link rel="stylesheet" href="style.css">
   <style>
-
-
-    .checkout-section {
-      max-width: 800px;
-      margin: 40px auto;
-      background-color: #ffffff;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    /* ── Checkout Page Extras ── */
+    .checkout-page {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 52px 24px 80px;
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 32px;
+      align-items: start;
     }
 
-    .checkout-section h2,
-    .checkout-section h3 {
-      color: #333;
-      border-bottom: 2px solid #ff5e5e;
-      padding-bottom: 5px;
+    /* Page heading */
+    .checkout-heading {
+      max-width: 1100px;
+      margin: 48px auto 0;
+      padding: 0 24px;
+    }
+    .checkout-heading h2 {
+      font-family: var(--font-heading);
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      color: var(--poy-plum);
+      font-style: italic;
+      margin-bottom: 6px;
+    }
+    .checkout-heading p { color: var(--text-light); font-size: 0.95rem; }
+
+    /* Cart panel */
+    .cart-panel {
+      background: var(--bg-white);
+      border: 1px solid var(--border);
+      border-radius: var(--r-xl);
+      padding: 32px;
+      box-shadow: var(--shadow-sm);
+      position: sticky;
+      top: 88px;
+    }
+    .cart-panel h3 {
+      font-size: 1.35rem;
       margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding-bottom: 14px;
+      border-bottom: 2px solid var(--border);
+    }
+    .cart-panel h3 .cart-count {
+      background: var(--poy-gold);
+      color: var(--text-dark);
+      font-size: 0.72rem;
+      font-weight: 900;
+      padding: 2px 8px;
+      border-radius: var(--r-pill);
     }
 
-    .cart-items {
-      margin-bottom: 30px;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      padding: 15px;
-      background-color: #ffffff;
-    }
-
-    .cart-item {
+    /* Cart items list */
+    #cart-items-list { list-style: none; padding: 0; margin: 0 0 16px; }
+    #cart-items-list li {
       display: flex;
       justify-content: space-between;
-      padding: 8px 0;
-      border-bottom: 1px dashed #ccc;
-    }
-
-    .cart-item:last-child {
-      border-bottom: none;
-    }
-
-    form {
-      display: flex;
-      flex-direction: column;
-    }
-
-    label {
-      margin-bottom: 5px;
-      font-weight: bold;
-    }
-
-    input {
-      padding: 10px;
-      margin-bottom: 20px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-      font-size: 1rem;
-    }
-
-    button[type="submit"] {
-      background-color: #ff5e5e;
-      color: white;
-      padding: 12px;
-      font-size: 1.1rem;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-
-    button[type="submit"]:hover {
-      background-color: #e14c4c;
-    }
-
-    footer {
-      text-align: center;
-      padding: 20px;
-      background-color: #f0f0f0;
-      color: #444;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
       font-size: 0.95rem;
-      margin-top: 40px;
+      gap: 12px;
+    }
+    #cart-items-list li:last-child { border-bottom: none; }
+    #cart-items-list .item-name { font-weight: 700; color: var(--text-dark); }
+    #cart-items-list .item-qty { color: var(--text-light); font-size: 0.85rem; margin-top: 2px; }
+    #cart-items-list .item-price { font-weight: 700; color: var(--poy-plum); white-space: nowrap; }
+
+    .empty-cart {
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--text-light);
+    }
+    .empty-cart span { font-size: 3rem; display: block; margin-bottom: 12px; }
+    .empty-cart a { color: var(--poy-plum); font-weight: 700; }
+
+    /* Divider */
+    .cart-divider { border: none; border-top: 1px solid var(--border); margin: 14px 0; }
+
+    /* Totals */
+    .total-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+      color: var(--text-mid);
+      margin-bottom: 8px;
+    }
+    .total-row.grand {
+      font-family: var(--font-heading);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-top: 10px;
+    }
+    .total-row .free-tag {
+      color: #27ae60;
+      font-weight: 700;
+      font-size: 0.85rem;
     }
 
-    @media (max-width: 600px) {
-      .checkout-section {
-        padding: 20px;
-        margin: 20px;
-      }
+    .clear-btn {
+      width: 100%;
+      background: transparent;
+      border: 1px solid var(--border-mid);
+      color: var(--text-light);
+      border-radius: var(--r-pill);
+      padding: 9px;
+      font-size: 0.8rem;
+      font-family: var(--font-body);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      cursor: pointer;
+      margin-top: 14px;
+      transition: all 0.2s ease;
+    }
+    .clear-btn:hover { border-color: #e74c3c; color: #e74c3c; background: #fff5f5; }
 
-      nav a {
-        display: inline-block;
-        margin: 5px 10px;
-      }
+    /* Payment form panel */
+    .payment-panel {
+      background: var(--bg-white);
+      border: 1px solid var(--border);
+      border-radius: var(--r-xl);
+      padding: 36px;
+      box-shadow: var(--shadow-sm);
+    }
+    .payment-panel h3 {
+      font-size: 1.35rem;
+      margin-bottom: 6px;
+      padding-bottom: 14px;
+      border-bottom: 2px solid var(--border);
+    }
+    .payment-panel p.sub { color: var(--text-light); font-size: 0.9rem; margin-bottom: 24px; margin-top: 8px; }
+
+    /* Payment method tabs */
+    .pay-tabs { display: flex; gap: 10px; margin-bottom: 24px; flex-wrap: wrap; }
+    .pay-tab {
+      flex: 1; min-width: 80px;
+      padding: 10px 8px;
+      text-align: center;
+      border: 2px solid var(--border);
+      border-radius: var(--r-md);
+      cursor: pointer;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text-mid);
+      background: var(--bg-muted);
+      transition: all 0.2s ease;
+      user-select: none;
+    }
+    .pay-tab.selected {
+      border-color: var(--poy-plum);
+      background: var(--poy-plum-soft);
+      color: var(--poy-plum);
+    }
+    .pay-tab span { display: block; font-size: 1.3rem; margin-bottom: 4px; }
+
+    /* Form fields */
+    .pf-group { margin-bottom: 18px; }
+    .pf-group label {
+      display: block;
+      font-weight: 700;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-dark);
+      margin-bottom: 7px;
+    }
+    .pf-group input {
+      width: 100%;
+      padding: 13px 16px;
+      border: 1px solid var(--border-mid);
+      border-radius: var(--r-md);
+      font-size: 0.95rem;
+      background: var(--bg-white);
+      color: var(--text-dark);
+      outline: none;
+      font-family: var(--font-body);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .pf-group input:focus {
+      border-color: var(--poy-plum);
+      box-shadow: 0 0 0 3px rgba(115,64,96,0.14);
+    }
+    .pf-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+    /* Security note */
+    .secure-note {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--bg-muted);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      padding: 11px 14px;
+      margin-bottom: 20px;
+      font-size: 0.82rem;
+      color: var(--text-mid);
+    }
+    .secure-note span { font-size: 1rem; }
+
+    /* Place order btn */
+    .place-order-btn {
+      background: var(--poy-plum);
+      color: #fff;
+      border: none;
+      padding: 15px;
+      border-radius: var(--r-pill);
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      width: 100%;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+    .place-order-btn:hover { background: var(--poy-plum-dark); transform: translateY(-1px); }
+    .place-order-btn:disabled { background: #ccc; cursor: not-allowed; transform: none; }
+
+    @media (max-width: 860px) {
+      .checkout-page { grid-template-columns: 1fr; }
+      .cart-panel { position: static; }
+      .pf-row { grid-template-columns: 1fr; }
     }
   </style>
 </head>
-
 <body>
-    <header class="main-header">
+
+  <!-- Header -->
+  <header class="main-header">
     <h1><a href="index.html">PipaliyaPlates 🍕</a></h1>
     <nav>
-      <a href="index.html" class="">Home</a>
-      <a href="menu.html" class="">Menu</a>
-      <a href="about.html" class="">About</a>
-      <a href="contact.html" class="">Contact</a>
+      <a href="index.html">Home</a>
+      <a href="menu.html">Menu</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
       <a href="checkout.html" class="active">Cart</a>
-      <a href="profile.html" class="profile-link ">👤</a>
+      <a href="profile.html" class="profile-link">👤</a>
     </nav>
   </header>
 
-  <section class="checkout-section">
-    <h2>Checkout 🛒</h2>
-    <h3>Your Cart</h3>
-    <div class="cart-items" id="cart-items">
-      <!-- Items will be added dynamically -->
+  <!-- Page Heading -->
+  <div class="checkout-heading">
+    <h2>Your Cart &amp; Checkout</h2>
+    <p>Review your items and complete your payment to place the order.</p>
+  </div>
+
+  <!-- Two column layout -->
+  <div class="checkout-page">
+
+    <!-- LEFT: Cart Summary -->
+    <div class="cart-panel">
+      <h3>🛒 Order Summary <span class="cart-count" id="cart-count">0</span></h3>
+
+      <ul id="cart-items-list">
+        <!-- Filled by JS -->
+      </ul>
+
+      <hr class="cart-divider">
+
+      <div class="total-row">
+        <span>Subtotal</span>
+        <span id="subtotal-display">₹0</span>
+      </div>
+      <div class="total-row">
+        <span>Delivery Charge</span>
+        <span id="delivery-display">₹40</span>
+      </div>
+      <div class="total-row">
+        <span>Discount</span>
+        <span class="free-tag">— ₹0</span>
+      </div>
+      <hr class="cart-divider">
+      <div class="total-row grand">
+        <span>Total</span>
+        <span id="grand-total-display">₹0</span>
+      </div>
+
+      <button class="clear-btn" onclick="clearCart()">🗑️ Clear Cart</button>
     </div>
 
-    <h3>Total: <span id="cart-total">Rs. 0</span></h3>
+    <!-- RIGHT: Payment Form -->
+    <div class="payment-panel">
+      <h3>💳 Payment Details</h3>
+      <p class="sub">Choose your payment method and fill in your details.</p>
 
-    <h2>Payment Info 💳</h2>
-    <form id="checkout-form">
-      <label for="name">Name on Card:</label>
-      <input type="text" id="name" required>
+      <!-- Payment method tabs -->
+      <div class="pay-tabs">
+        <div class="pay-tab selected" onclick="selectTab(this)"><span>💳</span>Card</div>
+        <div class="pay-tab" onclick="selectTab(this)"><span>📱</span>UPI</div>
+        <div class="pay-tab" onclick="selectTab(this)"><span>🏦</span>Net Banking</div>
+        <div class="pay-tab" onclick="selectTab(this)"><span>💰</span>Wallet</div>
+      </div>
 
-      <label for="card">Card Number:</label>
-      <input type="text" id="card" required>
+      <form id="checkout-form" onsubmit="handleCheckout(event)">
 
-      <label for="exp">Expiration:</label>
-      <input type="month" id="exp" required>
+        <!-- Delivery address -->
+        <div class="pf-group">
+          <label>Delivery Address</label>
+          <input type="text" id="del-address" placeholder="Enter your full delivery address" required>
+        </div>
 
-      <label for="cvv">CVV:</label>
-      <input type="text" id="cvv" required>
+        <div class="pf-row">
+          <div class="pf-group">
+            <label>City</label>
+            <input type="text" id="del-city" placeholder="City" required>
+          </div>
+          <div class="pf-group">
+            <label>Pincode</label>
+            <input type="text" id="del-pin" placeholder="380001" maxlength="6" required>
+          </div>
+        </div>
 
-      <button type="submit">Place Order</button>
-    </form>
-  </section>
+        <hr class="cart-divider">
 
+        <!-- Card details -->
+        <div class="pf-group">
+          <label>Name on Card</label>
+          <input type="text" id="card-name" placeholder="e.g. Hardik Pipaliya" required>
+        </div>
+        <div class="pf-group">
+          <label>Card Number</label>
+          <input type="text" id="card-num" placeholder="XXXX  XXXX  XXXX  XXXX" maxlength="19" required>
+        </div>
+        <div class="pf-row">
+          <div class="pf-group">
+            <label>Expiry Date</label>
+            <input type="month" id="card-exp" required>
+          </div>
+          <div class="pf-group">
+            <label>CVV</label>
+            <input type="password" id="card-cvv" placeholder="•••" maxlength="4" required>
+          </div>
+        </div>
+
+        <div class="secure-note">
+          <span>🔒</span>
+          Your payment information is encrypted and 100% secure. We never store card details.
+        </div>
+
+        <button type="submit" class="place-order-btn" id="place-order-btn">✅ Place Order</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Footer -->
   <footer class="main-footer">
+    <span class="footer-brand">PipaliyaPlates 🍕</span>
     <p>&copy; 2025 PipaliyaPlates. Your food journey ends here… happily!</p>
+    <nav class="footer-nav">
+      <a href="index.html">Home</a>
+      <a href="menu.html">Menu</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
   </footer>
 
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const cartContainer = document.querySelector(".cart-items");
-      const totalDisplay = document.getElementById("cart-total");
-
-      let cart = JSON.parse(localStorage.getItem("cart")) || [];
-      cartContainer.innerHTML = "";
-      let total = 0;
-
-      if (cart.length === 0) {
-        cartContainer.innerHTML = "<p>Your cart is empty.</p>";
-      } else {
-        cart.forEach(item => {
-          const itemDiv = document.createElement("div");
-          itemDiv.classList.add("cart-item");
-          itemDiv.innerHTML = `
-            <strong>${item.name}</strong> - Rs. ${item.price} × ${item.quantity}
-            <br><small>Subtotal: Rs. ${item.price * item.quantity}</small>
-            <hr>
-          `;
-          cartContainer.appendChild(itemDiv);
-          total += item.price * item.quantity;
-        });
-
-        totalDisplay.textContent = `Rs. ${total}`;
-      }
-
-      // Order placement handler
-      const form = document.getElementById("checkout-form");
-      form.addEventListener("submit", function (e) {
-        e.preventDefault();
-        alert("🎉 Payment Successful! Thank you for your order.");
-
-        // Clear cart from localStorage
-        localStorage.removeItem("cart");
-
-        // Redirect to thank you page after 1 second
-        setTimeout(() => {
-          window.location.href = "thankyou.html";
-        }, 1000);
-      });
+    // Format card number with spaces
+    document.getElementById('card-num').addEventListener('input', function(e) {
+      let v = e.target.value.replace(/\D/g, '').substring(0, 16);
+      e.target.value = v.replace(/(.{4})/g, '$1  ').trim();
     });
 
+    // Payment tab selection
+    function selectTab(el) {
+      document.querySelectorAll('.pay-tab').forEach(t => t.classList.remove('selected'));
+      el.classList.add('selected');
+    }
 
+    // Load cart from localStorage
+    document.addEventListener('DOMContentLoaded', function() {
+      loadCart();
+    });
+
+    function loadCart() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const listEl = document.getElementById('cart-items-list');
+      const countEl = document.getElementById('cart-count');
+      const subtotalEl = document.getElementById('subtotal-display');
+      const grandEl = document.getElementById('grand-total-display');
+      const deliveryEl = document.getElementById('delivery-display');
+      const orderBtn = document.getElementById('place-order-btn');
+
+      listEl.innerHTML = '';
+      let subtotal = 0;
+
+      if (cart.length === 0) {
+        listEl.innerHTML = `
+          <div class="empty-cart">
+            <span>🛒</span>
+            <p>Your cart is empty!</p>
+            <a href="menu.html">Browse Menu →</a>
+          </div>
+        `;
+        orderBtn.disabled = true;
+        countEl.textContent = '0';
+        subtotalEl.textContent = '₹0';
+        grandEl.textContent = '₹0';
+        deliveryEl.textContent = '₹0';
+        return;
+      }
+
+      cart.forEach(item => {
+        const li = document.createElement('li');
+        li.innerHTML = `
+          <div>
+            <div class="item-name">${item.name}</div>
+            <div class="item-qty">× ${item.quantity}</div>
+          </div>
+          <div class="item-price">₹${item.price * item.quantity}</div>
+        `;
+        listEl.appendChild(li);
+        subtotal += item.price * item.quantity;
+      });
+
+      const delivery = subtotal >= 500 ? 0 : 40;
+      const grand = subtotal + delivery;
+
+      countEl.textContent = cart.reduce((a, i) => a + i.quantity, 0);
+      subtotalEl.textContent = '₹' + subtotal;
+      deliveryEl.textContent = delivery === 0 ? '🎉 FREE' : '₹' + delivery;
+      grandEl.textContent = '₹' + grand;
+      orderBtn.disabled = false;
+    }
+
+    function clearCart() {
+      if (!confirm('Clear all items from cart?')) return;
+      localStorage.removeItem('cart');
+      loadCart();
+    }
+
+    function handleCheckout(e) {
+      e.preventDefault();
+      const btn = document.getElementById('place-order-btn');
+      btn.textContent = '⏳ Processing...';
+      btn.disabled = true;
+      setTimeout(() => {
+        localStorage.removeItem('cart');
+        window.location.href = 'thankyou.html';
+      }, 1200);
+    }
   </script>
-
-
 </body>
-
 </html>

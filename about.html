@@ -5,302 +5,332 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PipaliyaPlates | About Us</title>
   <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
   <style>
-  body {
-    font-family: 'Open Sans', sans-serif;
-    line-height: 1.6;
-    background: linear-gradient(to right, #fff7f0, #f7f7f7);
-    margin: 0;
-    padding: 0;
-    color: #333;
-    animation: fadeIn 1s ease-in-out;
-  }
- 
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-
-
-  .about-section {
-    padding: 80px 50px;
-    max-width: 1200px;
-    margin: 0 auto;
-    background-color: #ffffff;
-    border-radius: 16px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    margin-top: 40px;
-    animation: fadeIn 1.2s ease;
-  }
-
-  .about-header h2, .about-offer h2, .about-vision h2 {
-    font-size: 2rem;
-    color: #ff5722;
-    margin-bottom: 20px;
-    position: relative;
-    display: inline-block;
-  }
-
-  .about-header h2::after,
-  .about-offer h2::after,
-  .about-vision h2::after,
-  .team-section h2::after {
-    content: "";
-    display: block;
-    height: 3px;
-    width: 60%;
-    margin-top: 8px;
-    background: linear-gradient(to right, #ff5722, #ff7043);
-    border-radius: 8px;
-    margin: 8px auto 0 auto;
-    animation: fadeIn 1s ease;
-  }
-
-  .about-header p, .about-offer ul, .about-vision p {
-    font-size: 1.15rem;
-    color: #444;
-  }
-
-  .about-offer ul {
-    list-style-type: none;
-    padding: 0;
-  }
-
-  .about-offer ul li {
-    margin-bottom: 12px;
-    padding-left: 36px;
-    position: relative;
-    font-size: 1.1rem;
-    color: #555;
-  }
-
-  .about-offer ul li::before {
-    content: "🍽️";
-    position: absolute;
-    left: 0;
-    top: 0;
-    font-size: 1.2rem;
-  }
-
-  .about-vision {
-    margin-top: 50px;
-  }
-
-  .about-section img {
-    border-radius: 12px;
-    margin-top: 20px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-    transition: transform 0.3s ease;
-  }
-
-  .about-section img:hover {
-    transform: scale(1.02);
-  }
-
-  .testimonials {
-    margin: 80px auto;
-    background-color: #fff8f4;
-    padding: 60px;
-    max-width: 1000px;
-    border-radius: 16px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
-    text-align: center;
-    animation: fadeIn 1.5s ease;
-  }
-
-  .testimonial {
-    margin-bottom: 40px;
-    padding: 20px;
-    border-left: 5px solid #ff7043;
-    background-color: #fff;
-    border-radius: 8px;
-    font-style: italic;
-    position: relative;
-    transition: all 0.3s ease;
-  }
-
-  .testimonial:hover {
-    background-color: #fff3e0;
-    transform: scale(1.02);
-  }
-
-  .testimonial::before {
-    content: "❝";
-    font-size: 3rem;
-    position: absolute;
-    top: -20px;
-    left: -10px;
-    color: #ff7043;
-  }
-
-  .testimonial p {
-    font-size: 1.1rem;
-    color: #555;
-    margin-bottom: 10px;
-  }
-
-  .testimonial .customer-name {
-    font-weight: bold;
-    color: #333;
-  }
-
-  .team-section {
-    margin: 60px auto;
-    text-align: center;
-    max-width: 1200px;
-  }
-
-  .team-section h2 {
-    font-size: 2.5rem;
-    color: #ff5722;
-    margin-bottom: 40px;
-    position: relative;
-  }
-
-  .team-members {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 40px;
-  }
-
-  .team-member {
-    width: 220px;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 16px;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-
-  .team-member:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 10px 30px rgba(255, 112, 67, 0.3);
-  }
-
-  .team-member img {
-    width: 100%;
-    height: auto;
-    border-radius: 50%;
-    margin-bottom: 15px;
-    border: 4px solid #ff7043;
-  }
-
-  .team-member h3 {
-    font-size: 1.4rem;
-    color: #333;
-    margin: 5px 0;
-  }
-
-  .team-member p {
-    font-size: 1rem;
-    color: #777;
-  }
-
-  footer {
-    background-color: #222;
-    color: white;
-    text-align: center;
-    padding: 20px;
-    margin-top: 80px;
-    font-size: 1rem;
-    animation: fadeIn 1s ease;
-  }
-
-  @media (max-width: 768px) {
-    .about-section, .testimonials, .team-section {
-      padding: 20px;
-    }
-    .team-members {
-      flex-direction: column;
+    /* ── About Page Extras ── */
+    .about-hero {
+      background:
+        linear-gradient(rgba(43,42,40,0.50), rgba(43,42,40,0.62)),
+        url('https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=1600&q=80')
+        no-repeat center center / cover;
+      min-height: 320px;
+      display: flex;
       align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 60px 24px;
     }
-  }
-</style>
+    .about-hero h2 {
+      font-family: var(--font-heading);
+      font-style: italic;
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      color: #fff;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.35);
+      margin-bottom: 14px;
+    }
+    .about-hero p {
+      color: rgba(255,255,255,0.88);
+      font-size: 1.1rem;
+      max-width: 560px;
+      margin: 0 auto;
+      font-weight: 300;
+    }
 
+    /* Page wrapper */
+    .about-page { max-width: 1100px; margin: 0 auto; padding: 60px 24px; }
+
+    /* Section card */
+    .about-card {
+      background: var(--bg-white);
+      border: 1px solid var(--border);
+      border-radius: var(--r-xl);
+      padding: 44px 48px;
+      margin-bottom: 32px;
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow 0.3s ease;
+    }
+    .about-card:hover { box-shadow: var(--shadow-md); }
+
+    .about-card h3 {
+      font-size: 1.75rem;
+      color: var(--poy-plum);
+      margin-bottom: 18px;
+      padding-bottom: 14px;
+      border-bottom: 3px solid var(--poy-gold);
+      display: inline-block;
+    }
+    .about-card p {
+      color: var(--text-mid);
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin-bottom: 14px;
+    }
+
+    /* Offer list */
+    .offer-list { list-style: none; padding: 0; margin: 0; }
+    .offer-list li {
+      padding: 12px 0 12px 44px;
+      position: relative;
+      color: var(--text-mid);
+      font-size: 1.05rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .offer-list li:last-child { border-bottom: none; }
+    .offer-list li::before {
+      content: attr(data-icon);
+      position: absolute; left: 0; top: 10px;
+      font-size: 1.3rem;
+    }
+
+    /* Stats row */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-bottom: 32px;
+    }
+    .stat-box {
+      background: var(--bg-white);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: 28px 16px;
+      text-align: center;
+      box-shadow: var(--shadow-xs);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .stat-box:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+    .stat-box .big { font-family: var(--font-heading); font-size: 2.4rem; font-weight: 700; color: var(--poy-plum); display: block; }
+    .stat-box .label { font-size: 0.82rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.07em; font-weight: 700; margin-top: 6px; display: block; }
+
+    /* Team */
+    .team-wrap { max-width: 1100px; margin: 0 auto 60px; padding: 0 24px; }
+    .team-title {
+      text-align: center;
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      margin-bottom: 10px;
+    }
+    .team-sub { text-align: center; color: var(--text-light); margin-bottom: 44px; }
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+    .team-card {
+      background: var(--bg-white);
+      border: 1px solid var(--border);
+      border-radius: var(--r-xl);
+      padding: 36px 24px;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .team-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+    .team-avatar {
+      width: 110px; height: 110px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 0 auto 18px;
+      display: block;
+      border: 4px solid var(--poy-lavender);
+    }
+    .team-card h4 { font-size: 1.25rem; margin-bottom: 6px; }
+    .team-card .role {
+      font-size: 0.8rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.08em; color: var(--poy-plum); margin-bottom: 12px;
+    }
+    .team-card p { color: var(--text-mid); font-size: 0.92rem; line-height: 1.6; }
+
+    /* Testimonials strip */
+    .about-testimonials {
+      background: var(--poy-plum);
+      padding: 72px 24px;
+      text-align: center;
+      margin-bottom: 0;
+    }
+    .about-testimonials h3 {
+      font-family: var(--font-heading);
+      font-style: italic;
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      color: #fff;
+      margin-bottom: 44px;
+    }
+    .t-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .t-card {
+      background: rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: var(--r-lg);
+      padding: 32px 28px;
+      text-align: left;
+      position: relative;
+      transition: background 0.3s ease;
+    }
+    .t-card:hover { background: rgba(255,255,255,0.16); }
+    .t-card::before {
+      content: '\201C';
+      font-family: Georgia, serif;
+      font-size: 4rem;
+      color: var(--poy-gold);
+      position: absolute;
+      top: 10px; left: 20px;
+      line-height: 1;
+      opacity: 0.7;
+    }
+    .t-card p { color: rgba(255,255,255,0.88); font-style: italic; font-size: 1rem; line-height: 1.7; padding-top: 18px; margin-bottom: 14px; }
+    .t-card span { color: var(--poy-gold); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; }
+
+    @media (max-width: 900px) {
+      .stats-row { grid-template-columns: repeat(2, 1fr); }
+      .team-grid { grid-template-columns: repeat(2, 1fr); }
+      .about-card { padding: 28px 24px; }
+    }
+    @media (max-width: 600px) {
+      .stats-row { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .team-grid { grid-template-columns: 1fr; }
+      .t-grid { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
-  <!-- Header Section -->
-    <header class="main-header">
+
+  <!-- Header -->
+  <header class="main-header">
     <h1><a href="index.html">PipaliyaPlates 🍕</a></h1>
     <nav>
-      <a href="index.html" class="">Home</a>
-      <a href="menu.html" class="">Menu</a>
+      <a href="index.html">Home</a>
+      <a href="menu.html">Menu</a>
       <a href="about.html" class="active">About</a>
-      <a href="contact.html" class="">Contact</a>
-      <a href="checkout.html" class="">Cart</a>
-      <a href="profile.html" class="profile-link ">👤</a>
+      <a href="contact.html">Contact</a>
+      <a href="checkout.html">Cart</a>
+      <a href="profile.html" class="profile-link">👤</a>
     </nav>
   </header>
 
-  <!-- About Section -->
-  <section class="about-section">
-    <!-- Who We Are Section -->
-    <div class="about-header">
-      <h2>Who We Are</h2>
-      <p>PipaliyaPlates was founded in 2025 with a mission to bring flavor, freshness, and fast delivery together in one sizzling platform. Whether you crave traditional Gujarati, spicy Punjabi, or cheesy Italian—our chefs cook it all with love. 💖</p>
-      <img src="images/chefs-in-action.jpg" alt="Chefs cooking" style="width: 100%; height: auto; margin-top: 20px;">
+  <!-- Hero Banner -->
+  <div class="about-hero">
+    <div>
+      <h2>Our Story</h2>
+      <p>Born from a love of food and a dream to bring India's best flavours to your doorstep — fast, fresh, and full of heart.</p>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="about-page">
+
+    <!-- Who We Are -->
+    <div class="about-card">
+      <h3>🍽️ Who We Are</h3>
+      <p>PipaliyaPlates was founded in 2025 with one bold mission — to bring flavor, freshness, and fast delivery together on a single sizzling platform. We believe that great food should never be hard to reach. Whether you're craving a hearty Gujarati Thali, spicy Punjabi Chole Bhature, cheesy Italian pizza, or smoky Korean Bibimbap — our chefs prepare it all with passion and care.</p>
+      <p>We started as a small kitchen in Ahmedabad with just 3 dishes on the menu. Today, we serve 25+ dishes across 8 cuisines, with thousands of happy orders delivered every month. Every plate that leaves our kitchen carries a piece of our heart — because that's what food means to us.</p>
     </div>
 
-    <!-- What We Offer Section -->
-    <div class="about-offer">
-      <h2>What We Offer</h2>
-      <ul>
-        <li>🔥 Wide variety of Indian & International dishes</li>
-        <li>🛵 Fast, reliable delivery</li>
-        <li>💳 Secure online payments</li>
-        <li>📦 Easy-to-use cart and checkout system</li>
+    <!-- What We Offer -->
+    <div class="about-card">
+      <h3>✨ What We Offer</h3>
+      <ul class="offer-list">
+        <li data-icon="🍛">Wide variety of Indian &amp; International dishes — from Masala Dosa to Thai Green Curry</li>
+        <li data-icon="🛵">Fast, reliable delivery — your order at your door in 30–40 minutes, guaranteed</li>
+        <li data-icon="👨‍🍳">Freshly prepared by skilled chefs — no frozen, no compromise on quality</li>
+        <li data-icon="💳">Secure online payments — UPI, Card, Wallet — all accepted safely</li>
+        <li data-icon="📦">Easy cart &amp; checkout — add dishes, review, and pay in under 2 minutes</li>
+        <li data-icon="🌿">Vegetarian-friendly menu — clearly marked, diet-conscious options available</li>
+        <li data-icon="💎">Exclusive member offers — premium discounts, free delivery, and loyalty rewards</li>
       </ul>
     </div>
 
-    <!-- Our Vision Section -->
-    <div class="about-vision">
-      <h2>Our Vision</h2>
-      <p>To be your go-to digital kitchen across India, known for consistency, care, and comfort food you can trust!</p>
-      <img src="images/vision.jpg" alt="Vision" style="width: 100%; height: auto; margin-top: 20px;">
+    <!-- Stats -->
+    <div class="stats-row">
+      <div class="stat-box">
+        <span class="big">25+</span>
+        <span class="label">Dishes Served</span>
+      </div>
+      <div class="stat-box">
+        <span class="big">8</span>
+        <span class="label">Cuisines</span>
+      </div>
+      <div class="stat-box">
+        <span class="big">1200+</span>
+        <span class="label">Happy Orders</span>
+      </div>
+      <div class="stat-box">
+        <span class="big">4.6 ⭐</span>
+        <span class="label">Avg Rating</span>
+      </div>
     </div>
-  </section>
 
-  <!-- Testimonials Section -->
-  <section class="testimonials">
-    <h2>What Our Customers Say</h2>
-    <div class="testimonial">
-      <p>"PipaliyaPlates is my go-to place for comfort food! The delivery is fast, and the taste is always spot on. I love the variety!"</p>
-      <p class="customer-name">- Neha Patel</p>
+    <!-- Our Vision -->
+    <div class="about-card">
+      <h3>🌟 Our Vision</h3>
+      <p>To become India's most loved digital kitchen — a name that families trust, foodies celebrate, and communities grow around. We envision a future where ordering your favourite meal is as joyful as eating it.</p>
+      <p>We're building more than a food platform. We're building a community where food connects people, cultures blend beautifully on a plate, and every bite tells a story. Our commitment is simple: <strong>freshness, speed, and a smile with every delivery.</strong></p>
     </div>
-    <div class="testimonial">
-      <p>"I’ve been ordering regularly, and the food is always fresh, delicious, and exactly what I crave. Highly recommend!"</p>
-      <p class="customer-name">- Rohit Sharma</p>
-    </div>
-  </section>
+
+  </div>
 
   <!-- Team Section -->
-  <section class="team-section">
-    <h2>Meet Our Team</h2>
-    <div class="team-members">
-      <div class="team-member">
-        <img src="images/team1.jpg" alt="Team Member 1">
-        <h3>Rajesh Kumar</h3>
-        <p>Founder & CEO</p>
+  <div class="team-wrap">
+    <h2 class="team-title">Meet Our Team</h2>
+    <p class="team-sub">The people behind every delicious plate 👨‍🍳</p>
+    <div class="team-grid">
+      <div class="team-card">
+        <img src="https://ui-avatars.com/api/?name=Rajesh+Kumar&background=f0e8ec&color=734060&size=200&bold=true" alt="Rajesh Kumar" class="team-avatar">
+        <h4>Rajesh Kumar</h4>
+        <p class="role">Founder &amp; CEO</p>
+        <p>Visionary behind PipaliyaPlates. Rajesh turned his passion for authentic Indian food into a platform that serves thousands of happy customers every month.</p>
       </div>
-      <div class="team-member">
-        <img src="images/team2.jpg" alt="Team Member 2">
-        <h3>Suman Patel</h3>
-        <p>Head Chef</p>
+      <div class="team-card">
+        <img src="https://ui-avatars.com/api/?name=Suman+Patel&background=f0e8ec&color=734060&size=200&bold=true" alt="Suman Patel" class="team-avatar">
+        <h4>Suman Patel</h4>
+        <p class="role">Head Chef</p>
+        <p>With over 15 years of culinary experience, Suman crafts every recipe with precision. Her Gujarati Thali is legendary — customers call it "Maa ke haath ka khana."</p>
       </div>
-      <div class="team-member">
-        <img src="images/team3.jpg" alt="Team Member 3">
-        <h3>Priya Verma</h3>
-        <p>Operations Manager</p>
+      <div class="team-card">
+        <img src="https://ui-avatars.com/api/?name=Priya+Verma&background=f0e8ec&color=734060&size=200&bold=true" alt="Priya Verma" class="team-avatar">
+        <h4>Priya Verma</h4>
+        <p class="role">Operations Manager</p>
+        <p>Priya ensures your food arrives hot, on time, and exactly as ordered. She manages our fleet of 20+ delivery partners across Ahmedabad with surgical precision.</p>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- Footer Section -->
+  <!-- Customer Testimonials -->
+  <div class="about-testimonials">
+    <h3>What Our Customers Say 💬</h3>
+    <div class="t-grid">
+      <div class="t-card">
+        <p>"PipaliyaPlates is my go-to for comfort food! The delivery is always fast and the taste is exactly what I crave every time. Paneer Butter Masala is unbeatable!"</p>
+        <span>— Neha Patel, Ahmedabad</span>
+      </div>
+      <div class="t-card">
+        <p>"I've tried food from many apps but PipaliyaPlates stands out. The variety is amazing — one day I order Masala Dosa, next day Korean Tacos. Always fresh, always delicious!"</p>
+        <span>— Rohit Sharma, Surat</span>
+      </div>
+      <div class="t-card">
+        <p>"Fast delivery and amazing packaging. The Gujarati Thali brought back memories of home. Highly recommend to anyone missing authentic home-style cooking."</p>
+        <span>— Kavya Mehta, Vadodara</span>
+      </div>
+      <div class="t-card">
+        <p>"The app is smooth, checkout is easy and food is phenomenal. Ordered for my office team — everyone loved it. Will definitely order again for our next event!"</p>
+        <span>— Amit Desai, Gandhinagar</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
   <footer class="main-footer">
+    <span class="footer-brand">PipaliyaPlates 🍕</span>
     <p>&copy; 2025 PipaliyaPlates. Taste the joy, every bite!</p>
+    <nav class="footer-nav">
+      <a href="index.html">Home</a>
+      <a href="menu.html">Menu</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
   </footer>
+
 </body>
 </html>
