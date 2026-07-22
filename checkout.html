@@ -446,7 +446,53 @@
       const btn = document.getElementById('place-order-btn');
       btn.textContent = '⏳ Processing...';
       btn.disabled = true;
+
       setTimeout(() => {
+        // ── Save order to localStorage for Admin Panel ──
+        const cart        = JSON.parse(localStorage.getItem('cart')) || [];
+        const userEmail   = sessionStorage.getItem('userEmail') || 'guest@pipaliyaplates.com';
+        const userName    = (() => {
+          const users = JSON.parse(localStorage.getItem('registeredUsers')) || [];
+          const found = users.find(u => u.email === userEmail);
+          return found ? found.name : (userEmail === 'hardik@gmail.com' ? 'Hardik Pipaliya' : 'Guest User');
+        })();
+
+        // Determine payment method from selected tab
+        const selectedTab = document.querySelector('.pay-tab.selected');
+        const payMethod   = selectedTab ? selectedTab.textContent.trim() : '💳 Card';
+
+        // Build items string
+        const itemsStr = cart.map(i => `${i.name} ×${i.quantity}`).join(', ') || 'No items';
+
+        // Calculate total
+        let subtotal = cart.reduce((s, i) => s + i.price * i.quantity, 0);
+        const delivery = subtotal >= 500 ? 0 : 40;
+        const total    = subtotal + delivery;
+
+        // Generate unique order ID
+        const orderId = '#PP-' + Date.now().toString().slice(-6);
+
+        // Save to orders array
+        const orders = JSON.parse(localStorage.getItem('orders')) || [];
+        orders.push({
+          orderId,
+          userEmail,
+          userName,
+          items:         itemsStr,
+          total,
+          paymentMethod: payMethod,
+          status:        'success',
+          date:          new Date().toISOString(),
+          address:       document.getElementById('del-address')?.value || '',
+          city:          document.getElementById('del-city')?.value || '',
+          pincode:       document.getElementById('del-pin')?.value || '',
+        });
+        localStorage.setItem('orders', JSON.stringify(orders));
+
+        // Save last order ID for thank-you page
+        sessionStorage.setItem('lastOrderId', orderId);
+        sessionStorage.setItem('lastOrderTotal', '₹' + total);
+
         localStorage.removeItem('cart');
         window.location.href = 'thankyou.html';
       }, 1200);

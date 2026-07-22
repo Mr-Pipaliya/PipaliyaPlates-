@@ -101,7 +101,8 @@
 
     <div class="order-details">
       <h2>📦 Order Summary</h2>
-      <p><strong>Order Number:</strong> #PF123456</p>
+      <p><strong>Order Number:</strong> <span id="order-id-display">#PP-XXXXXX</span></p>
+      <p><strong>Amount Paid:</strong> <span id="order-total-display">—</span></p>
       <p><strong>Estimated Delivery:</strong> 30–40 Minutes</p>
       <p><strong>Payment Method:</strong> Online (UPI / Card)</p>
       <p><strong>Need Help?</strong> Call us: <a href="tel:1800800600" style="color:var(--poy-plum)">1800-800-600</a></p>
@@ -120,5 +121,15 @@
       <a href="contact.html">Contact</a>
     </nav>
   </footer>
+
+  <script>
+    // Show real order ID from sessionStorage
+    const orderId = sessionStorage.getItem('lastOrderId');
+    const orderTotal = sessionStorage.getItem('lastOrderTotal');
+    if (orderId) document.getElementById('order-id-display').textContent = orderId;
+    if (orderTotal) document.getElementById('order-total-display').textContent = orderTotal;
+    sessionStorage.removeItem('lastOrderId');
+    sessionStorage.removeItem('lastOrderTotal');
+  </script>
 </body>
 </html>
