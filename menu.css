@@ -33,11 +33,11 @@
     font-weight: bold;
     text-transform: uppercase;
     transition: color 0.3s ease;
-  }
+  } 
   
   nav a:hover, .active {
     color: #ffbb33;
-  }
+  } 
   
   /* Menu Section */
   .menu-list {
@@ -83,7 +83,7 @@
   .menu-item p {
     font-size: 1.2rem;
     color: #ff6f61;
-    margin-top: 10px;
+    margin-top: 10px;/
   }
   
   .add-to-cart {
@@ -160,5 +160,3 @@
   footer p {
     font-size: 1rem;
   }
-  
-  

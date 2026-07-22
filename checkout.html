@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -44,7 +45,8 @@
       box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
     }
 
-    .checkout-section h2, .checkout-section h3 {
+    .checkout-section h2,
+    .checkout-section h3 {
       color: #333;
       border-bottom: 2px solid #ff5e5e;
       padding-bottom: 5px;
@@ -125,11 +127,12 @@
     }
   </style>
 </head>
+
 <body>
   <header class="main-header">
     <h1>Checkout 🛒</h1>
     <nav>
-      <a href="Home.html">Home</a>
+      <a href="index.html">Home</a>
       <a href="menu.html">Menu</a>
       <a href="about.html">About</a>
       <a href="contact.html">Contact</a>
@@ -171,11 +174,11 @@
     document.addEventListener("DOMContentLoaded", function () {
       const cartContainer = document.querySelector(".cart-items");
       const totalDisplay = document.getElementById("cart-total");
-    
+
       let cart = JSON.parse(localStorage.getItem("cart")) || [];
       cartContainer.innerHTML = "";
       let total = 0;
-    
+
       if (cart.length === 0) {
         cartContainer.innerHTML = "<p>Your cart is empty.</p>";
       } else {
@@ -190,19 +193,19 @@
           cartContainer.appendChild(itemDiv);
           total += item.price * item.quantity;
         });
-    
+
         totalDisplay.textContent = `Rs. ${total}`;
       }
-  
+
       // Order placement handler
       const form = document.getElementById("checkout-form");
       form.addEventListener("submit", function (e) {
         e.preventDefault();
         alert("🎉 Payment Successful! Thank you for your order.");
-  
+
         // Clear cart from localStorage
         localStorage.removeItem("cart");
-  
+
         // Redirect to thank you page after 1 second
         setTimeout(() => {
           window.location.href = "thankyou.html";
@@ -210,9 +213,10 @@
       });
     });
 
-    
+
   </script>
-  
-  
+
+
 </body>
+
 </html>

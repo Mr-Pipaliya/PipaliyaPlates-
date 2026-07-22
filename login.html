@@ -179,22 +179,64 @@
   <div class="extra-links">
     <p>Don't have an account? <a href="register.html">Register</a></p>  
     <p><a href="forgot.html">Forgot Password?</a></p>
-    <p><a href="home.html">← Back to Home</a></p>
+    <p><a href="index.html">← Back to Home</a></p>
   </div>
 
   <footer class="main-footer">&copy; 2025 PipaliyaPlates. All Rights Reserved.</footer>
 
   <script>
-    function handleLogin(event) {
+    async function handleLogin(event) {
       event.preventDefault();
       const email = document.getElementById('email').value;
       const password = document.getElementById('password').value;
 
-      if (email && password) {
+      if (!email || !password) return;
+
+      // 1. Try backend server login if server is running
+      try {
+        const response = await fetch('http://localhost:5000/api/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ email, password })
+        });
+        
+        if (response.ok) {
+          sessionStorage.setItem("isLoggedIn", "true");
+          sessionStorage.setItem("userEmail", email);
+          alert("Login Successful!");
+          window.location.href = "index.html";
+          return;
+        } else if (response.status === 401) {
+          alert("Invalid email or password!");
+          return;
+        }
+      } catch (error) {
+        console.warn("Backend server not reachable, using client-side validation:", error);
+      }
+
+      // 2. Client-side local verification fallback
+      // Check default user
+      if (email === 'hardik@gmail.com' && password === 'Hardik@2005') {
         sessionStorage.setItem("isLoggedIn", "true");
         sessionStorage.setItem("userEmail", email);
         alert("Login Successful!");
-        window.location.href = "index.html"; 
+        window.location.href = "index.html";
+        return;
+      }
+
+      // Check registered users from localStorage
+      const registeredUsers = JSON.parse(localStorage.getItem("registeredUsers")) || [];
+      const matchedUser = registeredUsers.find(u => u.email === email && u.password === password);
+      
+      if (matchedUser) {
+        sessionStorage.setItem("isLoggedIn", "true");
+        sessionStorage.setItem("userEmail", email);
+        alert("Login Successful!");
+        window.location.href = "index.html";
+      } else {
+        alert("Invalid email or password!");
       }
     }
 

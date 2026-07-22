@@ -136,16 +136,32 @@
     <button type="submit">Register</button>
   </form>
   <div class="extra-links">
-    <p>Already have an account? <a href="index.html">Login</a></p>
-    <p><a href="home.html">← Back to Home</a></p>
+    <p>Already have an account? <a href="login.html">Login</a></p>
+    <p><a href="index.html">← Back to Home</a></p>
   </div>
   <footer class="main-footer">&copy; 2025 PipaliyaPlates. All Rights Reserved.</footer>
 
   <script>
   function handleRegister(event) {
     event.preventDefault();
-    // For now, just redirect after "register"
-    window.location.href = "index.html"; // back to login page after register
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+
+    if (name && email && password) {
+      let registeredUsers = JSON.parse(localStorage.getItem("registeredUsers")) || [];
+      
+      // Check if user already exists
+      if (registeredUsers.some(u => u.email === email)) {
+        alert("An account with this email already exists!");
+        return false;
+      }
+
+      registeredUsers.push({ name, email, password });
+      localStorage.setItem("registeredUsers", JSON.stringify(registeredUsers));
+      alert("Registration Successful! Please login.");
+      window.location.href = "login.html"; // back to login page after register
+    }
     return false;
   }
 

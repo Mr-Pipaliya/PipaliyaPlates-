@@ -15,7 +15,7 @@ const users = [
 ];
 
 // Login API
-app.post('/api/login', (req, res) => {debugger
+app.post('/api/login', (req, res) => {
   const { email, password } = req.body;
 
   // Find user

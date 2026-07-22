@@ -1,4 +1,43 @@
-let cart = [];
+function updateCartDisplay() {
+  const cartItemsList = document.getElementById('cart-items');
+  const cartTotal = document.getElementById('cart-total');
+  const checkoutBtn = document.getElementById('checkout-btn');
+
+  if (!cartItemsList) return; // Cart container is not on this page
+
+  cartItemsList.innerHTML = '';
+  let total = 0;
+
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  if (cart.length === 0) {
+    const li = document.createElement('li');
+    li.textContent = "Your cart is empty.";
+    cartItemsList.appendChild(li);
+  } else {
+    cart.forEach(item => {
+      const li = document.createElement('li');
+      // Create a nice layout for the list item
+      li.style.display = 'flex';
+      li.style.justifyContent = 'space-between';
+      li.style.padding = '8px 0';
+      li.style.borderBottom = '1px dashed #ccc';
+      li.innerHTML = `
+        <span>${item.name}</span>
+        <span>Rs. ${item.price} x ${item.quantity}</span>
+      `;
+      cartItemsList.appendChild(li);
+      total += item.price * item.quantity;
+    });
+  }
+
+  if (cartTotal) {
+    cartTotal.textContent = `Total: Rs. ${total}`;
+  }
+  if (checkoutBtn) {
+    checkoutBtn.disabled = cart.length === 0;
+  }
+}
 
 function addToCart(id, name, price) {
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -13,74 +52,35 @@ function addToCart(id, name, price) {
 
   localStorage.setItem("cart", JSON.stringify(cart));
   alert(`${name} added to cart!`);
+  updateCartDisplay();
 }
 
-function updateCartDisplay() {
-
-  const cartItemsList = document.getElementById('cart-items');
-  const cartTotal = document.getElementById('cart-total');
-  const checkoutBtn = document.getElementById('checkout-btn');
-
-  cartItemsList.innerHTML = '';
-  let total = 0;
-
-  cart.forEach(item => {
-    const li = document.createElement('li');
-    li.textContent = `${item.name} - Rs. ${item.price}`;
-    cartItemsList.appendChild(li);
-    total += item.price;
-  });
-
-  cartTotal.textContent = `Total: Rs. ${total}`;
-  checkoutBtn.disabled = cart.length === 0;
-}
 document.addEventListener("DOMContentLoaded", function () {
-  const cartContainer = document.getElementById("cart-items");
-  const totalDisplay = document.getElementById("cart-total");
+  // Update the cart display when page loads
+  updateCartDisplay();
 
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-  if (cart.length === 0) {
-    cartContainer.innerHTML = "<p>Your cart is empty.</p>";
-    return;
+  // Attach listener to checkout form if it exists on the current page
+  const checkoutForm = document.getElementById("checkout-form");
+  if (checkoutForm) {
+    checkoutForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      alert("Order placed successfully!");
+      localStorage.removeItem("cart");
+      window.location.href = "thankyou.html";
+    });
   }
-
-  let total = 0;
-  cart.forEach(item => {
-    const itemDiv = document.createElement("div");
-    itemDiv.classList.add("cart-item");
-    itemDiv.innerHTML = `
-        <span>${item.name}</span>
-        <span>Rs. ${item.price} x ${item.quantity}</span>
-      `;
-    cartContainer.appendChild(itemDiv);
-    total += item.price * item.quantity;
-  });
-
-  totalDisplay.textContent = `Rs. ${total}`;
 });
-document.getElementById("checkout-form").addEventListener("submit", function (e) {
-  e.preventDefault();
-  alert("Order placed successfully!");
-  localStorage.removeItem("cart");
-  window.location.href = "thankyou.html"; // Optional: redirect to a Thank You page
-});
-// Redirect to thank you page after 1 second
-setTimeout(() => {
-  window.location.href = "thankyou.html";
-}, 3000);
-// Redirect to home page after 1 second
-setTimeout(() => {
-  window.location.href = "index.html";
-}, 3000);
 
+// Category page navigation
 const categoryPages = [
   'gujarati.html',
   'punjabi.html',
   'chinese.html',
   'italian.html',
   'korean.html',
-  'southindian.html'
+  'southindian.html',
+  'mexican.html',
+  'french.html'
 ];
 
 function getCurrentPageIndex() {
@@ -105,4 +105,3 @@ function goForward() {
     alert('This is the last category.');
   }
 }
-
