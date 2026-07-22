@@ -7,9 +7,66 @@ const express    = require('express');
 const cors       = require('cors');
 const bodyParser = require('body-parser');
 
+const path = require('path');
+
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
+
+// ── Serve website HTML files statically ──
+app.use(express.static(path.join(__dirname)));
+
+// ── GET / → Redirect to index.html ──
+app.get('/', (req, res) => {
+  res.redirect('/index.html');
+});
+
+// ── GET /status → Nice server status page ──
+app.get('/status', (req, res) => {
+  res.send(`
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <title>Server Status | PipaliyaPlates</title>
+      <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family: 'Segoe UI', sans-serif; background: #0b0f1a; color: #f1f5f9; display:flex; align-items:center; justify-content:center; min-height:100vh; }
+        .card { background: #151d2e; border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 40px; max-width: 480px; width: 100%; text-align: center; box-shadow: 0 24px 60px rgba(0,0,0,0.5); }
+        .emoji { font-size: 3rem; margin-bottom: 16px; }
+        h1 { font-size: 1.6rem; margin-bottom: 8px; color: #ebb454; }
+        p  { color: #94a3b8; font-size: 0.9rem; margin-bottom: 20px; line-height: 1.6; }
+        .status-dot { display:inline-block; width:10px; height:10px; border-radius:50%; background:#10b981; margin-right:8px; animation: pulse 2s infinite; }
+        @keyframes pulse { 0%,100%{box-shadow:0 0 0 0 rgba(16,185,129,0.4)} 50%{box-shadow:0 0 0 6px rgba(16,185,129,0)} }
+        .routes { background: #0f1523; border-radius: 10px; padding: 18px; text-align: left; margin-top: 20px; }
+        .route { display:flex; gap:12px; padding:8px 0; border-bottom:1px solid rgba(255,255,255,0.06); font-size:0.82rem; }
+        .route:last-child { border-bottom: none; }
+        .method { background:#734060; color:#fff; padding:2px 8px; border-radius:4px; font-weight:700; font-size:0.72rem; }
+        .path { color:#94a3b8; }
+        a { color: #ebb454; text-decoration: none; font-weight: 600; }
+        a:hover { text-decoration: underline; }
+        .btn { display:inline-block; margin-top:20px; padding:12px 28px; background:linear-gradient(135deg,#734060,#9a5a7e); color:#fff; border-radius:50px; font-weight:700; font-size:0.9rem; text-decoration:none; }
+        .btn:hover { opacity:0.9; }
+      </style>
+    </head>
+    <body>
+      <div class="card">
+        <div class="emoji">🍕</div>
+        <h1>PipaliyaPlates Server</h1>
+        <p><span class="status-dot"></span><strong style="color:#10b981">Online</strong> — Live Terminal Logger is running!<br>
+        All user logins, registrations &amp; orders will appear in your terminal.</p>
+        <div class="routes">
+          <div class="route"><span class="method">POST</span><span class="path">/api/login</span></div>
+          <div class="route"><span class="method">POST</span><span class="path">/api/register</span></div>
+          <div class="route"><span class="method">POST</span><span class="path">/api/order</span></div>
+        </div>
+        <a href="/index.html" class="btn">🏠 Open Website</a>
+      </div>
+    </body>
+    </html>
+  `);
+});
+
 
 // ── ANSI Color Codes (no extra dependencies needed) ──
 const C = {
