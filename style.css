@@ -1,8 +1,40 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
 
 /* ==========================================================================
-   🎨 Design System & Reset
+   🌿 Pinch of Yum Inspired Design System
    ========================================================================== */
+
+:root {
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  --bg-main: #FAF8F5;
+  --bg-card: #FFFFFF;
+  --bg-dark: #1E1B18;
+
+  --text-primary: #2C2825;
+  --text-muted: #78726A;
+  --text-light: #FAF8F5;
+
+  --accent-terracotta: #C85A32;
+  --accent-hover: #A94420;
+  --accent-soft: #F7ECE6;
+  --accent-soft-text: #9C3A18;
+  --accent-gold: #E5A638;
+
+  --border-color: #EFECE6;
+  --border-dark: #322E2B;
+
+  --shadow-sm: 0 4px 14px rgba(44, 40, 37, 0.03);
+  --shadow-md: 0 10px 30px rgba(44, 40, 37, 0.05);
+  --shadow-lg: 0 18px 40px rgba(44, 40, 37, 0.09);
+
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-pill: 50px;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -14,23 +46,30 @@ html {
 }
 
 body {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  background-color: #faf9f6;
-  color: #2d3142;
-  line-height: 1.6;
+  font-family: var(--font-sans);
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  line-height: 1.65;
   -webkit-font-smoothing: antialiased;
-  animation: fadeInPage 0.4s ease-in-out;
+  animation: fadeInPage 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 @keyframes fadeInPage {
   from {
     opacity: 0;
-    transform: translateY(4px);
+    transform: translateY(6px);
   }
   to {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* Headings Typography */
+h1, h2, h3, .serif-title {
+  font-family: var(--font-serif);
+  color: var(--text-primary);
+  letter-spacing: -0.3px;
 }
 
 /* Base utility layouts */
@@ -47,122 +86,135 @@ img {
 }
 
 a {
-  color: #ff4d6d;
+  color: var(--accent-terracotta);
   text-decoration: none;
-  transition: color 0.2s ease;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+
+a:hover {
+  color: var(--accent-hover);
 }
 
 /* ==========================================================================
-   ✨ Premium Glassmorphic Header & Navigation
+   ✨ Editorial Glassmorphic Header & Navigation
    ========================================================================== */
 .main-header {
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-  padding: 15px 40px;
+  background: rgba(250, 248, 245, 0.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border-color);
+  padding: 18px 40px;
   position: sticky;
   top: 0;
   z-index: 1000;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.02);
+  box-shadow: var(--shadow-sm);
 }
 
 .main-header h1 {
-  font-size: 1.8rem;
-  font-weight: 800;
-  color: #ff4d6d;
+  font-size: 2.1rem;
+  font-weight: 700;
   margin: 0;
-  letter-spacing: -0.5px;
 }
 
 .main-header h1 a {
-  color: inherit;
+  font-family: var(--font-serif);
+  color: var(--text-primary);
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
 .main-header h1 a:hover {
-  color: #ff758f;
+  color: var(--accent-terracotta);
 }
 
 nav {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
 }
 
 nav a {
-  color: #495057;
+  font-family: var(--font-sans);
+  color: var(--text-primary);
   padding: 8px 16px;
-  border-radius: 8px;
+  border-radius: var(--radius-pill);
   font-weight: 600;
-  font-size: 0.95rem;
-  transition: all 0.2s ease;
+  font-size: 0.88rem;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  transition: all 0.25s ease;
 }
 
 nav a:hover, nav a.active {
-  color: #ff4d6d;
-  background: rgba(255, 77, 109, 0.08);
+  color: var(--accent-terracotta);
+  background: var(--accent-soft);
 }
 
 .profile-link {
-  font-size: 1.2rem;
-  padding: 6px 12px;
+  font-size: 1.1rem;
+  padding: 6px 14px;
 }
 
 /* ==========================================================================
-   🔥 Hero Section
+   🍲 Hero Section (Pinch of Yum Editorial Banner)
    ========================================================================== */
 .hero {
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.55)), 
+  background: linear-gradient(rgba(30, 27, 24, 0.52), rgba(30, 27, 24, 0.62)), 
               url('https://static.vecteezy.com/system/resources/previews/053/698/268/non_2x/circular-frame-with-healthy-food-empty-insidegraphy-photo.jpg') no-repeat center center/cover;
-  padding: 120px 20px;
-  color: white;
+  padding: 130px 20px;
+  color: var(--text-light);
   text-align: center;
-  border-radius: 0 0 24px 24px;
-  margin-bottom: 40px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  margin-bottom: 50px;
+  box-shadow: var(--shadow-md);
 }
 
 .hero-text h2 {
-  font-size: 3.5rem;
-  font-weight: 800;
-  letter-spacing: -1px;
-  margin-bottom: 20px;
-  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  text-transform: uppercase;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 3.6rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  letter-spacing: -0.5px;
+  margin-bottom: 18px;
+  text-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+  text-transform: none;
 }
 
 .hero-text p {
-  font-size: 1.4rem;
-  max-width: 600px;
-  margin: 0 auto 30px auto;
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  font-family: var(--font-sans);
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: #FAF8F5;
+  max-width: 620px;
+  margin: 0 auto 32px auto;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
 }
 
 .hero .btn {
-  background: #ff4d6d;
-  padding: 16px 36px;
-  border-radius: 12px;
-  color: white;
+  background: var(--accent-terracotta);
+  padding: 16px 38px;
+  border-radius: var(--radius-pill);
+  color: #FFFFFF;
   font-weight: 700;
-  font-size: 1.1rem;
-  box-shadow: 0 8px 24px rgba(255, 77, 109, 0.35);
+  font-size: 1.05rem;
+  letter-spacing: 0.5px;
+  box-shadow: 0 8px 24px rgba(200, 90, 50, 0.32);
   display: inline-block;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .hero .btn:hover {
-  background: #ff758f;
+  background: var(--accent-hover);
   transform: translateY(-2px);
-  box-shadow: 0 12px 28px rgba(255, 77, 109, 0.45);
+  box-shadow: 0 12px 28px rgba(200, 90, 50, 0.42);
 }
 
 /* ==========================================================================
-   ⭐ popular Categories (Index page)
+   ⭐ Popular Categories (Editorial Grid)
    ========================================================================== */
 .categories {
   padding: 40px 20px;
@@ -172,48 +224,47 @@ nav a:hover, nav a.active {
 }
 
 .categories h2 {
-  font-size: 2.2rem;
-  font-weight: 800;
-  margin-bottom: 30px;
-  color: #212529;
-  text-transform: uppercase;
+  font-size: 2.3rem;
+  font-weight: 700;
+  margin-bottom: 34px;
+  color: var(--text-primary);
 }
 
 .category-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
+  gap: 26px;
 }
 
 .category-card {
-  background: #ffffff;
-  border-radius: 16px;
+  background: var(--bg-card);
+  border-radius: var(--radius-md);
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
-  border: 1px solid #f1f3f5;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease, border-color 0.3s ease;
   display: flex;
   flex-direction: column;
   text-align: left;
 }
 
 .category-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
-  border-color: rgba(255, 77, 109, 0.25);
+  transform: translateY(-7px);
+  box-shadow: var(--shadow-md);
+  border-color: rgba(200, 90, 50, 0.3);
 }
 
 .category-card img {
   width: 100%;
-  height: 180px;
+  height: 190px;
   object-fit: cover;
 }
 
 .category-card h3 {
-  font-size: 1.3rem;
+  font-size: 1.35rem;
   font-weight: 700;
-  margin: 16px 20px 10px 20px;
-  color: #212529;
+  margin: 18px 20px 10px 20px;
+  color: var(--text-primary);
 }
 
 .category-card ul {
@@ -226,16 +277,17 @@ nav a:hover, nav a.active {
 }
 
 .category-card li {
-  font-size: 0.8rem;
-  background: #f8f9fa;
-  color: #495057;
+  font-size: 0.78rem;
+  font-weight: 600;
+  background: var(--accent-soft);
+  color: var(--accent-soft-text);
   padding: 4px 10px;
-  border-radius: 6px;
-  border: 1px solid #e9ecef;
+  border-radius: var(--radius-pill);
+  border: none;
 }
 
 /* ==========================================================================
-   🍕 Popular Dishes
+   🍕 Popular Dishes (Recipe Cards)
    ========================================================================== */
 .popular-dishes {
   padding: 60px 20px;
@@ -244,34 +296,33 @@ nav a:hover, nav a.active {
 }
 
 .popular-dishes h2 {
-  font-size: 2.2rem;
-  font-weight: 800;
+  font-size: 2.3rem;
+  font-weight: 700;
   text-align: center;
   margin-bottom: 40px;
-  text-transform: uppercase;
 }
 
 .dish-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  gap: 26px;
 }
 
 .dish-card {
-  background: white;
-  border-radius: 16px;
+  background: var(--bg-card);
+  border-radius: var(--radius-md);
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
-  border: 1px solid #f1f3f5;
-  transition: all 0.3s ease;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   text-align: left;
   display: flex;
   flex-direction: column;
 }
 
 .dish-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.06);
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
 }
 
 .dish-card img {
@@ -287,38 +338,40 @@ nav a:hover, nav a.active {
 }
 
 .dish-card p:nth-of-type(1) {
+  font-family: var(--font-sans);
   font-size: 1.2rem;
   font-weight: 800;
-  color: #ff4d6d;
+  color: var(--accent-terracotta);
   margin: 0 20px 10px 20px;
 }
 
 .dish-card p:nth-of-type(2) {
   font-size: 0.95rem;
-  color: #6c757d;
+  color: var(--text-muted);
   margin: 0 20px 20px 20px;
-  line-height: 1.5;
+  line-height: 1.55;
   flex-grow: 1;
 }
 
 /* ==========================================================================
-   🎁 Special Offers
+   🎁 Special Offers (Terracotta Feature Banner)
    ========================================================================== */
 .special-offers {
-  background: linear-gradient(135deg, #ff4d6d, #ff758f);
+  background: linear-gradient(135deg, var(--text-primary), #3B3531);
   padding: 60px 20px;
-  color: white;
-  border-radius: 24px;
+  color: var(--text-light);
+  border-radius: var(--radius-lg);
   margin: 60px auto;
   max-width: 1160px;
   text-align: center;
+  box-shadow: var(--shadow-md);
 }
 
 .special-offers h2 {
-  font-size: 2.2rem;
-  font-weight: 800;
-  margin-bottom: 30px;
-  text-transform: uppercase;
+  color: var(--accent-soft);
+  font-size: 2.3rem;
+  font-weight: 700;
+  margin-bottom: 32px;
 }
 
 .offers-grid {
@@ -328,30 +381,31 @@ nav a:hover, nav a.active {
 }
 
 .offer-card {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.07);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   padding: 30px 20px;
-  border-radius: 16px;
+  border-radius: var(--radius-md);
   text-align: center;
   transition: all 0.3s ease;
 }
 
 .offer-card:hover {
   transform: translateY(-5px);
-  background: rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.12);
+  border-color: var(--accent-terracotta);
 }
 
 .offer-card h3 {
-  font-size: 1.3rem;
+  font-size: 1.35rem;
   font-weight: 700;
-  color: #fff;
+  color: var(--text-light);
 }
 
 .offer-card p {
   font-size: 0.95rem;
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(250, 248, 245, 0.85);
   margin-top: 10px;
 }
 
@@ -365,25 +419,24 @@ nav a:hover, nav a.active {
 }
 
 .testimonials h2 {
-  font-size: 2.2rem;
-  font-weight: 800;
+  font-size: 2.3rem;
+  font-weight: 700;
   text-align: center;
   margin-bottom: 40px;
-  text-transform: uppercase;
 }
 
 .testimonial-cards {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
+  gap: 26px;
 }
 
 .testimonial-card {
-  background: white;
-  padding: 30px;
-  border-radius: 16px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
-  border: 1px solid #f1f3f5;
+  background: var(--bg-card);
+  padding: 32px;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
   transition: all 0.3s ease;
   text-align: left;
 }
@@ -391,43 +444,42 @@ nav a:hover, nav a.active {
 .testimonial-card p {
   font-size: 1.05rem;
   font-style: italic;
-  color: #495057;
-  margin-bottom: 15px;
+  color: var(--text-muted);
+  margin-bottom: 16px;
 }
 
 .testimonial-card h3 {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   font-weight: 700;
-  color: #ff4d6d;
+  color: var(--accent-terracotta);
 }
 
 /* ==========================================================================
-   📈 Ratings
+   ⭐ Ratings
    ========================================================================== */
 .ratings {
   text-align: center;
   padding: 60px 20px;
-  background-color: #fef6e4;
-  margin: 40px 0;
-  border-radius: 20px;
+  background-color: var(--accent-soft);
+  margin: 50px 0;
+  border-radius: var(--radius-lg);
 }
 
 .ratings h2 {
-  font-size: 2.2rem;
-  color: #e67e22;
-  margin-bottom: 20px;
-  text-transform: uppercase;
+  font-size: 2.3rem;
+  color: var(--accent-soft-text);
+  margin-bottom: 18px;
 }
 
 .rating-stars span {
-  font-size: 2em;
-  color: #f1c40f;
+  font-size: 2.1em;
+  color: var(--accent-gold);
   display: inline-block;
 }
 
 .rating-stars p {
   font-size: 1.1em;
-  color: #555;
+  color: var(--text-muted);
   margin-top: 10px;
 }
 
@@ -435,61 +487,66 @@ nav a:hover, nav a.active {
    📧 Newsletter
    ========================================================================== */
 .newsletter {
-  background-color: #fff;
-  padding: 60px 20px;
+  background-color: var(--bg-card);
+  padding: 60px 30px;
   text-align: center;
-  border-radius: 20px;
+  border-radius: var(--radius-lg);
   max-width: 800px;
   margin: 60px auto;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
 }
 
 .newsletter h2 {
-  font-size: 2rem;
-  font-weight: 800;
+  font-size: 2.2rem;
+  font-weight: 700;
   margin-bottom: 10px;
 }
 
 .newsletter p {
   font-size: 1.1rem;
-  color: #6c757d;
-  margin-bottom: 25px;
+  color: var(--text-muted);
+  margin-bottom: 28px;
 }
 
 .newsletter input {
-  padding: 14px 20px;
+  padding: 14px 22px;
   font-size: 1rem;
-  border: 1px solid #dee2e6;
-  border-radius: 12px;
+  font-family: var(--font-sans);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-pill);
   width: 100%;
   max-width: 360px;
   outline: none;
-  transition: border-color 0.2s ease;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  background: var(--bg-main);
 }
 
 .newsletter input:focus {
-  border-color: #ff4d6d;
+  border-color: var(--accent-terracotta);
+  box-shadow: 0 0 0 3px rgba(200, 90, 50, 0.15);
 }
 
 .newsletter button {
-  background-color: #ff4d6d;
-  padding: 14px 28px;
+  background-color: var(--accent-terracotta);
+  padding: 14px 30px;
   font-size: 1rem;
-  color: white;
+  color: #FFFFFF;
   border: none;
-  border-radius: 12px;
+  border-radius: var(--radius-pill);
   cursor: pointer;
   margin-left: 10px;
   font-weight: 700;
-  transition: background-color 0.2s ease;
+  transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
 .newsletter button:hover {
-  background-color: #ff758f;
+  background-color: var(--accent-hover);
+  transform: translateY(-1px);
 }
 
 /* ==========================================================================
-   🍜 Menu Pages (Categories list)
+   🍜 Menu Pages & Category Grids
    ========================================================================== */
 .menu-list {
   padding: 40px 20px;
@@ -499,28 +556,28 @@ nav a:hover, nav a.active {
 
 .menu-list h2 {
   font-size: 2.5rem;
-  font-weight: 800;
+  font-weight: 700;
   margin-bottom: 15px;
-  color: #212529;
+  color: var(--text-primary);
   text-align: center;
 }
 
 .menu-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 24px;
+  gap: 26px;
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
 }
 
 .menu-item {
-  background: white;
-  border-radius: 16px;
-  padding: 16px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
-  border: 1px solid #f1f3f5;
-  transition: all 0.3s ease;
+  background: var(--bg-card);
+  border-radius: var(--radius-md);
+  padding: 18px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -528,51 +585,54 @@ nav a:hover, nav a.active {
 
 .menu-item:hover {
   transform: translateY(-6px);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.06);
+  box-shadow: var(--shadow-md);
 }
 
 .menu-image {
   width: 100%;
-  height: 180px;
+  height: 185px;
   object-fit: cover;
-  border-radius: 12px;
+  border-radius: var(--radius-sm);
 }
 
 .menu-item h3 {
-  font-size: 1.25rem;
+  font-size: 1.3rem;
   font-weight: 700;
   margin-top: 15px;
-  color: #212529;
+  color: var(--text-primary);
 }
 
 .menu-item p {
-  font-size: 1.1rem;
+  font-family: var(--font-sans);
+  font-size: 1.15rem;
   font-weight: 800;
-  color: #ff4d6d;
-  margin-top: 10px;
+  color: var(--accent-terracotta);
+  margin-top: 8px;
 }
 
 .add-to-cart {
-  background: #ff4d6d;
-  color: white;
+  background: var(--accent-terracotta);
+  color: #FFFFFF;
   border: none;
-  padding: 12px 24px;
-  border-radius: 10px;
+  padding: 11px 24px;
+  border-radius: var(--radius-pill);
   font-weight: 700;
+  font-size: 0.9rem;
   cursor: pointer;
   margin-top: 15px;
-  transition: background-color 0.2s ease;
-  box-shadow: 0 4px 12px rgba(255, 77, 109, 0.15);
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  box-shadow: 0 4px 14px rgba(200, 90, 50, 0.25);
 }
 
 .add-to-cart:hover {
-  background: #ff758f;
+  background: var(--accent-hover);
+  transform: translateY(-1px);
 }
 
-/* Navigation items in category pages */
+/* Pagination / Category Navigation */
 .page-nav {
   text-align: center;
-  margin: 20px 0;
+  margin: 24px 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -581,15 +641,15 @@ nav a:hover, nav a.active {
 
 .page-nav span {
   font-weight: 600;
-  color: #6c757d;
+  color: var(--text-muted);
 }
 
 .page-nav a {
-  background: white;
-  border: 1px solid #dee2e6;
-  color: #495057;
-  width: 36px;
-  height: 36px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  width: 38px;
+  height: 38px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -599,9 +659,9 @@ nav a:hover, nav a.active {
 }
 
 .page-nav a:hover, .page-nav a.active {
-  background: #ff4d6d;
-  color: white;
-  border-color: #ff4d6d;
+  background: var(--accent-terracotta);
+  color: #FFFFFF;
+  border-color: var(--accent-terracotta);
 }
 
 .nav-buttons {
@@ -612,38 +672,38 @@ nav a:hover, nav a.active {
 }
 
 .back-btn, .next-btn {
-  background: white;
-  border: 1px solid #dee2e6;
-  padding: 10px 20px;
-  border-radius: 10px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  padding: 10px 22px;
+  border-radius: var(--radius-pill);
   font-weight: 600;
-  color: #495057;
+  color: var(--text-primary);
   transition: all 0.2s ease;
 }
 
 .back-btn:hover, .next-btn:hover {
-  border-color: #ff4d6d;
-  color: #ff4d6d;
+  border-color: var(--accent-terracotta);
+  color: var(--accent-terracotta);
 }
 
 /* ==========================================================================
    🛒 Cart Widget on Menu & Category Pages
    ========================================================================== */
 .cart-info {
-  background: white;
-  border-radius: 20px;
-  padding: 24px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.03);
-  border: 1px solid #f1f3f5;
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
   max-width: 600px;
   margin: 30px auto;
   text-align: center;
 }
 
 .cart-info h3 {
-  font-size: 1.5rem;
-  font-weight: 800;
-  margin-bottom: 15px;
+  font-size: 1.55rem;
+  font-weight: 700;
+  margin-bottom: 16px;
 }
 
 #cart-items {
@@ -653,16 +713,17 @@ nav a:hover, nav a.active {
 }
 
 #cart-total {
-  font-size: 1.3rem;
+  font-size: 1.35rem;
   font-weight: 800;
+  color: var(--accent-terracotta);
   margin-bottom: 20px;
 }
 
 #checkout-btn {
-  background: #ff4d6d;
-  color: white;
-  padding: 12px 28px;
-  border-radius: 10px;
+  background: var(--accent-terracotta);
+  color: #FFFFFF;
+  padding: 12px 30px;
+  border-radius: var(--radius-pill);
   font-weight: 700;
   font-size: 1rem;
   border: none;
@@ -671,11 +732,11 @@ nav a:hover, nav a.active {
 }
 
 #checkout-btn:hover {
-  background: #ff758f;
+  background: var(--accent-hover);
 }
 
 #checkout-btn:disabled {
-  background: #ced4da;
+  background: #CBD5E1;
   cursor: not-allowed;
 }
 
@@ -689,12 +750,12 @@ nav a:hover, nav a.active {
 }
 
 .about-header, .about-offer, .about-vision {
-  background: white;
-  padding: 30px;
-  border-radius: 20px;
+  background: var(--bg-card);
+  padding: 34px;
+  border-radius: var(--radius-lg);
   margin-bottom: 30px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
-  border: 1px solid #f1f3f5;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
 }
 
 .team-section {
@@ -704,8 +765,8 @@ nav a:hover, nav a.active {
 }
 
 .team-section h2 {
-  font-size: 2.2rem;
-  font-weight: 800;
+  font-size: 2.3rem;
+  font-weight: 700;
   text-align: center;
   margin-bottom: 40px;
 }
@@ -714,15 +775,15 @@ nav a:hover, nav a.active {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 24px;
+  gap: 26px;
 }
 
 .team-member {
-  background: white;
-  border-radius: 20px;
-  padding: 24px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
-  border: 1px solid #f1f3f5;
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  padding: 26px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
   width: 280px;
   text-align: center;
 }
@@ -733,16 +794,16 @@ nav a:hover, nav a.active {
   border-radius: 50%;
   object-fit: cover;
   margin: 0 auto 15px auto;
-  border: 4px solid #ff4d6d;
+  border: 4px solid var(--accent-terracotta);
 }
 
 .team-member h3 {
-  font-size: 1.3rem;
+  font-size: 1.35rem;
   font-weight: 700;
 }
 
 .team-member p {
-  color: #6c757d;
+  color: var(--text-muted);
   font-size: 0.95rem;
   margin-top: 5px;
 }
@@ -757,13 +818,13 @@ nav a:hover, nav a.active {
 }
 
 .profile-header {
-  background: white;
-  border-radius: 20px;
-  padding: 30px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.02);
-  border: 1px solid #f1f3f5;
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  padding: 34px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
   display: flex;
-  gap: 24px;
+  gap: 26px;
   align-items: center;
   margin-bottom: 40px;
 }
@@ -773,40 +834,42 @@ nav a:hover, nav a.active {
   height: 120px;
   border-radius: 50%;
   object-fit: cover;
-  border: 4px solid #ff4d6d;
+  border: 4px solid var(--accent-terracotta);
 }
 
 .profile-info h2 {
-  font-size: 1.8rem;
-  font-weight: 800;
+  font-size: 1.9rem;
+  font-weight: 700;
 }
 
 .profile-info p.email {
-  color: #6c757d;
+  color: var(--text-muted);
   margin-bottom: 10px;
 }
 
 .profile-actions {
   display: flex;
-  gap: 10px;
+  gap: 12px;
 }
 
 .btn.primary-btn {
-  background: #ff4d6d;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 8px;
+  background: var(--accent-terracotta);
+  color: #FFFFFF;
+  padding: 10px 22px;
+  border-radius: var(--radius-pill);
   font-weight: 600;
   border: none;
+  cursor: pointer;
 }
 
 .btn.secondary-btn {
-  background: #e9ecef;
-  color: #495057;
-  padding: 10px 20px;
-  border-radius: 8px;
+  background: var(--accent-soft);
+  color: var(--accent-soft-text);
+  padding: 10px 22px;
+  border-radius: var(--radius-pill);
   font-weight: 600;
   border: none;
+  cursor: pointer;
 }
 
 .stats-grid {
@@ -817,44 +880,44 @@ nav a:hover, nav a.active {
 }
 
 .stat-card {
-  background: white;
+  background: var(--bg-card);
   padding: 20px;
-  border-radius: 16px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.02);
-  border: 1px solid #f1f3f5;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
   text-align: center;
 }
 
 .stat-number {
   font-size: 1.8rem;
   font-weight: 800;
-  color: #ff4d6d;
+  color: var(--accent-terracotta);
 }
 
 .stat-label {
   font-size: 0.9rem;
-  color: #6c757d;
+  color: var(--text-muted);
 }
 
 .favorites-wishlist {
   display: flex;
-  gap: 24px;
+  gap: 26px;
   margin-bottom: 40px;
 }
 
 .favorites, .wishlist {
   flex: 1;
-  background: white;
-  border-radius: 20px;
-  padding: 24px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
-  border: 1px solid #f1f3f5;
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  padding: 26px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
 }
 
 .favorites h3, .wishlist h3, .order-history h3, .saved-addresses h3, .payment-methods h3 {
-  font-size: 1.4rem;
-  font-weight: 800;
-  margin-bottom: 15px;
+  font-size: 1.45rem;
+  font-weight: 700;
+  margin-bottom: 16px;
 }
 
 .favorites ul, .wishlist ul {
@@ -868,11 +931,11 @@ nav a:hover, nav a.active {
 
 /* Orders table */
 .order-history {
-  background: white;
-  border-radius: 20px;
-  padding: 24px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
-  border: 1px solid #f1f3f5;
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  padding: 26px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
   margin-bottom: 40px;
   overflow-x: auto;
 }
@@ -885,13 +948,13 @@ nav a:hover, nav a.active {
 .order-history th, .order-history td {
   padding: 12px 16px;
   text-align: left;
-  border-bottom: 1px solid #e9ecef;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .order-history th {
   font-weight: 700;
-  color: #495057;
-  background: #f8f9fa;
+  color: var(--text-primary);
+  background: var(--bg-main);
 }
 
 /* Addresses */
@@ -900,15 +963,15 @@ nav a:hover, nav a.active {
 }
 
 .address-card {
-  background: white;
-  padding: 16px 20px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
-  border-left: 4px solid #ff4d6d;
-  margin-bottom: 12px;
-  border-top: 1px solid #f1f3f5;
-  border-bottom: 1px solid #f1f3f5;
-  border-right: 1px solid #f1f3f5;
+  background: var(--bg-card);
+  padding: 18px 22px;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  border-left: 4px solid var(--accent-terracotta);
+  margin-bottom: 14px;
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  border-right: 1px solid var(--border-color);
 }
 
 .payment-methods ul {
@@ -917,28 +980,34 @@ nav a:hover, nav a.active {
 
 .payment-methods li {
   padding: 10px 0;
-  border-bottom: 1px solid #e9ecef;
+  border-bottom: 1px solid var(--border-color);
 }
 
 /* ==========================================================================
-   🏠 Footer
+   🏠 Dark Warm Editorial Footer
    ========================================================================== */
 footer, .main-footer {
-  background-color: #212529;
-  color: #adb5bd;
+  background-color: var(--bg-dark);
+  color: #A5A098;
   text-align: center;
-  padding: 40px 20px;
-  margin-top: 60px;
+  padding: 50px 20px;
+  margin-top: 70px;
   font-size: 0.95rem;
+  border-top: 1px solid var(--border-dark);
 }
 
 footer p, .main-footer p {
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 .footer-nav a {
-  color: #ff4d6d;
-  margin: 0 8px;
+  color: #E89E82;
+  margin: 0 10px;
+  font-weight: 600;
+}
+
+.footer-nav a:hover {
+  color: #FFFFFF;
 }
 
 /* ==========================================================================
@@ -949,7 +1018,7 @@ footer p, .main-footer p {
 @media (max-width: 992px) {
   .category-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
+    gap: 18px;
   }
 }
 
@@ -957,8 +1026,8 @@ footer p, .main-footer p {
 @media (max-width: 768px) {
   .main-header {
     flex-direction: column;
-    gap: 12px;
-    padding: 15px;
+    gap: 14px;
+    padding: 16px;
     text-align: center;
   }
 
@@ -970,11 +1039,11 @@ footer p, .main-footer p {
 
   nav a {
     padding: 6px 12px;
-    font-size: 0.85rem;
+    font-size: 0.82rem;
   }
 
   .hero {
-    padding: 80px 16px;
+    padding: 90px 16px;
   }
 
   .hero-text h2 {
@@ -982,7 +1051,7 @@ footer p, .main-footer p {
   }
 
   .hero-text p {
-    font-size: 1.15rem;
+    font-size: 1.1rem;
   }
 
   /* Dishes wrap nicely into horizontal layout list on mobile */
@@ -1002,7 +1071,7 @@ footer p, .main-footer p {
   }
 
   .dish-card h3 {
-    font-size: 1.1rem;
+    font-size: 1.15rem;
     margin: 12px 16px 4px 16px;
   }
 
@@ -1055,14 +1124,13 @@ footer p, .main-footer p {
 
 /* Max-width 576px (Small Phones) */
 @media (max-width: 576px) {
-  /* Categories: compact 2-column grid is extremely professional */
   .category-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 12px;
   }
 
   .category-card img {
-    height: 120px;
+    height: 125px;
   }
 
   .category-card h3 {
@@ -1076,7 +1144,7 @@ footer p, .main-footer p {
   }
 
   .category-card li {
-    font-size: 0.7rem;
+    font-size: 0.72rem;
     padding: 2px 6px;
   }
 
@@ -1087,17 +1155,17 @@ footer p, .main-footer p {
   }
 
   .menu-item {
-    padding: 10px;
+    padding: 12px;
     border-radius: 12px;
   }
 
   .menu-image {
-    height: 110px;
+    height: 115px;
     border-radius: 8px;
   }
 
   .menu-item h3 {
-    font-size: 0.95rem;
+    font-size: 1rem;
     margin-top: 8px;
   }
 
@@ -1109,11 +1177,10 @@ footer p, .main-footer p {
   .add-to-cart {
     padding: 8px 16px;
     font-size: 0.8rem;
-    border-radius: 8px;
+    border-radius: var(--radius-pill);
     margin-top: 10px;
   }
 
-  /* Newsletter mobile layout */
   .newsletter input {
     max-width: 100%;
     margin-bottom: 12px;
