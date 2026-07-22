@@ -62,6 +62,16 @@ a {
   letter-spacing: -0.5px;
 }
 
+.main-header h1 a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.main-header h1 a:hover {
+  color: #ff758f;
+}
+
 nav {
   display: flex;
   align-items: center;
