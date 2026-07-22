@@ -93,10 +93,10 @@
   </footer>
 
   <script>
-    function handleRegister(event) {
+    async function handleRegister(event) {
       event.preventDefault();
-      const name = document.getElementById('name').value;
-      const email = document.getElementById('email').value;
+      const name     = document.getElementById('name').value;
+      const email    = document.getElementById('email').value;
       const password = document.getElementById('password').value;
 
       if (name && email && password) {
@@ -107,6 +107,16 @@
         }
         registeredUsers.push({ name, email, password, registeredAt: new Date().toISOString() });
         localStorage.setItem("registeredUsers", JSON.stringify(registeredUsers));
+
+        // ── Notify server terminal ──
+        try {
+          await fetch('http://localhost:5000/api/register', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, email, password })
+          });
+        } catch (_) { /* server offline — ignore */ }
+
         alert("Registration Successful! Please login.");
         window.location.href = "login.html";
       }

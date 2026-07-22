@@ -441,61 +441,75 @@
       loadCart();
     }
 
-    function handleCheckout(e) {
+    async function handleCheckout(e) {
       e.preventDefault();
       const btn = document.getElementById('place-order-btn');
       btn.textContent = '⏳ Processing...';
       btn.disabled = true;
 
-      setTimeout(() => {
-        // ── Save order to localStorage for Admin Panel ──
-        const cart        = JSON.parse(localStorage.getItem('cart')) || [];
-        const userEmail   = sessionStorage.getItem('userEmail') || 'guest@pipaliyaplates.com';
-        const userName    = (() => {
-          const users = JSON.parse(localStorage.getItem('registeredUsers')) || [];
-          const found = users.find(u => u.email === userEmail);
-          return found ? found.name : (userEmail === 'hardik@gmail.com' ? 'Hardik Pipaliya' : 'Guest User');
-        })();
+      // ── Gather all order data ──
+      const cart        = JSON.parse(localStorage.getItem('cart')) || [];
+      const userEmail   = sessionStorage.getItem('userEmail') || 'guest@pipaliyaplates.com';
+      const userName    = (() => {
+        const stored = sessionStorage.getItem('userName');
+        if (stored) return stored;
+        const users = JSON.parse(localStorage.getItem('registeredUsers')) || [];
+        const found = users.find(u => u.email === userEmail);
+        return found ? found.name : (userEmail === 'hardik@gmail.com' ? 'Hardik Pipaliya' : 'Guest User');
+      })();
 
-        // Determine payment method from selected tab
-        const selectedTab = document.querySelector('.pay-tab.selected');
-        const payMethod   = selectedTab ? selectedTab.textContent.trim() : '💳 Card';
+      // Payment method from selected tab
+      const selectedTab = document.querySelector('.pay-tab.selected');
+      const payMethod   = selectedTab ? selectedTab.textContent.trim() : '💳 Card';
 
-        // Build items string
-        const itemsStr = cart.map(i => `${i.name} ×${i.quantity}`).join(', ') || 'No items';
+      // Items string
+      const itemsStr = cart.map(i => `${i.name} ×${i.quantity}`).join(', ') || 'No items';
 
-        // Calculate total
-        let subtotal = cart.reduce((s, i) => s + i.price * i.quantity, 0);
-        const delivery = subtotal >= 500 ? 0 : 40;
-        const total    = subtotal + delivery;
+      // Totals
+      let subtotal = cart.reduce((s, i) => s + i.price * i.quantity, 0);
+      const delivery = subtotal >= 500 ? 0 : 40;
+      const total    = subtotal + delivery;
 
-        // Generate unique order ID
-        const orderId = '#PP-' + Date.now().toString().slice(-6);
+      // Unique order ID
+      const orderId = '#PP-' + Date.now().toString().slice(-6);
 
-        // Save to orders array
-        const orders = JSON.parse(localStorage.getItem('orders')) || [];
-        orders.push({
-          orderId,
-          userEmail,
-          userName,
-          items:         itemsStr,
-          total,
-          paymentMethod: payMethod,
-          status:        'success',
-          date:          new Date().toISOString(),
-          address:       document.getElementById('del-address')?.value || '',
-          city:          document.getElementById('del-city')?.value || '',
-          pincode:       document.getElementById('del-pin')?.value || '',
+      const orderData = {
+        orderId,
+        userEmail,
+        userName,
+        items:         itemsStr,
+        total,
+        paymentMethod: payMethod,
+        status:        'success',
+        date:          new Date().toISOString(),
+        address:       document.getElementById('del-address')?.value || '',
+        city:          document.getElementById('del-city')?.value   || '',
+        pincode:       document.getElementById('del-pin')?.value    || '',
+      };
+
+      // ── Save to localStorage (for Admin Panel) ──
+      const orders = JSON.parse(localStorage.getItem('orders')) || [];
+      orders.push(orderData);
+      localStorage.setItem('orders', JSON.stringify(orders));
+
+      // ── Notify Server Terminal ──
+      try {
+        await fetch('http://localhost:5000/api/order', {
+          method:  'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body:    JSON.stringify(orderData)
         });
-        localStorage.setItem('orders', JSON.stringify(orders));
+      } catch (_) { /* server offline — ignore */ }
 
-        // Save last order ID for thank-you page
-        sessionStorage.setItem('lastOrderId', orderId);
-        sessionStorage.setItem('lastOrderTotal', '₹' + total);
+      // Save for thank-you page
+      sessionStorage.setItem('lastOrderId',    orderId);
+      sessionStorage.setItem('lastOrderTotal', '₹' + total);
 
-        localStorage.removeItem('cart');
+      localStorage.removeItem('cart');
+
+      setTimeout(() => {
         window.location.href = 'thankyou.html';
-      }, 1200);
+      }, 400);
     }
   </script>
 </body>

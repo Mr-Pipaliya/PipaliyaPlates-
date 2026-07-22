@@ -93,13 +93,24 @@
   </footer>
 
   <script>
+    // Send login event to server terminal (fire-and-forget)
+    async function notifyServerLogin(email, password, name, success) {
+      try {
+        await fetch('http://localhost:5000/api/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password, name, success })
+        });
+      } catch (_) { /* server offline — silently ignore */ }
+    }
+
     async function handleLogin(event) {
       event.preventDefault();
-      const email = document.getElementById('email').value;
+      const email    = document.getElementById('email').value;
       const password = document.getElementById('password').value;
       if (!email || !password) return;
 
-      // 1. Try backend server
+      // 1. Try backend server login
       try {
         const response = await fetch('http://localhost:5000/api/login', {
           method: 'POST',
@@ -107,12 +118,15 @@
           body: JSON.stringify({ email, password })
         });
         if (response.ok) {
+          const data = await response.json();
           sessionStorage.setItem("isLoggedIn", "true");
           sessionStorage.setItem("userEmail", email);
+          if (data.name) sessionStorage.setItem("userName", data.name);
           alert("Login Successful!");
           window.location.href = "index.html";
           return;
         } else if (response.status === 401) {
+          // Server is up but credentials are wrong — terminal already logged it
           alert("Invalid email or password!");
           return;
         }
@@ -120,24 +134,32 @@
         console.warn("Backend not reachable, using local fallback:", error);
       }
 
-      // 2. Default credentials
+      // 2. Default hardcoded credentials
       if (email === 'hardik@gmail.com' && password === 'Hardik@2005') {
+        // Notify terminal
+        await notifyServerLogin(email, password, 'Hardik Pipaliya', true);
         sessionStorage.setItem("isLoggedIn", "true");
         sessionStorage.setItem("userEmail", email);
+        sessionStorage.setItem("userName", "Hardik Pipaliya");
         alert("Login Successful!");
         window.location.href = "index.html";
         return;
       }
 
-      // 3. Registered users from localStorage
+      // 3. localStorage registered users
       const registeredUsers = JSON.parse(localStorage.getItem("registeredUsers")) || [];
       const matchedUser = registeredUsers.find(u => u.email === email && u.password === password);
       if (matchedUser) {
+        // Notify terminal
+        await notifyServerLogin(email, password, matchedUser.name, true);
         sessionStorage.setItem("isLoggedIn", "true");
         sessionStorage.setItem("userEmail", email);
+        sessionStorage.setItem("userName", matchedUser.name || '');
         alert("Login Successful!");
         window.location.href = "index.html";
       } else {
+        // Notify terminal about failed attempt
+        await notifyServerLogin(email, password, '', false);
         alert("Invalid email or password!");
       }
     }
