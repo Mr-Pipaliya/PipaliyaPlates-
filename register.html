@@ -6,165 +6,124 @@
   <title>Register | PipaliyaPlates</title>
   <link rel="stylesheet" href="style.css" />
   <style>
-    body {
-      background-color: #faf9f6;
-      font-family: 'Plus Jakarta Sans', sans-serif;
+    .auth-wrapper {
       display: flex;
       flex-direction: column;
       align-items: center;
       min-height: 100vh;
-      padding: 0;
+      background: var(--bg-cream);
+      padding-bottom: 60px;
     }
-    h2 {
-      color: #ff5e5e;
-      margin-bottom: 20px;
-      font-size: 2rem;
-      animation: fadeInUp 1s ease-in;
+    .auth-logo {
+      margin-top: 40px;
+      margin-bottom: 10px;
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--poy-plum);
     }
-    form.register-form {
-      background-color: white;
-      padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-      width: 100%;
-      max-width: 400px;
+    .auth-logo a { color: inherit; text-decoration: none; }
+    .auth-title {
+      font-family: var(--font-heading);
+      font-style: italic;
+      font-size: 1.7rem;
+      color: var(--poy-plum);
+      margin-bottom: 0;
+      text-align: center;
+    }
+    .password-container {
       display: flex;
-      flex-direction: column;
-      animation: fadeInUp 1.2s ease-in;
+      position: relative;
+      align-items: center;
+      margin-bottom: 18px;
     }
-    label {
-      text-align: left;
-      margin-bottom: 8px;
-      font-weight: bold;
-      color: #333;
+    .password-container input {
+      width: 100%;
+      margin-bottom: 0;
+      padding-right: 50px;
     }
-    input[type="text"],
-    input[type="email"],
-    input[type="password"] {
-      padding: 12px;
-      margin-bottom: 20px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 1rem;
-      transition: border-color 0.3s;
-    }
-    input:focus {
-      border-color: #ff5e5e;
-      outline: none;
-    }
-    button {
-      padding: 12px;
-      background-color: #ff5e5e;
-      color: white;
+    .toggle-password {
+      position: absolute;
+      right: 8px;
+      background: none;
       border: none;
-      border-radius: 10px;
-      font-size: 1.1rem;
-      font-weight: bold;
+      font-size: 1.2rem;
       cursor: pointer;
-      transition: all 0.3s ease;
-    }
-    button:hover {
-      background-color: #e14c4c;
-      transform: scale(1.05);
-    }
-    .extra-links {
-      margin-top: 15px;
-      text-align: center;
-      font-size: 0.95rem;
-    }
-    .extra-links a {
-      color: #ff5e5e;
-      text-decoration: none;
-      margin: 0 5px;
-      transition: color 0.3s;
-    }
-    .extra-links a:hover {
-      color: #e14c4c;
-    }
-    footer.main-footer {
-      margin-top: auto;
-      font-size: 0.9rem;
-      color: #888;
-      text-align: center;
-      animation: fadeInUp 1.4s ease-in;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    @media (max-width: 768px) {
-      h2 { font-size: 1.8rem; }
-      form.register-form { padding: 20px; }
+      color: var(--poy-plum);
+      padding: 4px;
+      transform: none !important;
     }
   </style>
 </head>
-
 <body>
-  <header class="main-header">
-    <h1><a href="index.html">PipaliyaPlates 🍕</a></h1>
-  </header>
-  <h2>Create Your Account</h2>
-  <form class="register-form" onsubmit="return handleRegister(event)">
-    <label for="name">Full Name</label>
-    <input type="text" id="name" name="name" required placeholder="Enter your full name">
+  <div class="auth-wrapper">
+    <div class="auth-logo"><a href="index.html">PipaliyaPlates 🍕</a></div>
+    <p class="auth-title">Create Account</p>
 
-    <label for="email">Email Address</label>
-    <input type="email" id="email" name="email" required placeholder="Enter your email">
+    <form class="register-form" onsubmit="return handleRegister(event)">
+      <label for="name">Full Name</label>
+      <input type="text" id="name" name="name" required placeholder="Enter your full name">
 
-    <label for="password">Password</label>
-<div class="password-container">
-  <input type="password" id="password" name="password" required placeholder="Create a password">
-  <button type="button" class="toggle-password" onclick="togglePassword()">👁️</button>
-</div>
+      <label for="email">Email Address</label>
+      <input type="email" id="email" name="email" required placeholder="Enter your email">
 
-    <button type="submit">Register</button>
-  </form>
-  <div class="extra-links">
-    <p>Already have an account? <a href="login.html">Login</a></p>
-    <p><a href="index.html">← Back to Home</a></p>
+      <label for="password">Password</label>
+      <div class="password-container">
+        <input type="password" id="password" name="password" required placeholder="Create a password">
+        <button type="button" class="toggle-password" onclick="togglePassword()">👁️</button>
+      </div>
+
+      <button type="submit">Register</button>
+
+      <div class="extra-links">
+        <p>Already have an account? <a href="login.html">Login</a></p>
+      </div>
+    </form>
   </div>
-  <footer class="main-footer">&copy; 2025 PipaliyaPlates. All Rights Reserved.</footer>
+
+  <footer class="main-footer">
+    <span class="footer-brand">PipaliyaPlates 🍕</span>
+    <p>&copy; 2025 PipaliyaPlates. All Rights Reserved.</p>
+    <nav class="footer-nav">
+      <a href="index.html">Home</a>
+      <a href="menu.html">Menu</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </footer>
 
   <script>
-  function handleRegister(event) {
-    event.preventDefault();
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
+    function handleRegister(event) {
+      event.preventDefault();
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
 
-    if (name && email && password) {
-      let registeredUsers = JSON.parse(localStorage.getItem("registeredUsers")) || [];
-      
-      // Check if user already exists
-      if (registeredUsers.some(u => u.email === email)) {
-        alert("An account with this email already exists!");
-        return false;
+      if (name && email && password) {
+        let registeredUsers = JSON.parse(localStorage.getItem("registeredUsers")) || [];
+        if (registeredUsers.some(u => u.email === email)) {
+          alert("An account with this email already exists!");
+          return false;
+        }
+        registeredUsers.push({ name, email, password });
+        localStorage.setItem("registeredUsers", JSON.stringify(registeredUsers));
+        alert("Registration Successful! Please login.");
+        window.location.href = "login.html";
       }
-
-      registeredUsers.push({ name, email, password });
-      localStorage.setItem("registeredUsers", JSON.stringify(registeredUsers));
-      alert("Registration Successful! Please login.");
-      window.location.href = "login.html"; // back to login page after register
+      return false;
     }
-    return false;
-  }
 
-  function togglePassword() {
-  const passwordField = document.getElementById('password');
-  const toggleBtn = document.querySelector('.toggle-password');
-  if (passwordField.type === 'password') {
-    passwordField.type = 'text';
-    toggleBtn.textContent = '🙈';
-  } else {
-    passwordField.type = 'password';
-    toggleBtn.textContent = '👁️';
-  }
-}
-
+    function togglePassword() {
+      const passwordField = document.getElementById('password');
+      const toggleBtn = document.querySelector('.toggle-password');
+      if (passwordField.type === 'password') {
+        passwordField.type = 'text';
+        toggleBtn.textContent = '🙈';
+      } else {
+        passwordField.type = 'password';
+        toggleBtn.textContent = '👁️';
+      }
+    }
   </script>
 </body>
 </html>
