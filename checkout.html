@@ -492,14 +492,20 @@
       orders.push(orderData);
       localStorage.setItem('orders', JSON.stringify(orders));
 
-      // ── Notify Server Terminal ──
-      try {
-        await fetch('http://localhost:5000/api/order', {
-          method:  'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body:    JSON.stringify(orderData)
-        });
-      } catch (_) { /* server offline — ignore */ }
+      // ── Notify Server Terminal (only on localhost) ──
+      const IS_LOCAL = ['localhost', '127.0.0.1'].includes(window.location.hostname);
+      if (IS_LOCAL) {
+        try {
+          const ctrl = new AbortController();
+          setTimeout(() => ctrl.abort(), 3000);
+          await fetch('http://localhost:5000/api/order', {
+            method:  'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body:    JSON.stringify(orderData),
+            signal:  ctrl.signal
+          });
+        } catch (_) { /* server offline — ignore */ }
+      }
 
       // Save for thank-you page
       sessionStorage.setItem('lastOrderId',    orderId);

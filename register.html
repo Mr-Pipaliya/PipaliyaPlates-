@@ -93,10 +93,12 @@
   </footer>
 
   <script>
+    const IS_LOCAL = ['localhost', '127.0.0.1'].includes(window.location.hostname);
+
     async function handleRegister(event) {
       event.preventDefault();
-      const name     = document.getElementById('name').value;
-      const email    = document.getElementById('email').value;
+      const name     = document.getElementById('name').value.trim();
+      const email    = document.getElementById('email').value.trim();
       const password = document.getElementById('password').value;
 
       if (name && email && password) {
@@ -108,14 +110,19 @@
         registeredUsers.push({ name, email, password, registeredAt: new Date().toISOString() });
         localStorage.setItem("registeredUsers", JSON.stringify(registeredUsers));
 
-        // ── Notify server terminal ──
-        try {
-          await fetch('http://localhost:5000/api/register', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name, email, password })
-          });
-        } catch (_) { /* server offline — ignore */ }
+        // ── Notify server terminal (only on localhost) ──
+        if (IS_LOCAL) {
+          try {
+            const ctrl = new AbortController();
+            setTimeout(() => ctrl.abort(), 3000);
+            await fetch('http://localhost:5000/api/register', {
+              method:  'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body:    JSON.stringify({ name, email, password }),
+              signal:  ctrl.signal
+            });
+          } catch (_) { /* server offline — ignore */ }
+        }
 
         alert("Registration Successful! Please login.");
         window.location.href = "login.html";
