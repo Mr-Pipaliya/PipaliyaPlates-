@@ -5,6 +5,91 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Profile | PipaliyaPlates</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    /* ─── Profile Picture Upload ─── */
+    .avatar-wrap {
+      position: relative;
+      width: 120px;
+      height: 120px;
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+
+    .profile-avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid var(--poy-lavender);
+      display: block;
+      transition: filter 0.3s ease, transform 0.3s ease;
+    }
+
+    .avatar-wrap:hover .profile-avatar {
+      filter: brightness(0.72);
+      transform: scale(1.04);
+    }
+
+    /* Camera icon overlay */
+    .avatar-overlay {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+
+    .avatar-wrap:hover .avatar-overlay {
+      opacity: 1;
+    }
+
+    .avatar-overlay span {
+      font-size: 1.8rem;
+      line-height: 1;
+    }
+
+    .avatar-overlay small {
+      font-size: 0.65rem;
+      font-family: var(--font-body);
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #fff;
+      margin-top: 4px;
+    }
+
+    /* Hidden file input */
+    #avatar-input { display: none; }
+
+    /* Upload success ring animation */
+    @keyframes avatarRing {
+      0%   { box-shadow: 0 0 0 0 rgba(115,64,96,0.5); }
+      70%  { box-shadow: 0 0 0 14px rgba(115,64,96,0); }
+      100% { box-shadow: 0 0 0 0 rgba(115,64,96,0); }
+    }
+
+    .avatar-uploaded {
+      animation: avatarRing 0.6s ease-out;
+    }
+
+    /* Change photo text badge below avatar */
+    .avatar-hint {
+      text-align: center;
+      font-size: 0.72rem;
+      font-family: var(--font-body);
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--poy-plum);
+      margin-top: 8px;
+      opacity: 0.75;
+    }
+  </style>
 </head>
 <body>
 
@@ -26,11 +111,29 @@
 
     <!-- Profile Header -->
     <section class="profile-header">
-      <img src="https://via.placeholder.com/150" alt="Profile Picture" class="profile-avatar">
+
+      <!-- ── Clickable Avatar with camera overlay ── -->
+      <div class="avatar-wrap" onclick="document.getElementById('avatar-input').click()" title="Click to change photo">
+        <img id="profile-avatar-img"
+             src="https://ui-avatars.com/api/?name=User&background=f0e8ec&color=734060&size=200&font-size=0.42&bold=true"
+             alt="Profile Picture"
+             class="profile-avatar">
+
+        <!-- Hover overlay -->
+        <div class="avatar-overlay">
+          <span>📷</span>
+          <small>Change</small>
+        </div>
+      </div>
+
+      <!-- Hidden file input -->
+      <input type="file" id="avatar-input" accept="image/*" onchange="handleAvatarUpload(event)">
+      <p class="avatar-hint">📷 Click photo to change</p>
+
       <div class="profile-info">
-        <h2>✨ Mr. Hardik ✨</h2>
-        <p class="email">📧 hardik@example.com</p>
-        <p class="bio">🍱 Foodie | 🌏 Global cuisines | 💻 Developer & Designer</p>
+        <h2 id="profile-name">✨ Mr. Hardik ✨</h2>
+        <p class="email" id="profile-email">📧 hardik@example.com</p>
+        <p class="bio" id="profile-bio">🍱 Foodie | 🌏 Global cuisines | 💻 Developer &amp; Designer</p>
         <div class="profile-actions">
           <button class="btn primary-btn" onclick="editProfile()">✏️ Edit Profile</button>
           <button class="btn secondary-btn" onclick="logout()">🚪 Logout</button>
@@ -238,59 +341,115 @@
       window.location.href = "login.html";
     }
 
-    // Load user data on load
+    // ── Load all user data on page load ──
     document.addEventListener("DOMContentLoaded", () => {
-      const emailElement = document.querySelector(".profile-info .email");
-      const nameElement = document.querySelector(".profile-info h2");
-      const bioElement = document.querySelector(".profile-info .bio");
+      const emailEl = document.getElementById("profile-email");
+      const nameEl  = document.getElementById("profile-name");
+      const bioEl   = document.getElementById("profile-bio");
+      const avatarEl = document.getElementById("profile-avatar-img");
 
       const loggedEmail = sessionStorage.getItem("userEmail") || "hardik@example.com";
-      emailElement.textContent = "📧 " + loggedEmail;
+      emailEl.textContent = "📧 " + loggedEmail;
 
-      // Load name and bio from localStorage if saved
+      // Load saved name
       const savedName = localStorage.getItem("profileName_" + loggedEmail);
-      const savedBio = localStorage.getItem("profileBio_" + loggedEmail);
-
       if (savedName) {
-        nameElement.textContent = "✨ " + savedName + " ✨";
+        nameEl.textContent = "✨ " + savedName + " ✨";
       } else {
-        // default name from email
         const defaultName = loggedEmail.split("@")[0];
-        nameElement.textContent = "✨ " + defaultName.charAt(0).toUpperCase() + defaultName.slice(1) + " ✨";
+        nameEl.textContent = "✨ " + defaultName.charAt(0).toUpperCase() + defaultName.slice(1) + " ✨";
       }
 
-      if (savedBio) {
-        bioElement.textContent = "🍱 " + savedBio;
+      // Load saved bio
+      const savedBio = localStorage.getItem("profileBio_" + loggedEmail);
+      if (savedBio) bioEl.textContent = "🍱 " + savedBio;
+
+      // ── Load saved profile picture ──
+      const savedAvatar = localStorage.getItem("profileAvatar_" + loggedEmail);
+      if (savedAvatar) {
+        avatarEl.src = savedAvatar;
+      } else {
+        // Generate a nice initials avatar as default
+        const initials = (savedName || loggedEmail.split("@")[0]).charAt(0).toUpperCase();
+        avatarEl.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(initials)}&background=f0e8ec&color=734060&size=200&font-size=0.5&bold=true`;
       }
     });
 
+    // ── Handle avatar file upload ──
+    function handleAvatarUpload(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      // Only allow images
+      if (!file.type.startsWith('image/')) {
+        alert('Please select an image file!');
+        return;
+      }
+
+      // Max 5MB check
+      if (file.size > 5 * 1024 * 1024) {
+        alert('Image is too large! Please choose an image under 5MB.');
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const avatarEl = document.getElementById('profile-avatar-img');
+        avatarEl.src = e.target.result;
+
+        // Play ring animation
+        avatarEl.classList.remove('avatar-uploaded');
+        void avatarEl.offsetWidth; // reflow to restart animation
+        avatarEl.classList.add('avatar-uploaded');
+
+        // Save to localStorage
+        const loggedEmail = sessionStorage.getItem('userEmail') || 'hardik@example.com';
+        try {
+          localStorage.setItem('profileAvatar_' + loggedEmail, e.target.result);
+        } catch(err) {
+          // localStorage quota exceeded — image too large
+          console.warn('Could not save avatar to localStorage:', err);
+          alert('Photo displayed but could not be saved (storage full). Try a smaller image.');
+        }
+      };
+      reader.readAsDataURL(file);
+
+      // Reset input so same file can be picked again
+      event.target.value = '';
+    }
+
     // Edit Profile Handler
     function editProfile() {
-      const emailElement = document.querySelector(".profile-info .email");
-      const nameElement = document.querySelector(".profile-info h2");
-      const bioElement = document.querySelector(".profile-info .bio");
+      const nameEl  = document.getElementById("profile-name");
+      const bioEl   = document.getElementById("profile-bio");
 
       const loggedEmail = sessionStorage.getItem("userEmail") || "hardik@example.com";
-      const currentName = nameElement.textContent.replace(/✨/g, "").trim();
-      const currentBio = bioElement.textContent.replace(/🍱/g, "").trim();
+      const currentName = nameEl.textContent.replace(/✨/g, "").trim();
+      const currentBio  = bioEl.textContent.replace(/🍱/g, "").trim();
 
       const newName = prompt("Enter new name:", currentName);
-      if (newName === null) return; // cancelled
+      if (newName === null) return;
       const newBio = prompt("Enter new bio:", currentBio);
-      if (newBio === null) return; // cancelled
+      if (newBio === null) return;
 
       if (newName.trim() === "") {
         alert("Name cannot be empty!");
         return;
       }
 
-      // Update DOM
-      nameElement.textContent = "✨ " + newName.trim() + " ✨";
-      bioElement.textContent = "🍱 " + newBio.trim();
+      nameEl.textContent = "✨ " + newName.trim() + " ✨";
+      bioEl.textContent  = "🍱 " + newBio.trim();
 
-      // Save to localStorage
       localStorage.setItem("profileName_" + loggedEmail, newName.trim());
-      localStorage.setItem("profileBio_" + loggedEmail, newBio.trim());
+      localStorage.setItem("profileBio_" + loggedEmail,  newBio.trim());
+
+      // Also update default avatar if no custom photo yet
+      const savedAvatar = localStorage.getItem("profileAvatar_" + loggedEmail);
+      if (!savedAvatar) {
+        const initials = newName.trim().charAt(0).toUpperCase();
+        document.getElementById('profile-avatar-img').src =
+          `https://ui-avatars.com/api/?name=${encodeURIComponent(initials)}&background=f0e8ec&color=734060&size=200&font-size=0.5&bold=true`;
+      }
 
       alert("Profile updated successfully!");
     }
