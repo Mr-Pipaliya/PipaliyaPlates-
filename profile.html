@@ -32,8 +32,8 @@
         <p class="email">📧 hardik@example.com</p>
         <p class="bio">🍱 Foodie | 🌏 Global cuisines | 💻 Developer & Designer</p>
         <div class="profile-actions">
-          <button class="btn primary-btn">✏️ Edit Profile</button>
-          <button class="btn secondary-btn">🚪 Logout</button>
+          <button class="btn primary-btn" onclick="editProfile()">✏️ Edit Profile</button>
+          <button class="btn secondary-btn" onclick="logout()">🚪 Logout</button>
         </div>
       </div>
     </section>
@@ -215,10 +215,10 @@
     <section class="settings">
       <h3>⚙️ Account Settings</h3>
       <ul>
-        <li><a href="#">🔒 Change Password</a></li>
-        <li><a href="#">🛡️ Privacy Settings</a></li>
+        <li><a href="#" onclick="changePassword(); return false;">🔒 Change Password</a></li>
+        <li><a href="#" onclick="editPrivacySettings(); return false;">🛡️ Privacy Settings</a></li>
         <li><a href="#">🔔 Notification Preferences</a></li>
-        <li><a href="#">🗑️ Delete Account</a></li>
+        <li><a href="#" onclick="deleteAccount(); return false;">🗑️ Delete Account</a></li>
       </ul>
     </section>
 
@@ -231,5 +231,163 @@
       <a href="#">Terms</a> | <a href="#">Privacy</a> | <a href="#">Help</a>
     </nav>
   </footer>
+
+  <script>
+    // Check if logged in
+    if (sessionStorage.getItem("isLoggedIn") !== "true") {
+      window.location.href = "login.html";
+    }
+
+    // Load user data on load
+    document.addEventListener("DOMContentLoaded", () => {
+      const emailElement = document.querySelector(".profile-info .email");
+      const nameElement = document.querySelector(".profile-info h2");
+      const bioElement = document.querySelector(".profile-info .bio");
+
+      const loggedEmail = sessionStorage.getItem("userEmail") || "hardik@example.com";
+      emailElement.textContent = "📧 " + loggedEmail;
+
+      // Load name and bio from localStorage if saved
+      const savedName = localStorage.getItem("profileName_" + loggedEmail);
+      const savedBio = localStorage.getItem("profileBio_" + loggedEmail);
+
+      if (savedName) {
+        nameElement.textContent = "✨ " + savedName + " ✨";
+      } else {
+        // default name from email
+        const defaultName = loggedEmail.split("@")[0];
+        nameElement.textContent = "✨ " + defaultName.charAt(0).toUpperCase() + defaultName.slice(1) + " ✨";
+      }
+
+      if (savedBio) {
+        bioElement.textContent = "🍱 " + savedBio;
+      }
+    });
+
+    // Edit Profile Handler
+    function editProfile() {
+      const emailElement = document.querySelector(".profile-info .email");
+      const nameElement = document.querySelector(".profile-info h2");
+      const bioElement = document.querySelector(".profile-info .bio");
+
+      const loggedEmail = sessionStorage.getItem("userEmail") || "hardik@example.com";
+      const currentName = nameElement.textContent.replace(/✨/g, "").trim();
+      const currentBio = bioElement.textContent.replace(/🍱/g, "").trim();
+
+      const newName = prompt("Enter new name:", currentName);
+      if (newName === null) return; // cancelled
+      const newBio = prompt("Enter new bio:", currentBio);
+      if (newBio === null) return; // cancelled
+
+      if (newName.trim() === "") {
+        alert("Name cannot be empty!");
+        return;
+      }
+
+      // Update DOM
+      nameElement.textContent = "✨ " + newName.trim() + " ✨";
+      bioElement.textContent = "🍱 " + newBio.trim();
+
+      // Save to localStorage
+      localStorage.setItem("profileName_" + loggedEmail, newName.trim());
+      localStorage.setItem("profileBio_" + loggedEmail, newBio.trim());
+
+      alert("Profile updated successfully!");
+    }
+
+    // Logout Handler
+    function logout() {
+      if (confirm("Are you sure you want to logout?")) {
+        sessionStorage.removeItem("isLoggedIn");
+        sessionStorage.removeItem("userEmail");
+        alert("Logged out successfully!");
+        window.location.href = "login.html";
+      }
+    }
+
+    // Change Password Handler
+    function changePassword() {
+      const loggedEmail = sessionStorage.getItem("userEmail") || "hardik@example.com";
+      const currentPass = prompt("Enter current password:");
+      if (currentPass === null) return;
+
+      // Retrieve user's actual password
+      let registeredUsers = JSON.parse(localStorage.getItem("registeredUsers")) || [];
+      let userIndex = registeredUsers.findIndex(u => u.email === loggedEmail);
+      
+      let actualPassword = "Hardik@2005"; // Default
+      if (userIndex !== -1) {
+        actualPassword = registeredUsers[userIndex].password;
+      } else {
+        // Check custom default password if changed
+        actualPassword = localStorage.getItem("defaultUserPassword") || "Hardik@2005";
+      }
+
+      if (currentPass !== actualPassword) {
+        alert("Incorrect current password!");
+        return;
+      }
+
+      const newPass = prompt("Enter new password:");
+      if (!newPass) {
+        alert("Password cannot be empty!");
+        return;
+      }
+
+      // Save new password
+      if (userIndex !== -1) {
+        registeredUsers[userIndex].password = newPass;
+        localStorage.setItem("registeredUsers", JSON.stringify(registeredUsers));
+      } else {
+        localStorage.setItem("defaultUserPassword", newPass);
+      }
+
+      alert("Password changed successfully!");
+    }
+
+    // Privacy Settings Handler
+    function editPrivacySettings() {
+      const loggedEmail = sessionStorage.getItem("userEmail") || "hardik@example.com";
+      const currentSetting = localStorage.getItem("privacy_" + loggedEmail) || "Public";
+      const newSetting = prompt("Enter privacy setting (Public / Private):", currentSetting);
+      if (newSetting === null) return;
+
+      if (newSetting.trim().toLowerCase() === "public" || newSetting.trim().toLowerCase() === "private") {
+        const capitalizedSetting = newSetting.trim().charAt(0).toUpperCase() + newSetting.trim().slice(1).toLowerCase();
+        localStorage.setItem("privacy_" + loggedEmail, capitalizedSetting);
+        alert("Privacy settings updated to: " + capitalizedSetting);
+      } else {
+        alert("Invalid input! Please enter either 'Public' or 'Private'.");
+      }
+    }
+
+    // Delete Account Handler
+    function deleteAccount() {
+      const loggedEmail = sessionStorage.getItem("userEmail") || "hardik@example.com";
+      
+      const confirmText = `Are you sure you want to delete your account (${loggedEmail})?\nThis action is permanent and cannot be undone!`;
+      if (!confirm(confirmText)) return;
+
+      // Delete from registered users if registered
+      let registeredUsers = JSON.parse(localStorage.getItem("registeredUsers")) || [];
+      const filteredUsers = registeredUsers.filter(u => u.email !== loggedEmail);
+      localStorage.setItem("registeredUsers", JSON.stringify(filteredUsers));
+
+      // Remove specific local settings
+      localStorage.removeItem("profileName_" + loggedEmail);
+      localStorage.removeItem("profileBio_" + loggedEmail);
+      localStorage.removeItem("privacy_" + loggedEmail);
+      if (loggedEmail === "hardik@gmail.com") {
+        localStorage.removeItem("defaultUserPassword");
+      }
+
+      // Clear session and redirect
+      sessionStorage.removeItem("isLoggedIn");
+      sessionStorage.removeItem("userEmail");
+
+      alert("Your account has been successfully deleted.");
+      window.location.href = "register.html";
+    }
+  </script>
 </body>
 </html>
