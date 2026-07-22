@@ -11,55 +11,10 @@
       box-sizing: border-box;
     }
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to bottom right, #fffaf0, #ffe9d6);
-      color: #333;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #faf9f6;
+      color: #2d3142;
       line-height: 1.6;
-    }
-    .container {
-      max-width: 1000px;
-      margin: auto;
-      padding: 20px;
-    }
-    /* HEADER */
-    .header {
-      background: linear-gradient(90deg, #ff5e57, #ff8c42);
-      color: #fff;
-      padding: 30px 20px;
-      text-align: center;
-      border-bottom: 5px solid #d84315;
-    }
-    .logo {
-      font-size: 2.8rem;
-      font-weight: bold;
-      letter-spacing: 1px;
-    }
-    .tagline {
-      font-size: 1.2rem;
-      margin: 10px 0;
-      font-style: italic;
-    }
-    .navbar {
-      margin-top: 15px;
-    }
-    .navbar a {
-      color: #fff;
-      text-decoration: none;
-      margin: 0 18px;
-      font-weight: bold;
-      font-size: 1.05rem;
-      position: relative;
-    }
-    .navbar a::after {
-      content: "";
-      display: block;
-      height: 2px;
-      background-color: #fff;
-      width: 0%;
-      transition: width 0.3s ease;
-    }
-    .navbar a:hover::after {
-      width: 100%;
     }
     /* CONTACT SECTION */
     .contact {
@@ -161,21 +116,20 @@
     }
   </style>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <!-- Header -->
-  <header class="header">
-    <div class="container">
-      <h1 class="logo">PipaliyaPlates 🍕</h1>
-      <p class="tagline">Big Food Delivery</p>
-      <nav class="navbar">
-        <a href="index.html">Home</a>
-        <a href="menu.html">Menu</a>
-        <a href="checkout.html">Checkout</a>
-        <a href="about.html">About</a>
-        <a href="profile.html">👤</a>
-      </nav>
-    </div>
+    <header class="main-header">
+    <h1>PipaliyaPlates 🍕</h1>
+    <nav>
+      <a href="index.html" class="">Home</a>
+      <a href="menu.html" class="">Menu</a>
+      <a href="about.html" class="">About</a>
+      <a href="contact.html" class="active">Contact</a>
+      <a href="checkout.html" class="">Cart</a>
+      <a href="profile.html" class="profile-link ">👤</a>
+    </nav>
   </header>
   <!-- Contact Section -->
   <main class="contact">

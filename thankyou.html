@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Thank You | PipaliyaPlates</title>
+  <link rel="stylesheet" href="style.css">
   <style>
     * {
       margin: 0;
@@ -12,7 +13,7 @@
     }
     body {
       background: linear-gradient(135deg, #fff0f5, #ffe4e1);
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Plus Jakarta Sans', sans-serif;
       text-align: center;
       padding: 40px 20px;
       min-height: 100vh;
@@ -21,18 +22,6 @@
       justify-content: center;
       align-items: center;
       animation: fadeIn 1s ease-in;
-    }
-    header {
-      background-color: #ff5e5e;
-      width: 100%;
-      padding: 20px;
-      color: white;
-      font-size: 2.5rem;
-      font-weight: bold;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-      border-bottom-left-radius: 20px;
-      border-bottom-right-radius: 20px;
-      margin-bottom: 30px;
     }
     .thank-you-icon {
       font-size: 6rem;
@@ -126,7 +115,17 @@
   </style>
 </head>
 <body>
-  <header>PipaliyaPlates</header>
+    <header class="main-header">
+    <h1>PipaliyaPlates 🍕</h1>
+    <nav>
+      <a href="index.html" class="">Home</a>
+      <a href="menu.html" class="">Menu</a>
+      <a href="about.html" class="">About</a>
+      <a href="contact.html" class="">Contact</a>
+      <a href="checkout.html" class="">Cart</a>
+      <a href="profile.html" class="profile-link ">👤</a>
+    </nav>
+  </header>
 
   <!-- Confetti Elements & Auto-redirect -->
   <script>

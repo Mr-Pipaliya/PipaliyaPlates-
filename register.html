@@ -8,7 +8,7 @@
   <style>
     body {
       background: linear-gradient(135deg, #fff0f5, #ffe4e1);
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Plus Jakarta Sans', sans-serif;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -118,7 +118,17 @@
 </head>
 
 <body>
-  <header class="main-header">PipaliyaPlates 🍕</header>
+    <header class="main-header">
+    <h1>PipaliyaPlates 🍕</h1>
+    <nav>
+      <a href="index.html" class="">Home</a>
+      <a href="menu.html" class="">Menu</a>
+      <a href="about.html" class="">About</a>
+      <a href="contact.html" class="">Contact</a>
+      <a href="checkout.html" class="">Cart</a>
+      <a href="profile.html" class="profile-link ">👤</a>
+    </nav>
+  </header>
   <h2>Create Your Account</h2>
   <form class="register-form" onsubmit="return handleRegister(event)">
     <label for="name">Full Name</label>
