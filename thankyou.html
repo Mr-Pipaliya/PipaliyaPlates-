@@ -128,7 +128,7 @@
 <body>
   <header>PipaliyaPlates</header>
 
-  <!-- Confetti Elements -->
+  <!-- Confetti Elements & Auto-redirect -->
   <script>
     for (let i = 0; i < 100; i++) {
       let confetti = document.createElement('div');
@@ -138,6 +138,11 @@
       confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
       document.body.appendChild(confetti);
     }
+
+    // Automatically redirect to home page (index.html) after 3 seconds
+    setTimeout(() => {
+      window.location.href = "index.html";
+    }, 3000);
   </script>
 
   <div class="thank-you-icon">🎉</div>
