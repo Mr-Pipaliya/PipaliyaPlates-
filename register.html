@@ -2,96 +2,68 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Register | PipaliyaPlates</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register | PipaliyaPlates — Create Your Account</title>
+  <meta name="description" content="Create your free PipaliyaPlates account and start ordering delicious food today." />
   <link rel="stylesheet" href="style.css" />
-  <style>
-    .auth-wrapper {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
-      background: var(--bg-cream);
-      padding-bottom: 60px;
-    }
-    .auth-logo {
-      margin-top: 40px;
-      margin-bottom: 10px;
-      font-family: var(--font-heading);
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--poy-plum);
-    }
-    .auth-logo a { color: inherit; text-decoration: none; }
-    .auth-title {
-      font-family: var(--font-heading);
-      font-style: italic;
-      font-size: 1.7rem;
-      color: var(--poy-plum);
-      margin-bottom: 0;
-      text-align: center;
-    }
-    .password-container {
-      display: flex;
-      position: relative;
-      align-items: center;
-      margin-bottom: 18px;
-    }
-    .password-container input {
-      width: 100%;
-      margin-bottom: 0;
-      padding-right: 50px;
-    }
-    .toggle-password {
-      position: absolute;
-      right: 8px;
-      background: none;
-      border: none;
-      font-size: 1.2rem;
-      cursor: pointer;
-      color: var(--poy-plum);
-      padding: 4px;
-      transform: none !important;
-    }
-  </style>
 </head>
 <body>
-  <div class="auth-wrapper">
-    <div class="auth-logo"><a href="index.html">PipaliyaPlates 🍕</a></div>
-    <p class="auth-title">Create Account</p>
 
-    <form class="register-form" onsubmit="handleRegister(event); return false;">
-      <label for="name">Full Name</label>
-      <input type="text" id="name" required placeholder="Enter your full name">
+  <div class="auth-page">
 
-      <label for="email">Email Address</label>
-      <input type="email" id="email" required placeholder="Enter your email">
-
-      <label for="password">Password</label>
-      <div class="password-container">
-        <input type="password" id="password" required placeholder="Create a password">
-        <button type="button" class="toggle-password" onclick="togglePassword()">👁️</button>
+    <!-- Left Visual -->
+    <div class="auth-visual">
+      <img
+        src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=900&q=80"
+        alt="Delicious food spread"
+      />
+      <div class="auth-visual-overlay">
+        <h2>Join the<br>Food<br>Revolution.</h2>
+        <p>1200+ happy foodies · Free delivery on ₹500+</p>
       </div>
+    </div>
 
-      <button type="submit">Register</button>
+    <!-- Right Form -->
+    <div class="auth-side">
+      <a href="login.html" class="auth-logo-top">
+        <div class="logo-icon">🍕</div>
+        <span class="logo-text">Pipaliya<span style="color:var(--primary)">Plates</span></span>
+      </a>
 
-      <div class="extra-links">
-        <p>Already have an account? <a href="login.html">Login</a></p>
+      <h1 class="auth-form-title">Create Account</h1>
+      <p class="auth-form-sub">It's free! Start ordering in 60 seconds 🍽️</p>
+
+      <form onsubmit="handleRegister(event); return false;">
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" required placeholder="e.g. Hardik Pipaliya" />
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" required placeholder="you@example.com" />
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <div class="input-icon-wrap">
+            <input type="password" id="password" required placeholder="Create a strong password" />
+            <button type="button" class="input-icon" onclick="togglePwd()" id="eye-btn">👁️</button>
+          </div>
+        </div>
+
+        <button type="submit" class="auth-submit-btn" id="reg-btn">
+          Create Account →
+        </button>
+      </form>
+
+      <div class="auth-links">
+        <p>Already have an account? <a href="login.html">Sign in</a></p>
       </div>
-    </form>
+    </div>
   </div>
 
-  <footer class="main-footer">
-    <span class="footer-brand">PipaliyaPlates 🍕</span>
-    <p>&copy; 2025 PipaliyaPlates. All Rights Reserved.</p>
-    <nav class="footer-nav">
-      <a href="index.html">Home</a>
-      <a href="menu.html">Menu</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-  </footer>
-
+  <script src="script.js"></script>
   <script>
     function handleRegister(event) {
       event.preventDefault();
@@ -101,23 +73,36 @@
 
       if (!name || !email || !password) return;
 
-      let users = JSON.parse(localStorage.getItem("registeredUsers")) || [];
-      if (users.some(u => u.email === email)) {
-        alert("An account with this email already exists!");
+      if (password.length < 6) {
+        showToast('Password must be at least 6 characters!', 'error');
         return;
       }
 
-      users.push({ name, email, password, registeredAt: new Date().toISOString() });
-      localStorage.setItem("registeredUsers", JSON.stringify(users));
-      alert("Registration Successful! Please login.");
-      window.location.href = "login.html";
+      const btn = document.getElementById('reg-btn');
+      btn.textContent = 'Creating account…';
+      btn.disabled = true;
+
+      setTimeout(() => {
+        let users = JSON.parse(localStorage.getItem('registeredUsers')) || [];
+        if (users.some(u => u.email === email)) {
+          showToast('An account with this email already exists!', 'error');
+          btn.textContent = 'Create Account →';
+          btn.disabled = false;
+          return;
+        }
+
+        users.push({ name, email, password, registeredAt: new Date().toISOString() });
+        localStorage.setItem('registeredUsers', JSON.stringify(users));
+        showToast('Account created! Please login 🎉', 'success');
+        setTimeout(() => window.location.href = 'login.html', 1000);
+      }, 600);
     }
 
-    function togglePassword() {
+    function togglePwd() {
       const f = document.getElementById('password');
-      const b = document.querySelector('.toggle-password');
-      if (f.type === 'password') { f.type = 'text'; b.textContent = '🙈'; }
-      else { f.type = 'password'; b.textContent = '👁️'; }
+      const b = document.getElementById('eye-btn');
+      if (f.type === 'password') { f.type = 'text';     b.textContent = '🙈'; }
+      else                       { f.type = 'password'; b.textContent = '👁️'; }
     }
   </script>
 </body>

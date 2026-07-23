@@ -1,169 +1,176 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PipaliyaPlates | Italian Menu</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Italian Cuisine | PipaliyaPlates</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
-<body>
 
-  <!-- Header Section -->
-    <header class="main-header">
-    <h1><a href="index.html">PipaliyaPlates 🍕</a></h1>
+<body class="has-navbar">
+  <header class="main-header" id="main-header">
+    <a href="index.html" class="header-logo">
+      <div class="logo-icon">🍕</div><span class="logo-text">Pipaliya<span>Plates</span></span>
+    </a>
     <nav>
-      <a href="index.html" class="">Home</a>
-      <a href="menu.html" class="active">Menu</a>
-      <a href="about.html" class="">About</a>
-      <a href="contact.html" class="">Contact</a>
-      <a href="checkout.html" class="">Cart</a>
-      <a href="profile.html" class="profile-link ">👤</a>
+      <a href="index.html">Home</a><a href="menu.html" class="active">Menu</a>
+      <a href="about.html">About</a><a href="contact.html">Contact</a>
+      <a href="checkout.html" class="nav-cart">🛒 Cart<span class="cart-badge">0</span></a>
+      <a href="profile.html" class="profile-link">👤</a>
     </nav>
-  </header>   
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </header>
+  <div class="mobile-nav" id="mobile-nav">
+    <a href="index.html">Home</a><a href="menu.html" class="active">Menu</a>
+    <a href="about.html">About</a><a href="contact.html">Contact</a>
+    <a href="checkout.html">🛒 Cart</a><a href="profile.html">👤 Profile</a>
+  </div>
 
-   <!-- Cart Info Section -->
-   <section class="cart-info">
-    <h3>Your Cart</h3>
-    <ul id="cart-items"></ul>
-    <p id="cart-total">Total: Rs. 0</p>
-    <button id="checkout-btn" onclick="window.location.href='checkout.html'">Proceed to Checkout</button>
-  </section>
+  <div class="page-hero">
+    <p class="badge badge-primary" style="margin-bottom:16px;">🍕 La Cucina Italiana</p>
+    <h1>Italian <span style="color:var(--primary)">Cuisine</span></h1>
+    <p>Authentic Italian classics — pizzas, pastas, and more, freshly made for you!</p>
+  </div>
 
-   <!-- Page Navigation -->
-<div class="page-nav">
-  <span>Categories:</span>
-  <a href="gujarati.html">1</a>
-  <a href="punjabi.html">2</a>
-  <a href="chinese.html">3</a>
-  <a href="italian.html">4</a>
-  <a href="korean.html">5</a>
-  <a href="southindian.html">6</a>
-  <a href="mexican.html">7</a>
-  <a href="french.html">8</a>
-</div>
-
-<div class="nav-buttons">
-  <a href="chinese.html" class="back-btn">← Back</a>
-  <a href="korean.html" class="next-btn">Next →</a>
-</div>
-  
-  <!-- Menu Section -->
-  <section class="menu-list">
-    <h2>Italian Vegetarian Delights</h2>
-  </section>
-
-  <div class="menu-grid">
-    <div class="menu-item" data-id="1">
-      <div class="card-img-wrap"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzzsGVeB9YBgTNR-DEMTErI5l4HLQ1EganKQ&s" alt="Margherita Pizza" class="menu-image"></div>
-      <h3>1. Margherita Pizza</h3>
-      <p>Rs. 250</p>
-      <button class="add-to-cart" onclick="addToCart(1, 'Margherita Pizza', 250)">Add to Cart</button>
-    </div>
-
-    <div class="menu-item" data-id="2">
-      <div class="card-img-wrap"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqduOyL87L4vCupHEUxGgvCHxUj15HHF28Hw&s" alt="Vegetable Lasagna" class="menu-image"></div>
-      <h3>2. Vegetable Lasagna</h3>
-      <p>Rs. 320</p>
-      <button class="add-to-cart" onclick="addToCart(2, 'Vegetable Lasagna', 320)">Add to Cart</button>
-    </div>
-
-    <div class="menu-item" data-id="3">
-      <div class="card-img-wrap"><img src="https://cdn.shopify.com/s/files/1/0521/1763/5242/files/pasta_alfredo_hero_5_1024x1024.jpg?v=1656573455" alt="Pasta Alfredo" class="menu-image"></div>
-      <h3>3. Pasta Alfredo</h3>
-      <p>Rs. 210</p>
-      <button class="add-to-cart" onclick="addToCart(3, 'Pasta Alfredo', 210)">Add to Cart</button>
-    </div>
-
-    <div class="menu-item" data-id="4">
-      <div class="card-img-wrap"><img src="https://www.kingarthurbaking.com/sites/default/files/styles/featured_image/public/2025-02/Potato-Gnocchi_2025_Lifestyle_ALT_H_045.jpg?itok=bYYFrg-L" alt="Gnocchi" class="menu-image"></div>
-      <h3>4. Gnocchi</h3>
-      <p>Rs. 280</p>
-      <button class="add-to-cart" onclick="addToCart(4, 'Gnocchi', 280)">Add to Cart</button>
-    </div>
-
-    <div class="menu-item" data-id="5">
-      <div class="card-img-wrap"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5ORDgL3VfBgwJmjO5ifW6WQWSmTM3ldq-NA&s" alt="Vegetable Ravioli" class="menu-image"></div>
-      <h3>5. Vegetable Ravioli</h3>
-      <p>Rs. 250</p>
-      <button class="add-to-cart" onclick="addToCart(5, 'Vegetable Ravioli', 250)">Add to Cart</button>
-    </div>
-
-    <div class="menu-item" data-id="6">
-      <div class="card-img-wrap"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQdJQh8NlPcsW-4txXuQsYoOzW12VK3KmZ7w&s" alt="Penne Arrabbiata" class="menu-image"></div>
-      <h3>6. Penne Arrabbiata</h3>
-      <p>Rs. 220</p>
-      <button class="add-to-cart" onclick="addToCart(6, 'Penne Arrabbiata', 220)">Add to Cart</button>
-    </div>
-
-    <div class="menu-item" data-id="7">
-      <div class="card-img-wrap"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSB7VyKM6dU7R4Yzmo6vnKroJVkL2zdKj9PYQ&s" alt="Mushroom Risotto" class="menu-image"></div>
-      <h3>7. Mushroom Risotto</h3>
-      <p>Rs. 300</p>
-      <button class="add-to-cart" onclick="addToCart(7, 'Mushroom Risotto', 300)">Add to Cart</button>
-    </div>
-
-    <div class="menu-item" data-id="8">
-      <div class="card-img-wrap"><img src="https://www.floatingkitchen.net/wp-content/uploads/2023/08/Bruschetta-Ricotta-Pesto-1-720x405.jpg" alt="Bruschetta" class="menu-image"></div>
-      <h3>8. Bruschetta</h3>
-      <p>Rs. 150</p>
-      <button class="add-to-cart" onclick="addToCart(8, 'Bruschetta', 150)">Add to Cart</button>
-    </div>
-
-    <div class="menu-item" data-id="9">
-      <div class="card-img-wrap"><img src="https://www.foodandwine.com/thmb/IuZPWAXBp4YaT9hn1YLHhuijT3k=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/FAW-recipes-big-italian-salad-hero-83e6ea846722478f8feb1eea33158b00.jpg" alt="Italian Salad" class="menu-image"></div>
-      <h3>9. Italian Salad</h3>
-      <p>Rs. 180</p>      
-      <button class="add-to-cart" onclick="addToCart(9, 'Italian Salad', 180)">Add to Cart</button>
-    </div>
-
-    <div class="menu-item" data-id="10">
-      <div class="card-img-wrap"><img src="https://i0.wp.com/smittenkitchen.com/wp-content/uploads/2023/09/simple-eggplant-parmesan-12-scaled.jpg?fit=1200%2C800&ssl=1" alt="Eggplant Parmesan" class="menu-image"></div>
-      <h3>10. Eggplant Parmesan</h3>
-      <p>Rs. 250</p>
-      <button class="add-to-cart" onclick="addToCart(10, 'Eggplant Parmesan', 250)">Add to Cart</button>
-    </div>
-
-    <div class="menu-item" data-id="11">
-      <div class="card-img-wrap"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIQH49waX_-KXhT09Z5dF19nv292n22KbwZQ&s" alt="Vegetable Soup" class="menu-image"></div>
-      <h3>11. Vegetable Soup</h3>
-      <p>Rs. 150</p>
-      <button class="add-to-cart" onclick="addToCart(11, 'Vegetable Soup', 150)">Add to Cart</button>
-    </div>
-
-    <div class="menu-item" data-id="12">
-      <div class="card-img-wrap"><img src="https://www.seriouseats.com/thmb/5kQKbm3V-zgurSr95PTITqaS_vs=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/classic-caprese-salad-recipe-hero-05_1-9ce2f9b0601c45279e07320f9548fa66.JPG" alt="Caprese Salad" class="menu-image"></div>
-      <h3>12. Caprese Salad</h3>
-      <p>Rs. 200</p>
-      <button class="add-to-cart" onclick="addToCart(12, 'Caprese Salad', 200)">Add to Cart</button>
-    </div>
-
-    <div class="menu-item" data-id="13">
-      <div class="card-img-wrap"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtUOb2wtWThCqigb7WTZYYuWv8CUMk7wcNsg&s" alt="Focaccia Bread" class="menu-image"></div>
-      <h3>13. Focaccia Bread</h3>
-      <p>Rs. 120</p>
-      <button class="add-to-cart" onclick="addToCart(13, 'Focaccia Bread', 120)">Add to Cart</button>
-    </div>
-
-    <div class="menu-item" data-id="14">
-      <div class="card-img-wrap"><img src="https://ichef.bbci.co.uk/food/ic/food_16x9_1600/recipes/hasselback_garlic_bread_79835_16x9.jpg" alt="Garlic Bread" class="menu-image"></div>
-      <h3>14. Garlic Bread</h3>
-      <p>Rs. 100</p>
-      <button class="add-to-cart" onclick="addToCart(14, 'Garlic Bread', 100)">Add to Cart</button>
-    </div>
-
-    <div class="menu-item" data-id="15">
-      <div class="card-img-wrap"><img src="https://staticcookist.akamaized.net/wp-content/uploads/sites/22/2024/09/THUMB-VIDEO-2_rev1-56.jpeg?im=Resize,width=742;" alt="Tiramisu" class="menu-image"></div>
-      <h3>15. Tiramisu</h3>
-      <p>Rs. 180</p>
-      <button class="add-to-cart" onclick="addToCart(15, 'Tiramisu', 180)">Add to Cart</button>
+  <div style="max-width:1200px;margin:24px auto;padding:0 24px;">
+    <div class="cart-info">
+      <h3>🛒 Your Cart</h3>
+      <ul id="cart-items"></ul><span id="cart-total">Total: ₹0</span>
+      <button id="checkout-btn" onclick="window.location.href='checkout.html'">Proceed to Checkout →</button>
     </div>
   </div>
 
-  <!-- Footer Section -->
-  <footer class="main-footer">
-    <p>&copy; 2025 PipaliyaPlates. Eat Fresh, Eat Italian.</p>
-  </footer>
+  <div class="cat-nav">
+    <a href="gujarati.html" class="btn btn-outline btn-sm">🍛 Gujarati</a>
+    <a href="punjabi.html" class="btn btn-outline btn-sm">🌶️ Punjabi</a>
+    <a href="chinese.html" class="btn btn-outline btn-sm">🥢 Chinese</a>
+    <a href="italian.html" class="btn btn-primary btn-sm">🍕 Italian</a>
+    <a href="korean.html" class="btn btn-outline btn-sm">🇰🇷 Korean</a>
+    <a href="southindian.html" class="btn btn-outline btn-sm">🥥 South Indian</a>
+    <a href="mexican.html" class="btn btn-outline btn-sm">🌮 Mexican</a>
+    <a href="french.html" class="btn btn-outline btn-sm">🥐 French</a>
+  </div>
 
+  <div class="cat-page-grid">
+    <div class="cat-menu-item">
+      <div class="card-img-wrap"><img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzzsGVeB9YBgTNR-DEMTErI5l4HLQ1EganKQ&s"
+          alt="Margherita Pizza" /></div>
+      <h3>Margherita Pizza</h3>
+      <p>₹250</p><button class="add-to-cart" onclick="addToCart(1,'Margherita Pizza',250)">+ Add to Cart</button>
+    </div>
+    <div class="cat-menu-item">
+      <div class="card-img-wrap"><img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqduOyL87L4vCupHEUxGgvCHxUj15HHF28Hw&s"
+          alt="Vegetable Lasagna" /></div>
+      <h3>Vegetable Lasagna</h3>
+      <p>₹320</p><button class="add-to-cart" onclick="addToCart(2,'Vegetable Lasagna',320)">+ Add to Cart</button>
+    </div>
+    <div class="cat-menu-item">
+      <div class="card-img-wrap"><img
+          src="https://cdn.shopify.com/s/files/1/0521/1763/5242/files/pasta_alfredo_hero_5_1024x1024.jpg?v=1656573455"
+          alt="Pasta Alfredo" /></div>
+      <h3>Pasta Alfredo</h3>
+      <p>₹210</p><button class="add-to-cart" onclick="addToCart(3,'Pasta Alfredo',210)">+ Add to Cart</button>
+    </div>
+    <div class="cat-menu-item">
+      <div class="card-img-wrap"><img
+          src="https://www.kingarthurbaking.com/sites/default/files/styles/featured_image/public/2025-02/Potato-Gnocchi_2025_Lifestyle_ALT_H_045.jpg?itok=bYYFrg-L"
+          alt="Gnocchi" /></div>
+      <h3>Gnocchi</h3>
+      <p>₹280</p><button class="add-to-cart" onclick="addToCart(4,'Gnocchi',280)">+ Add to Cart</button>
+    </div>
+    <div class="cat-menu-item">
+      <div class="card-img-wrap"><img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5ORDgL3VfBgwJmjO5ifW6WQWSmTM3ldq-NA&s"
+          alt="Vegetable Ravioli" /></div>
+      <h3>Vegetable Ravioli</h3>
+      <p>₹250</p><button class="add-to-cart" onclick="addToCart(5,'Vegetable Ravioli',250)">+ Add to Cart</button>
+    </div>
+    <div class="cat-menu-item">
+      <div class="card-img-wrap"><img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQdJQh8NlPcsW-4txXuQsYoOzW12VK3KmZ7w&s"
+          alt="Penne Arrabbiata" /></div>
+      <h3>Penne Arrabbiata</h3>
+      <p>₹220</p><button class="add-to-cart" onclick="addToCart(6,'Penne Arrabbiata',220)">+ Add to Cart</button>
+    </div>
+    <div class="cat-menu-item">
+      <div class="card-img-wrap"><img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSB7VyKM6dU7R4Yzmo6vnKroJVkL2zdKj9PYQ&s"
+          alt="Mushroom Risotto" /></div>
+      <h3>Mushroom Risotto</h3>
+      <p>₹300</p><button class="add-to-cart" onclick="addToCart(7,'Mushroom Risotto',300)">+ Add to Cart</button>
+    </div>
+    <div class="cat-menu-item">
+      <div class="card-img-wrap"><img
+          src="https://www.floatingkitchen.net/wp-content/uploads/2023/08/Bruschetta-Ricotta-Pesto-1-720x405.jpg"
+          alt="Bruschetta" /></div>
+      <h3>Bruschetta</h3>
+      <p>₹150</p><button class="add-to-cart" onclick="addToCart(8,'Bruschetta',150)">+ Add to Cart</button>
+    </div>
+    <div class="cat-menu-item">
+      <div class="card-img-wrap"><img
+          src="https://www.foodandwine.com/thmb/IuZPWAXBp4YaT9hn1YLHhuijT3k=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/FAW-recipes-big-italian-salad-hero-83e6ea846722478f8feb1eea33158b00.jpg"
+          alt="Italian Salad" /></div>
+      <h3>Italian Salad</h3>
+      <p>₹180</p><button class="add-to-cart" onclick="addToCart(9,'Italian Salad',180)">+ Add to Cart</button>
+    </div>
+    <div class="cat-menu-item">
+      <div class="card-img-wrap"><img
+          src="https://i0.wp.com/smittenkitchen.com/wp-content/uploads/2023/09/simple-eggplant-parmesan-12-scaled.jpg?fit=1200%2C800&ssl=1"
+          alt="Eggplant Parmesan" /></div>
+      <h3>Eggplant Parmesan</h3>
+      <p>₹250</p><button class="add-to-cart" onclick="addToCart(10,'Eggplant Parmesan',250)">+ Add to Cart</button>
+    </div>
+    <div class="cat-menu-item">
+      <div class="card-img-wrap"><img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIQH49waX_-KXhT09Z5dF19nv292n22KbwZQ&s"
+          alt="Vegetable Soup" /></div>
+      <h3>Vegetable Soup</h3>
+      <p>₹150</p><button class="add-to-cart" onclick="addToCart(11,'Vegetable Soup',150)">+ Add to Cart</button>
+    </div>
+    <div class="cat-menu-item">
+      <div class="card-img-wrap"><img
+          src="https://www.seriouseats.com/thmb/5kQKbm3V-zgurSr95PTITqaS_vs=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/classic-caprese-salad-recipe-hero-05_1-9ce2f9b0601c45279e07320f9548fa66.JPG"
+          alt="Caprese Salad" /></div>
+      <h3>Caprese Salad</h3>
+      <p>₹200</p><button class="add-to-cart" onclick="addToCart(12,'Caprese Salad',200)">+ Add to Cart</button>
+    </div>
+    <div class="cat-menu-item">
+      <div class="card-img-wrap"><img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtUOb2wtWThCqigb7WTZYYuWv8CUMk7wcNsg&s"
+          alt="Focaccia Bread" /></div>
+      <h3>Focaccia Bread</h3>
+      <p>₹120</p><button class="add-to-cart" onclick="addToCart(13,'Focaccia Bread',120)">+ Add to Cart</button>
+    </div>
+    <div class="cat-menu-item">
+      <div class="card-img-wrap"><img
+          src="https://ichef.bbci.co.uk/food/ic/food_16x9_1600/recipes/hasselback_garlic_bread_79835_16x9.jpg"
+          alt="Garlic Bread" /></div>
+      <h3>Garlic Bread</h3>
+      <p>₹100</p><button class="add-to-cart" onclick="addToCart(14,'Garlic Bread',100)">+ Add to Cart</button>
+    </div>
+    <div class="cat-menu-item">
+      <div class="card-img-wrap"><img
+          src="https://staticcookist.akamaized.net/wp-content/uploads/sites/22/2024/09/THUMB-VIDEO-2_rev1-56.jpeg"
+          alt="Tiramisu" /></div>
+      <h3>Tiramisu</h3>
+      <p>₹180</p><button class="add-to-cart" onclick="addToCart(15,'Tiramisu',180)">+ Add to Cart</button>
+    </div>
+  </div>
+
+  <footer class="main-footer">
+    <div class="container">
+      <div class="footer-bottom" style="justify-content:center;flex-direction:column;text-align:center;gap:16px;">
+        <span class="footer-brand">PipaliyaPlates 🍕</span>
+        <p>© 2025 PipaliyaPlates. Eat Fresh, Eat Italian.</p>
+        <nav class="footer-nav" style="justify-content:center;"><a href="index.html">Home</a><a
+            href="menu.html">Menu</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav>
+      </div>
+    </div>
+  </footer>
   <script src="script.js"></script>
 </body>
+
 </html>

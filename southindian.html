@@ -1,170 +1,160 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PipaliyaPlates | South Indian Menu</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>South Indian Cuisine | PipaliyaPlates</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
-<body>
 
-  <!-- Header Section -->
-    <header class="main-header">
-    <h1><a href="index.html">PipaliyaPlates 🍕</a></h1>
-    <nav>
-      <a href="index.html" class="">Home</a>
-      <a href="menu.html" class="active">Menu</a>
-      <a href="about.html" class="">About</a>
-      <a href="contact.html" class="">Contact</a>
-      <a href="checkout.html" class="">Cart</a>
-      <a href="profile.html" class="profile-link ">👤</a>
-    </nav>
+<body class="has-navbar">
+  <header class="main-header" id="main-header">
+    <a href="index.html" class="header-logo">
+      <div class="logo-icon">🍕</div><span class="logo-text">Pipaliya<span>Plates</span></span>
+    </a>
+    <nav><a href="index.html">Home</a><a href="menu.html" class="active">Menu</a><a href="about.html">About</a><a
+        href="contact.html">Contact</a><a href="checkout.html" class="nav-cart">🛒 Cart<span
+          class="cart-badge">0</span></a><a href="profile.html" class="profile-link">👤</a></nav>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
   </header>
+  <div class="mobile-nav" id="mobile-nav"><a href="index.html">Home</a><a href="menu.html" class="active">Menu</a><a
+      href="about.html">About</a><a href="contact.html">Contact</a><a href="checkout.html">🛒 Cart</a><a
+      href="profile.html">👤 Profile</a></div>
 
-  <!-- Cart Info Section -->
-  <section class="cart-info">
-    <h3>Your Cart</h3>
-    <ul id="cart-items"></ul>
-    <p id="cart-total">Total: Rs. 0</p>
-    <button id="checkout-btn" onclick="window.location.href='checkout.html'">Proceed to Checkout</button>
-  </section> 
-
-   <!-- Page Navigation -->
-<div class="page-nav">
-  <span>Categories:</span>
-  <a href="gujarati.html">1</a>
-  <a href="punjabi.html">2</a>
-  <a href="chinese.html">3</a>
-  <a href="italian.html">4</a>
-  <a href="korean.html">5</a>
-  <a href="southindian.html">6</a>
-  <a href="mexican.html">7</a>
-  <a href="french.html">8</a>
-</div>
-
-<div class="nav-buttons">
-  <a href="korean.html" class="back-btn">← Back</a>
-  <a href="mexican.html" class="next-btn">Next →</a>
-</div>
-
-
-  <!-- Menu Section -->
-  <section class="menu-list">
-    <h2>South Indian Vegetarian Specialties</h2>
-  </section>
-
-  <div class="menu-grid">
-    <div class="menu-item" data-id="1">
-      <div class="card-img-wrap"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQACh1yWbIwNiWJOZ-8lkt9oGkf5cdMK4DV8Q&s" alt="Dosa" class="menu-image"></div>
-      <h3>1. Dosa</h3>
-      <p>Rs. 120</p>
-      <button class="add-to-cart" onclick="addToCart(1, 'Dosa', 120)">Add to Cart</button>
+  <div class="page-hero">
+    <p class="badge badge-primary" style="margin-bottom:16px;">🥥 Tastes of the South</p>
+    <h1>South Indian <span style="color:var(--primary)">Cuisine</span></h1>
+    <p>Crispy dosas, fluffy idlis, aromatic sambar — authentic South Indian cooking!</p>
+  </div>
+  <div style="max-width:1200px;margin:24px auto;padding:0 24px;">
+    <div class="cart-info">
+      <h3>🛒 Your Cart</h3>
+      <ul id="cart-items"></ul><span id="cart-total">Total: ₹0</span><button id="checkout-btn"
+        onclick="window.location.href='checkout.html'">Proceed to Checkout →</button>
     </div>
-
-    <div class="menu-item" data-id="2">
-      <div class="card-img-wrap"><img src="https://yummy-valley.com/wp-content/uploads/2024/01/millet-idli.webp" alt="Idli" class="menu-image"></div>
-      <h3>2. Idli</h3>
-      <p>Rs. 100</p>
-      <button class="add-to-cart" onclick="addToCart(2, 'Idli', 100)">Add to Cart</button>
+  </div>
+  <div class="cat-nav">
+    <a href="gujarati.html" class="btn btn-outline btn-sm">🍛 Gujarati</a><a href="punjabi.html"
+      class="btn btn-outline btn-sm">🌶️ Punjabi</a><a href="chinese.html" class="btn btn-outline btn-sm">🥢
+      Chinese</a><a href="italian.html" class="btn btn-outline btn-sm">🍕 Italian</a><a href="korean.html"
+      class="btn btn-outline btn-sm">🇰🇷 Korean</a><a href="southindian.html" class="btn btn-primary btn-sm">🥥 South
+      Indian</a><a href="mexican.html" class="btn btn-outline btn-sm">🌮 Mexican</a><a href="french.html"
+      class="btn btn-outline btn-sm">🥐 French</a>
+  </div>
+  <div class="cat-page-grid">
+    <div class="cat-menu-item">
+      <div class="card-img-wrap"><img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQACh1yWbIwNiWJOZ-8lkt9oGkf5cdMK4DV8Q&s"
+          alt="Dosa" /></div>
+      <h3>Dosa</h3>
+      <p>₹120</p><button class="add-to-cart" onclick="addToCart(1,'Dosa',120)">+ Add to Cart</button>
     </div>
-
-    <div class="menu-item" data-id="3">
-      <div class="card-img-wrap"><img src="https://aahaaramonline.com/wp-content/uploads/2012/10/Coconut_Rice_Thengai_Sadam_Kobbari_Annam_Tenginakayi_Anna.jpg" alt="VadaCoconut Rice" class="menu-image"></div>
-      <h3>3. Coconut Rice</h3>
-      <p>Rs. 120</p>
-      <button class="add-to-cart" onclick="addToCart(3, 'Coconut Rice', 120)">Add to Cart</button>
+    <div class="cat-menu-item">
+      <div class="card-img-wrap"><img src="https://yummy-valley.com/wp-content/uploads/2024/01/millet-idli.webp"
+          alt="Idli" /></div>
+      <h3>Idli</h3>
+      <p>₹100</p><button class="add-to-cart" onclick="addToCart(2,'Idli',100)">+ Add to Cart</button>
     </div>
-
-    <div class="menu-item" data-id="4">
-      <div class="card-img-wrap"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnKhCM7ASZHUTnLmduwvl371zKWhLwTCphew&s" alt="Uttapam" class="menu-image"></div>
-      <h3>4. Uttapam</h3>
-      <p>Rs. 150</p>
-      <button class="add-to-cart" onclick="addToCart(4, 'Uttapam', 150)">Add to Cart</button>
+    <div class="cat-menu-item">
+      <div class="card-img-wrap"><img
+          src="https://aahaaramonline.com/wp-content/uploads/2012/10/Coconut_Rice_Thengai_Sadam_Kobbari_Annam_Tenginakayi_Anna.jpg"
+          alt="Coconut Rice" /></div>
+      <h3>Coconut Rice</h3>
+      <p>₹120</p><button class="add-to-cart" onclick="addToCart(3,'Coconut Rice',120)">+ Add to Cart</button>
     </div>
-
-    <div class="menu-item" data-id="5">
-      <div class="card-img-wrap"><img src="https://ranveerbrar.com/wp-content/uploads/2021/02/Masala-dosa-scaled.jpg" alt="Masala Dosa" class="menu-image"></div>
-      <h3>5. Masala Dosa</h3>
-      <p>Rs. 130</p>
-      <button class="add-to-cart" onclick="addToCart(5, 'Masala Dosa', 130)">Add to Cart</button>
+    <div class="cat-menu-item">
+      <div class="card-img-wrap"><img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnKhCM7ASZHUTnLmduwvl371zKWhLwTCphew&s"
+          alt="Uttapam" /></div>
+      <h3>Uttapam</h3>
+      <p>₹150</p><button class="add-to-cart" onclick="addToCart(4,'Uttapam',150)">+ Add to Cart</button>
     </div>
-
-    <div class="menu-item" data-id="6">
-      <div class="card-img-wrap"><img src="https://en-media.thebetterindia.com/uploads/2025/02/sambhar-1740568837.jpg" alt="Sambar" class="menu-image"></div>
-      <h3>6. Sambar</h3>
-      <p>Rs. 80</p>
-      <button class="add-to-cart" onclick="addToCart(6, 'Sambar', 80)">Add to Cart</button>
+    <div class="cat-menu-item">
+      <div class="card-img-wrap"><img src="https://ranveerbrar.com/wp-content/uploads/2021/02/Masala-dosa-scaled.jpg"
+          alt="Masala Dosa" /></div>
+      <h3>Masala Dosa</h3>
+      <p>₹130</p><button class="add-to-cart" onclick="addToCart(5,'Masala Dosa',130)">+ Add to Cart</button>
     </div>
-
-    <div class="menu-item" data-id="7">
-      <div class="card-img-wrap"><img src="https://aahaaramonline.com/wp-content/uploads/2023/12/Sathukudi_Rasam_Sweet_Lime_Rasam_Mosambi_Rasam.jpg" alt="Rasam" class="menu-image"></div>
-      <h3>7. Rasam</h3>
-      <p>Rs. 70</p>
-      <button class="add-to-cart" onclick="addToCart(7, 'Rasam', 70)">Add to Cart</button>
+    <div class="cat-menu-item">
+      <div class="card-img-wrap"><img src="https://en-media.thebetterindia.com/uploads/2025/02/sambhar-1740568837.jpg"
+          alt="Sambar" /></div>
+      <h3>Sambar</h3>
+      <p>₹80</p><button class="add-to-cart" onclick="addToCart(6,'Sambar',80)">+ Add to Cart</button>
     </div>
-
-    <div class="menu-item" data-id="8">
-      <div class="card-img-wrap"><img src="https://www.chefkunalkapur.com/wp-content/uploads/2023/05/DSC09411-scaled.jpg?v=1684031938" alt="Curd Rice" class="menu-image"></div>
-      <h3>8. Curd Rice</h3>
-      <p>Rs. 110</p>
-      <button class="add-to-cart" onclick="addToCart(8, 'Curd Rice', 110)">Add to Cart</button>
+    <div class="cat-menu-item">
+      <div class="card-img-wrap"><img
+          src="https://aahaaramonline.com/wp-content/uploads/2023/12/Sathukudi_Rasam_Sweet_Lime_Rasam_Mosambi_Rasam.jpg"
+          alt="Rasam" /></div>
+      <h3>Rasam</h3>
+      <p>₹70</p><button class="add-to-cart" onclick="addToCart(7,'Rasam',70)">+ Add to Cart</button>
     </div>
-
-    <div class="menu-item" data-id="9">
-      <div class="card-img-wrap"><img src="https://www.indianhealthyrecipes.com/wp-content/uploads/2021/01/pongal-ven-pongal.jpg" alt="Pongal" class="menu-image"></div>
-      <h3>9. Pongal</h3>
-      <p>Rs. 120</p>
-      <button class="add-to-cart" onclick="addToCart(9, 'Pongal', 120)">Add to Cart</button>
+    <div class="cat-menu-item">
+      <div class="card-img-wrap"><img
+          src="https://www.chefkunalkapur.com/wp-content/uploads/2023/05/DSC09411-scaled.jpg?v=1684031938"
+          alt="Curd Rice" /></div>
+      <h3>Curd Rice</h3>
+      <p>₹110</p><button class="add-to-cart" onclick="addToCart(8,'Curd Rice',110)">+ Add to Cart</button>
     </div>
-
-    <div class="menu-item" data-id="10">
-      <div class="card-img-wrap"><img src="https://c.ndtvimg.com/2023-09/u113o4r_medu-vada_625x300_06_September_23.jpg" alt="Medu Vada" class="menu-image"></div>
-      <h3>10. Medu Vada</h3>
-      <p>Rs. 100</p>
-      <button class="add-to-cart" onclick="addToCart(10, 'Medu Vada', 100)">Add to Cart</button>
+    <div class="cat-menu-item">
+      <div class="card-img-wrap"><img
+          src="https://www.indianhealthyrecipes.com/wp-content/uploads/2021/01/pongal-ven-pongal.jpg" alt="Pongal" />
+      </div>
+      <h3>Pongal</h3>
+      <p>₹120</p><button class="add-to-cart" onclick="addToCart(9,'Pongal',120)">+ Add to Cart</button>
     </div>
-
-    <div class="menu-item" data-id="11">
-      <div class="card-img-wrap"><img src="https://manjilas.com/wp-content/uploads/2021/03/Onion-Coriander-Podi-Dosa.jpg" alt="Podiy Dosa" class="menu-image"></div>
-      <h3>11. Podiy Dosa</h3>
-      <p>Rs. 140</p>
-      <button class="add-to-cart" onclick="addToCart(11, 'Podiy Dosa', 140)">Add to Cart</button>
+    <div class="cat-menu-item">
+      <div class="card-img-wrap"><img src="https://c.ndtvimg.com/2023-09/u113o4r_medu-vada_625x300_06_September_23.jpg"
+          alt="Medu Vada" /></div>
+      <h3>Medu Vada</h3>
+      <p>₹100</p><button class="add-to-cart" onclick="addToCart(10,'Medu Vada',100)">+ Add to Cart</button>
     </div>
-
-    <div class="menu-item" data-id="12">
-      <div class="card-img-wrap"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYGDTiCrfu5FB9j-6BR_40l7DE0RKVJp1tAw&s" alt="Appam" class="menu-image"></div>
-      <h3>12. Appam</h3>
-      <p>Rs. 160</p>
-      <button class="add-to-cart" onclick="addToCart(12, 'Appam', 160)">Add to Cart</button>
+    <div class="cat-menu-item">
+      <div class="card-img-wrap"><img
+          src="https://manjilas.com/wp-content/uploads/2021/03/Onion-Coriander-Podi-Dosa.jpg" alt="Podi Dosa" /></div>
+      <h3>Podi Dosa</h3>
+      <p>₹140</p><button class="add-to-cart" onclick="addToCart(11,'Podiy Dosa',140)">+ Add to Cart</button>
     </div>
-
-    <div class="menu-item" data-id="13">
-      <div class="card-img-wrap"><img src="https://www.tastycircle.com/wp-content/uploads/2014/06/kerala-parotta.jpg" alt="Kerala Paratha" class="menu-image"></div>
-      <h3>13. Kerala Paratha</h3>
-      <p>Rs. 120</p>
-      <button class="add-to-cart" onclick="addToCart(13, 'Kerala Paratha', 120)">Add to Cart</button>
+    <div class="cat-menu-item">
+      <div class="card-img-wrap"><img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYGDTiCrfu5FB9j-6BR_40l7DE0RKVJp1tAw&s"
+          alt="Appam" /></div>
+      <h3>Appam</h3>
+      <p>₹160</p><button class="add-to-cart" onclick="addToCart(12,'Appam',160)">+ Add to Cart</button>
     </div>
-
-    <div class="menu-item" data-id="14">
-      <div class="card-img-wrap"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSu50X8MAijCzQRHAcMFACBJGDnlQaryAw8lQ&s" alt="Puri Bhaji" class="menu-image"></div>
-      <h3>14. Puri Bhaji</h3>
-      <p>Rs. 130</p>
-      <button class="add-to-cart" onclick="addToCart(14, 'Puri Bhaji', 130)">Add to Cart</button>
+    <div class="cat-menu-item">
+      <div class="card-img-wrap"><img src="https://www.tastycircle.com/wp-content/uploads/2014/06/kerala-parotta.jpg"
+          alt="Kerala Paratha" /></div>
+      <h3>Kerala Paratha</h3>
+      <p>₹120</p><button class="add-to-cart" onclick="addToCart(13,'Kerala Paratha',120)">+ Add to Cart</button>
     </div>
-
-    <div class="menu-item" data-id="15">
-      <div class="card-img-wrap"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6J-IWDVWgKhDd8mD_zfa4YSvs3m94PFWtIA&s" alt="Bisi Bela Bath" class="menu-image"></div>
-      <h3>15. Bisi Bela Bath</h3>
-      <p>Rs. 150</p>
-      <button class="add-to-cart" onclick="addToCart(15, 'Bisi Bela Bath', 150)">Add to Cart</button>
+    <div class="cat-menu-item">
+      <div class="card-img-wrap"><img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSu50X8MAijCzQRHAcMFACBJGDnlQaryAw8lQ&s"
+          alt="Puri Bhaji" /></div>
+      <h3>Puri Bhaji</h3>
+      <p>₹130</p><button class="add-to-cart" onclick="addToCart(14,'Puri Bhaji',130)">+ Add to Cart</button>
+    </div>
+    <div class="cat-menu-item">
+      <div class="card-img-wrap"><img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6J-IWDVWgKhDd8mD_zfa4YSvs3m94PFWtIA&s"
+          alt="Bisi Bela Bath" /></div>
+      <h3>Bisi Bela Bath</h3>
+      <p>₹150</p><button class="add-to-cart" onclick="addToCart(15,'Bisi Bela Bath',150)">+ Add to Cart</button>
     </div>
   </div>
 
-  <!-- Footer Section -->
   <footer class="main-footer">
-    <p>&copy; 2025 PipaliyaPlates. Taste the South Indian Tradition.</p>
+    <div class="container">
+      <div class="footer-bottom" style="justify-content:center;flex-direction:column;text-align:center;gap:16px;"><span
+          class="footer-brand">PipaliyaPlates 🍕</span>
+        <p>© 2025 PipaliyaPlates. Taste the South Indian Tradition.</p>
+        <nav class="footer-nav" style="justify-content:center;"><a href="index.html">Home</a><a
+            href="menu.html">Menu</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav>
+      </div>
+    </div>
   </footer>
-
   <script src="script.js"></script>
 </body>
+
 </html>

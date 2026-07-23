@@ -1,246 +1,843 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PipaliyaPlates | Menu</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Menu | PipaliyaPlates — Order Your Favourites</title>
+  <meta name="description"
+    content="Order from our full menu of 25+ dishes. Starters, mains, desserts, drinks — all delivered in 30 minutes." />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Menu page specific */
+    .menu-page-layout {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 0;
+      max-width: 1400px;
+      margin: 0 auto;
+      min-height: calc(100vh - var(--nav-h));
+    }
+
+    .menu-main {
+      padding: 40px 32px 80px;
+    }
+
+    .menu-sidebar {
+      padding: 40px 24px 80px;
+      border-left: 1px solid var(--border);
+      background: var(--bg-surface);
+      position: sticky;
+      top: var(--nav-h);
+      height: calc(100vh - var(--nav-h));
+      overflow-y: auto;
+    }
+
+    .menu-filter-bar {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+      align-items: center;
+    }
+
+    .filter-btn {
+      padding: 8px 20px;
+      border-radius: var(--r-pill);
+      border: 1.5px solid var(--border-bright);
+      background: var(--bg-card);
+      color: var(--text-secondary);
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--t-fast);
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active {
+      border-color: var(--primary);
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .menu-search {
+      flex: 1;
+      min-width: 200px;
+      max-width: 320px;
+      position: relative;
+    }
+
+    .menu-search input {
+      width: 100%;
+      padding: 10px 16px 10px 40px;
+      background: var(--bg-card);
+      border: 1.5px solid var(--border-bright);
+      border-radius: var(--r-pill);
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      font-size: 0.88rem;
+      outline: none;
+      transition: border-color var(--t-fast);
+    }
+
+    .menu-search input:focus {
+      border-color: var(--primary);
+    }
+
+    .menu-search input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .menu-search::before {
+      content: '🔍';
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.9rem;
+      pointer-events: none;
+    }
+
+    .section-label {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin: 32px 0 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--primary-light);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .menu-items-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .m-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--r-xl);
+      overflow: hidden;
+      transition: all var(--t-normal);
+    }
+
+    .m-item:hover {
+      border-color: var(--border-primary);
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-glow);
+    }
+
+    .m-item.hidden {
+      display: none;
+    }
+
+    .m-img {
+      height: 160px;
+      overflow: hidden;
+    }
+
+    .m-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform var(--t-slow);
+    }
+
+    .m-item:hover .m-img img {
+      transform: scale(1.08);
+    }
+
+    .m-body {
+      padding: 14px 16px;
+    }
+
+    .m-body h3 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+
+    .m-body .m-desc {
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      margin-bottom: 10px;
+    }
+
+    .m-body .m-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .m-body .m-price {
+      font-family: var(--font-heading);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .m-body .m-qty-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .m-footer {
+      padding: 12px 16px;
+      border-top: 1px solid var(--border);
+    }
+
+    .m-footer .add-btn {
+      width: 100%;
+      padding: 9px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: #fff;
+      border: none;
+      border-radius: var(--r-pill);
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--t-fast);
+    }
+
+    .m-footer .add-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255, 107, 53, .4);
+    }
+
+    /* Sidebar cart */
+    .sidebar-cart-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .sidebar-cart-title .cart-count-badge {
+      background: var(--primary);
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: var(--r-pill);
+    }
+
+    .sidebar-cart-items {
+      min-height: 80px;
+      margin-bottom: 20px;
+    }
+
+    .sidebar-cart-items .empty-msg {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      padding: 24px 0;
+    }
+
+    .sidebar-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.85rem;
+      gap: 8px;
+    }
+
+    .sidebar-item:last-child {
+      border-bottom: none;
+    }
+
+    .sidebar-item .s-name {
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .sidebar-item .s-qty {
+      color: var(--text-muted);
+      font-size: 0.75rem;
+    }
+
+    .sidebar-item .s-price {
+      color: var(--primary);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .sidebar-total {
+      font-family: var(--font-heading);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      display: flex;
+      justify-content: space-between;
+      padding-top: 16px;
+      border-top: 2px solid var(--primary-light);
+    }
+
+    .no-results {
+      grid-column: 1/-1;
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text-muted);
+    }
+
+    .no-results .icon {
+      font-size: 3rem;
+      display: block;
+      margin-bottom: 12px;
+    }
+
+    @media (max-width: 900px) {
+      .menu-page-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .menu-sidebar {
+        position: static;
+        height: auto;
+        border-left: none;
+        border-top: 1px solid var(--border);
+        order: -1;
+      }
+    }
+  </style>
 </head>
-<body>
-  <!-- Header Section -->
-    <header class="main-header">
-    <h1><a href="index.html">PipaliyaPlates 🍕</a></h1>
+
+<body class="has-navbar">
+
+  <!-- HEADER -->
+  <header class="main-header" id="main-header">
+    <a href="index.html" class="header-logo">
+      <div class="logo-icon">🍕</div>
+      <span class="logo-text">Pipaliya<span>Plates</span></span>
+    </a>
     <nav>
-      <a href="index.html" class="">Home</a>
+      <a href="index.html">Home</a>
       <a href="menu.html" class="active">Menu</a>
-      <a href="about.html" class="">About</a>
-      <a href="contact.html" class="">Contact</a>
-      <a href="checkout.html" class="">Cart</a>
-      <a href="profile.html" class="profile-link ">👤</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="checkout.html" class="nav-cart">
+        🛒 Cart
+        <span class="cart-badge" id="cart-badge-main">0</span>
+      </a>
+      <a href="profile.html" class="profile-link" title="Profile">👤</a>
     </nav>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
   </header>
 
-  <!-- Cart Info Section -->
-  <section class="cart-info">
-    <h3>Your Cart</h3>
-    <ul id="cart-items">
-      <!-- Items will appear here dynamically -->
-    </ul>
-    <p id="cart-total">Total: Rs. 0</p>
-    <button id="checkout-btn" onclick="window.location.href='checkout.html'">Proceed to Checkout</button>
-  </section>
+  <div class="mobile-nav" id="mobile-nav">
+    <a href="index.html">Home</a>
+    <a href="menu.html" class="active">Menu</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="checkout.html">🛒 Cart</a>
+    <a href="profile.html">👤 Profile</a>
+  </div>
 
-  <!-- Menu Section -->
-  <section class="menu-list">
-    <h2>Delicious Dishes</h2>
-    <!-- Your dishes go here -->
-  </section>
+  <div class="menu-page-layout">
 
-  <div class="menu-grid">
-    <div class="menu-item" data-id="25">
-      <div class="card-img-wrap"><img src="https://static.toiimg.com/thumb/61050397.cms?width=1200&height=900" alt="Samosa" class="menu-image"></div>
-      <h3>Samosa</h3>
-      <p>Rs. 40 </p>
-      <p>2 Piece</p>
-      <button class="add-to-cart" onclick="addToCart(25, 'Samosa', 40)">Add to Cart</button>
-    </div>    
-    <div class="menu-item" data-id="10">
-      <div class="card-img-wrap"><img src="https://www.awesomecuisine.com/wp-content/uploads/2007/11/Pani-Puri-500x375.jpg" alt="Pani Puri" class="menu-image"></div>
-      <h3>Pani Puri</h3>
-      <p>Rs. 50</p>
-      <p>10 Balls</p>
-      <button class="add-to-cart" onclick="addToCart(10, 'Pani Puri', 50)">Add to Cart</button>
-    </div> 
-    <div class="menu-item" data-id="9">
-      <div class="card-img-wrap"><img src="https://www.simplyrecipes.com/thmb/M3LEdeKC37xv52FUmIBFJVXKBFY=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Simply-Recipes-Mango-Lassi-LEAD-13-73719759cc3f4a2ca7fe8be72baaeaab.jpg" alt="Mango Lassi" class="menu-image"></div>
-      <h3>Mango Lassi</h3>
-      <p>Rs. 60</p>
-      <p>1 glass</p>
-      <button class="add-to-cart" onclick="addToCart(9, 'Mango Lassi', 60)">Add to Cart</button>
-    </div>
-    <div class="menu-item" data-id="19">
-      <div class="card-img-wrap"><img src="https://www.allrecipes.com/thmb/RdyL1EgIB0Qq_fr5HjdsAmcpMlU=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/228553-moist-chocolate-muffins-DDMFS-4x3-a9f73a46938547c99d921613dc167741.jpg" alt="Chocolate Muffin" class="menu-image"></div>
-      <h3>Chocolate Muffin</h3>
-      <p>Rs. 60</p>
-      <p>4 Piece</p>
-      <button class="add-to-cart" onclick="addToCart(19, 'Chocolate Muffin', 60)">Add to Cart</button>
-    </div> 
-    <div class="menu-item" data-id="17">
-      <div class="card-img-wrap"><img src="https://www.jagranimages.com/images/newimg/khanakhazana/02_2024-french_fries_recipe.webp" alt="French Fries" class="menu-image"></div>
-      <h3>French Fries</h3>
-      <p>Rs. 70</p>
-      <p>1 plate</p>
-      <button class="add-to-cart" onclick="addToCart(17, 'French Fries', 70)">Add to Cart</button>
-    </div>  
-    <div class="menu-item" data-id="8">
-      <div class="card-img-wrap"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpridNzzU09HIIGpVPQ9XhWqay-q7NrMj1yg&s" alt="Gulab Jamun" class="menu-image"></div>
-      <h3>Gulab Jamun</h3>
-      <p>Rs. 80</p>
-      <p>6 piece</p>
-      <button class="add-to-cart" onclick="addToCart(8, 'Gulab Jamun', 80)">Add to Cart</button>
-    </div>
-    <div class="menu-item" data-id="16">
-      <div class="card-img-wrap"><img src="https://www.maggi.in/sites/default/files/srh_recipes/9cc96dc3b0168582c17fe2d98218026a.jpg" alt="Aloo Paratha" class="menu-image"></div>
-      <h3>Aloo Paratha</h3>
-      <p>Rs. 90</p>
-      <p>3 piece</p>
-      <button class="add-to-cart" onclick="addToCart(16, 'Aloo Paratha', 90)">Add to Cart</button>
-    </div>
-    <div class="menu-item" data-id="20">
-      <div class="card-img-wrap"><img src="https://lorcoffee.com/cdn/shop/articles/Dark-Chocolate-Ice-Coffee-with-Provocateur-exc.jpg?v=1675806078" alt="Cold Coffee" class="menu-image"></div>
-      <h3>Cold Coffee</h3>
-      <p>Rs. 90</p>
-      <p>1 cup</p>
-      <button class="add-to-cart" onclick="addToCart(20, 'Cold Coffee', 90)">Add to Cart</button>
-    </div>
-    <div class="menu-item" data-id="24">
-      <div class="card-img-wrap"><img src="https://img-global.cpcdn.com/recipes/2ece5f8426d2b1c2/680x482cq70/rabdi-rasgulla-recipe-main-photo.jpg" alt="Rasgulla" class="menu-image"></div>
-      <h3>Rasgulla</h3>
-      <p>Rs. 90</p>
-      <p>6 piece</p>
-      <button class="add-to-cart" onclick="addToCart(24, 'Rasgulla', 90)">Add to Cart</button>
-    </div>  
-    <div class="menu-item" data-id="5">
-      <div class="card-img-wrap"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQACh1yWbIwNiWJOZ-8lkt9oGkf5cdMK4DV8Q&s" alt="Masala Dosa" class="menu-image"></div>
-      <h3>Masala Dosa</h3>
-      <p>Rs. 100</p>
-      <p>2 paper</p>
-      <p>chutney + sambhar</p>
-      <button class="add-to-cart" onclick="addToCart(5, 'Masala Dosa', 100)">Add to Cart</button>
-    </div>
-    <div class="menu-item" data-id="14">
-      <div class="card-img-wrap"><img src="https://www.simplyrecipes.com/thmb/0NrKQlJ691l6L9tZXpL06uOuWis=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Simply-Recipes-Easy-Greek-Salad-LEAD-2-4601eff771fd4de38f9722e8cafc897a.jpg" alt="Greek Salad" class="menu-image"></div>
-      <h3>Greek Salad</h3>
-      <p>Rs. 110</p>
-      <p>1 plate</p>
-      <button class="add-to-cart" onclick="addToCart(14, 'Greek Salad', 110)">Add to Cart</button>
-    </div> 
-    <div class="menu-item" data-id="21">
-      <div class="card-img-wrap"><img src="https://californiaavocado.com/wp-content/uploads/2023/04/AvoBaconGrilledCheese_0011-scaled-e1682914545487.jpg" alt="Grilled Cheese Sandwich" class="menu-image"></div>
-      <h3>Grilled Cheese Sandwich</h3>
-      <p>Rs. 110</p>
-      <p>2 piece</p>
-      <button class="add-to-cart" onclick="addToCart(21, 'Grilled Cheese Sandwich', 110)">Add to Cart</button>
-    </div>  
-    <div class="menu-item" data-id="1">
-      <div class="card-img-wrap"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6d6HsMbInzzAryQqK9xwyP6wYepKKx7pS1g&s" alt="Gujarati Thali" class="menu-image"></div>
-      <h3>Gujarati Thali</h3>
-      <p>Rs. 120</p>
-      <p>full dish </p>
-      <button class="add-to-cart" onclick="addToCart(1, 'Gujarati Thali', 120)">Add to Cart</button>
-    </div> 
-    <div class="menu-item" data-id="12">
-      <div class="card-img-wrap"><img src="https://thumbs.dreamstime.com/b/burger-french-fries-basket-tartan-tablecloth-ketchup-mustard-bottle-background-close-up-135319836.jpg" alt="Cheese Burger" class="menu-image"></div>
-      <h3>Cheese Burger</h3>
-      <p>Rs. 130</p>
-      <p>1 piece </p>
-      <p>cold drink + French Fries</p>
-      <button class="add-to-cart" onclick="addToCart(12, 'Cheese Burger', 130)">Add to Cart</button>
-    </div> 
-    <div class="menu-item" data-id="18">
-      <div class="card-img-wrap"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPyUSqrcFI8HMayp8V6IhE4FM9pun9HA_FwA&s" alt="Falafel Wrap" class="menu-image"></div>
-      <h3>Falafel Wrap</h3>
-      <p>Rs. 130</p>
-      <p>2 piece</p>
-      <button class="add-to-cart" onclick="addToCart(18, 'Falafel Wrap', 130)">Add to Cart</button>
-    </div>  
-    <div class="menu-item" data-id="3">
-      <div class="card-img-wrap"><img src="https://www.mygingergarlickitchen.com/wp-content/rich-markup-images/4x3/4x3-vegetable-hakka-noodles.jpg" alt="Veg Hakka Noodles" class="menu-image"></div>
-      <h3>Veg Hakka Noodles</h3>
-      <p>Rs. 140</p>
-      <p>1 Bowl</p>
-      <button class="add-to-cart" onclick="addToCart(3, 'Veg Hakka Noodles', 140)">Add to Cart</button>
-    </div> 
-    <div class="menu-item" data-id="7">
-      <div class="card-img-wrap"><img src="https://www.thespruceeats.com/thmb/ereeBcFkDEbDT2VSlDe34sqXO_8=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/chicken-tinga-tinga-de-pollo-4773239-Hero_01-1bd1d960c02a4fdb812323b8c60fd55b.jpg" alt="Mexican Tacos" class="menu-image"></div>
-      <h3>Mexican Tacos</h3>
-      <p>Rs. 150</p>
-      <p>4 piece</p>
-      <button class="add-to-cart" onclick="addToCart(7, 'Mexican Tacos', 150)">Add to Cart</button>
-    </div>  
-    <div class="menu-item" data-id="23">
-      <div class="card-img-wrap"><img src="https://img-global.cpcdn.com/recipes/90da6123069afe1e/680x482cq70/gujarati-undhiyu-recipe-main-photo.jpg" alt="Undhiyu" class="menu-image"></div>
-      <h3>Undhiyu</h3>
-      <p>Rs. 150</p>
-      <p>chass included</p>
-      <button class="add-to-cart" onclick="addToCart(23, 'Undhiyu', 150)">Add to Cart</button>
-    </div> 
-    <div class="menu-item" data-id="2">
-      <div class="card-img-wrap"><img src="https://vegecravings.com/wp-content/uploads/2017/04/paneer-butter-masala-recipe-step-by-step-instructions.jpg" alt="Paneer Butter Masala" class="menu-image"></div>
-      <h3>Paneer Butter Masala</h3>
-      <p>Rs. 160</p>
-      <p>Paratha + Lassi</p>    
-      <button class="add-to-cart" onclick="addToCart(2, 'Paneer Butter Masala', 160)">Add to Cart</button>
-    </div> 
-    <div class="menu-item" data-id="15">
-      <div class="card-img-wrap"><img src="https://static.toiimg.com/thumb/msid-112019658,width-1280,height-720,resizemode-4/112019658.jpg" alt="ice-cream" class="menu-image"></div>
-      <h3>ice-cream</h3>
-      <p>Rs. 160</p>
-      <p>1 Bowl</p>
-      <button class="add-to-cart" onclick="addToCart(15, 'ice-cream', 160)">Add to Cart</button>
-    </div>
-    <div class="menu-item" data-id="6">
-      <div class="card-img-wrap"><img src="https://www.australianeggs.org.au/assets/Uploads/Egg-fried-rice-2.jpg" alt="Fried Rice" class="menu-image"></div>
-      <h3>Fried Rice</h3>
-      <p>Rs. 170</p>
-      <p>1 plate</p>
-      <button class="add-to-cart" onclick="addToCart(6, 'Fried Rice', 170)">Add to Cart</button>
-    </div> 
-    <div class="menu-item" data-id="4">
-      <div class="card-img-wrap"><img src="https://www.yumcurry.com/wp-content/uploads/2020/06/pizza-margherita-recipe-480x270.jpg" alt="Margherita Pizza" class="menu-image"></div>
-      <h3>Margherita Pizza</h3>
-      <p>Rs. 180</p>
-      <p>cold drink Free</p>
-      <button class="add-to-cart" onclick="addToCart(4, 'Margherita Pizza', 180)">Add to Cart</button>
-    </div>
-    <div class="menu-item" data-id="13">
-      <div class="card-img-wrap"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQaeBlIywcv4RMaVlvzAk-ygkpjyiX0juwM6Q&s" alt="Hyderabadi veg Dum Biryani" class="menu-image"></div>
-      <h3>Hyderabadi veg Dum Biryani</h3>
-      <p>Rs. 190</p>
-      <p>1 Bowl</p>
-      <button class="add-to-cart" onclick="addToCart(13, 'Hyderabadi veg Dum Biryani', 190)">Add to Cart</button>
-    </div>  
-    <div class="menu-item" data-id="22">
-      <div class="card-img-wrap"><img src="https://vaya.in/recipes/wp-content/uploads/2018/12/Authentic-Thai-Green-Curry.jpg" alt="Thai Green Curry" class="menu-image"></div>
-      <h3>Thai Green Curry</h3>
-      <p>Rs. 200</p>
-      <p>1 Bowl</p>
-      <button class="add-to-cart" onclick="addToCart(22, 'Thai Green Curry', 200)">Add to Cart</button>
-    </div> 
-    <div class="menu-item" data-id="11">
-      <div class="card-img-wrap"><img src="https://i0.wp.com/s.lightorangebean.com/media/20240914151841/Veggie-Sushi-Rolls_-done.png?resize=480%2C270&quality=80&ssl=1" alt="veg Sushi Roll" class="menu-image"></div>
-      <h3>veg Sushi Roll</h3>
-      <p>Rs. 220</p>
-      <p>8 piece</p>
-      <button class="add-to-cart" onclick="addToCart(11, 'veg Sushi Roll', 220)">Add to Cart</button>
+    <!-- MAIN MENU CONTENT -->
+    <div class="menu-main">
+      <h1 style="font-size:clamp(1.8rem,3vw,2.8rem);margin-bottom:6px;">Our <span style="color:var(--primary)">Full
+          Menu</span></h1>
+      <p style="color:var(--text-secondary);margin-bottom:28px;">25+ freshly prepared dishes — add to cart and checkout
+        in minutes!</p>
+
+      <!-- Filter Bar -->
+      <div class="menu-filter-bar">
+        <div class="menu-search">
+          <input type="text" id="search-input" placeholder="Search dishes..." oninput="filterMenu()" />
+        </div>
+        <button class="filter-btn active" data-cat="all" onclick="setFilter(this)">All</button>
+        <button class="filter-btn" data-cat="starters" onclick="setFilter(this)">🥗 Starters</button>
+        <button class="filter-btn" data-cat="mains" onclick="setFilter(this)">🍛 Mains</button>
+        <button class="filter-btn" data-cat="desserts" onclick="setFilter(this)">🍮 Desserts</button>
+        <button class="filter-btn" data-cat="drinks" onclick="setFilter(this)">🥤 Drinks</button>
+      </div>
+
+      <!-- Menu Items -->
+      <div class="menu-items-grid" id="menu-grid">
+
+        <!-- STARTERS -->
+        <div class="m-item" data-cat="starters" data-name="Samosa">
+          <div class="m-img"><img src="https://static.toiimg.com/thumb/61050397.cms?width=1200&height=900"
+              alt="Samosa" /></div>
+          <div class="m-body">
+            <h3>Samosa</h3>
+            <div class="m-meta">
+              <span class="m-price">₹40</span>
+              <span class="m-qty-label">2 Pieces</span>
+            </div>
+          </div>
+          <div class="m-footer"><button class="add-btn" onclick="addToCart(25,'Samosa',40)">+ Add to Cart</button></div>
+        </div>
+
+        <div class="m-item" data-cat="starters" data-name="Pani Puri">
+          <div class="m-img"><img src="https://www.awesomecuisine.com/wp-content/uploads/2007/11/Pani-Puri-500x375.jpg"
+              alt="Pani Puri" /></div>
+          <div class="m-body">
+            <h3>Pani Puri</h3>
+            <div class="m-meta"><span class="m-price">₹50</span><span class="m-qty-label">10 Balls</span></div>
+          </div>
+          <div class="m-footer"><button class="add-btn" onclick="addToCart(10,'Pani Puri',50)">+ Add to Cart</button>
+          </div>
+        </div>
+
+        <div class="m-item" data-cat="starters" data-name="French Fries">
+          <div class="m-img"><img
+              src="https://www.jagranimages.com/images/newimg/khanakhazana/02_2024-french_fries_recipe.webp"
+              alt="French Fries" /></div>
+          <div class="m-body">
+            <h3>French Fries</h3>
+            <div class="m-meta"><span class="m-price">₹70</span><span class="m-qty-label">1 Plate</span></div>
+          </div>
+          <div class="m-footer"><button class="add-btn" onclick="addToCart(17,'French Fries',70)">+ Add to Cart</button>
+          </div>
+        </div>
+
+        <div class="m-item" data-cat="starters" data-name="Greek Salad">
+          <div class="m-img"><img
+              src="https://www.simplyrecipes.com/thmb/0NrKQlJ691l6L9tZXpL06uOuWis=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Simply-Recipes-Easy-Greek-Salad-LEAD-2-4601eff771fd4de38f9722e8cafc897a.jpg"
+              alt="Greek Salad" /></div>
+          <div class="m-body">
+            <h3>Greek Salad</h3>
+            <div class="m-meta"><span class="m-price">₹110</span><span class="m-qty-label">1 Plate</span></div>
+          </div>
+          <div class="m-footer"><button class="add-btn" onclick="addToCart(14,'Greek Salad',110)">+ Add to Cart</button>
+          </div>
+        </div>
+
+        <div class="m-item" data-cat="starters" data-name="Grilled Cheese Sandwich">
+          <div class="m-img"><img
+              src="https://californiaavocado.com/wp-content/uploads/2023/04/AvoBaconGrilledCheese_0011-scaled-e1682914545487.jpg"
+              alt="Grilled Cheese Sandwich" /></div>
+          <div class="m-body">
+            <h3>Grilled Cheese Sandwich</h3>
+            <div class="m-meta"><span class="m-price">₹110</span><span class="m-qty-label">2 Pieces</span></div>
+          </div>
+          <div class="m-footer"><button class="add-btn" onclick="addToCart(21,'Grilled Cheese Sandwich',110)">+ Add to
+              Cart</button></div>
+        </div>
+
+        <div class="m-item" data-cat="starters" data-name="Falafel Wrap">
+          <div class="m-img"><img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPyUSqrcFI8HMayp8V6IhE4FM9pun9HA_FwA&s"
+              alt="Falafel Wrap" /></div>
+          <div class="m-body">
+            <h3>Falafel Wrap</h3>
+            <div class="m-meta"><span class="m-price">₹130</span><span class="m-qty-label">2 Pieces</span></div>
+          </div>
+          <div class="m-footer"><button class="add-btn" onclick="addToCart(18,'Falafel Wrap',130)">+ Add to
+              Cart</button></div>
+        </div>
+
+        <!-- MAINS -->
+        <div class="m-item" data-cat="mains" data-name="Masala Dosa">
+          <div class="m-img"><img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQACh1yWbIwNiWJOZ-8lkt9oGkf5cdMK4DV8Q&s"
+              alt="Masala Dosa" /></div>
+          <div class="m-body">
+            <h3>Masala Dosa</h3>
+            <div class="m-desc">Chutney + Sambhar included</div>
+            <div class="m-meta"><span class="m-price">₹100</span><span class="m-qty-label">2 Paper</span></div>
+          </div>
+          <div class="m-footer"><button class="add-btn" onclick="addToCart(5,'Masala Dosa',100)">+ Add to Cart</button>
+          </div>
+        </div>
+
+        <div class="m-item" data-cat="mains" data-name="Gujarati Thali">
+          <div class="m-img"><img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6d6HsMbInzzAryQqK9xwyP6wYepKKx7pS1g&s"
+              alt="Gujarati Thali" /></div>
+          <div class="m-body">
+            <h3>Gujarati Thali</h3>
+            <div class="m-desc">Full Thali — Complete Meal</div>
+            <div class="m-meta"><span class="m-price">₹120</span><span class="m-qty-label">Full Dish</span></div>
+          </div>
+          <div class="m-footer"><button class="add-btn" onclick="addToCart(1,'Gujarati Thali',120)">+ Add to
+              Cart</button></div>
+        </div>
+
+        <div class="m-item" data-cat="mains" data-name="Cheese Burger">
+          <div class="m-img"><img
+              src="https://thumbs.dreamstime.com/b/burger-french-fries-basket-tartan-tablecloth-ketchup-mustard-bottle-background-close-up-135319836.jpg"
+              alt="Cheese Burger" /></div>
+          <div class="m-body">
+            <h3>Cheese Burger</h3>
+            <div class="m-desc">Cold Drink + French Fries</div>
+            <div class="m-meta"><span class="m-price">₹130</span><span class="m-qty-label">1 Piece</span></div>
+          </div>
+          <div class="m-footer"><button class="add-btn" onclick="addToCart(12,'Cheese Burger',130)">+ Add to
+              Cart</button></div>
+        </div>
+
+        <div class="m-item" data-cat="mains" data-name="Aloo Paratha">
+          <div class="m-img"><img
+              src="https://www.maggi.in/sites/default/files/srh_recipes/9cc96dc3b0168582c17fe2d98218026a.jpg"
+              alt="Aloo Paratha" /></div>
+          <div class="m-body">
+            <h3>Aloo Paratha</h3>
+            <div class="m-meta"><span class="m-price">₹90</span><span class="m-qty-label">3 Pieces</span></div>
+          </div>
+          <div class="m-footer"><button class="add-btn" onclick="addToCart(16,'Aloo Paratha',90)">+ Add to Cart</button>
+          </div>
+        </div>
+
+        <div class="m-item" data-cat="mains" data-name="Veg Hakka Noodles">
+          <div class="m-img"><img
+              src="https://www.mygingergarlickitchen.com/wp-content/rich-markup-images/4x3/4x3-vegetable-hakka-noodles.jpg"
+              alt="Veg Hakka Noodles" /></div>
+          <div class="m-body">
+            <h3>Veg Hakka Noodles</h3>
+            <div class="m-meta"><span class="m-price">₹140</span><span class="m-qty-label">1 Bowl</span></div>
+          </div>
+          <div class="m-footer"><button class="add-btn" onclick="addToCart(3,'Veg Hakka Noodles',140)">+ Add to
+              Cart</button></div>
+        </div>
+
+        <div class="m-item" data-cat="mains" data-name="Mexican Tacos">
+          <div class="m-img"><img
+              src="https://www.thespruceeats.com/thmb/ereeBcFkDEbDT2VSlDe34sqXO_8=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/chicken-tinga-tinga-de-pollo-4773239-Hero_01-1bd1d960c02a4fdb812323b8c60fd55b.jpg"
+              alt="Mexican Tacos" /></div>
+          <div class="m-body">
+            <h3>Mexican Tacos</h3>
+            <div class="m-meta"><span class="m-price">₹150</span><span class="m-qty-label">4 Pieces</span></div>
+          </div>
+          <div class="m-footer"><button class="add-btn" onclick="addToCart(7,'Mexican Tacos',150)">+ Add to
+              Cart</button></div>
+        </div>
+
+        <div class="m-item" data-cat="mains" data-name="Undhiyu">
+          <div class="m-img"><img
+              src="https://img-global.cpcdn.com/recipes/90da6123069afe1e/680x482cq70/gujarati-undhiyu-recipe-main-photo.jpg"
+              alt="Undhiyu" /></div>
+          <div class="m-body">
+            <h3>Undhiyu</h3>
+            <div class="m-desc">Chass included</div>
+            <div class="m-meta"><span class="m-price">₹150</span><span class="m-qty-label">1 Bowl</span></div>
+          </div>
+          <div class="m-footer"><button class="add-btn" onclick="addToCart(23,'Undhiyu',150)">+ Add to Cart</button>
+          </div>
+        </div>
+
+        <div class="m-item" data-cat="mains" data-name="Paneer Butter Masala">
+          <div class="m-img"><img
+              src="https://vegecravings.com/wp-content/uploads/2017/04/paneer-butter-masala-recipe-step-by-step-instructions.jpg"
+              alt="Paneer Butter Masala" /></div>
+          <div class="m-body">
+            <h3>Paneer Butter Masala</h3>
+            <div class="m-desc">Paratha + Lassi</div>
+            <div class="m-meta"><span class="m-price">₹160</span><span class="m-qty-label">1 Bowl</span></div>
+          </div>
+          <div class="m-footer"><button class="add-btn" onclick="addToCart(2,'Paneer Butter Masala',160)">+ Add to
+              Cart</button></div>
+        </div>
+
+        <div class="m-item" data-cat="mains" data-name="Fried Rice">
+          <div class="m-img"><img src="https://www.australianeggs.org.au/assets/Uploads/Egg-fried-rice-2.jpg"
+              alt="Fried Rice" /></div>
+          <div class="m-body">
+            <h3>Fried Rice</h3>
+            <div class="m-meta"><span class="m-price">₹170</span><span class="m-qty-label">1 Plate</span></div>
+          </div>
+          <div class="m-footer"><button class="add-btn" onclick="addToCart(6,'Fried Rice',170)">+ Add to Cart</button>
+          </div>
+        </div>
+
+        <div class="m-item" data-cat="mains" data-name="Margherita Pizza">
+          <div class="m-img"><img
+              src="https://www.yumcurry.com/wp-content/uploads/2020/06/pizza-margherita-recipe-480x270.jpg"
+              alt="Margherita Pizza" /></div>
+          <div class="m-body">
+            <h3>Margherita Pizza</h3>
+            <div class="m-desc">Cold Drink FREE</div>
+            <div class="m-meta"><span class="m-price">₹180</span><span class="m-qty-label">1 Pizza</span></div>
+          </div>
+          <div class="m-footer"><button class="add-btn" onclick="addToCart(4,'Margherita Pizza',180)">+ Add to
+              Cart</button></div>
+        </div>
+
+        <div class="m-item" data-cat="mains" data-name="Hyderabadi Dum Biryani">
+          <div class="m-img"><img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQaeBlIywcv4RMaVlvzAk-ygkpjyiX0juwM6Q&s"
+              alt="Hyderabadi Dum Biryani" /></div>
+          <div class="m-body">
+            <h3>Hyderabadi Veg Dum Biryani</h3>
+            <div class="m-meta"><span class="m-price">₹190</span><span class="m-qty-label">1 Bowl</span></div>
+          </div>
+          <div class="m-footer"><button class="add-btn" onclick="addToCart(13,'Hyderabadi veg Dum Biryani',190)">+ Add
+              to Cart</button></div>
+        </div>
+
+        <div class="m-item" data-cat="mains" data-name="Thai Green Curry">
+          <div class="m-img"><img
+              src="https://vaya.in/recipes/wp-content/uploads/2018/12/Authentic-Thai-Green-Curry.jpg"
+              alt="Thai Green Curry" /></div>
+          <div class="m-body">
+            <h3>Thai Green Curry</h3>
+            <div class="m-meta"><span class="m-price">₹200</span><span class="m-qty-label">1 Bowl</span></div>
+          </div>
+          <div class="m-footer"><button class="add-btn" onclick="addToCart(22,'Thai Green Curry',200)">+ Add to
+              Cart</button></div>
+        </div>
+
+        <div class="m-item" data-cat="mains" data-name="Veg Sushi Roll">
+          <div class="m-img"><img
+              src="https://i0.wp.com/s.lightorangebean.com/media/20240914151841/Veggie-Sushi-Rolls_-done.png?resize=480%2C270&quality=80&ssl=1"
+              alt="Veg Sushi Roll" /></div>
+          <div class="m-body">
+            <h3>Veg Sushi Roll</h3>
+            <div class="m-meta"><span class="m-price">₹220</span><span class="m-qty-label">8 Pieces</span></div>
+          </div>
+          <div class="m-footer"><button class="add-btn" onclick="addToCart(11,'veg Sushi Roll',220)">+ Add to
+              Cart</button></div>
+        </div>
+
+        <!-- DESSERTS -->
+        <div class="m-item" data-cat="desserts" data-name="Gulab Jamun">
+          <div class="m-img"><img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpridNzzU09HIIGpVPQ9XhWqay-q7NrMj1yg&s"
+              alt="Gulab Jamun" /></div>
+          <div class="m-body">
+            <h3>Gulab Jamun</h3>
+            <div class="m-meta"><span class="m-price">₹80</span><span class="m-qty-label">6 Pieces</span></div>
+          </div>
+          <div class="m-footer"><button class="add-btn" onclick="addToCart(8,'Gulab Jamun',80)">+ Add to Cart</button>
+          </div>
+        </div>
+
+        <div class="m-item" data-cat="desserts" data-name="Rasgulla">
+          <div class="m-img"><img
+              src="https://img-global.cpcdn.com/recipes/2ece5f8426d2b1c2/680x482cq70/rabdi-rasgulla-recipe-main-photo.jpg"
+              alt="Rasgulla" /></div>
+          <div class="m-body">
+            <h3>Rasgulla</h3>
+            <div class="m-meta"><span class="m-price">₹90</span><span class="m-qty-label">6 Pieces</span></div>
+          </div>
+          <div class="m-footer"><button class="add-btn" onclick="addToCart(24,'Rasgulla',90)">+ Add to Cart</button>
+          </div>
+        </div>
+
+        <div class="m-item" data-cat="desserts" data-name="Chocolate Muffin">
+          <div class="m-img"><img
+              src="https://www.allrecipes.com/thmb/RdyL1EgIB0Qq_fr5HjdsAmcpMlU=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/228553-moist-chocolate-muffins-DDMFS-4x3-a9f73a46938547c99d921613dc167741.jpg"
+              alt="Chocolate Muffin" /></div>
+          <div class="m-body">
+            <h3>Chocolate Muffin</h3>
+            <div class="m-meta"><span class="m-price">₹60</span><span class="m-qty-label">4 Pieces</span></div>
+          </div>
+          <div class="m-footer"><button class="add-btn" onclick="addToCart(19,'Chocolate Muffin',60)">+ Add to
+              Cart</button></div>
+        </div>
+
+        <div class="m-item" data-cat="desserts" data-name="Ice Cream">
+          <div class="m-img"><img
+              src="https://static.toiimg.com/thumb/msid-112019658,width-1280,height-720,resizemode-4/112019658.jpg"
+              alt="Ice Cream" /></div>
+          <div class="m-body">
+            <h3>Ice Cream</h3>
+            <div class="m-meta"><span class="m-price">₹160</span><span class="m-qty-label">1 Bowl</span></div>
+          </div>
+          <div class="m-footer"><button class="add-btn" onclick="addToCart(15,'ice-cream',160)">+ Add to Cart</button>
+          </div>
+        </div>
+
+        <div class="m-item" data-cat="desserts" data-name="Kulfi">
+          <div class="m-img"><img src="https://i.ytimg.com/vi/lvQn9VNjqkM/maxresdefault.jpg" alt="Kulfi" /></div>
+          <div class="m-body">
+            <h3>Kulfi (Malai, Pista, Mango)</h3>
+            <div class="m-meta"><span class="m-price">₹60</span><span class="m-qty-label">3 Pieces</span></div>
+          </div>
+          <div class="m-footer"><button class="add-btn" onclick="addToCart(100,'Kulfi',60)">+ Add to Cart</button></div>
+        </div>
+
+        <div class="m-item" data-cat="desserts" data-name="Stick Ice Cream">
+          <div class="m-img"><img
+              src="https://t3.ftcdn.net/jpg/08/59/46/76/360_F_859467637_WZvuoqUI9NjK9SPqku8EurxLq8vq5nlt.jpg"
+              alt="Stick Ice Cream" /></div>
+          <div class="m-body">
+            <h3>Stick Ice Cream</h3>
+            <div class="m-desc">Buy 1 Get 1 Free!</div>
+            <div class="m-meta"><span class="m-price">₹50</span><span class="m-qty-label">3 Pieces</span></div>
+          </div>
+          <div class="m-footer"><button class="add-btn" onclick="addToCart(101,'Stick Ice Cream',50)">+ Add to
+              Cart</button></div>
+        </div>
+
+        <!-- DRINKS -->
+        <div class="m-item" data-cat="drinks" data-name="Mango Lassi">
+          <div class="m-img"><img
+              src="https://www.simplyrecipes.com/thmb/M3LEdeKC37xv52FUmIBFJVXKBFY=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Simply-Recipes-Mango-Lassi-LEAD-13-73719759cc3f4a2ca7fe8be72baaeaab.jpg"
+              alt="Mango Lassi" /></div>
+          <div class="m-body">
+            <h3>Mango Lassi</h3>
+            <div class="m-meta"><span class="m-price">₹60</span><span class="m-qty-label">1 Glass</span></div>
+          </div>
+          <div class="m-footer"><button class="add-btn" onclick="addToCart(9,'Mango Lassi',60)">+ Add to Cart</button>
+          </div>
+        </div>
+
+        <div class="m-item" data-cat="drinks" data-name="Cold Coffee">
+          <div class="m-img"><img
+              src="https://lorcoffee.com/cdn/shop/articles/Dark-Chocolate-Ice-Coffee-with-Provocateur-exc.jpg?v=1675806078"
+              alt="Cold Coffee" /></div>
+          <div class="m-body">
+            <h3>Cold Coffee</h3>
+            <div class="m-meta"><span class="m-price">₹90</span><span class="m-qty-label">1 Cup</span></div>
+          </div>
+          <div class="m-footer"><button class="add-btn" onclick="addToCart(20,'Cold Coffee',90)">+ Add to Cart</button>
+          </div>
+        </div>
+
+        <!-- No results placeholder -->
+        <div class="no-results" id="no-results" style="display:none;">
+          <span class="icon">🔍</span>
+          <p>No dishes found. Try a different search!</p>
+        </div>
+      </div>
     </div>
 
-    <div class="menu-item" data-id="12">
-      <div class="card-img-wrap"><img src="https://i.ytimg.com/vi/lvQn9VNjqkM/maxresdefault.jpg" alt="Kulfi (Malai, Pista, Mango)" class="menu-image"></div>
-      <h3>Kulfi (Malai, Pista, Mango)</h3>
-      <p>Rs. 60</p>
-      <p>3 piece</p>
-      <button class="add-to-cart" onclick="addToCart(12, 'Kulfi (Malai, Pista, Mango)', 60)">Add to Cart</button>
-    </div>
+    <!-- SIDEBAR CART -->
+    <aside class="menu-sidebar">
+      <div class="sidebar-cart-title">
+        🛒 Your Cart
+        <span class="sidebar-cart-title cart-count-badge" id="sidebar-count">0</span>
+      </div>
+      <div class="sidebar-cart-items" id="sidebar-items">
+        <div class="empty-msg">🍽️ Your cart is empty.<br>Add some dishes!</div>
+      </div>
+      <div class="sidebar-total" id="sidebar-total-row" style="display:none;">
+        <span>Total</span>
+        <span id="sidebar-total">₹0</span>
+      </div>
+      <div style="margin-top:16px;">
+        <a href="checkout.html" class="btn btn-primary" style="width:100%;justify-content:center;margin-bottom:10px;"
+          id="checkout-sidebar-btn">
+          Checkout →
+        </a>
+        <button onclick="clearCartSidebar()" class="clear-btn">🗑️ Clear Cart</button>
+      </div>
+    </aside>
+  </div>
 
-    <div class="menu-item" data-id="13">
-      <div class="card-img-wrap"><img src="https://t3.ftcdn.net/jpg/08/59/46/76/360_F_859467637_WZvuoqUI9NjK9SPqku8EurxLq8vq5nlt.jpg" alt="stick ice cream" class="menu-image"></div>
-      <h3>stick ice cream</h3>
-      <p>Rs. 50</p>
-      <p>3 piece</p>
-      <p>buy one get one free</p>
-      <button class="add-to-cart" onclick="addToCart(13, 'stick ice cream', 50)">Add to Cart</button>
-    </div>
-    
-  </div> 
-      
-  </section>
-
-  <!-- Footer Section -->
+  <!-- FOOTER -->
   <footer class="main-footer">
-    <p>&copy; 2025 PipaliyaPlates. Eat Fresh, Eat Desi.</p>
+    <div class="container">
+      <div class="footer-bottom" style="justify-content:center;flex-direction:column;text-align:center;gap:16px;">
+        <span class="footer-brand">PipaliyaPlates 🍕</span>
+        <p>© 2025 PipaliyaPlates. Eat Fresh, Eat Desi.</p>
+        <nav class="footer-nav" style="justify-content:center;">
+          <a href="index.html">Home</a>
+          <a href="menu.html">Menu</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+      </div>
+    </div>
   </footer>
 
   <script src="script.js"></script>
+  <script>
+    let currentFilter = 'all';
+
+    function setFilter(btn) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentFilter = btn.dataset.cat;
+      filterMenu();
+    }
+
+    function filterMenu() {
+      const query = document.getElementById('search-input').value.toLowerCase();
+      const items = document.querySelectorAll('.m-item');
+      let visible = 0;
+
+      items.forEach(item => {
+        const cat = item.dataset.cat;
+        const name = item.dataset.name.toLowerCase();
+        const matchCat = currentFilter === 'all' || cat === currentFilter;
+        const matchName = !query || name.includes(query);
+
+        if (matchCat && matchName) {
+          item.classList.remove('hidden');
+          visible++;
+        } else {
+          item.classList.add('hidden');
+        }
+      });
+
+      document.getElementById('no-results').style.display = visible === 0 ? 'block' : 'none';
+    }
+
+    function updateSidebarCart() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const sidebarItems = document.getElementById('sidebar-items');
+      const sidebarTotal = document.getElementById('sidebar-total');
+      const sidebarCount = document.getElementById('sidebar-count');
+      const totalRow = document.getElementById('sidebar-total-row');
+
+      const totalQty = cart.reduce((a, i) => a + i.quantity, 0);
+      sidebarCount.textContent = totalQty;
+
+      if (cart.length === 0) {
+        sidebarItems.innerHTML = '<div class="empty-msg">🍽️ Your cart is empty.<br>Add some dishes!</div>';
+        totalRow.style.display = 'none';
+        return;
+      }
+
+      let html = '';
+      let total = 0;
+      cart.forEach(item => {
+        const lineTotal = item.price * item.quantity;
+        total += lineTotal;
+        html += `
+          <div class="sidebar-item">
+            <div>
+              <div class="s-name">${item.name}</div>
+              <div class="s-qty">× ${item.quantity}</div>
+            </div>
+            <span class="s-price">₹${lineTotal}</span>
+          </div>
+        `;
+      });
+
+      sidebarItems.innerHTML = html;
+      sidebarTotal.textContent = '₹' + total;
+      totalRow.style.display = 'flex';
+    }
+
+    // Override addToCart to also update sidebar
+    const _origAddToCart = addToCart;
+    window.addToCart = function (id, name, price) {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      let existing = cart.find(item => item.id === id);
+      if (existing) existing.quantity += 1;
+      else cart.push({ id, name, price, quantity: 1 });
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateCartBadge();
+      updateSidebarCart();
+      showToast(`${name} added to cart! 🛒`, 'info');
+    };
+
+    function clearCartSidebar() {
+      if (!confirm('Clear all items from cart?')) return;
+      localStorage.removeItem('cart');
+      updateCartBadge();
+      updateSidebarCart();
+      showToast('Cart cleared!', 'info');
+    }
+
+    document.addEventListener('DOMContentLoaded', updateSidebarCart);
+  </script>
 </body>
-</html>      
+
+</html>

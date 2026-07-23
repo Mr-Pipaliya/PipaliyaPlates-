@@ -302,20 +302,29 @@
   </style>
 </head>
 
-<body>
+<body class="has-navbar">
 
-  <!-- 🍕 Header -->
-  <header class="main-header">
-    <h1><a href="index.html">PipaliyaPlates 🍕</a></h1>
+  <!-- HEADER -->
+  <header class="main-header" id="main-header">
+    <a href="index.html" class="header-logo">
+      <div class="logo-icon">🍕</div>
+      <span class="logo-text">Pipaliya<span>Plates</span></span>
+    </a>
     <nav>
-      <a href="index.html" class="">Home</a>
-      <a href="menu.html" class="">Menu</a>
-      <a href="about.html" class="">About</a>
-      <a href="contact.html" class="">Contact</a>
-      <a href="checkout.html" class="">Cart</a>
+      <a href="index.html">Home</a>
+      <a href="menu.html">Menu</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="checkout.html" class="nav-cart">🛒 Cart<span class="cart-badge">0</span></a>
       <a href="profile.html" class="profile-link active">👤</a>
     </nav>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
   </header>
+  <div class="mobile-nav" id="mobile-nav">
+    <a href="index.html">Home</a><a href="menu.html">Menu</a>
+    <a href="about.html">About</a><a href="contact.html">Contact</a>
+    <a href="checkout.html">🛒 Cart</a><a href="profile.html" class="active">👤 Profile</a>
+  </div>
 
   <!-- 🌟 Profile Page -->
   <main class="profile-page">

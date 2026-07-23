@@ -1,84 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Thank You | PipaliyaPlates</title>
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thank You! | PipaliyaPlates — Order Confirmed</title>
+  <meta name="description" content="Your order has been placed! PipaliyaPlates is preparing your delicious food." />
+  <link rel="stylesheet" href="style.css" />
   <style>
-    /* Confetti particles */
-    .confetti-piece {
-      position: fixed;
-      width: 10px; height: 10px;
-      border-radius: 2px;
-      animation: confetti-fall 4s linear infinite;
-      pointer-events: none;
-      z-index: 999;
-    }
-    @keyframes confetti-fall {
-      0%   { transform: translateY(-20px) rotate(0deg); opacity: 1; }
-      100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
-    }
-
-    /* Thank you page centering */
-    .thankyou-wrap {
-      max-width: 600px;
-      margin: 60px auto;
-      padding: 0 24px;
-      text-align: center;
-    }
-
-    .thankyou-wrap h1 {
-      font-family: var(--font-heading);
-      font-style: italic;
-      font-size: clamp(2rem, 5vw, 3rem);
-      color: var(--poy-plum);
-      margin: 16px 0 12px;
-    }
-
-    .thankyou-wrap > p {
-      font-size: 1.1rem;
-      color: var(--text-mid);
-      margin-bottom: 32px;
-      line-height: 1.7;
-    }
-
-    .redirect-msg {
+    .thankyou-wrap .order-details p {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
       font-size: 0.9rem;
-      color: var(--text-light);
-      font-style: italic;
-      margin-top: 20px;
     }
 
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-14px); }
+    .thankyou-wrap .order-details p:last-child {
+      border-bottom: none;
     }
 
-    .thank-you-icon {
-      animation: bounce 1.5s ease-in-out infinite;
-      display: block;
+    .success-ring {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(34, 197, 94, 0.15), rgba(34, 197, 94, 0.05));
+      border: 2px solid rgba(34, 197, 94, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    .delivery-track {
+      display: flex;
+      justify-content: space-between;
+      margin: 24px 0;
+      position: relative;
+    }
+
+    .delivery-track::before {
+      content: '';
+      position: absolute;
+      top: 20px;
+      left: 10%;
+      right: 10%;
+      height: 2px;
+      background: linear-gradient(90deg, var(--success), var(--primary));
+    }
+
+    .track-step {
+      text-align: center;
+      flex: 1;
+      position: relative;
+    }
+
+    .track-dot {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--bg-card);
+      border: 2px solid var(--success);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 8px;
+      font-size: 1rem;
+    }
+
+    .track-dot.active {
+      background: linear-gradient(135deg, var(--success), #16a34a);
+      box-shadow: 0 0 16px rgba(34, 197, 94, 0.4);
+    }
+
+    .track-label {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .04em;
     }
   </style>
 </head>
-<body>
-  <!-- Header -->
-  <header class="main-header">
-    <h1><a href="index.html">PipaliyaPlates 🍕</a></h1>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="menu.html">Menu</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
-      <a href="checkout.html">Cart</a>
-      <a href="profile.html" class="profile-link">👤</a>
-    </nav>
-  </header>
 
-  <!-- Confetti + Auto-redirect Script -->
+<body class="has-navbar">
+
+  <!-- Confetti -->
   <script>
-    // Generate confetti pieces
-    const colors = ['#734060', '#ebb454', '#d1b7ca', '#2B2A28', '#f0e8ec'];
+    const colors = ['#FF6B35', '#FFB800', '#22C55E', '#fff', 'rgba(255,107,53,0.6)'];
     for (let i = 0; i < 80; i++) {
       const piece = document.createElement('div');
       piece.classList.add('confetti-piece');
@@ -88,42 +98,112 @@
       piece.style.animationDelay = (Math.random() * 2) + 's';
       document.body.appendChild(piece);
     }
-
-    // Auto-redirect to home after 6 seconds
-    setTimeout(() => { window.location.href = "index.html"; }, 6000);
+    setTimeout(() => { window.location.href = 'index.html'; }, 7000);
   </script>
 
-  <div class="thankyou-wrap">
-    <span class="thank-you-icon">🎉</span>
-    <h1>Payment Successful!</h1>
-    <p>Thank you for ordering from <strong>PipaliyaPlates</strong>.<br>
-    Your delicious meal is on its way! 🚀🍽️</p>
-
-    <div class="order-details">
-      <h2>📦 Order Summary</h2>
-      <p><strong>Order Number:</strong> <span id="order-id-display">#PP-XXXXXX</span></p>
-      <p><strong>Amount Paid:</strong> <span id="order-total-display">—</span></p>
-      <p><strong>Estimated Delivery:</strong> 30–40 Minutes</p>
-      <p><strong>Payment Method:</strong> Online (UPI / Card)</p>
-      <p><strong>Need Help?</strong> Call us: <a href="tel:1800800600" style="color:var(--poy-plum)">1800-800-600</a></p>
-    </div>
-
-    <p class="redirect-msg">Redirecting you back to Home in 6 seconds…</p>
-  </div>
-
-  <footer class="main-footer">
-    <span class="footer-brand">PipaliyaPlates 🍕</span>
-    <p>&copy; 2025 PipaliyaPlates. All Rights Reserved.</p>
-    <nav class="footer-nav">
+  <!-- HEADER -->
+  <header class="main-header" id="main-header">
+    <a href="index.html" class="header-logo">
+      <div class="logo-icon">🍕</div>
+      <span class="logo-text">Pipaliya<span>Plates</span></span>
+    </a>
+    <nav>
       <a href="index.html">Home</a>
       <a href="menu.html">Menu</a>
       <a href="about.html">About</a>
       <a href="contact.html">Contact</a>
+      <a href="profile.html" class="profile-link">👤</a>
     </nav>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </header>
+
+  <div class="mobile-nav" id="mobile-nav">
+    <a href="index.html">Home</a>
+    <a href="menu.html">Menu</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="profile.html">👤 Profile</a>
+  </div>
+
+  <div class="thankyou-wrap">
+
+    <!-- Success icon -->
+    <div class="success-ring">
+      <span class="thank-you-icon" style="font-size:3rem;animation:none;">🎉</span>
+    </div>
+
+    <h1>Payment Successful!</h1>
+    <p>
+      Thank you for ordering from <strong style="color:var(--primary);">PipaliyaPlates</strong>!<br>
+      Your delicious meal is being prepared. 🚀🍽️
+    </p>
+
+    <!-- Order Details -->
+    <div class="order-details">
+      <h2>📦 Order Summary</h2>
+
+      <!-- Delivery tracking -->
+      <div class="delivery-track">
+        <div class="track-step">
+          <div class="track-dot active">✅</div>
+          <div class="track-label">Confirmed</div>
+        </div>
+        <div class="track-step">
+          <div class="track-dot active">👨‍🍳</div>
+          <div class="track-label">Preparing</div>
+        </div>
+        <div class="track-step">
+          <div class="track-dot">🛵</div>
+          <div class="track-label">On the Way</div>
+        </div>
+        <div class="track-step">
+          <div class="track-dot">🏠</div>
+          <div class="track-label">Delivered</div>
+        </div>
+      </div>
+
+      <p>
+        <strong>Order Number</strong>
+        <span id="order-id-display">#PP-XXXXXX</span>
+      </p>
+      <p>
+        <strong>Amount Paid</strong>
+        <span id="order-total-display">—</span>
+      </p>
+      <p>
+        <strong>Estimated Delivery</strong>
+        <span>30–40 Minutes</span>
+      </p>
+      <p>
+        <strong>Payment Method</strong>
+        <span>Online (UPI / Card)</span>
+      </p>
+      <p>
+        <strong>Need Help?</strong>
+        <a href="tel:1800800600" style="color:var(--primary);font-weight:700;">1800-800-600</a>
+      </p>
+    </div>
+
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:24px;">
+      <a href="menu.html" class="btn btn-primary">🍽️ Order Again</a>
+      <a href="index.html" class="btn btn-outline">🏠 Go Home</a>
+    </div>
+
+    <p class="redirect-msg">Redirecting you back to Home in 7 seconds…</p>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="main-footer">
+    <div class="container">
+      <div class="footer-bottom" style="justify-content:center;flex-direction:column;text-align:center;gap:16px;">
+        <span class="footer-brand">PipaliyaPlates 🍕</span>
+        <p>© 2025 PipaliyaPlates. All Rights Reserved.</p>
+      </div>
+    </div>
   </footer>
 
+  <script src="script.js"></script>
   <script>
-    // Show real order ID from sessionStorage
     const orderId = sessionStorage.getItem('lastOrderId');
     const orderTotal = sessionStorage.getItem('lastOrderTotal');
     if (orderId) document.getElementById('order-id-display').textContent = orderId;
@@ -132,4 +212,5 @@
     sessionStorage.removeItem('lastOrderTotal');
   </script>
 </body>
+
 </html>

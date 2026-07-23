@@ -1,172 +1,168 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>PipaliyaPlates | Chinese Menu</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chinese Cuisine | PipaliyaPlates</title>
   <link rel="stylesheet" href="style.css" />
 </head>
-<body>
 
-  <!-- Header Section -->
-    <header class="main-header">
-    <h1><a href="index.html">PipaliyaPlates 🍕</a></h1>
+<body class="has-navbar">
+  <header class="main-header" id="main-header">
+    <a href="index.html" class="header-logo">
+      <div class="logo-icon">🍕</div><span class="logo-text">Pipaliya<span>Plates</span></span>
+    </a>
     <nav>
-      <a href="index.html" class="">Home</a>
-      <a href="menu.html" class="active">Menu</a>
-      <a href="about.html" class="">About</a>
-      <a href="contact.html" class="">Contact</a>
-      <a href="checkout.html" class="">Cart</a>
-      <a href="profile.html" class="profile-link ">👤</a>
+      <a href="index.html">Home</a><a href="menu.html" class="active">Menu</a>
+      <a href="about.html">About</a><a href="contact.html">Contact</a>
+      <a href="checkout.html" class="nav-cart">🛒 Cart<span class="cart-badge">0</span></a>
+      <a href="profile.html" class="profile-link">👤</a>
     </nav>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
   </header>
-  
-   <!-- Cart Info Section -->
-   <section class="cart-info">
-    <h3>Your Cart</h3>
-    <ul id="cart-items"></ul>
-    <p id="cart-total">Total: Rs. 0</p>
-    <button id="checkout-btn" onclick="window.location.href='checkout.html'">Proceed to Checkout</button>
-  </section>
+  <div class="mobile-nav" id="mobile-nav">
+    <a href="index.html">Home</a><a href="menu.html" class="active">Menu</a>
+    <a href="about.html">About</a><a href="contact.html">Contact</a>
+    <a href="checkout.html">🛒 Cart</a><a href="profile.html">👤 Profile</a>
+  </div>
 
-   <!-- Page Navigation -->
-<div class="page-nav">
-  <span>Categories:</span>
-  <a href="gujarati.html">1</a>
-  <a href="punjabi.html">2</a>
-  <a href="chinese.html">3</a>
-  <a href="italian.html">4</a>
-  <a href="korean.html">5</a>
-  <a href="southindian.html">6</a>
-  <a href="mexican.html">7</a>
-  <a href="french.html">8</a>
-</div>
+  <div class="page-hero">
+    <p class="badge badge-accent" style="margin-bottom:16px;">🥢 Indo-Chinese</p>
+    <h1>Chinese <span style="color:var(--primary)">Cuisine</span></h1>
+    <p>Bold, saucy, spicy — your favourite Indo-Chinese classics, freshly made!</p>
+  </div>
 
-<div class="nav-buttons">
-  <a href="punjabi.html" class="back-btn">← Back</a>
-  <a href="italian.html" class="next-btn">Next →</a>
-</div>
-
-
-
-  <!-- Menu Section -->
-  <section class="menu-list">
-    <h2>Chinese Dishes</h2>
-  </section>
-
-  <div class="menu-grid">
-    <div class="menu-item" data-id="201">
-      <div class="card-img-wrap"><img src="https://www.subbuskitchen.com/wp-content/uploads/2014/01/Veg-Noodles.jpg" class="menu-image"></div>
-      <h3>1. Hakka Noodles</h3>
-      <p>Rs. 120</p>
-      <button class="add-to-cart" onclick="addToCart(201, 'Hakka Noodles', 120)">Add to Cart</button>
-    </div>
-
-    <div class="menu-item" data-id="202">
-      <div class="card-img-wrap"><img src="https://c.ndtvimg.com/2021-01/rlten3n8_manchurian_625x300_27_January_21.jpg" alt="Veg Manchurian" class="menu-image"></div>
-      <h3>2. Veg Manchurian</h3>
-      <p>Rs. 140</p>
-      <button class="add-to-cart" onclick="addToCart(202, 'Veg Manchurian', 140)">Add to Cart</button>
-    </div>
-
-    <div class="menu-item" data-id="203">
-      <div class="card-img-wrap"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSeyNBUBooHqQRxDBAOTzk1BYYG-y-PR7oKA&s" alt="Fried Rice" class="menu-image"></div>
-      <h3>3. Fried Rice</h3>
-      <p>Rs. 110</p>
-      <button class="add-to-cart" onclick="addToCart(203, 'Fried Rice', 110)">Add to Cart</button>
-    </div>
-
-    <div class="menu-item" data-id="204">
-      <div class="card-img-wrap"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEHvR98W4vIF8jfoK72GJq0no5WE3NsohZ3w&s" alt="Chilli Paneer" class="menu-image"></div>
-      <h3>4. Chilli Paneer</h3>
-      <p>Rs. 150</p>
-      <button class="add-to-cart" onclick="addToCart(204, 'Chilli Paneer', 150)">Add to Cart</button>
-    </div>
-
-    <div class="menu-item" data-id="205">
-      <div class="card-img-wrap"><img src="https://atanurrannagharrecipe.com/wp-content/uploads/2023/04/Chicken-Schezwan-Fried-Rice.jpg" alt="Schezwan Fried Rice" class="menu-image"></div>
-      <h3>5. Schezwan Fried Rice</h3>
-      <p>Rs. 130</p>
-      <button class="add-to-cart" onclick="addToCart(205, 'Schezwan Fried Rice', 130)">Add to Cart</button>
-    </div>
-
-    <div class="menu-item" data-id="206">
-      <div class="card-img-wrap"><img src="https://i.ytimg.com/vi/hEQQGxS-ynY/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDS9USsKg3YdT-6jJ3WNFNhl4-mWw" class="menu-image"></div>
-      <h3>6. Spring Rolls</h3>
-      <p>Rs. 100</p>
-      <button class="add-to-cart" onclick="addToCart(206, 'Spring Rolls', 100)">Add to Cart</button>
-    </div>
-
-    <div class="menu-item" data-id="207">
-      <div class="card-img-wrap"><img src="https://www.dumplingconnection.com/wp-content/uploads/2021/04/AdobeStock_137020166.jpg" alt="Hot & Sour Soup" class="menu-image"></div>
-      <h3>7. Hot & Sour Soup</h3>
-      <p>Rs. 90</p>
-      <button class="add-to-cart" onclick="addToCart(207, 'Hot & Sour Soup', 90)">Add to Cart</button>
-    </div>
-
-    <div class="menu-item" data-id="208">
-      <div class="card-img-wrap"><img src="https://i.ytimg.com/vi/70lugjxvoAs/maxresdefault.jpg" alt="Veg Noodles" class="menu-image"></div>
-      <h3>8. Veg Noodles</h3>
-      <p>Rs. 110</p>
-      <button class="add-to-cart" onclick="addToCart(208, 'Veg Noodles', 110)">Add to Cart</button>
-    </div>
-
-    <div class="menu-item" data-id="209">
-      <div class="card-img-wrap"><img src="https://cookingwithbenazir.com/img/CHINESEBHEL.jpg" alt="Chinese Bhel" class="menu-image"></div>
-      <h3>9. Chinese Bhel</h3>
-      <p>Rs. 100</p>
-      <button class="add-to-cart" onclick="addToCart(209, 'Chinese Bhel', 100)">Add to Cart</button>
-    </div>
-
-    <div class="menu-item" data-id="210">
-      <div class="card-img-wrap"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNG8ho1VOiNSS6HFzA0JkqZDh-ELwzXjGqeA&s" alt="Paneer Chilli Dry" class="menu-image"></div>
-      <h3>10. Paneer Chilli Dry</h3>
-      <p>Rs. 140</p>
-      <button class="add-to-cart" onclick="addToCart(210, 'Paneer Chilli Dry', 140)">Add to Cart</button>
-    </div>
-
-    <div class="menu-item" data-id="211">
-      <div class="card-img-wrap"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVPvcZIxeA9bZukK18CymY32OqFUTVbkKXgQ&s" alt="Chinese Noodles" class="menu-image"></div>
-      <h3>11. Chinese Noodles</h3>
-      <p>Rs. 120</p>
-      <button class="add-to-cart" onclick="addToCart(211, 'Chinese Noodles', 120)">Add to Cart</button>
-    </div>
-
-    <div class="menu-item" data-id="212">
-      <div class="card-img-wrap"><img src="https://www.chefkunalkapur.com/wp-content/uploads/2021/12/Veg-Chowmein-scaled.jpg?v=1638771610" class="menu-image"></div>
-      <h3>12. Chilli Garlic Noodles</h3>
-      <p>Rs. 130</p>
-      <button class="add-to-cart" onclick="addToCart(212, 'Chilli Garlic Noodles', 130)">Add to Cart</button>
-    </div>
-
-    <div class="menu-item" data-id="213">
-      <div class="card-img-wrap"><img src="https://i.ytimg.com/vi/HToinNNWISU/maxresdefault.jpg" alt="Chilli Potato" class="menu-image"></div>
-      <h3>13. Chilli Potato</h3>
-      <p>Rs. 110</p>
-      <button class="add-to-cart" onclick="addToCart(213, 'Chilli Potato', 110)">Add to Cart</button>
-    </div>
-
-    <div class="menu-item" data-id="214">
-      <div class="card-img-wrap"><img src="https://5.imimg.com/data5/CU/GA/WH/ANDROID-10316784/product-jpeg-500x500.jpg" alt="Paneer Momos" class="menu-image"></div>
-      <h3>14. Paneer Momos</h3>
-      <p>Rs. 80</p>
-      <button class="add-to-cart" onclick="addToCart(214, 'Paneer Momos', 90)">Add to Cart</button>
-    </div>
-
-    <div class="menu-item" data-id="215">
-      <div class="card-img-wrap"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAdIdvxNYjUli1uIozMTzeZ9jCaG2fZUl9uA&s" alt="Veg Momos" class="menu-image"></div>
-      <h3>15. Veg Momos</h3>
-      <p>Rs. 60</p>
-      <button class="add-to-cart" onclick="addToCart(215, 'Veg Momos', 80)">Add to Cart</button>
+  <div style="max-width:1200px;margin:24px auto;padding:0 24px;">
+    <div class="cart-info">
+      <h3>🛒 Your Cart</h3>
+      <ul id="cart-items"></ul><span id="cart-total">Total: ₹0</span>
+      <button id="checkout-btn" onclick="window.location.href='checkout.html'">Proceed to Checkout →</button>
     </div>
   </div>
 
-  <!-- Footer Section -->
-  <footer class="main-footer">
-    <p>&copy; 2025 PipaliyaPlates. Eat Fresh, Eat Desi.</p>
-  </footer>
+  <div class="cat-nav">
+    <a href="gujarati.html" class="btn btn-outline btn-sm">🍛 Gujarati</a>
+    <a href="punjabi.html" class="btn btn-outline btn-sm">🌶️ Punjabi</a>
+    <a href="chinese.html" class="btn btn-primary btn-sm">🥢 Chinese</a>
+    <a href="italian.html" class="btn btn-outline btn-sm">🍕 Italian</a>
+    <a href="korean.html" class="btn btn-outline btn-sm">🇰🇷 Korean</a>
+    <a href="southindian.html" class="btn btn-outline btn-sm">🥥 South Indian</a>
+    <a href="mexican.html" class="btn btn-outline btn-sm">🌮 Mexican</a>
+    <a href="french.html" class="btn btn-outline btn-sm">🥐 French</a>
+  </div>
 
+  <div class="cat-page-grid">
+    <div class="cat-menu-item">
+      <div class="card-img-wrap"><img src="https://www.subbuskitchen.com/wp-content/uploads/2014/01/Veg-Noodles.jpg"
+          alt="Hakka Noodles" /></div>
+      <h3>Hakka Noodles</h3>
+      <p>₹120</p><button class="add-to-cart" onclick="addToCart(201,'Hakka Noodles',120)">+ Add to Cart</button>
+    </div>
+    <div class="cat-menu-item">
+      <div class="card-img-wrap"><img src="https://c.ndtvimg.com/2021-01/rlten3n8_manchurian_625x300_27_January_21.jpg"
+          alt="Veg Manchurian" /></div>
+      <h3>Veg Manchurian</h3>
+      <p>₹140</p><button class="add-to-cart" onclick="addToCart(202,'Veg Manchurian',140)">+ Add to Cart</button>
+    </div>
+    <div class="cat-menu-item">
+      <div class="card-img-wrap"><img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSeyNBUBooHqQRxDBAOTzk1BYYG-y-PR7oKA&s"
+          alt="Fried Rice" /></div>
+      <h3>Fried Rice</h3>
+      <p>₹110</p><button class="add-to-cart" onclick="addToCart(203,'Fried Rice',110)">+ Add to Cart</button>
+    </div>
+    <div class="cat-menu-item">
+      <div class="card-img-wrap"><img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEHvR98W4vIF8jfoK72GJq0no5WE3NsohZ3w&s"
+          alt="Chilli Paneer" /></div>
+      <h3>Chilli Paneer</h3>
+      <p>₹150</p><button class="add-to-cart" onclick="addToCart(204,'Chilli Paneer',150)">+ Add to Cart</button>
+    </div>
+    <div class="cat-menu-item">
+      <div class="card-img-wrap"><img
+          src="https://atanurrannagharrecipe.com/wp-content/uploads/2023/04/Chicken-Schezwan-Fried-Rice.jpg"
+          alt="Schezwan Fried Rice" /></div>
+      <h3>Schezwan Fried Rice</h3>
+      <p>₹130</p><button class="add-to-cart" onclick="addToCart(205,'Schezwan Fried Rice',130)">+ Add to Cart</button>
+    </div>
+    <div class="cat-menu-item">
+      <div class="card-img-wrap"><img src="https://i.ytimg.com/vi/hEQQGxS-ynY/hq720.jpg" alt="Spring Rolls" /></div>
+      <h3>Spring Rolls</h3>
+      <p>₹100</p><button class="add-to-cart" onclick="addToCart(206,'Spring Rolls',100)">+ Add to Cart</button>
+    </div>
+    <div class="cat-menu-item">
+      <div class="card-img-wrap"><img
+          src="https://www.dumplingconnection.com/wp-content/uploads/2021/04/AdobeStock_137020166.jpg"
+          alt="Hot & Sour Soup" /></div>
+      <h3>Hot & Sour Soup</h3>
+      <p>₹90</p><button class="add-to-cart" onclick="addToCart(207,'Hot & Sour Soup',90)">+ Add to Cart</button>
+    </div>
+    <div class="cat-menu-item">
+      <div class="card-img-wrap"><img src="https://i.ytimg.com/vi/70lugjxvoAs/maxresdefault.jpg" alt="Veg Noodles" />
+      </div>
+      <h3>Veg Noodles</h3>
+      <p>₹110</p><button class="add-to-cart" onclick="addToCart(208,'Veg Noodles',110)">+ Add to Cart</button>
+    </div>
+    <div class="cat-menu-item">
+      <div class="card-img-wrap"><img src="https://cookingwithbenazir.com/img/CHINESEBHEL.jpg" alt="Chinese Bhel" />
+      </div>
+      <h3>Chinese Bhel</h3>
+      <p>₹100</p><button class="add-to-cart" onclick="addToCart(209,'Chinese Bhel',100)">+ Add to Cart</button>
+    </div>
+    <div class="cat-menu-item">
+      <div class="card-img-wrap"><img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNG8ho1VOiNSS6HFzA0JkqZDh-ELwzXjGqeA&s"
+          alt="Paneer Chilli Dry" /></div>
+      <h3>Paneer Chilli Dry</h3>
+      <p>₹140</p><button class="add-to-cart" onclick="addToCart(210,'Paneer Chilli Dry',140)">+ Add to Cart</button>
+    </div>
+    <div class="cat-menu-item">
+      <div class="card-img-wrap"><img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVPvcZIxeA9bZukK18CymY32OqFUTVbkKXgQ&s"
+          alt="Chinese Noodles" /></div>
+      <h3>Chinese Noodles</h3>
+      <p>₹120</p><button class="add-to-cart" onclick="addToCart(211,'Chinese Noodles',120)">+ Add to Cart</button>
+    </div>
+    <div class="cat-menu-item">
+      <div class="card-img-wrap"><img
+          src="https://www.chefkunalkapur.com/wp-content/uploads/2021/12/Veg-Chowmein-scaled.jpg?v=1638771610"
+          alt="Chilli Garlic Noodles" /></div>
+      <h3>Chilli Garlic Noodles</h3>
+      <p>₹130</p><button class="add-to-cart" onclick="addToCart(212,'Chilli Garlic Noodles',130)">+ Add to Cart</button>
+    </div>
+    <div class="cat-menu-item">
+      <div class="card-img-wrap"><img src="https://i.ytimg.com/vi/HToinNNWISU/maxresdefault.jpg" alt="Chilli Potato" />
+      </div>
+      <h3>Chilli Potato</h3>
+      <p>₹110</p><button class="add-to-cart" onclick="addToCart(213,'Chilli Potato',110)">+ Add to Cart</button>
+    </div>
+    <div class="cat-menu-item">
+      <div class="card-img-wrap"><img src="https://5.imimg.com/data5/CU/GA/WH/ANDROID-10316784/product-jpeg-500x500.jpg"
+          alt="Paneer Momos" /></div>
+      <h3>Paneer Momos</h3>
+      <p>₹80</p><button class="add-to-cart" onclick="addToCart(214,'Paneer Momos',90)">+ Add to Cart</button>
+    </div>
+    <div class="cat-menu-item">
+      <div class="card-img-wrap"><img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAdIdvxNYjUli1uIozMTzeZ9jCaG2fZUl9uA&s"
+          alt="Veg Momos" /></div>
+      <h3>Veg Momos</h3>
+      <p>₹60</p><button class="add-to-cart" onclick="addToCart(215,'Veg Momos',80)">+ Add to Cart</button>
+    </div>
+  </div>
+
+  <footer class="main-footer">
+    <div class="container">
+      <div class="footer-bottom" style="justify-content:center;flex-direction:column;text-align:center;gap:16px;">
+        <span class="footer-brand">PipaliyaPlates 🍕</span>
+        <p>© 2025 PipaliyaPlates. Eat Fresh, Eat Desi.</p>
+        <nav class="footer-nav" style="justify-content:center;"><a href="index.html">Home</a><a
+            href="menu.html">Menu</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav>
+      </div>
+    </div>
+  </footer>
   <script src="script.js"></script>
 </body>
+
 </html>
-  

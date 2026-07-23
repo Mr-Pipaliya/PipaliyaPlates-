@@ -1,273 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cart &amp; Checkout | PipaliyaPlates</title>
-  <link rel="stylesheet" href="style.css">
-  <style>
-    /* ── Checkout Page Extras ── */
-    .checkout-page {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 52px 24px 80px;
-      display: grid;
-      grid-template-columns: 1fr 1.2fr;
-      gap: 32px;
-      align-items: start;
-    }
-
-    /* Page heading */
-    .checkout-heading {
-      max-width: 1100px;
-      margin: 48px auto 0;
-      padding: 0 24px;
-    }
-    .checkout-heading h2 {
-      font-family: var(--font-heading);
-      font-size: clamp(1.8rem, 3vw, 2.4rem);
-      color: var(--poy-plum);
-      font-style: italic;
-      margin-bottom: 6px;
-    }
-    .checkout-heading p { color: var(--text-light); font-size: 0.95rem; }
-
-    /* Cart panel */
-    .cart-panel {
-      background: var(--bg-white);
-      border: 1px solid var(--border);
-      border-radius: var(--r-xl);
-      padding: 32px;
-      box-shadow: var(--shadow-sm);
-      position: sticky;
-      top: 88px;
-    }
-    .cart-panel h3 {
-      font-size: 1.35rem;
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding-bottom: 14px;
-      border-bottom: 2px solid var(--border);
-    }
-    .cart-panel h3 .cart-count {
-      background: var(--poy-gold);
-      color: var(--text-dark);
-      font-size: 0.72rem;
-      font-weight: 900;
-      padding: 2px 8px;
-      border-radius: var(--r-pill);
-    }
-
-    /* Cart items list */
-    #cart-items-list { list-style: none; padding: 0; margin: 0 0 16px; }
-    #cart-items-list li {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 12px 0;
-      border-bottom: 1px solid var(--border);
-      font-size: 0.95rem;
-      gap: 12px;
-    }
-    #cart-items-list li:last-child { border-bottom: none; }
-    #cart-items-list .item-name { font-weight: 700; color: var(--text-dark); }
-    #cart-items-list .item-qty { color: var(--text-light); font-size: 0.85rem; margin-top: 2px; }
-    #cart-items-list .item-price { font-weight: 700; color: var(--poy-plum); white-space: nowrap; }
-
-    .empty-cart {
-      text-align: center;
-      padding: 40px 20px;
-      color: var(--text-light);
-    }
-    .empty-cart span { font-size: 3rem; display: block; margin-bottom: 12px; }
-    .empty-cart a { color: var(--poy-plum); font-weight: 700; }
-
-    /* Divider */
-    .cart-divider { border: none; border-top: 1px solid var(--border); margin: 14px 0; }
-
-    /* Totals */
-    .total-row {
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.9rem;
-      color: var(--text-mid);
-      margin-bottom: 8px;
-    }
-    .total-row.grand {
-      font-family: var(--font-heading);
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: var(--text-dark);
-      margin-top: 10px;
-    }
-    .total-row .free-tag {
-      color: #27ae60;
-      font-weight: 700;
-      font-size: 0.85rem;
-    }
-
-    .clear-btn {
-      width: 100%;
-      background: transparent;
-      border: 1px solid var(--border-mid);
-      color: var(--text-light);
-      border-radius: var(--r-pill);
-      padding: 9px;
-      font-size: 0.8rem;
-      font-family: var(--font-body);
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      cursor: pointer;
-      margin-top: 14px;
-      transition: all 0.2s ease;
-    }
-    .clear-btn:hover { border-color: #e74c3c; color: #e74c3c; background: #fff5f5; }
-
-    /* Payment form panel */
-    .payment-panel {
-      background: var(--bg-white);
-      border: 1px solid var(--border);
-      border-radius: var(--r-xl);
-      padding: 36px;
-      box-shadow: var(--shadow-sm);
-    }
-    .payment-panel h3 {
-      font-size: 1.35rem;
-      margin-bottom: 6px;
-      padding-bottom: 14px;
-      border-bottom: 2px solid var(--border);
-    }
-    .payment-panel p.sub { color: var(--text-light); font-size: 0.9rem; margin-bottom: 24px; margin-top: 8px; }
-
-    /* Payment method tabs */
-    .pay-tabs { display: flex; gap: 10px; margin-bottom: 24px; flex-wrap: wrap; }
-    .pay-tab {
-      flex: 1; min-width: 80px;
-      padding: 10px 8px;
-      text-align: center;
-      border: 2px solid var(--border);
-      border-radius: var(--r-md);
-      cursor: pointer;
-      font-size: 0.82rem;
-      font-weight: 700;
-      color: var(--text-mid);
-      background: var(--bg-muted);
-      transition: all 0.2s ease;
-      user-select: none;
-    }
-    .pay-tab.selected {
-      border-color: var(--poy-plum);
-      background: var(--poy-plum-soft);
-      color: var(--poy-plum);
-    }
-    .pay-tab span { display: block; font-size: 1.3rem; margin-bottom: 4px; }
-
-    /* Form fields */
-    .pf-group { margin-bottom: 18px; }
-    .pf-group label {
-      display: block;
-      font-weight: 700;
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: var(--text-dark);
-      margin-bottom: 7px;
-    }
-    .pf-group input {
-      width: 100%;
-      padding: 13px 16px;
-      border: 1px solid var(--border-mid);
-      border-radius: var(--r-md);
-      font-size: 0.95rem;
-      background: var(--bg-white);
-      color: var(--text-dark);
-      outline: none;
-      font-family: var(--font-body);
-      transition: border-color 0.2s ease, box-shadow 0.2s ease;
-    }
-    .pf-group input:focus {
-      border-color: var(--poy-plum);
-      box-shadow: 0 0 0 3px rgba(115,64,96,0.14);
-    }
-    .pf-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-
-    /* Security note */
-    .secure-note {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--bg-muted);
-      border: 1px solid var(--border);
-      border-radius: var(--r-md);
-      padding: 11px 14px;
-      margin-bottom: 20px;
-      font-size: 0.82rem;
-      color: var(--text-mid);
-    }
-    .secure-note span { font-size: 1rem; }
-
-    /* Place order btn */
-    .place-order-btn {
-      background: var(--poy-plum);
-      color: #fff;
-      border: none;
-      padding: 15px;
-      border-radius: var(--r-pill);
-      font-family: var(--font-body);
-      font-weight: 700;
-      font-size: 0.9rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      cursor: pointer;
-      width: 100%;
-      transition: background 0.2s ease, transform 0.2s ease;
-    }
-    .place-order-btn:hover { background: var(--poy-plum-dark); transform: translateY(-1px); }
-    .place-order-btn:disabled { background: #ccc; cursor: not-allowed; transform: none; }
-
-    @media (max-width: 860px) {
-      .checkout-page { grid-template-columns: 1fr; }
-      .cart-panel { position: static; }
-      .pf-row { grid-template-columns: 1fr; }
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cart & Checkout | PipaliyaPlates</title>
+  <meta name="description"
+    content="Review your cart and checkout securely with Card, UPI, Net Banking, or Wallet payment." />
+  <link rel="stylesheet" href="style.css" />
 </head>
-<body>
 
-  <!-- Header -->
-  <header class="main-header">
-    <h1><a href="index.html">PipaliyaPlates 🍕</a></h1>
+<body class="has-navbar">
+
+  <!-- HEADER -->
+  <header class="main-header" id="main-header">
+    <a href="index.html" class="header-logo">
+      <div class="logo-icon">🍕</div>
+      <span class="logo-text">Pipaliya<span>Plates</span></span>
+    </a>
     <nav>
       <a href="index.html">Home</a>
       <a href="menu.html">Menu</a>
       <a href="about.html">About</a>
       <a href="contact.html">Contact</a>
-      <a href="checkout.html" class="active">Cart</a>
-      <a href="profile.html" class="profile-link">👤</a>
+      <a href="checkout.html" class="nav-cart active">🛒 Cart<span class="cart-badge">0</span></a>
+      <a href="profile.html" class="profile-link" title="Profile">👤</a>
     </nav>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
   </header>
 
-  <!-- Page Heading -->
+  <div class="mobile-nav" id="mobile-nav">
+    <a href="index.html">Home</a>
+    <a href="menu.html">Menu</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="checkout.html" class="active">🛒 Cart</a>
+    <a href="profile.html">👤 Profile</a>
+  </div>
+
+  <!-- PAGE HEADING -->
   <div class="checkout-heading">
-    <h2>Your Cart &amp; Checkout</h2>
+    <h2>🛒 Your Cart & Checkout</h2>
     <p>Review your items and complete your payment to place the order.</p>
   </div>
 
-  <!-- Two column layout -->
+  <!-- TWO-COLUMN LAYOUT -->
   <div class="checkout-page">
 
     <!-- LEFT: Cart Summary -->
     <div class="cart-panel">
-      <h3>🛒 Order Summary <span class="cart-count" id="cart-count">0</span></h3>
+      <h3>📦 Order Summary <span class="cart-count" id="cart-count">0</span></h3>
 
-      <ul id="cart-items-list">
-        <!-- Filled by JS -->
-      </ul>
+      <ul id="cart-items-list"></ul>
 
-      <hr class="cart-divider">
+      <hr class="cart-divider" />
 
       <div class="total-row">
         <span>Subtotal</span>
@@ -281,7 +67,7 @@
         <span>Discount</span>
         <span class="free-tag">— ₹0</span>
       </div>
-      <hr class="cart-divider">
+      <hr class="cart-divider" />
       <div class="total-row grand">
         <span>Total</span>
         <span id="grand-total-display">₹0</span>
@@ -295,7 +81,7 @@
       <h3>💳 Payment Details</h3>
       <p class="sub">Choose your payment method and fill in your details.</p>
 
-      <!-- Payment method tabs -->
+      <!-- Payment Tabs -->
       <div class="pay-tabs">
         <div class="pay-tab selected" onclick="selectTab(this)"><span>💳</span>Card</div>
         <div class="pay-tab" onclick="selectTab(this)"><span>📱</span>UPI</div>
@@ -305,42 +91,42 @@
 
       <form id="checkout-form" onsubmit="handleCheckout(event)">
 
-        <!-- Delivery address -->
+        <!-- Delivery Address -->
         <div class="pf-group">
           <label>Delivery Address</label>
-          <input type="text" id="del-address" placeholder="Enter your full delivery address" required>
+          <input type="text" id="del-address" placeholder="Enter your full delivery address" required />
         </div>
 
         <div class="pf-row">
           <div class="pf-group">
             <label>City</label>
-            <input type="text" id="del-city" placeholder="City" required>
+            <input type="text" id="del-city" placeholder="City" required />
           </div>
           <div class="pf-group">
             <label>Pincode</label>
-            <input type="text" id="del-pin" placeholder="380001" maxlength="6" required>
+            <input type="text" id="del-pin" placeholder="380001" maxlength="6" required />
           </div>
         </div>
 
-        <hr class="cart-divider">
+        <hr class="cart-divider" />
 
-        <!-- Card details -->
+        <!-- Card Details -->
         <div class="pf-group">
           <label>Name on Card</label>
-          <input type="text" id="card-name" placeholder="e.g. Hardik Pipaliya" required>
+          <input type="text" id="card-name" placeholder="e.g. Hardik Pipaliya" required />
         </div>
         <div class="pf-group">
           <label>Card Number</label>
-          <input type="text" id="card-num" placeholder="XXXX  XXXX  XXXX  XXXX" maxlength="19" required>
+          <input type="text" id="card-num" placeholder="XXXX  XXXX  XXXX  XXXX" maxlength="19" required />
         </div>
         <div class="pf-row">
           <div class="pf-group">
             <label>Expiry Date</label>
-            <input type="month" id="card-exp" required>
+            <input type="month" id="card-exp" required />
           </div>
           <div class="pf-group">
             <label>CVV</label>
-            <input type="password" id="card-cvv" placeholder="•••" maxlength="4" required>
+            <input type="password" id="card-cvv" placeholder="•••" maxlength="4" required />
           </div>
         </div>
 
@@ -354,35 +140,36 @@
     </div>
   </div>
 
-  <!-- Footer -->
+  <!-- FOOTER -->
   <footer class="main-footer">
-    <span class="footer-brand">PipaliyaPlates 🍕</span>
-    <p>&copy; 2025 PipaliyaPlates. Your food journey ends here… happily!</p>
-    <nav class="footer-nav">
-      <a href="index.html">Home</a>
-      <a href="menu.html">Menu</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
-    </nav>
+    <div class="container">
+      <div class="footer-bottom" style="justify-content:center;flex-direction:column;text-align:center;gap:16px;">
+        <span class="footer-brand">PipaliyaPlates 🍕</span>
+        <p>© 2025 PipaliyaPlates. Your food journey ends here… happily!</p>
+        <nav class="footer-nav" style="justify-content:center;">
+          <a href="index.html">Home</a>
+          <a href="menu.html">Menu</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+      </div>
+    </div>
   </footer>
 
+  <script src="script.js"></script>
   <script>
-    // Format card number with spaces
-    document.getElementById('card-num').addEventListener('input', function(e) {
+    // Format card number
+    document.getElementById('card-num').addEventListener('input', function (e) {
       let v = e.target.value.replace(/\D/g, '').substring(0, 16);
       e.target.value = v.replace(/(.{4})/g, '$1  ').trim();
     });
 
-    // Payment tab selection
     function selectTab(el) {
       document.querySelectorAll('.pay-tab').forEach(t => t.classList.remove('selected'));
       el.classList.add('selected');
     }
 
-    // Load cart from localStorage
-    document.addEventListener('DOMContentLoaded', function() {
-      loadCart();
-    });
+    document.addEventListener('DOMContentLoaded', loadCart);
 
     function loadCart() {
       const cart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -438,18 +225,20 @@
     function clearCart() {
       if (!confirm('Clear all items from cart?')) return;
       localStorage.removeItem('cart');
+      updateCartBadge();
       loadCart();
+      showToast('Cart cleared!', 'info');
     }
 
     function handleCheckout(e) {
       e.preventDefault();
       const btn = document.getElementById('place-order-btn');
-      btn.textContent = '⏳ Processing...';
+      btn.textContent = '⏳ Processing…';
       btn.disabled = true;
 
-      const cart      = JSON.parse(localStorage.getItem('cart')) || [];
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
       const userEmail = sessionStorage.getItem('userEmail') || 'guest@pipaliyaplates.com';
-      const userName  = (() => {
+      const userName = (() => {
         const stored = sessionStorage.getItem('userName');
         if (stored) return stored;
         const users = JSON.parse(localStorage.getItem('registeredUsers')) || [];
@@ -458,36 +247,34 @@
       })();
 
       const selectedTab = document.querySelector('.pay-tab.selected');
-      const payMethod   = selectedTab ? selectedTab.textContent.trim() : '💳 Card';
-      const itemsStr    = cart.map(i => `${i.name} ×${i.quantity}`).join(', ') || 'No items';
-      const subtotal    = cart.reduce((s, i) => s + i.price * i.quantity, 0);
-      const delivery    = subtotal >= 500 ? 0 : 40;
-      const total       = subtotal + delivery;
-      const orderId     = '#PP-' + Date.now().toString().slice(-6);
+      const payMethod = selectedTab ? selectedTab.textContent.trim() : '💳 Card';
+      const itemsStr = cart.map(i => `${i.name} ×${i.quantity}`).join(', ') || 'No items';
+      const subtotal = cart.reduce((s, i) => s + i.price * i.quantity, 0);
+      const delivery = subtotal >= 500 ? 0 : 40;
+      const total = subtotal + delivery;
+      const orderId = '#PP-' + Date.now().toString().slice(-6);
 
       const orderData = {
-        orderId, userEmail, userName,
-        items:         itemsStr,
-        total,
-        paymentMethod: payMethod,
-        status:        'success',
-        date:          new Date().toISOString(),
-        address:       document.getElementById('del-address')?.value || '',
-        city:          document.getElementById('del-city')?.value   || '',
-        pincode:       document.getElementById('del-pin')?.value    || '',
+        orderId, userEmail, userName, items: itemsStr, total,
+        paymentMethod: payMethod, status: 'success',
+        date: new Date().toISOString(),
+        address: document.getElementById('del-address')?.value || '',
+        city: document.getElementById('del-city')?.value || '',
+        pincode: document.getElementById('del-pin')?.value || '',
       };
 
-      // Save to localStorage (for Admin Panel)
       const orders = JSON.parse(localStorage.getItem('orders')) || [];
       orders.push(orderData);
       localStorage.setItem('orders', JSON.stringify(orders));
 
-      sessionStorage.setItem('lastOrderId',    orderId);
+      sessionStorage.setItem('lastOrderId', orderId);
       sessionStorage.setItem('lastOrderTotal', '₹' + total);
       localStorage.removeItem('cart');
 
-      setTimeout(() => { window.location.href = 'thankyou.html'; }, 400);
+      showToast('Order placed! Redirecting… 🚀', 'success', 2000);
+      setTimeout(() => window.location.href = 'thankyou.html', 800);
     }
   </script>
 </body>
+
 </html>

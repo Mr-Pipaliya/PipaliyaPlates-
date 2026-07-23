@@ -1,73 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Forgot Password | PipaliyaPlates</title>
   <link rel="stylesheet" href="style.css" />
-  <style>
-    .auth-wrapper {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
-      background: var(--bg-cream);
-      padding-bottom: 60px;
-    }
-    .auth-logo {
-      margin-top: 40px;
-      margin-bottom: 10px;
-      font-family: var(--font-heading);
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--poy-plum);
-    }
-    .auth-logo a { color: inherit; text-decoration: none; }
-    .auth-title {
-      font-family: var(--font-heading);
-      font-style: italic;
-      font-size: 1.7rem;
-      color: var(--poy-plum);
-      margin-bottom: 0;
-      text-align: center;
-    }
-  </style>
 </head>
+
 <body>
-  <div class="auth-wrapper">
-    <div class="auth-logo"><a href="index.html">PipaliyaPlates 🍕</a></div>
-    <p class="auth-title">Reset Password</p>
 
-    <form class="forgot-form" onsubmit="return handleForgot(event)">
-      <label for="forgot-email">Enter your email to receive a reset link</label>
-      <input type="email" id="forgot-email" name="forgot-email" required placeholder="Enter your email">
+  <div class="auth-page">
 
-      <button type="submit">Send Reset Link</button>
+    <!-- Left Visual -->
+    <div class="auth-visual">
+      <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=900&q=80"
+        alt="Food" />
+      <div class="auth-visual-overlay">
+        <h2>Don't<br>Worry!</h2>
+        <p>We'll get you back in no time 🔑</p>
+      </div>
+    </div>
 
-      <div class="extra-links">
+    <!-- Right -->
+    <div class="auth-side">
+      <a href="login.html" class="auth-logo-top">
+        <div class="logo-icon">🍕</div>
+        <span class="logo-text">Pipaliya<span style="color:var(--primary)">Plates</span></span>
+      </a>
+
+      <h1 class="auth-form-title">Forgot Password?</h1>
+      <p class="auth-form-sub">Enter your email and we'll send a reset link.</p>
+
+      <form onsubmit="handleForgot(event); return false;">
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" required placeholder="you@example.com" />
+        </div>
+        <button type="submit" class="auth-submit-btn" id="forgot-btn">
+          Send Reset Link →
+        </button>
+      </form>
+
+      <div class="auth-links">
         <p><a href="login.html">← Back to Login</a></p>
       </div>
-    </form>
+    </div>
   </div>
 
-  <footer class="main-footer">
-    <span class="footer-brand">PipaliyaPlates 🍕</span>
-    <p>&copy; 2025 PipaliyaPlates. All Rights Reserved.</p>
-    <nav class="footer-nav">
-      <a href="index.html">Home</a>
-      <a href="menu.html">Menu</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-  </footer>
-
+  <script src="script.js"></script>
   <script>
     function handleForgot(event) {
       event.preventDefault();
-      alert('Reset link sent to your email!');
-      window.location.href = "login.html";
-      return false;
+      const email = document.getElementById('email').value.trim();
+      if (!email) return;
+
+      const btn = document.getElementById('forgot-btn');
+      btn.textContent = 'Sending…';
+      btn.disabled = true;
+
+      setTimeout(() => {
+        showToast(`Reset link sent to ${email}! Check your inbox 📧`, 'success', 4000);
+        btn.textContent = 'Send Reset Link →';
+        btn.disabled = false;
+        document.getElementById('email').value = '';
+      }, 1000);
     }
   </script>
 </body>
+
 </html>

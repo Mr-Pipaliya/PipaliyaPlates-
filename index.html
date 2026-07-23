@@ -4,237 +4,518 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PipaliyaPlates | Home</title>
+  <title>PipaliyaPlates | Home — India's Best Food Delivery</title>
+  <meta name="description"
+    content="Order from 25+ dishes across 8 cuisines. Fast delivery in 30 minutes. PipaliyaPlates — Crave. Click. Eat. Repeat." />
   <link rel="stylesheet" href="style.css" />
 </head>
 
-<body>
+<body class="has-navbar">
+
   <script>
-    // block access if not logged in
-    if (sessionStorage.getItem("isLoggedIn") !== "true") {
-      window.location.href = "login.html";
+    if (sessionStorage.getItem('isLoggedIn') !== 'true') {
+      window.location.href = 'login.html';
     }
   </script>
-  
-    <header class="main-header">
-    <h1><a href="index.html">PipaliyaPlates 🍕</a></h1>
+
+  <!-- HEADER -->
+  <header class="main-header" id="main-header">
+    <a href="index.html" class="header-logo">
+      <div class="logo-icon">🍕</div>
+      <span class="logo-text">Pipaliya<span>Plates</span></span>
+    </a>
     <nav>
       <a href="index.html" class="active">Home</a>
-      <a href="menu.html" class="">Menu</a>
-      <a href="about.html" class="">About</a>
-      <a href="contact.html" class="">Contact</a>
-      <a href="checkout.html" class="">Cart</a>
-      <a href="profile.html" class="profile-link ">👤</a>
-    </nav>
-  </header>
-
-  <section class="hero">
-    <div class="hero-text">
-      <h2>Crave. Click. Eat. Repeat.</h2>
-      <p>Delicious food at your doorstep in minutes. Order now and indulge in culinary delight!</p>
-      <a href="menu.html" class="btn">Explore Menu</a>
-    </div>
-  </section>
-
-  <section class="categories">
-    <h2>Popular Categories</h2>
-    <div class="category-grid">
-      <a href="gujarati.html" class="category-card">
-        <div class="card-img-wrap"><img src="https://miro.medium.com/v2/resize:fit:800/1*gmC9-iW7VtxsO-TiTtULFw.jpeg" alt="Gujarati Food" /></div>
-        <h3>Gujarati</h3>
-        <ul>
-          <li>Dal Dhokli</li>
-          <li>Gujarati Thali</li>
-          <li>Fafda Jalebi</li>
-          <li>Khichdi</li>
-          <li>Undhiyu</li>
-        </ul>
-      </a>
-
-      <a href="punjabi.html" class="category-card">
-        <div class="card-img-wrap"><img src="https://www.shutterstock.com/image-photo/punjabi-thali-home-cooked-indian-260nw-1755363179.jpg" alt="Punjabi Food" /></div>
-        <h3>Punjabi</h3>
-        <ul>
-          <li>Sarson da Saag & Makki di Roti</li>
-          <li>Paneer Tikka</li>
-          <li>Butter Paneer</li>
-          <li>Amritsari Kulcha</li>
-          <li>Chole Bhature</li>
-        </ul>
-      </a>
-
-      <a href="chinese.html" class="category-card">
-        <div class="card-img-wrap"><img src="https://i.ndtvimg.com/i/2018-05/chinese-food_620x350_51525941624.jpg" alt="Chinese Food" /></div>
-        <h3>Chinese</h3>
-        <ul>
-          <li>Chili Paneer</li>
-          <li>Spring Rolls</li>
-          <li>Hakka Noodles</li>
-          <li>Manchurian Balls</li>
-          <li>Fried Rice</li>
-        </ul>
-      </a>
-
-      <a href="italian.html" class="category-card">
-        <div class="card-img-wrap"><img src="https://i.ytimg.com/vi/Nqf3Ha1NbiY/maxresdefault.jpg" alt="Italian Food" /></div>
-        <h3>Italian</h3>
-        <ul>
-          <li>Margherita Pizza</li>
-          <li>Spaghetti Carbonara</li>
-          <li>Lasagna</li>
-          <li>Pasta Alfredo</li>
-          <li>Bruschetta</li>
-        </ul>
-      </a>
-
-      <a href="korean.html" class="category-card">
-        <div class="card-img-wrap"><img src="https://cf.creatrip.com/original/blog/6948/mx06br6efy1mf5z2n86u254u447kthhp.jpg?d=800x600&q=75&f=webp" alt="Korean Food" /></div>
-        <h3>Korean</h3>
-        <ul>
-          <li>Kimchi Bokkeumbap</li>
-          <li>Vegetable Japchae</li>
-          <li>Tofu Bibimbap</li>
-          <li>Korean Mandu</li>
-          <li>Korean Pancakes</li>
-        </ul>
-      </a>
-
-      <a href="southindian.html" class="category-card">
-        <div class="card-img-wrap"><img src="https://c.ndtvimg.com/2023-01/n0aamqh_south-indian-food_625x300_17_January_23.jpg?im=FeatureCrop,algorithm=dnn,width=1200,height=675" alt="South Indian Food" /></div>
-        <h3>South Indian</h3>
-        <ul>
-          <li>Masala Dosa</li>
-          <li>Idli Sambar</li>
-          <li>Vada</li>
-          <li>Uttapam</li>
-          <li>Pongal</li>
-        </ul>
-      </a>
-
-      <a href="mexican.html" class="category-card">
-        <div class="card-img-wrap"><img src="https://www.shutterstock.com/image-photo/mexican-food-many-dishes-cuisine-260nw-1539082802.jpg" alt="Mexican Food" /></div>
-        <h3>Mexican</h3>
-        <ul>
-          <li>Veggie Tacos</li>
-          <li>Cheese Quesadilla</li>
-          <li>Nachos Supreme</li>
-          <li>Burrito Bowl</li>
-          <li>Spicy Salsa</li>
-        </ul>
-      </a>
-
-      <a href="french.html" class="category-card">
-        <div class="card-img-wrap"><img src="https://frenchly.us/wp-content/uploads/elementor/thumbs/5-qkdu6dupk4uyxsww3jqztm8bn18jxcm5y75ticyf0o.jpg" alt="French Food" /></div>
-        <h3>French</h3>
-        <ul>
-          <li>Croissant</li>
-          <li>Ratatouille</li>
-          <li>Crêpes</li>
-          <li>Quiche Lorraine</li>
-          <li>Baguette</li>
-        </ul>
-      </a>
-    </div>
-  </section>
-
-  <section class="popular-dishes">
-    <h2>Popular Dishes</h2>
-    <div class="dish-grid">
-      <div class="dish-card">
-        <div class="card-img-wrap"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDB5SHmiSc3i8yC5NmVHd9CGAAm71gDuNTpw&s" alt="Pizza" /></div>
-        <span class="price-badge">₹420</span>
-        <h3>Deluxe Pizza</h3>
-        <p>₹420</p>
-        <p>A Deluxe Pizza loaded with a variety of toppings — cheesy, crispy, and utterly satisfying every bite.</p>
-      </div>
-      <div class="dish-card">
-        <div class="card-img-wrap"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOxnefDdlWlRoNRfin-uRzQ4H27HvQVxLErQ&s" alt="Pasta" /></div>
-        <span class="price-badge">₹499</span>
-        <h3>Spaghetti Bolognese</h3>
-        <p>₹499</p>
-        <p>Classic Italian spaghetti with a slow-simmered ragù — rich, hearty, and full of deep savory flavour.</p>
-      </div>
-      <div class="dish-card">
-        <div class="card-img-wrap"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRf9tC5sOxSUzsCHVLWLjMY7HnphyZe_HiDhw&s" alt="Paneer Tikka" /></div>
-        <span class="price-badge">₹249</span>
-        <h3>Paneer Tikka</h3>
-        <p>₹249</p>
-        <p>Juicy paneer cubes marinated in yogurt and spices, chargrilled to perfection. An Indian classic.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="special-offers">
-    <h2>Special Offers</h2>
-    <div class="offers-grid">
-      <div class="offer-card">
-        <h3>20% Off on First Order</h3>
-        <p>Use code: FIRST20 on checkout.</p>
-      </div>
-      <div class="offer-card">
-        <h3>Free Delivery on Orders Over Rs. 500</h3>
-        <p>Enjoy free delivery when you order more than Rs. 500.</p>
-      </div>
-      <div class="offer-card">
-        <h3>Buy 1 Get 1 Free</h3>
-        <p>Get a free pizza when you buy another of the same size.</p>
-      </div>
-    </div>
-    
-  </section>
-
-  <section class="delivery-info">
-    <h2>Fast and Reliable Delivery</h2>
-    <p>We ensure fast and secure delivery to your doorstep.</p>
-  </section>
-
-  <section class="testimonials">
-    <h2>What Our Customers Say</h2>
-    <div class="testimonial-cards">
-      <div class="testimonial-card">
-        <p>"Best food delivery service! The pizzas are always fresh and delicious!"</p>
-        <h3>- Neha Patel</h3>
-      </div>
-      <div class="testimonial-card">
-        <p>"Quick delivery and amazing Gujarati food. Highly recommend PipaliyaPlates!"</p>
-        <h3>- Ravi Shah</h3>
-      </div>
-    </div>
-  </section>
-
-  <section class="ratings">
-    <h2>Customer Ratings</h2>
-    <div class="rating-stars">
-      <div class="stars-row">
-        <span style="animation-delay:0s">&#9733;</span>
-        <span style="animation-delay:0.12s">&#9733;</span>
-        <span style="animation-delay:0.24s">&#9733;</span>
-        <span style="animation-delay:0.36s">&#9733;</span>
-        <span style="animation-delay:0.48s">&#9733;</span>
-      </div>
-      <p>4.6 / 5 &nbsp;&mdash;&nbsp; based on 1,200+ happy reviews</p>
-    </div>
-  </section>
-
-  <section class="newsletter">
-    <h2>Stay Updated</h2>
-    <p>Sign up for our newsletter to receive special offers.</p>
-    <div class="newsletter-form">
-      <input type="email" placeholder="Enter your email" />
-      <button>Subscribe</button>
-    </div>
-  </section>
-
-  <footer class="main-footer">
-    <span class="footer-brand">PipaliyaPlates 🍕</span>
-    <p>&copy; 2025 PipaliyaPlates. All Rights Reserved.</p>
-    <nav class="footer-nav">
-      <a href="index.html">Home</a>
       <a href="menu.html">Menu</a>
       <a href="about.html">About</a>
       <a href="contact.html">Contact</a>
+      <a href="checkout.html" class="nav-cart">
+        🛒 Cart
+        <span class="cart-badge" id="cart-badge-main">0</span>
+      </a>
+      <a href="profile.html" class="profile-link" title="Profile">👤</a>
     </nav>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- MOBILE NAV -->
+  <div class="mobile-nav" id="mobile-nav">
+    <a href="index.html" class="active">Home</a>
+    <a href="menu.html">Menu</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="checkout.html">🛒 Cart</a>
+    <a href="profile.html">👤 Profile</a>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid-lines"></div>
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-eyebrow">🚀 30-Min Guaranteed Delivery</div>
+        <h1 class="hero-title">
+          Crave. Click.<br><span>Eat. Repeat.</span>
+        </h1>
+        <p class="hero-desc">
+          Delicious food from 8 world cuisines delivered to your doorstep in under 30 minutes. Freshly made, never
+          frozen. 🍛
+        </p>
+        <div class="hero-cta">
+          <a href="menu.html" class="btn btn-primary btn-lg">🍽️ Explore Menu</a>
+          <a href="about.html" class="btn btn-outline btn-lg">Our Story</a>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <div class="num" data-count="25" data-suffix="+">0+</div>
+            <div class="lbl">Dishes</div>
+          </div>
+          <div class="hero-stat">
+            <div class="num" data-count="8">0</div>
+            <div class="lbl">Cuisines</div>
+          </div>
+          <div class="hero-stat">
+            <div class="num" data-count="1200" data-suffix="+">0+</div>
+            <div class="lbl">Orders</div>
+          </div>
+          <div class="hero-stat">
+            <div class="num">4.6 ⭐</div>
+            <div class="lbl">Rating</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Floating hero image -->
+    <div class="hero-visual">
+      <div class="hero-img-wrap" style="border-radius: 50% 40% 50% 40%; height: 520px; width: 520px;">
+        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=80"
+          alt="Delicious food" style="width:100%;height:100%;object-fit:cover;" />
+      </div>
+      <!-- Float badges -->
+      <div class="hero-float-badge" style="top: 80px; right: -20px; animation-delay: 0.5s;">
+        <span class="fb-icon">⚡</span>
+        <div>
+          <div class="fb-label">Delivery Time</div>
+          <div class="fb-value">30 Minutes</div>
+        </div>
+      </div>
+      <div class="hero-float-badge" style="bottom: 100px; left: -30px; animation-delay: 1s;">
+        <span class="fb-icon">⭐</span>
+        <div>
+          <div class="fb-label">Customer Rating</div>
+          <div class="fb-value">4.6 / 5.0</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="bg-surface">
+    <div class="container">
+      <div class="section-header">
+        <p class="badge badge-primary" style="margin-bottom:16px;">Simple Process</p>
+        <h2 class="section-title">How It <span>Works</span></h2>
+        <p class="section-subtitle">Order your favourite food in 3 easy steps</p>
+      </div>
+      <div class="steps-grid reveal">
+        <div class="step-card">
+          <div class="step-num">🍽️</div>
+          <h3>Choose Your Dish</h3>
+          <p>Browse from 25+ dishes across 8 amazing cuisines — Gujarati, Punjabi, Italian, Chinese & more!</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">🛒</div>
+          <h3>Add to Cart</h3>
+          <p>Add your favourites to cart, apply discount codes, and review your order summary.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">🚀</div>
+          <h3>Fast Delivery</h3>
+          <p>Pay securely via Card, UPI, or Wallet. Your fresh food arrives in 30 minutes — guaranteed!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- POPULAR CATEGORIES -->
+  <section class="bg-base">
+    <div class="container">
+      <div class="section-header">
+        <p class="badge badge-accent" style="margin-bottom:16px;">8 Cuisines</p>
+        <h2 class="section-title">Popular <span>Categories</span></h2>
+        <p class="section-subtitle">From local Gujarati comfort to global gourmet — all in one place</p>
+      </div>
+      <div class="category-grid reveal">
+
+        <a href="gujarati.html" class="category-card">
+          <img src="https://miro.medium.com/v2/resize:fit:800/1*gmC9-iW7VtxsO-TiTtULFw.jpeg" alt="Gujarati Food" />
+          <div class="category-overlay">
+            <div class="cat-badge">🌿 Veg</div>
+            <h3>Gujarati</h3>
+            <p>Thali · Dal Dhokli · Fafda</p>
+          </div>
+        </a>
+
+        <a href="punjabi.html" class="category-card">
+          <img src="https://www.shutterstock.com/image-photo/punjabi-thali-home-cooked-indian-260nw-1755363179.jpg"
+            alt="Punjabi Food" />
+          <div class="category-overlay">
+            <div class="cat-badge">🔥 Spicy</div>
+            <h3>Punjabi</h3>
+            <p>Chole Bhature · Paneer Tikka</p>
+          </div>
+        </a>
+
+        <a href="chinese.html" class="category-card">
+          <img src="https://i.ndtvimg.com/i/2018-05/chinese-food_620x350_51525941624.jpg" alt="Chinese Food" />
+          <div class="category-overlay">
+            <div class="cat-badge">🥢 Indo-Chinese</div>
+            <h3>Chinese</h3>
+            <p>Hakka Noodles · Manchurian</p>
+          </div>
+        </a>
+
+        <a href="italian.html" class="category-card">
+          <img src="https://i.ytimg.com/vi/Nqf3Ha1NbiY/maxresdefault.jpg" alt="Italian Food" />
+          <div class="category-overlay">
+            <div class="cat-badge">🍕 Classic</div>
+            <h3>Italian</h3>
+            <p>Pizza · Pasta · Bruschetta</p>
+          </div>
+        </a>
+
+        <a href="korean.html" class="category-card">
+          <img
+            src="https://cf.creatrip.com/original/blog/6948/mx06br6efy1mf5z2n86u254u447kthhp.jpg?d=800x600&q=75&f=webp"
+            alt="Korean Food" />
+          <div class="category-overlay">
+            <div class="cat-badge">🌶️ Trendy</div>
+            <h3>Korean</h3>
+            <p>Bibimbap · Japchae · Mandu</p>
+          </div>
+        </a>
+
+        <a href="southindian.html" class="category-card">
+          <img
+            src="https://c.ndtvimg.com/2023-01/n0aamqh_south-indian-food_625x300_17_January_23.jpg?im=FeatureCrop,algorithm=dnn,width=1200,height=675"
+            alt="South Indian Food" />
+          <div class="category-overlay">
+            <div class="cat-badge">🥥 Fresh</div>
+            <h3>South Indian</h3>
+            <p>Masala Dosa · Idli · Vada</p>
+          </div>
+        </a>
+
+        <a href="mexican.html" class="category-card">
+          <img src="https://www.shutterstock.com/image-photo/mexican-food-many-dishes-cuisine-260nw-1539082802.jpg"
+            alt="Mexican Food" />
+          <div class="category-overlay">
+            <div class="cat-badge">🌮 Fun</div>
+            <h3>Mexican</h3>
+            <p>Tacos · Quesadilla · Nachos</p>
+          </div>
+        </a>
+
+        <a href="french.html" class="category-card">
+          <img
+            src="https://frenchly.us/wp-content/uploads/elementor/thumbs/5-qkdu6dupk4uyxsww3jqztm8bn18jxcm5y75ticyf0o.jpg"
+            alt="French Food" />
+          <div class="category-overlay">
+            <div class="cat-badge">🥐 Premium</div>
+            <h3>French</h3>
+            <p>Croissant · Crêpes · Ratatouille</p>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- POPULAR DISHES -->
+  <section class="bg-surface popular-dishes">
+    <div class="container">
+      <div class="section-header">
+        <p class="badge badge-primary" style="margin-bottom:16px;">Best Sellers</p>
+        <h2 class="section-title">Popular <span>Dishes</span></h2>
+        <p class="section-subtitle">Our customers' absolute favourites — order yours today!</p>
+      </div>
+      <div class="dish-grid reveal">
+
+        <div class="dish-card">
+          <div class="card-img-wrap">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDB5SHmiSc3i8yC5NmVHd9CGAAm71gDuNTpw&s"
+              alt="Deluxe Pizza" />
+            <span class="price-badge">₹420</span>
+            <div class="veg-badge"></div>
+          </div>
+          <div class="dish-card-body">
+            <h3>Deluxe Pizza</h3>
+            <p class="dish-desc">Loaded with a variety of toppings — cheesy, crispy, and utterly satisfying every bite.
+            </p>
+            <div class="dish-meta">
+              <span class="rating">⭐ 4.8</span>
+              <span>· Italian ·</span>
+              <span>25 mins</span>
+            </div>
+          </div>
+          <div class="dish-card-footer">
+            <span class="dish-price">₹420</span>
+            <button class="btn btn-primary btn-sm" onclick="addToCart(4,'Deluxe Pizza',420)">Add to Cart</button>
+          </div>
+        </div>
+
+        <div class="dish-card">
+          <div class="card-img-wrap">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOxnefDdlWlRoNRfin-uRzQ4H27HvQVxLErQ&s"
+              alt="Spaghetti Bolognese" />
+            <span class="price-badge">₹499</span>
+            <div class="veg-badge"></div>
+          </div>
+          <div class="dish-card-body">
+            <h3>Spaghetti Bolognese</h3>
+            <p class="dish-desc">Classic Italian spaghetti with slow-simmered ragù — rich, hearty, and full of deep
+              savory flavour.</p>
+            <div class="dish-meta">
+              <span class="rating">⭐ 4.7</span>
+              <span>· Italian ·</span>
+              <span>30 mins</span>
+            </div>
+          </div>
+          <div class="dish-card-footer">
+            <span class="dish-price">₹499</span>
+            <button class="btn btn-primary btn-sm" onclick="addToCart(4,'Spaghetti Bolognese',499)">Add to Cart</button>
+          </div>
+        </div>
+
+        <div class="dish-card">
+          <div class="card-img-wrap">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRf9tC5sOxSUzsCHVLWLjMY7HnphyZe_HiDhw&s"
+              alt="Paneer Tikka" />
+            <span class="price-badge">₹249</span>
+            <div class="veg-badge"></div>
+          </div>
+          <div class="dish-card-body">
+            <h3>Paneer Tikka</h3>
+            <p class="dish-desc">Juicy paneer cubes marinated in yogurt and spices, chargrilled to perfection. An Indian
+              classic.</p>
+            <div class="dish-meta">
+              <span class="rating">⭐ 4.9</span>
+              <span>· Punjabi ·</span>
+              <span>20 mins</span>
+            </div>
+          </div>
+          <div class="dish-card-footer">
+            <span class="dish-price">₹249</span>
+            <button class="btn btn-primary btn-sm" onclick="addToCart(2,'Paneer Tikka',249)">Add to Cart</button>
+          </div>
+        </div>
+
+      </div>
+      <div style="text-align:center;margin-top:40px;">
+        <a href="menu.html" class="btn btn-outline btn-lg">View Full Menu →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SPECIAL OFFERS -->
+  <section class="bg-base special-offers">
+    <div class="container">
+      <div class="section-header">
+        <p class="badge badge-accent" style="margin-bottom:16px;">Limited Time</p>
+        <h2 class="section-title">Special <span>Offers</span></h2>
+        <p class="section-subtitle">Don't miss these amazing deals — grab them before they're gone!</p>
+      </div>
+      <div class="offers-grid reveal">
+        <div class="offer-card">
+          <span class="offer-icon">🎉</span>
+          <h3>20% Off First Order</h3>
+          <p>Use code below at checkout and get 20% off your very first order with us!</p>
+          <span class="offer-code">FIRST20</span>
+        </div>
+        <div class="offer-card">
+          <span class="offer-icon">🚚</span>
+          <h3>Free Delivery ₹500+</h3>
+          <p>Order above ₹500 and we'll deliver absolutely free to your doorstep!</p>
+          <span class="offer-code">AUTO-APPLIED</span>
+        </div>
+        <div class="offer-card">
+          <span class="offer-icon">🍕</span>
+          <h3>Buy 1 Get 1 Free</h3>
+          <p>Get a second pizza absolutely FREE when you buy any pizza of the same size!</p>
+          <span class="offer-code">BOGO</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DELIVERY INFO -->
+  <section class="bg-surface">
+    <div class="container">
+      <div class="delivery-info reveal">
+        <h2>⚡ Fast & Reliable Delivery</h2>
+        <p>We guarantee your food arrives hot, fresh, and on time — or your next order is on us!</p>
+        <div style="display:flex;gap:40px;justify-content:center;margin-top:32px;flex-wrap:wrap;">
+          <div style="text-align:center;">
+            <div style="font-size:2.5rem;font-family:var(--font-heading);color:var(--primary);">30 min</div>
+            <div
+              style="font-size:0.8rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;margin-top:6px;">
+              Avg Delivery</div>
+          </div>
+          <div style="text-align:center;">
+            <div style="font-size:2.5rem;font-family:var(--font-heading);color:var(--primary);">₹40</div>
+            <div
+              style="font-size:0.8rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;margin-top:6px;">
+              Delivery Fee</div>
+          </div>
+          <div style="text-align:center;">
+            <div style="font-size:2.5rem;font-family:var(--font-heading);color:var(--primary);">FREE</div>
+            <div
+              style="font-size:0.8rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;margin-top:6px;">
+              On ₹500+ Orders</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="bg-base">
+    <div class="container">
+      <div class="section-header">
+        <p class="badge badge-primary" style="margin-bottom:16px;">Reviews</p>
+        <h2 class="section-title">What Customers <span>Say</span></h2>
+        <p class="section-subtitle">Real reviews from real foodies who love us 💬</p>
+      </div>
+      <div class="testimonial-cards reveal">
+        <div class="testimonial-card">
+          <p>"Best food delivery service! The pizzas are always fresh and delivery is insanely fast. PipaliyaPlates is
+            my go-to app now!"</p>
+          <div class="reviewer">
+            <img src="https://ui-avatars.com/api/?name=Neha+Patel&background=FF6B35&color=fff&size=100&bold=true"
+              alt="Neha Patel" class="reviewer-avatar" />
+            <div>
+              <span class="reviewer-name">Neha Patel</span>
+              <span class="reviewer-stars">⭐⭐⭐⭐⭐ · Ahmedabad</span>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <p>"Quick delivery and amazing Gujarati food. The Thali brings back home memories. Highly recommend
+            PipaliyaPlates to everyone!"</p>
+          <div class="reviewer">
+            <img src="https://ui-avatars.com/api/?name=Ravi+Shah&background=FFB800&color=000&size=100&bold=true"
+              alt="Ravi Shah" class="reviewer-avatar" />
+            <div>
+              <span class="reviewer-name">Ravi Shah</span>
+              <span class="reviewer-stars">⭐⭐⭐⭐⭐ · Surat</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RATINGS -->
+  <section class="bg-surface ratings">
+    <div class="container">
+      <div class="rating-stars">
+        <div class="stars-row">
+          <span style="animation-delay:0s">⭐</span>
+          <span style="animation-delay:.12s">⭐</span>
+          <span style="animation-delay:.24s">⭐</span>
+          <span style="animation-delay:.36s">⭐</span>
+          <span style="animation-delay:.48s">⭐</span>
+        </div>
+        <p style="font-size:1.1rem;"><strong style="color:var(--primary);">4.6 / 5</strong> &nbsp;—&nbsp; based on
+          <strong>1,200+</strong> happy reviews</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="bg-base" style="padding: 96px 24px;">
+    <div class="newsletter container reveal">
+      <p class="badge badge-accent" style="margin-bottom:16px;">Stay Updated</p>
+      <h2 class="section-title">Get <span>Exclusive Offers</span></h2>
+      <p>Subscribe to our newsletter and be the first to know about new dishes, deals & discounts!</p>
+      <div class="newsletter-form">
+        <input type="email" id="nl-email" placeholder="Enter your email address" />
+        <button onclick="subscribeNewsletter()">Subscribe 🚀</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="main-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand-col">
+          <div class="footer-logo">
+            <div class="logo-icon">🍕</div>
+            <span class="logo-text">PipaliyaPlates</span>
+          </div>
+          <p>India's most loved food delivery platform. 25+ dishes, 8 cuisines, 30-minute delivery — freshness
+            guaranteed!</p>
+          <div class="footer-social">
+            <a href="#" title="Facebook">📘</a>
+            <a href="#" title="Instagram">📸</a>
+            <a href="#" title="Twitter">🐦</a>
+            <a href="#" title="YouTube">▶️</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="menu.html">Menu</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Cuisines</h4>
+          <ul>
+            <li><a href="gujarati.html">Gujarati</a></li>
+            <li><a href="punjabi.html">Punjabi</a></li>
+            <li><a href="italian.html">Italian</a></li>
+            <li><a href="chinese.html">Chinese</a></li>
+            <li><a href="korean.html">Korean</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Account</h4>
+          <ul>
+            <li><a href="profile.html">My Profile</a></li>
+            <li><a href="checkout.html">My Cart</a></li>
+            <li><a href="login.html" onclick="sessionStorage.clear()">Logout</a></li>
+          </ul>
+          <div style="margin-top:20px;">
+            <p style="font-size:.78rem;color:var(--text-muted);margin-bottom:6px;">CONTACT</p>
+            <p style="font-size:.85rem;color:var(--text-secondary);">support@pipaliyaplates.com</p>
+            <p style="font-size:.85rem;color:var(--text-secondary);">+91 98765 43210</p>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 PipaliyaPlates. All Rights Reserved. Made with ❤️ in Ahmedabad.</p>
+        <span class="footer-brand">PipaliyaPlates 🍕</span>
+      </div>
+    </div>
   </footer>
 
+  <script src="script.js"></script>
+  <script>
+    function subscribeNewsletter() {
+      const email = document.getElementById('nl-email').value.trim();
+      if (!email) { showToast('Please enter your email!', 'error'); return; }
+      showToast('Subscribed successfully! 🎉 Check your inbox.', 'success', 4000);
+      document.getElementById('nl-email').value = '';
+    }
+  </script>
 </body>
-</html>  
+
+</html>

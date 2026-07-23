@@ -1,243 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Contact Us | PipaliyaPlates</title>
-  <link rel="stylesheet" href="style.css">
-  <style>
-    /* ── Contact Page Extras ── */
-    .contact-hero {
-      background:
-        linear-gradient(rgba(43,42,40,0.52), rgba(43,42,40,0.64)),
-        url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1600&q=80')
-        no-repeat center center / cover;
-      min-height: 280px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 60px 24px;
-    }
-    .contact-hero h2 {
-      font-family: var(--font-heading);
-      font-style: italic;
-      font-size: clamp(2rem, 5vw, 3.2rem);
-      color: #fff;
-      text-shadow: 0 2px 12px rgba(0,0,0,0.35);
-      margin-bottom: 12px;
-    }
-    .contact-hero p {
-      color: rgba(255,255,255,0.86);
-      font-size: 1.05rem;
-      font-weight: 300;
-    }
-
-    /* Layout */
-    .contact-page {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 60px 24px;
-      display: grid;
-      grid-template-columns: 1fr 1.5fr;
-      gap: 32px;
-      align-items: start;
-    }
-
-    /* Info card */
-    .contact-info {
-      background: var(--bg-white);
-      border: 1px solid var(--border);
-      border-radius: var(--r-xl);
-      padding: 40px 36px;
-      box-shadow: var(--shadow-sm);
-    }
-    .contact-info h3 {
-      font-size: 1.6rem;
-      color: var(--poy-plum);
-      margin-bottom: 8px;
-      padding-bottom: 12px;
-      border-bottom: 3px solid var(--poy-gold);
-      display: inline-block;
-    }
-    .contact-info p.sub { color: var(--text-light); margin-bottom: 28px; font-size: 0.95rem; margin-top: 8px; }
-
-    .info-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 14px;
-      margin-bottom: 22px;
-    }
-    .info-icon {
-      width: 44px; height: 44px;
-      background: var(--poy-plum-soft);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.2rem;
-      flex-shrink: 0;
-      border: 1px solid var(--poy-lavender);
-    }
-    .info-item strong { display: block; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.07em; color: var(--text-dark); margin-bottom: 3px; }
-    .info-item span, .info-item a { color: var(--text-mid); font-size: 0.95rem; }
-    .info-item a { color: var(--poy-plum); font-weight: 700; }
-    .info-item a:hover { text-decoration: underline; }
-
-    /* Social row */
-    .social-row { display: flex; gap: 10px; margin-top: 28px; }
-    .social-btn {
-      display: inline-flex; align-items: center; gap: 6px;
-      background: var(--bg-muted);
-      border: 1px solid var(--border);
-      border-radius: var(--r-pill);
-      padding: 8px 16px;
-      font-size: 0.82rem;
-      font-weight: 700;
-      color: var(--text-dark);
-      text-decoration: none;
-      transition: all 0.2s ease;
-    }
-    .social-btn:hover { background: var(--poy-plum); color: #fff; border-color: var(--poy-plum); }
-
-    /* Contact form card */
-    .contact-form-card {
-      background: var(--bg-white);
-      border: 1px solid var(--border);
-      border-radius: var(--r-xl);
-      padding: 40px 40px;
-      box-shadow: var(--shadow-sm);
-    }
-    .contact-form-card h3 {
-      font-size: 1.6rem;
-      color: var(--poy-plum);
-      margin-bottom: 8px;
-      padding-bottom: 12px;
-      border-bottom: 3px solid var(--poy-gold);
-      display: inline-block;
-    }
-    .contact-form-card p.sub { color: var(--text-light); margin-bottom: 28px; font-size: 0.95rem; margin-top: 8px; }
-
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-
-    .form-group { margin-bottom: 18px; }
-    .form-group label {
-      display: block;
-      font-weight: 700;
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: var(--text-dark);
-      margin-bottom: 7px;
-    }
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-      width: 100%;
-      padding: 13px 16px;
-      border: 1px solid var(--border-mid);
-      border-radius: var(--r-md);
-      font-size: 0.95rem;
-      background: var(--bg-white);
-      color: var(--text-dark);
-      outline: none;
-      font-family: var(--font-body);
-      transition: border-color 0.2s ease, box-shadow 0.2s ease;
-    }
-    .form-group input:focus,
-    .form-group select:focus,
-    .form-group textarea:focus {
-      border-color: var(--poy-plum);
-      box-shadow: 0 0 0 3px rgba(115,64,96,0.14);
-    }
-    .form-group textarea { resize: vertical; min-height: 130px; }
-
-    .btn-send {
-      background: var(--poy-plum);
-      color: #fff;
-      border: none;
-      padding: 14px 36px;
-      border-radius: var(--r-pill);
-      font-family: var(--font-body);
-      font-weight: 700;
-      font-size: 0.85rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      cursor: pointer;
-      width: 100%;
-      transition: background 0.2s ease, transform 0.2s ease;
-    }
-    .btn-send:hover { background: var(--poy-plum-dark); transform: translateY(-1px); }
-
-    /* Map strip */
-    .map-strip {
-      max-width: 1100px;
-      margin: 0 auto 60px;
-      padding: 0 24px;
-    }
-    .map-card {
-      background: var(--bg-white);
-      border: 1px solid var(--border);
-      border-radius: var(--r-xl);
-      overflow: hidden;
-      box-shadow: var(--shadow-sm);
-    }
-    .map-card h3 {
-      padding: 22px 28px 0;
-      font-size: 1.2rem;
-      color: var(--poy-plum);
-    }
-    .map-placeholder {
-      background: linear-gradient(135deg, var(--poy-plum-soft) 0%, #e8e3f0 100%);
-      height: 200px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      margin: 16px 28px 28px;
-      border-radius: var(--r-lg);
-      border: 1px dashed var(--poy-lavender);
-      gap: 8px;
-    }
-    .map-placeholder span { font-size: 2.5rem; }
-    .map-placeholder p { color: var(--poy-plum); font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.06em; }
-    .map-placeholder small { color: var(--text-light); font-size: 0.85rem; }
-
-    @media (max-width: 860px) {
-      .contact-page { grid-template-columns: 1fr; }
-      .form-row { grid-template-columns: 1fr; }
-      .contact-form-card, .contact-info { padding: 28px 22px; }
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us | PipaliyaPlates — We're Here to Help</title>
+  <meta name="description"
+    content="Get in touch with PipaliyaPlates. Contact us for order issues, feedback, or partnerships." />
+  <link rel="stylesheet" href="style.css" />
 </head>
-<body>
 
-  <!-- Header -->
-  <header class="main-header">
-    <h1><a href="index.html">PipaliyaPlates 🍕</a></h1>
+<body class="has-navbar">
+
+  <!-- HEADER -->
+  <header class="main-header" id="main-header">
+    <a href="index.html" class="header-logo">
+      <div class="logo-icon">🍕</div>
+      <span class="logo-text">Pipaliya<span>Plates</span></span>
+    </a>
     <nav>
       <a href="index.html">Home</a>
       <a href="menu.html">Menu</a>
       <a href="about.html">About</a>
       <a href="contact.html" class="active">Contact</a>
-      <a href="checkout.html">Cart</a>
-      <a href="profile.html" class="profile-link">👤</a>
+      <a href="checkout.html" class="nav-cart">🛒 Cart<span class="cart-badge">0</span></a>
+      <a href="profile.html" class="profile-link" title="Profile">👤</a>
     </nav>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
   </header>
 
-  <!-- Hero -->
+  <div class="mobile-nav" id="mobile-nav">
+    <a href="index.html">Home</a>
+    <a href="menu.html">Menu</a>
+    <a href="about.html">About</a>
+    <a href="contact.html" class="active">Contact</a>
+    <a href="checkout.html">🛒 Cart</a>
+    <a href="profile.html">👤 Profile</a>
+  </div>
+
+  <!-- HERO -->
   <div class="contact-hero">
     <div>
-      <h2>Get In Touch</h2>
+      <h2>Get In Touch 💬</h2>
       <p>We'd love to hear from you — questions, feedback, or just a foodie chat 🍛</p>
     </div>
   </div>
 
-  <!-- Contact Grid -->
+  <!-- CONTACT GRID -->
   <div class="contact-page">
 
-    <!-- Left: Info -->
-    <div class="contact-info">
+    <!-- LEFT: Info -->
+    <div class="contact-info reveal">
       <h3>Contact Info</h3>
       <p class="sub">Reach us anytime — we're always happy to help!</p>
 
@@ -288,8 +101,8 @@
       </div>
     </div>
 
-    <!-- Right: Form -->
-    <div class="contact-form-card">
+    <!-- RIGHT: Form -->
+    <div class="contact-form-card reveal">
       <h3>Send a Message</h3>
       <p class="sub">Fill the form below and we'll get back to you within 24 hours.</p>
 
@@ -297,17 +110,17 @@
         <div class="form-row">
           <div class="form-group">
             <label for="c-name">Your Name</label>
-            <input type="text" id="c-name" placeholder="e.g. Hardik Pipaliya" required>
+            <input type="text" id="c-name" placeholder="e.g. Hardik Pipaliya" required />
           </div>
           <div class="form-group">
             <label for="c-email">Your Email</label>
-            <input type="email" id="c-email" placeholder="you@example.com" required>
+            <input type="email" id="c-email" placeholder="you@example.com" required />
           </div>
         </div>
 
         <div class="form-group">
           <label for="c-phone">Phone Number (optional)</label>
-          <input type="tel" id="c-phone" placeholder="+91 XXXXX XXXXX">
+          <input type="tel" id="c-phone" placeholder="+91 XXXXX XXXXX" />
         </div>
 
         <div class="form-group">
@@ -333,7 +146,7 @@
     </div>
   </div>
 
-  <!-- Map / Location -->
+  <!-- MAP -->
   <div class="map-strip">
     <div class="map-card">
       <h3>📍 Find Us</h3>
@@ -345,25 +158,31 @@
     </div>
   </div>
 
-  <!-- Footer -->
+  <!-- FOOTER -->
   <footer class="main-footer">
-    <span class="footer-brand">PipaliyaPlates 🍕</span>
-    <p>&copy; 2025 PipaliyaPlates. Made with ❤️ and served with spice.</p>
-    <nav class="footer-nav">
-      <a href="index.html">Home</a>
-      <a href="menu.html">Menu</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
-    </nav>
+    <div class="container">
+      <div class="footer-bottom" style="justify-content:center;flex-direction:column;text-align:center;gap:16px;">
+        <span class="footer-brand">PipaliyaPlates 🍕</span>
+        <p>© 2025 PipaliyaPlates. Made with ❤️ and served with spice.</p>
+        <nav class="footer-nav" style="justify-content:center;">
+          <a href="index.html">Home</a>
+          <a href="menu.html">Menu</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+      </div>
+    </div>
   </footer>
 
+  <script src="script.js"></script>
   <script>
     function handleContact(e) {
       e.preventDefault();
       const name = document.getElementById('c-name').value;
-      alert(`Thank you, ${name}! 🎉\nWe've received your message and will reply within 24 hours.`);
+      showToast(`Thank you, ${name}! 🎉 We'll reply within 24 hours.`, 'success', 4000);
       document.getElementById('contact-form').reset();
     }
   </script>
 </body>
+
 </html>
