@@ -10,12 +10,27 @@
   <link rel="stylesheet" href="style.css" />
   <style>
     /* ── Payment Tab Panels ── */
-    .pay-panel { display: none; flex-direction: column; gap: 18px; animation: fadeUp 0.3s ease; }
-    .pay-panel.active { display: flex; }
+    .pay-panel {
+      display: none;
+      flex-direction: column;
+      gap: 18px;
+      animation: fadeUp 0.3s ease;
+    }
+
+    .pay-panel.active {
+      display: flex;
+    }
 
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(10px); }
-      to   { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     /* ── Card visual ── */
@@ -25,38 +40,71 @@
       padding: 28px 24px 20px;
       position: relative;
       overflow: hidden;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
       margin-bottom: 4px;
     }
+
     .card-visual::before {
       content: '';
       position: absolute;
-      top: -40px; right: -40px;
-      width: 180px; height: 180px;
+      top: -40px;
+      right: -40px;
+      width: 180px;
+      height: 180px;
       border-radius: 50%;
-      background: rgba(255,107,53,0.15);
+      background: rgba(255, 107, 53, 0.15);
     }
+
     .card-visual::after {
       content: '';
       position: absolute;
-      bottom: -50px; left: -30px;
-      width: 140px; height: 140px;
+      bottom: -50px;
+      left: -30px;
+      width: 140px;
+      height: 140px;
       border-radius: 50%;
-      background: rgba(255,184,0,0.1);
+      background: rgba(255, 184, 0, 0.1);
     }
-    .cv-chip { font-size: 1.6rem; margin-bottom: 16px; }
+
+    .cv-chip {
+      font-size: 1.6rem;
+      margin-bottom: 16px;
+    }
+
     .cv-number {
       font-family: 'Courier New', monospace;
       font-size: 1.15rem;
       letter-spacing: 0.18em;
       color: #fff;
       margin-bottom: 18px;
-      position: relative; z-index: 1;
+      position: relative;
+      z-index: 1;
     }
-    .cv-row { display: flex; justify-content: space-between; position: relative; z-index: 1; }
-    .cv-label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.5); margin-bottom: 3px; }
-    .cv-val { font-size: 0.88rem; color: rgba(255,255,255,0.9); font-weight: 600; }
-    .cv-brand { font-size: 1.5rem; }
+
+    .cv-row {
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cv-label {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: rgba(255, 255, 255, 0.5);
+      margin-bottom: 3px;
+    }
+
+    .cv-val {
+      font-size: 0.88rem;
+      color: rgba(255, 255, 255, 0.9);
+      font-weight: 600;
+    }
+
+    .cv-brand {
+      font-size: 1.5rem;
+    }
 
     /* ── UPI Panel ── */
     .upi-qr-box {
@@ -69,6 +117,7 @@
       border: 2px dashed var(--border-bright);
       border-radius: var(--r-xl);
     }
+
     .upi-qr-svg {
       width: 160px;
       height: 160px;
@@ -79,15 +128,18 @@
       align-items: center;
       justify-content: center;
     }
+
     .upi-id-input-wrap {
       width: 100%;
       display: flex;
       gap: 10px;
       align-items: center;
     }
+
     .upi-id-input-wrap input {
       flex: 1;
     }
+
     .upi-apps {
       display: flex;
       gap: 12px;
@@ -95,6 +147,7 @@
       justify-content: center;
       margin-top: 4px;
     }
+
     .upi-app-btn {
       display: flex;
       flex-direction: column;
@@ -110,12 +163,18 @@
       color: var(--text-secondary);
       font-weight: 600;
     }
-    .upi-app-btn span { font-size: 1.5rem; }
-    .upi-app-btn:hover, .upi-app-btn.selected {
+
+    .upi-app-btn span {
+      font-size: 1.5rem;
+    }
+
+    .upi-app-btn:hover,
+    .upi-app-btn.selected {
       border-color: var(--primary);
       color: var(--primary);
       background: var(--primary-light);
     }
+
     .upi-divider {
       width: 100%;
       text-align: center;
@@ -124,7 +183,9 @@
       color: var(--text-muted);
       font-weight: 600;
     }
-    .upi-divider::before, .upi-divider::after {
+
+    .upi-divider::before,
+    .upi-divider::after {
       content: '';
       position: absolute;
       top: 50%;
@@ -132,8 +193,14 @@
       height: 1px;
       background: var(--border);
     }
-    .upi-divider::before { left: 0; }
-    .upi-divider::after { right: 0; }
+
+    .upi-divider::before {
+      left: 0;
+    }
+
+    .upi-divider::after {
+      right: 0;
+    }
 
     /* ── Net Banking ── */
     .nb-banks {
@@ -141,6 +208,7 @@
       grid-template-columns: 1fr 1fr;
       gap: 10px;
     }
+
     .nb-bank-btn {
       display: flex;
       align-items: center;
@@ -155,12 +223,18 @@
       color: var(--text-secondary);
       font-weight: 500;
     }
-    .nb-bank-btn span { font-size: 1.2rem; }
-    .nb-bank-btn:hover, .nb-bank-btn.selected {
+
+    .nb-bank-btn span {
+      font-size: 1.2rem;
+    }
+
+    .nb-bank-btn:hover,
+    .nb-bank-btn.selected {
       border-color: var(--primary);
       color: var(--primary);
       background: var(--primary-light);
     }
+
     .nb-select-wrap {
       margin-top: 4px;
     }
@@ -172,21 +246,35 @@
       align-items: center;
       gap: 12px;
       padding: 32px 24px;
-      background: linear-gradient(135deg, rgba(34,197,94,0.1), rgba(34,197,94,0.05));
-      border: 2px solid rgba(34,197,94,0.3);
+      background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(34, 197, 94, 0.05));
+      border: 2px solid rgba(34, 197, 94, 0.3);
       border-radius: var(--r-xl);
       text-align: center;
     }
-    .cod-icon { font-size: 3rem; }
-    .cod-title { font-size: 1.15rem; font-weight: 700; color: var(--text-primary); }
-    .cod-desc { font-size: 0.84rem; color: var(--text-muted); line-height: 1.6; }
+
+    .cod-icon {
+      font-size: 3rem;
+    }
+
+    .cod-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .cod-desc {
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
     .cod-note {
       display: flex;
       align-items: center;
       gap: 8px;
       padding: 10px 16px;
-      background: rgba(255,184,0,0.1);
-      border: 1px solid rgba(255,184,0,0.3);
+      background: rgba(255, 184, 0, 0.1);
+      border: 1px solid rgba(255, 184, 0, 0.3);
       border-radius: var(--r-lg);
       font-size: 0.8rem;
       color: var(--accent);
@@ -194,8 +282,18 @@
     }
 
     /* ── Shared form inputs ── */
-    .pf-group label { font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); margin-bottom: 6px; display: block; }
-    .pf-group input, .pf-group select {
+    .pf-group label {
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .pf-group input,
+    .pf-group select {
       width: 100%;
       background: var(--bg-surface);
       border: 1.5px solid var(--border-bright);
@@ -208,11 +306,17 @@
       transition: border-color 0.2s ease, box-shadow 0.2s ease;
       box-sizing: border-box;
     }
-    .pf-group input:focus, .pf-group select:focus {
+
+    .pf-group input:focus,
+    .pf-group select:focus {
       border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(255,107,53,0.12);
+      box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.12);
     }
-    .pf-group select option { background: var(--bg-card); color: var(--text-primary); }
+
+    .pf-group select option {
+      background: var(--bg-card);
+      color: var(--text-primary);
+    }
 
     /* Verified badge */
     .upi-verified {
@@ -355,8 +459,7 @@
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
             <div class="pf-group">
               <label>Expiry (MM/YY)</label>
-              <input type="text" id="card-exp" placeholder="MM/YY" maxlength="5"
-                oninput="fmtExpiry(this)" />
+              <input type="text" id="card-exp" placeholder="MM/YY" maxlength="5" oninput="fmtExpiry(this)" />
             </div>
             <div class="pf-group">
               <label>CVV</label>
@@ -377,50 +480,74 @@
             <div class="upi-qr-svg">
               <svg viewBox="0 0 100 100" width="140" height="140" xmlns="http://www.w3.org/2000/svg">
                 <!-- QR pattern blocks -->
-                <rect width="100" height="100" fill="white"/>
+                <rect width="100" height="100" fill="white" />
                 <!-- Top-left finder -->
-                <rect x="5" y="5" width="30" height="30" rx="3" fill="#111"/>
-                <rect x="10" y="10" width="20" height="20" rx="2" fill="white"/>
-                <rect x="14" y="14" width="12" height="12" rx="1" fill="#111"/>
+                <rect x="5" y="5" width="30" height="30" rx="3" fill="#111" />
+                <rect x="10" y="10" width="20" height="20" rx="2" fill="white" />
+                <rect x="14" y="14" width="12" height="12" rx="1" fill="#111" />
                 <!-- Top-right finder -->
-                <rect x="65" y="5" width="30" height="30" rx="3" fill="#111"/>
-                <rect x="70" y="10" width="20" height="20" rx="2" fill="white"/>
-                <rect x="74" y="14" width="12" height="12" rx="1" fill="#111"/>
+                <rect x="65" y="5" width="30" height="30" rx="3" fill="#111" />
+                <rect x="70" y="10" width="20" height="20" rx="2" fill="white" />
+                <rect x="74" y="14" width="12" height="12" rx="1" fill="#111" />
                 <!-- Bottom-left finder -->
-                <rect x="5" y="65" width="30" height="30" rx="3" fill="#111"/>
-                <rect x="10" y="70" width="20" height="20" rx="2" fill="white"/>
-                <rect x="14" y="74" width="12" height="12" rx="1" fill="#111"/>
+                <rect x="5" y="65" width="30" height="30" rx="3" fill="#111" />
+                <rect x="10" y="70" width="20" height="20" rx="2" fill="white" />
+                <rect x="14" y="74" width="12" height="12" rx="1" fill="#111" />
                 <!-- Data modules -->
-                <rect x="40" y="5" width="5" height="5" fill="#111"/><rect x="48" y="5" width="5" height="5" fill="#111"/>
-                <rect x="56" y="5" width="5" height="5" fill="#111"/>
-                <rect x="40" y="12" width="5" height="5" fill="#111"/><rect x="52" y="12" width="5" height="5" fill="#111"/>
-                <rect x="40" y="19" width="5" height="5" fill="#111"/><rect x="48" y="19" width="5" height="5" fill="#111"/>
-                <rect x="56" y="19" width="5" height="5" fill="#111"/>
-                <rect x="5" y="40" width="5" height="5" fill="#111"/><rect x="12" y="40" width="5" height="5" fill="#111"/>
-                <rect x="19" y="40" width="5" height="5" fill="#111"/><rect x="26" y="40" width="5" height="5" fill="#111"/>
-                <rect x="40" y="40" width="5" height="5" fill="#111"/><rect x="48" y="40" width="5" height="5" fill="#111"/>
-                <rect x="56" y="40" width="5" height="5" fill="#111"/><rect x="64" y="40" width="5" height="5" fill="#111"/>
-                <rect x="72" y="40" width="5" height="5" fill="#111"/><rect x="80" y="40" width="5" height="5" fill="#111"/>
-                <rect x="88" y="40" width="5" height="5" fill="#111"/>
-                <rect x="5" y="48" width="5" height="5" fill="#111"/><rect x="19" y="48" width="5" height="5" fill="#111"/>
-                <rect x="40" y="48" width="5" height="5" fill="#111"/><rect x="52" y="48" width="5" height="5" fill="#111"/>
-                <rect x="64" y="48" width="5" height="5" fill="#111"/><rect x="76" y="48" width="5" height="5" fill="#111"/>
-                <rect x="88" y="48" width="5" height="5" fill="#111"/>
-                <rect x="5" y="56" width="5" height="5" fill="#111"/><rect x="12" y="56" width="5" height="5" fill="#111"/>
-                <rect x="26" y="56" width="5" height="5" fill="#111"/><rect x="40" y="56" width="5" height="5" fill="#111"/>
-                <rect x="48" y="56" width="5" height="5" fill="#111"/><rect x="60" y="56" width="5" height="5" fill="#111"/>
-                <rect x="72" y="56" width="5" height="5" fill="#111"/><rect x="84" y="56" width="5" height="5" fill="#111"/>
-                <rect x="40" y="64" width="5" height="5" fill="#111"/><rect x="56" y="64" width="5" height="5" fill="#111"/>
-                <rect x="68" y="64" width="5" height="5" fill="#111"/><rect x="80" y="64" width="5" height="5" fill="#111"/>
-                <rect x="88" y="64" width="5" height="5" fill="#111"/>
-                <rect x="40" y="72" width="5" height="5" fill="#111"/><rect x="48" y="72" width="5" height="5" fill="#111"/>
-                <rect x="60" y="72" width="5" height="5" fill="#111"/><rect x="72" y="72" width="5" height="5" fill="#111"/>
-                <rect x="84" y="72" width="5" height="5" fill="#111"/>
-                <rect x="40" y="80" width="5" height="5" fill="#111"/><rect x="52" y="80" width="5" height="5" fill="#111"/>
-                <rect x="64" y="80" width="5" height="5" fill="#111"/><rect x="76" y="80" width="5" height="5" fill="#111"/>
-                <rect x="40" y="88" width="5" height="5" fill="#111"/><rect x="48" y="88" width="5" height="5" fill="#111"/>
-                <rect x="60" y="88" width="5" height="5" fill="#111"/><rect x="72" y="88" width="5" height="5" fill="#111"/>
-                <rect x="84" y="88" width="5" height="5" fill="#111"/><rect x="92" y="88" width="5" height="5" fill="#111"/>
+                <rect x="40" y="5" width="5" height="5" fill="#111" />
+                <rect x="48" y="5" width="5" height="5" fill="#111" />
+                <rect x="56" y="5" width="5" height="5" fill="#111" />
+                <rect x="40" y="12" width="5" height="5" fill="#111" />
+                <rect x="52" y="12" width="5" height="5" fill="#111" />
+                <rect x="40" y="19" width="5" height="5" fill="#111" />
+                <rect x="48" y="19" width="5" height="5" fill="#111" />
+                <rect x="56" y="19" width="5" height="5" fill="#111" />
+                <rect x="5" y="40" width="5" height="5" fill="#111" />
+                <rect x="12" y="40" width="5" height="5" fill="#111" />
+                <rect x="19" y="40" width="5" height="5" fill="#111" />
+                <rect x="26" y="40" width="5" height="5" fill="#111" />
+                <rect x="40" y="40" width="5" height="5" fill="#111" />
+                <rect x="48" y="40" width="5" height="5" fill="#111" />
+                <rect x="56" y="40" width="5" height="5" fill="#111" />
+                <rect x="64" y="40" width="5" height="5" fill="#111" />
+                <rect x="72" y="40" width="5" height="5" fill="#111" />
+                <rect x="80" y="40" width="5" height="5" fill="#111" />
+                <rect x="88" y="40" width="5" height="5" fill="#111" />
+                <rect x="5" y="48" width="5" height="5" fill="#111" />
+                <rect x="19" y="48" width="5" height="5" fill="#111" />
+                <rect x="40" y="48" width="5" height="5" fill="#111" />
+                <rect x="52" y="48" width="5" height="5" fill="#111" />
+                <rect x="64" y="48" width="5" height="5" fill="#111" />
+                <rect x="76" y="48" width="5" height="5" fill="#111" />
+                <rect x="88" y="48" width="5" height="5" fill="#111" />
+                <rect x="5" y="56" width="5" height="5" fill="#111" />
+                <rect x="12" y="56" width="5" height="5" fill="#111" />
+                <rect x="26" y="56" width="5" height="5" fill="#111" />
+                <rect x="40" y="56" width="5" height="5" fill="#111" />
+                <rect x="48" y="56" width="5" height="5" fill="#111" />
+                <rect x="60" y="56" width="5" height="5" fill="#111" />
+                <rect x="72" y="56" width="5" height="5" fill="#111" />
+                <rect x="84" y="56" width="5" height="5" fill="#111" />
+                <rect x="40" y="64" width="5" height="5" fill="#111" />
+                <rect x="56" y="64" width="5" height="5" fill="#111" />
+                <rect x="68" y="64" width="5" height="5" fill="#111" />
+                <rect x="80" y="64" width="5" height="5" fill="#111" />
+                <rect x="88" y="64" width="5" height="5" fill="#111" />
+                <rect x="40" y="72" width="5" height="5" fill="#111" />
+                <rect x="48" y="72" width="5" height="5" fill="#111" />
+                <rect x="60" y="72" width="5" height="5" fill="#111" />
+                <rect x="72" y="72" width="5" height="5" fill="#111" />
+                <rect x="84" y="72" width="5" height="5" fill="#111" />
+                <rect x="40" y="80" width="5" height="5" fill="#111" />
+                <rect x="52" y="80" width="5" height="5" fill="#111" />
+                <rect x="64" y="80" width="5" height="5" fill="#111" />
+                <rect x="76" y="80" width="5" height="5" fill="#111" />
+                <rect x="40" y="88" width="5" height="5" fill="#111" />
+                <rect x="48" y="88" width="5" height="5" fill="#111" />
+                <rect x="60" y="88" width="5" height="5" fill="#111" />
+                <rect x="72" y="88" width="5" height="5" fill="#111" />
+                <rect x="84" y="88" width="5" height="5" fill="#111" />
+                <rect x="92" y="88" width="5" height="5" fill="#111" />
               </svg>
             </div>
             <p style="font-size:0.82rem;color:var(--text-muted);text-align:center;margin:0;">
@@ -452,8 +579,7 @@
           <div class="pf-group">
             <label>UPI ID</label>
             <div class="upi-id-input-wrap">
-              <input type="text" id="upi-id" placeholder="e.g. yourname@paytm"
-                oninput="validateUpiId(this)" />
+              <input type="text" id="upi-id" placeholder="e.g. yourname@paytm" oninput="validateUpiId(this)" />
               <span class="upi-verified" id="upi-verified">✅ Verified</span>
             </div>
           </div>
@@ -502,7 +628,8 @@
             </select>
           </div>
 
-          <div id="nb-selected-display" style="display:none;padding:12px 16px;background:var(--primary-light);border:1px solid var(--border-primary);border-radius:var(--r-lg);font-size:0.88rem;color:var(--primary);font-weight:600;">
+          <div id="nb-selected-display"
+            style="display:none;padding:12px 16px;background:var(--primary-light);border:1px solid var(--border-primary);border-radius:var(--r-lg);font-size:0.88rem;color:var(--primary);font-weight:600;">
             🏦 Selected: <span id="nb-selected-name"></span>
           </div>
 
@@ -581,8 +708,8 @@
 
     // ── Expiry formatting ──
     function fmtExpiry(el) {
-      let v = el.value.replace(/\D/g,'');
-      if (v.length >= 2) v = v.slice(0,2) + '/' + v.slice(2,4);
+      let v = el.value.replace(/\D/g, '');
+      if (v.length >= 2) v = v.slice(0, 2) + '/' + v.slice(2, 4);
       el.value = v;
       document.getElementById('cv-exp').textContent = el.value || 'MM/YY';
     }
@@ -602,7 +729,7 @@
       document.getElementById('selected-pay-method').value = type;
 
       // Update required attributes
-      const cardFields = ['card-name','card-num','card-exp','card-cvv'];
+      const cardFields = ['card-name', 'card-num', 'card-exp', 'card-cvv'];
       cardFields.forEach(id => {
         const el = document.getElementById(id);
         if (el) el.required = (type === 'card');
@@ -715,10 +842,10 @@
 
       // Validation per method
       if (method === 'card') {
-        const cn = document.getElementById('card-num').value.replace(/\s/g,'');
+        const cn = document.getElementById('card-num').value.replace(/\s/g, '');
         const exp = document.getElementById('card-exp').value;
         const cvv = document.getElementById('card-cvv').value;
-        const nm  = document.getElementById('card-name').value.trim();
+        const nm = document.getElementById('card-name').value.trim();
         if (!nm) { showToast('Please enter name on card', 'error'); return; }
         if (cn.length < 16) { showToast('Enter valid 16-digit card number', 'error'); return; }
         if (!exp.match(/^\d{2}\/\d{2}$/)) { showToast('Enter valid expiry MM/YY', 'error'); return; }
@@ -751,7 +878,7 @@
         return found ? found.name : (userEmail === 'hardik@gmail.com' ? 'Hardik Pipaliya' : 'Guest User');
       })();
 
-      const methodLabels = { card:'💳 Card', upi:'📱 UPI', nb:'🏦 Net Banking', cod:'💵 Cash on Delivery' };
+      const methodLabels = { card: '💳 Card', upi: '📱 UPI', nb: '🏦 Net Banking', cod: '💵 Cash on Delivery' };
       const payMethod = methodLabels[method] || method;
       const itemsStr = cart.map(i => `${i.name} ×${i.quantity}`).join(', ') || 'No items';
       const subtotal = cart.reduce((s, i) => s + i.price * i.quantity, 0);
