@@ -1,0 +1,392 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Live Order Tracking | PipaliyaPlates</title>
+  <meta name="description" content="Track your PipaliyaPlates order live." />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    :root { --track-green:#22c55e; --track-green-glow:rgba(34,197,94,0.35); --track-orange:var(--primary,#FF6B35); --track-orange-glow:rgba(255,107,53,0.35); }
+    body.tracking-page { min-height:100vh; background:var(--bg-base,#0d0d0d); }
+    .trk-page { max-width:780px; margin:0 auto; padding:calc(var(--nav-h,70px) + 36px) 20px 80px; }
+    .trk-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:28px; flex-wrap:wrap; gap:12px; }
+    .trk-header-left { display:flex; flex-direction:column; gap:6px; }
+    .trk-page-title { font-family:var(--font-heading,'Outfit',sans-serif); font-size:clamp(1.4rem,4vw,2rem); font-weight:800; color:var(--text-primary,#fff); display:flex; align-items:center; gap:10px; margin:0; }
+    .trk-order-chip { display:inline-flex; align-items:center; gap:6px; padding:5px 14px; background:var(--primary-light,rgba(255,107,53,0.12)); border:1px solid var(--border-primary,rgba(255,107,53,0.3)); border-radius:99px; font-size:.8rem; font-weight:700; color:var(--primary,#FF6B35); width:fit-content; }
+    .live-badge { display:inline-flex; align-items:center; gap:7px; padding:6px 14px; background:rgba(34,197,94,0.1); border:1px solid rgba(34,197,94,0.3); border-radius:99px; font-size:.78rem; font-weight:700; color:#22c55e; letter-spacing:.06em; }
+    .live-dot { width:8px; height:8px; border-radius:50%; background:#22c55e; animation:livePulse 1s ease-in-out infinite; flex-shrink:0; }
+    @keyframes livePulse { 0%,100%{opacity:1;transform:scale(1)}50%{opacity:.25;transform:scale(.7)} }
+    .trk-card { background:var(--bg-card,#1a1a1a); border:1px solid var(--border,rgba(255,255,255,.08)); border-radius:24px; overflow:hidden; box-shadow:0 20px 60px rgba(0,0,0,.5); margin-bottom:20px; }
+    .trk-eta-banner { background:linear-gradient(135deg,rgba(255,107,53,.18),rgba(255,184,0,.1)); border-bottom:1px solid rgba(255,107,53,.18); padding:22px 28px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:14px; }
+    .eta-block { display:flex; flex-direction:column; gap:3px; }
+    .eta-mini-label { font-size:.7rem; font-weight:700; text-transform:uppercase; letter-spacing:.1em; color:var(--text-muted,rgba(255,255,255,.4)); }
+    .eta-big-time { font-family:var(--font-heading,'Outfit',sans-serif); font-size:2.6rem; font-weight:900; color:var(--primary,#FF6B35); line-height:1; transition:all .5s ease; }
+    .eta-unit { font-size:.9rem; color:var(--text-muted,rgba(255,255,255,.5)); font-weight:500; }
+    .eta-right { display:flex; flex-direction:column; align-items:flex-end; gap:4px; }
+    .eta-order-val { font-size:1.1rem; font-weight:700; color:var(--text-primary,#fff); }
+    .eta-pay-val { font-size:.82rem; color:var(--text-muted,rgba(255,255,255,.5)); }
+    .trk-progress-wrap { padding:0 28px; margin-top:4px; }
+    .trk-progress-bar { width:100%; height:5px; background:rgba(255,255,255,.07); border-radius:99px; overflow:hidden; margin:16px 0; }
+    .trk-progress-fill { height:100%; border-radius:99px; background:linear-gradient(90deg,#22c55e,var(--track-orange)); width:0%; transition:width 1.8s cubic-bezier(.4,0,.2,1); }
+    .trk-steps-wrap { padding:0 28px 28px; position:relative; }
+    .trk-steps { display:flex; justify-content:space-between; position:relative; }
+    .trk-steps-line-bg { position:absolute; top:26px; left:8%; right:8%; height:2px; background:rgba(255,255,255,.07); z-index:0; border-radius:99px; }
+    .trk-steps-line-fill { position:absolute; top:26px; left:8%; height:2px; background:linear-gradient(90deg,#22c55e,var(--track-orange)); z-index:1; width:0%; border-radius:99px; transition:width 1.8s cubic-bezier(.4,0,.2,1); }
+    .trk-step { flex:1; display:flex; flex-direction:column; align-items:center; gap:8px; position:relative; z-index:2; }
+    .trk-dot { width:52px; height:52px; border-radius:50%; background:var(--bg-surface,#111); border:2px solid rgba(255,255,255,.1); display:flex; align-items:center; justify-content:center; font-size:1.3rem; transition:all .6s ease; position:relative; }
+    .trk-dot::after { content:''; position:absolute; inset:-6px; border-radius:50%; border:2px solid transparent; transition:border-color .4s ease; }
+    .trk-dot.step-done { background:linear-gradient(135deg,#15803d,#22c55e); border-color:#22c55e; box-shadow:0 0 20px var(--track-green-glow); }
+    .trk-dot.step-current { background:linear-gradient(135deg,#e05b25,var(--track-orange)); border-color:var(--track-orange); animation:currentRing 1.6s ease-in-out infinite; }
+    .trk-dot.step-current::after { border-color:rgba(255,107,53,.3); animation:currentRingOuter 1.6s ease-in-out infinite; }
+    @keyframes currentRing { 0%,100%{box-shadow:0 0 0 0 var(--track-orange-glow)}50%{box-shadow:0 0 0 12px rgba(255,107,53,0)} }
+    @keyframes currentRingOuter { 0%,100%{transform:scale(1);opacity:.6}50%{transform:scale(1.15);opacity:0} }
+    .trk-step-label { font-size:.7rem; font-weight:700; text-transform:uppercase; letter-spacing:.05em; color:var(--text-muted,rgba(255,255,255,.4)); text-align:center; line-height:1.4; transition:color .4s; }
+    .trk-step-label.done { color:#22c55e; }
+    .trk-step-label.current { color:var(--track-orange); }
+    .trk-step-time { font-size:.62rem; color:rgba(255,255,255,.25); font-weight:500; text-align:center; }
+    .trk-step-time.visible { color:rgba(255,255,255,.5); }
+    .trk-status-msg { text-align:center; font-size:.9rem; font-weight:600; color:var(--text-secondary,rgba(255,255,255,.65)); padding:14px 28px 0; min-height:22px; transition:opacity .4s; }
+    .rider-strip { margin:20px 28px 0; height:64px; background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.06); border-radius:16px; position:relative; overflow:hidden; }
+    .rider-road-line { position:absolute; bottom:14px; left:0; right:0; height:2px; background:repeating-linear-gradient(90deg,rgba(255,255,255,.12) 0,rgba(255,255,255,.12) 14px,transparent 14px,transparent 26px); }
+    @keyframes roadScroll { from{background-position:0 0}to{background-position:-200px 0} }
+    .rider-road-line.moving { animation:roadScroll 1.5s linear infinite; }
+    .rider-bg-el { position:absolute; bottom:16px; font-size:1.1rem; opacity:.25; animation:bgScroll 8s linear infinite; }
+    @keyframes bgScroll { from{transform:translateX(100%)}to{transform:translateX(-120%)} }
+    .rider-emoji { position:absolute; bottom:16px; font-size:1.8rem; transition:left 2.5s cubic-bezier(.4,0,.2,1); filter:drop-shadow(0 3px 6px rgba(0,0,0,.4)); left:5%; }
+    .rider-dest { position:absolute; right:14px; bottom:14px; font-size:1.4rem; opacity:.5; }
+    .speed-lines { position:absolute; bottom:20px; font-size:.8rem; color:rgba(255,107,53,.6); font-weight:700; letter-spacing:-2px; transition:left 2.5s cubic-bezier(.4,0,.2,1),opacity .4s; left:3%; opacity:0; }
+    .speed-lines.visible { opacity:1; }
+    .trk-info-card { background:var(--bg-card,#1a1a1a); border:1px solid var(--border,rgba(255,255,255,.08)); border-radius:20px; padding:24px; margin-bottom:16px; }
+    .trk-info-title { font-family:var(--font-heading,'Outfit',sans-serif); font-size:.95rem; font-weight:700; color:var(--text-primary,#fff); margin-bottom:16px; display:flex; align-items:center; gap:8px; padding-bottom:12px; border-bottom:1px solid rgba(255,255,255,.06); }
+    .trk-info-row { display:flex; justify-content:space-between; align-items:center; padding:9px 0; border-bottom:1px solid rgba(255,255,255,.04); font-size:.86rem; }
+    .trk-info-row:last-child { border-bottom:none; }
+    .trk-info-key { color:var(--text-muted,rgba(255,255,255,.4)); font-weight:500; }
+    .trk-info-val { color:var(--text-primary,#fff); font-weight:600; }
+    .trk-delivered-overlay { display:none; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:48px 28px; gap:12px; }
+    .trk-delivered-overlay.show { display:flex; }
+    .delivered-big-icon { font-size:5rem; animation:deliveredPop .6s cubic-bezier(.34,1.56,.64,1) both; }
+    @keyframes deliveredPop { from{transform:scale(.3);opacity:0}to{transform:scale(1);opacity:1} }
+    .delivered-title { font-family:var(--font-heading,'Outfit',sans-serif); font-size:1.6rem; font-weight:800; color:#22c55e; margin:0; }
+    .delivered-sub { font-size:.9rem; color:var(--text-muted,rgba(255,255,255,.5)); }
+    .delivered-clear-bar { width:100%; max-width:260px; height:4px; background:rgba(255,255,255,.08); border-radius:99px; overflow:hidden; margin-top:8px; }
+    .delivered-clear-fill { height:100%; background:linear-gradient(90deg,#22c55e,var(--track-orange)); width:0%; border-radius:99px; }
+    .delivered-clear-msg { font-size:.75rem; color:rgba(255,255,255,.3); margin-top:2px; }
+    .trk-empty { display:none; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:80px 28px; gap:16px; }
+    .trk-empty.show { display:flex; }
+    .trk-empty-icon { font-size:4.5rem; opacity:.4; }
+    .trk-empty-title { font-family:var(--font-heading,'Outfit',sans-serif); font-size:1.3rem; font-weight:700; color:var(--text-primary,#fff); margin:0; }
+    .trk-empty-sub { font-size:.88rem; color:var(--text-muted,rgba(255,255,255,.4)); }
+    .trk-actions { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:16px; }
+    .trk-help { display:flex; align-items:center; gap:14px; padding:14px 20px; background:var(--bg-card,#1a1a1a); border:1px solid rgba(255,255,255,.06); border-radius:16px; font-size:.84rem; color:var(--text-secondary,rgba(255,255,255,.6)); }
+    .trk-help strong { color:var(--text-primary,#fff); }
+    @media(max-width:560px){ .trk-dot{width:42px;height:42px;font-size:1rem} .trk-eta-banner{flex-direction:column} .eta-right{align-items:flex-start} .rider-strip{height:52px} .trk-steps-wrap{padding:0 16px 24px} .trk-progress-wrap{padding:0 16px} }
+  </style>
+</head>
+
+<body class="has-navbar tracking-page">
+
+  <header class="main-header" id="main-header">
+    <a href="index.html" class="header-logo">
+      <div class="logo-icon">🍕</div>
+      <span class="logo-text">Pipaliya<span>Plates</span></span>
+    </a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="menu.html">Menu</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="checkout.html" class="nav-cart">🛒 Cart<span class="cart-badge">0</span></a>
+      <a href="profile.html" class="profile-link" title="Profile">👤</a>
+    </nav>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </header>
+
+  <div class="mobile-nav" id="mobile-nav">
+    <a href="index.html">Home</a><a href="menu.html">Menu</a>
+    <a href="about.html">About</a><a href="contact.html">Contact</a>
+    <a href="checkout.html">🛒 Cart</a><a href="profile.html">👤 Profile</a>
+  </div>
+
+  <div class="trk-page" id="trk-page">
+
+    <div class="trk-header" id="trk-header">
+      <div class="trk-header-left">
+        <h1 class="trk-page-title">🛵 Live Order Tracking</h1>
+        <div class="trk-order-chip" id="trk-order-chip">Loading…</div>
+      </div>
+      <div class="live-badge" id="live-badge">
+        <span class="live-dot"></span>LIVE
+      </div>
+    </div>
+
+    <div class="trk-card" id="trk-card">
+
+      <!-- ETA banner -->
+      <div class="trk-eta-banner">
+        <div class="eta-block">
+          <div class="eta-mini-label">Estimated Arrival</div>
+          <div class="eta-big-time" id="eta-big">--</div>
+          <div class="eta-unit" id="eta-unit">minutes</div>
+        </div>
+        <div class="eta-right">
+          <div class="eta-mini-label">Order Total</div>
+          <div class="eta-order-val" id="eta-total">—</div>
+          <div class="eta-pay-val" id="eta-pay">—</div>
+        </div>
+      </div>
+
+      <!-- Progress bar -->
+      <div class="trk-progress-wrap">
+        <div class="trk-progress-bar">
+          <div class="trk-progress-fill" id="trk-progress-fill"></div>
+        </div>
+      </div>
+
+      <!-- Status -->
+      <div class="trk-status-msg" id="trk-status-msg">⏳ Fetching your order…</div>
+
+      <!-- Rider strip -->
+      <div class="rider-strip" id="rider-strip">
+        <div class="rider-road-line" id="rider-road"></div>
+        <span class="rider-bg-el" style="right:30%;animation-delay:-2s;animation-duration:9s;">🌴</span>
+        <span class="rider-bg-el" style="right:65%;animation-delay:-5s;animation-duration:11s;">🏪</span>
+        <span class="rider-bg-el" style="right:10%;animation-delay:-7s;animation-duration:7s;">🌳</span>
+        <div class="speed-lines" id="speed-lines">>>></div>
+        <div class="rider-emoji" id="rider-emoji">🛵</div>
+        <div class="rider-dest">🏠</div>
+      </div>
+
+      <!-- Steps -->
+      <div class="trk-steps-wrap">
+        <div class="trk-steps" id="trk-steps">
+          <div class="trk-steps-line-bg"></div>
+          <div class="trk-steps-line-fill" id="trk-line-fill"></div>
+          <div class="trk-step"><div class="trk-dot" id="d0">✅</div><div class="trk-step-label" id="l0">Confirmed</div><div class="trk-step-time" id="t0"></div></div>
+          <div class="trk-step"><div class="trk-dot" id="d1">👨‍🍳</div><div class="trk-step-label" id="l1">Preparing</div><div class="trk-step-time" id="t1"></div></div>
+          <div class="trk-step"><div class="trk-dot" id="d2">🛵</div><div class="trk-step-label" id="l2">On the Way</div><div class="trk-step-time" id="t2"></div></div>
+          <div class="trk-step"><div class="trk-dot" id="d3">🏠</div><div class="trk-step-label" id="l3">Delivered</div><div class="trk-step-time" id="t3"></div></div>
+        </div>
+      </div>
+
+      <!-- Delivered overlay -->
+      <div class="trk-delivered-overlay" id="delivered-overlay">
+        <div class="delivered-big-icon">🎉</div>
+        <p class="delivered-title">Order Delivered!</p>
+        <p class="delivered-sub">Enjoy your meal! Hope you love it 😋</p>
+        <div class="delivered-clear-bar"><div class="delivered-clear-fill" id="clear-fill"></div></div>
+        <div class="delivered-clear-msg" id="clear-msg">Clearing in 5 seconds…</div>
+      </div>
+    </div>
+
+    <!-- Order info -->
+    <div class="trk-info-card" id="trk-info-card">
+      <div class="trk-info-title">📦 Order Details</div>
+      <div class="trk-info-row"><span class="trk-info-key">Order ID</span><span class="trk-info-val" id="info-id" style="color:var(--primary);">—</span></div>
+      <div class="trk-info-row"><span class="trk-info-key">Items</span><span class="trk-info-val" id="info-items" style="max-width:60%;text-align:right;font-size:.8rem;">—</span></div>
+      <div class="trk-info-row"><span class="trk-info-key">Deliver To</span><span class="trk-info-val" id="info-addr" style="max-width:60%;text-align:right;font-size:.8rem;">—</span></div>
+      <div class="trk-info-row"><span class="trk-info-key">Payment</span><span class="trk-info-val" id="info-pay">—</span></div>
+      <div class="trk-info-row"><span class="trk-info-key">Placed At</span><span class="trk-info-val" id="info-date">—</span></div>
+      <div class="trk-info-row"><span class="trk-info-key">Status</span><span class="trk-info-val" id="info-status" style="color:#22c55e;">✅ Confirmed</span></div>
+    </div>
+
+    <div class="trk-help">
+      <span style="font-size:1.4rem;">🎧</span>
+      <div><strong>Need help?</strong> Call <a href="tel:1800800600" style="color:var(--primary);font-weight:700;">1800-800-600</a> or <a href="contact.html" style="color:var(--primary);">Contact Us</a></div>
+    </div>
+
+    <!-- Empty state -->
+    <div class="trk-empty" id="trk-empty">
+      <div class="trk-empty-icon">📭</div>
+      <p class="trk-empty-title">No Active Order</p>
+      <p class="trk-empty-sub">You don't have any ongoing order to track right now.</p>
+      <div class="trk-actions">
+        <a href="menu.html" class="btn btn-primary">🍽️ Order Now</a>
+        <a href="profile.html" class="btn btn-outline">📋 Order History</a>
+      </div>
+    </div>
+
+  </div>
+
+  <footer class="main-footer">
+    <div class="container">
+      <div class="footer-bottom" style="justify-content:center;flex-direction:column;text-align:center;gap:14px;">
+        <span class="footer-brand">PipaliyaPlates 🍕</span>
+        <p>© 2025 PipaliyaPlates. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    const STEPS=[
+      {emoji:'✅',label:'Confirmed',msg:'✅ Order confirmed! Kitchen is getting ready…',progress:8,line:0,riderPos:'6%',eta:38,roadMoving:false},
+      {emoji:'👨‍🍳',label:'Preparing',msg:'👨‍🍳 Your food is being prepared fresh for you!',progress:36,line:31,riderPos:'18%',eta:22,roadMoving:false},
+      {emoji:'🛵',label:'On the Way',msg:'🛵 Rider has picked up your order and is speeding to you!',progress:70,line:64,riderPos:'56%',eta:10,roadMoving:true},
+      {emoji:'🏠',label:'Delivered',msg:'🏠 Your order has been delivered! Bon appétit! 😋',progress:100,line:96,riderPos:'85%',eta:0,roadMoving:false}
+    ];
+    // Timing: step 0 → now, step 1 → 12s, step 2 → 25s, step 3 → 50s
+    const STEP_DELAYS=[0,12000,25000,50000];
+
+    let currentStep=-1,activeOrder=null,etaInterval=null,etaSeconds=0;
+
+    function fmt12(d){return d.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit',hour12:true});}
+
+    function loadOrder(){
+      const orders=JSON.parse(localStorage.getItem('orders'))||[];
+      const tid=sessionStorage.getItem('trackingOrderId');
+      if(tid){const o=orders.find(x=>x.orderId===tid);if(o)return o;}
+      return orders.slice().reverse().find(o=>{
+        const placed=new Date(o.date).getTime();
+        return Date.now()-placed<2*60*60*1000 && o.status!=='delivered';
+      })||null;
+    }
+
+    function showEmpty(){
+      document.getElementById('trk-header').style.display='none';
+      document.getElementById('trk-card').style.display='none';
+      document.getElementById('trk-info-card').style.display='none';
+      document.querySelector('.trk-help').style.display='none';
+      document.getElementById('trk-empty').classList.add('show');
+    }
+
+    function populateInfo(o){
+      document.getElementById('trk-order-chip').textContent=o.orderId;
+      document.getElementById('eta-total').textContent='₹'+o.total;
+      document.getElementById('eta-pay').textContent=o.paymentMethod||'';
+      document.getElementById('info-id').textContent=o.orderId;
+      document.getElementById('info-items').textContent=o.items||'—';
+      const addr=[o.address,o.city,o.pincode].filter(Boolean).join(', ');
+      document.getElementById('info-addr').textContent=addr||'—';
+      document.getElementById('info-pay').textContent=o.paymentMethod||'—';
+      document.getElementById('info-date').textContent=o.date?fmt12(new Date(o.date)):'—';
+    }
+
+    function applyStep(idx){
+      if(idx===currentStep)return;
+      currentStep=idx;
+      const s=STEPS[idx];
+      document.getElementById('trk-progress-fill').style.width=s.progress+'%';
+      document.getElementById('trk-line-fill').style.width=s.line+'%';
+      document.getElementById('rider-emoji').style.left=s.riderPos;
+      const sl=document.getElementById('speed-lines');
+      sl.style.left=(parseFloat(s.riderPos)-5)+'%';
+      sl.classList.toggle('visible',s.roadMoving);
+      const road=document.getElementById('rider-road');
+      s.roadMoving?road.classList.add('moving'):road.classList.remove('moving');
+      document.getElementById('trk-status-msg').textContent=s.msg;
+      for(let i=0;i<=3;i++){
+        const dot=document.getElementById('d'+i);
+        const lbl=document.getElementById('l'+i);
+        const tm=document.getElementById('t'+i);
+        dot.classList.remove('step-done','step-current');
+        lbl.classList.remove('done','current');
+        if(i<idx){dot.classList.add('step-done');lbl.classList.add('done');dot.textContent='✅';}
+        else if(i===idx){
+          dot.classList.add('step-current');lbl.classList.add('current');
+          dot.textContent=STEPS[i].emoji;
+          if(!tm.textContent){tm.textContent=fmt12(new Date());tm.classList.add('visible');}
+        } else {dot.textContent=STEPS[i].emoji;}
+      }
+      if(idx<3){
+        etaSeconds=s.eta*60;
+        updateEtaDisplay();
+      } else {
+        document.getElementById('eta-big').textContent='🎉';
+        document.getElementById('eta-unit').textContent='Delivered!';
+        clearInterval(etaInterval);
+        const is=document.getElementById('info-status');
+        is.textContent='🎉 Delivered';is.style.color='#22c55e';
+        const tm3=document.getElementById('t3');
+        if(!tm3.textContent){tm3.textContent=fmt12(new Date());tm3.classList.add('visible');}
+        document.getElementById('live-badge').style.display='none';
+        showDelivered();
+      }
+    }
+
+    function updateEtaDisplay(){
+      const mins=Math.floor(etaSeconds/60),secs=etaSeconds%60;
+      if(etaSeconds>=60){
+        document.getElementById('eta-big').textContent=mins;
+        document.getElementById('eta-unit').textContent='min'+(mins!==1?'s':'')+' away';
+      } else {
+        document.getElementById('eta-big').textContent=secs;
+        document.getElementById('eta-unit').textContent='sec'+(secs!==1?'s':'')+' away';
+      }
+    }
+
+    function startEtaCountdown(){
+      clearInterval(etaInterval);
+      etaInterval=setInterval(()=>{
+        if(currentStep>=3){clearInterval(etaInterval);return;}
+        if(etaSeconds>0){etaSeconds--;updateEtaDisplay();}
+      },1000);
+    }
+
+    function showDelivered(){
+      const overlay=document.getElementById('delivered-overlay');
+      overlay.classList.add('show');
+      document.getElementById('trk-steps').style.opacity='0.3';
+      document.getElementById('rider-strip').style.opacity='0.3';
+      document.getElementById('trk-status-msg').style.opacity='0';
+      let clearSec=5;
+      const fillEl=document.getElementById('clear-fill');
+      const msgEl=document.getElementById('clear-msg');
+      requestAnimationFrame(()=>{fillEl.style.transition='width 5s linear';fillEl.style.width='100%';});
+      const clearTimer=setInterval(()=>{
+        clearSec--;
+        msgEl.textContent='Clearing in '+clearSec+' second'+(clearSec!==1?'s':'')+'…';
+        if(clearSec<=0){clearInterval(clearTimer);clearTracking();}
+      },1000);
+    }
+
+    function clearTracking(){
+      if(activeOrder){
+        const orders=JSON.parse(localStorage.getItem('orders'))||[];
+        const idx=orders.findIndex(o=>o.orderId===activeOrder.orderId);
+        if(idx!==-1){orders[idx].status='delivered';orders[idx].deliveredAt=new Date().toISOString();localStorage.setItem('orders',JSON.stringify(orders));}
+      }
+      sessionStorage.removeItem('trackingOrderId');
+      const card=document.getElementById('trk-card');
+      const infoCard=document.getElementById('trk-info-card');
+      card.style.transition='opacity .8s ease,transform .8s ease';
+      card.style.opacity='0';card.style.transform='scale(.95) translateY(10px)';
+      infoCard.style.transition='opacity .6s ease';infoCard.style.opacity='0';
+      setTimeout(()=>{
+        card.style.display='none';infoCard.style.display='none';
+        document.getElementById('trk-header').style.opacity='0';
+        setTimeout(()=>{
+          document.getElementById('trk-header').style.display='none';
+          const ei=document.querySelector('.trk-empty-icon');
+          const et=document.querySelector('.trk-empty-title');
+          const es=document.querySelector('.trk-empty-sub');
+          if(ei)ei.textContent='✅';
+          if(et)et.textContent='Order Delivered!';
+          if(es)es.textContent='Your order was delivered successfully. Place a new order whenever you\'re hungry again!';
+          document.querySelector('.trk-help') && (document.querySelector('.trk-help').style.display='none');
+          document.getElementById('trk-empty').classList.add('show');
+        },300);
+      },800);
+    }
+
+    document.addEventListener('DOMContentLoaded',()=>{
+      activeOrder=loadOrder();
+      if(!activeOrder){showEmpty();return;}
+      populateInfo(activeOrder);
+      const placed=new Date(activeOrder.date).getTime();
+      const elapsed=Date.now()-placed;
+      if(elapsed>=STEP_DELAYS[3]||activeOrder.status==='delivered'){applyStep(3);return;}
+      let startStep=0;
+      for(let i=STEP_DELAYS.length-1;i>=0;i--){if(elapsed>=STEP_DELAYS[i]){startStep=i;break;}}
+      applyStep(startStep);
+      startEtaCountdown();
+      STEP_DELAYS.forEach((delay,i)=>{
+        if(i<=startStep)return;
+        const remaining=delay-elapsed;
+        if(remaining>0){setTimeout(()=>{applyStep(i);if(i<3)startEtaCountdown();},remaining);}
+      });
+    });
+  </script>
+</body>
+</html>

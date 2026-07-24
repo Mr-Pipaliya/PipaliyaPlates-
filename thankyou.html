@@ -471,9 +471,9 @@
       </div>
     </div>
 
-    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:8px;">
-      <a href="menu.html" class="btn btn-primary">🍽️ Order Again</a>
-      <a href="profile.html" class="btn btn-outline">📋 My Orders</a>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:24px;">
+      <a href="tracking.html" class="btn btn-primary" id="track-btn">🛵 Track My Order</a>
+      <a href="menu.html" class="btn btn-outline">🍽️ Order Again</a>
       <a href="index.html" class="btn btn-outline">🏠 Go Home</a>
     </div>
 
@@ -500,6 +500,9 @@
     if (orderId) document.getElementById('order-id-display').textContent = orderId;
     if (orderTotal) document.getElementById('order-total-display').textContent = orderTotal;
     if (payMethod) document.getElementById('pay-method-display').textContent = payMethod;
+
+    // Save for tracking page
+    if (orderId) sessionStorage.setItem('trackingOrderId', orderId);
 
     sessionStorage.removeItem('lastOrderId');
     sessionStorage.removeItem('lastOrderTotal');
