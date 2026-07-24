@@ -1,37 +1,74 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Profile | PipaliyaPlates</title>
+  <title>My Profile | PipaliyaPlates — India's Premium Food Delivery</title>
+  <meta name="description" content="Manage your PipaliyaPlates profile, orders, addresses, and account settings." />
   <link rel="stylesheet" href="style.css">
   <style>
-    /* ─── Profile Picture Upload ─── */
+    /* ══════════════════════════════════════════════════
+       PROFILE PAGE — DARK THEME (matches website)
+    ══════════════════════════════════════════════════ */
+
+    .profile-hero {
+      padding: calc(var(--nav-h) + 48px) 24px 48px;
+      background:
+        radial-gradient(ellipse 70% 60% at 60% 50%, rgba(255,107,53,0.13) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 50% at 10% 80%, rgba(255,184,0,0.07) 0%, transparent 60%),
+        var(--bg-surface);
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .profile-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+
+    .profile-hero-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      position: relative;
+      z-index: 2;
+      flex-wrap: wrap;
+    }
+
     .avatar-wrap {
       position: relative;
-      width: 120px;
-      height: 120px;
+      width: 130px;
+      height: 130px;
       flex-shrink: 0;
       cursor: pointer;
     }
 
     .profile-avatar {
-      width: 120px;
-      height: 120px;
+      width: 130px;
+      height: 130px;
       border-radius: 50%;
       object-fit: cover;
-      border: 4px solid var(--poy-lavender);
+      border: 3px solid var(--border-primary);
       display: block;
       transition: filter 0.3s ease, transform 0.3s ease;
+      box-shadow: 0 0 30px rgba(255,107,53,0.3);
     }
 
     .avatar-wrap:hover .profile-avatar {
-      filter: brightness(0.72);
+      filter: brightness(0.65);
       transform: scale(1.04);
     }
 
-    /* Camera icon overlay */
     .avatar-overlay {
       position: absolute;
       inset: 0;
@@ -45,259 +82,362 @@
       pointer-events: none;
     }
 
-    .avatar-wrap:hover .avatar-overlay {
-      opacity: 1;
-    }
+    .avatar-wrap:hover .avatar-overlay { opacity: 1; }
 
-    .avatar-overlay span {
-      font-size: 1.8rem;
-      line-height: 1;
-    }
-
+    .avatar-overlay span { font-size: 1.8rem; line-height: 1; }
     .avatar-overlay small {
-      font-size: 0.65rem;
+      font-size: 0.6rem;
       font-family: var(--font-body);
       font-weight: 700;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
       color: #fff;
       margin-top: 4px;
     }
 
-    /* ─── Payment Methods Card Styling ─── */
-    .payment-methods {
-      padding: 20px;
+    #avatar-input { display: none; }
+
+    .avatar-hint {
+      text-align: center;
+      font-size: 0.68rem;
+      font-family: var(--font-body);
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 8px;
     }
 
-    .payment-methods ul {
-      list-style: none;
-      padding: 0;
-      margin-top: 12px;
+    @keyframes avatarRing {
+      0%   { box-shadow: 0 0 0 0 rgba(255,107,53,0.6); }
+      70%  { box-shadow: 0 0 0 14px rgba(255,107,53,0); }
+      100% { box-shadow: 0 0 0 0 rgba(255,107,53,0); }
+    }
+    .avatar-uploaded { animation: avatarRing 0.6s ease-out; }
+
+    .profile-hero-info { flex: 1; min-width: 220px; }
+
+    .profile-hero-info .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 14px;
+      background: var(--primary-light);
+      border: 1px solid var(--border-primary);
+      border-radius: var(--r-pill);
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--primary);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .profile-hero-info h1 {
+      font-family: var(--font-heading);
+      font-size: clamp(1.7rem, 4vw, 2.6rem);
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+      line-height: 1.15;
+    }
+
+    .profile-hero-info .p-email {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      margin-bottom: 6px;
+    }
+
+    .profile-hero-info .p-bio {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+
+    .profile-actions {
       display: flex;
-      flex-direction: column;
       gap: 12px;
+      flex-wrap: wrap;
     }
 
-    .payment-methods li {
+    /* ── Layout ── */
+    .profile-body {
+      max-width: 1100px;
+      margin: 48px auto 80px;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .profile-full { grid-column: 1 / -1; }
+
+    /* ── Cards ── */
+    .prof-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--r-2xl);
+      padding: 32px;
+      transition: border-color var(--t-normal), box-shadow var(--t-normal);
+    }
+
+    .prof-card:hover {
+      border-color: var(--border-primary);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+    }
+
+    .prof-card h3 {
+      font-family: var(--font-heading);
+      font-size: 1.2rem;
+      color: var(--text-primary);
+      margin-bottom: 20px;
       display: flex;
       align-items: center;
       gap: 10px;
-      background: #fff;
-      border: 1px solid #eee;
-      border-radius: 12px;
-      padding: 14px 18px;
-      font-family: var(--font-body);
-      font-size: 0.95rem;
-      color: var(--poy-plum);
-      box-shadow: 0 2px 6px rgba(115, 64, 96, 0.08);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border);
     }
 
-    .payment-methods li:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 6px 14px rgba(115, 64, 96, 0.15);
-      border-color: var(--poy-lavender);
+    .card-icon {
+      width: 34px;
+      height: 34px;
+      background: var(--primary-light);
+      border: 1px solid var(--border-primary);
+      border-radius: var(--r-md);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
     }
 
-    /* ─── Subscriptions & Memberships ─── */
-    .subscriptions {
-      padding: 20px;
-      background: #fff8f5;
-      border-radius: 14px;
-      border: 1px solid #f0e0e8;
+    /* ── Stats ── */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
     }
 
-    .subscriptions p {
-      font-family: var(--font-body);
-      color: var(--poy-plum);
-      margin: 6px 0;
-      font-size: 0.95rem;
-    }
-
-    .subscriptions p:first-of-type {
-      font-weight: 700;
-      font-size: 1.05rem;
-    }
-
-    /* ─── Upcoming Reservations ─── */
-    .reservations {
-      padding: 20px;
-    }
-
-    .reservations ul {
-      list-style: none;
-      padding: 0;
-      margin-top: 12px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .reservations li {
-      background: #fff;
-      border-left: 4px solid var(--poy-lavender);
-      border-radius: 10px;
-      padding: 12px 16px;
-      font-family: var(--font-body);
-      color: var(--poy-plum);
-      box-shadow: 0 2px 6px rgba(115, 64, 96, 0.08);
-      transition: transform 0.2s ease;
-    }
-
-    .reservations li:hover {
-      transform: translateX(4px);
-    }
-
-    /* ─── Recent Reviews ─── */
-    .reviews {
-      padding: 20px;
-    }
-
-    .reviews ul {
-      list-style: none;
-      padding: 0;
-      margin-top: 12px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .reviews li {
-      background: #fff;
-      border-radius: 10px;
-      padding: 12px 16px;
-      font-family: var(--font-body);
-      color: var(--poy-plum);
-      font-size: 0.9rem;
-      box-shadow: 0 2px 6px rgba(115, 64, 96, 0.08);
-    }
-
-    /* ─── Support Requests ─── */
-    .support-tickets {
-      padding: 20px;
-    }
-
-    .support-tickets ul {
-      list-style: none;
-      padding: 0;
-      margin-top: 12px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .support-tickets li {
-      background: #fff;
-      border-radius: 10px;
-      padding: 12px 16px;
-      font-family: var(--font-body);
-      color: var(--poy-plum);
-      font-size: 0.9rem;
-      border: 1px dashed #e2c9d6;
-    }
-
-    /* ─── Connected Social Accounts ─── */
-    .social-links {
-      padding: 20px;
-    }
-
-    .social-links ul {
-      list-style: none;
-      padding: 0;
-      margin-top: 12px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    .social-links li {
-      background: #fff;
-      border-radius: 30px;
-      padding: 8px 16px;
-      font-family: var(--font-body);
-      color: var(--poy-plum);
-      font-size: 0.9rem;
-      box-shadow: 0 2px 6px rgba(115, 64, 96, 0.08);
-    }
-
-    .social-links a {
-      color: var(--poy-plum);
-      text-decoration: none;
-      font-weight: 600;
-    }
-
-    .social-links a:hover {
-      text-decoration: underline;
-    }
-
-    /* ─── Account Settings ─── */
-    .settings {
-      padding: 20px;
-    }
-
-    .settings ul {
-      list-style: none;
-      padding: 0;
-      margin-top: 12px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .settings li a {
-      display: block;
-      background: #fff;
-      border-radius: 10px;
-      padding: 12px 16px;
-      font-family: var(--font-body);
-      color: var(--poy-plum);
-      text-decoration: none;
-      font-size: 0.95rem;
-      box-shadow: 0 2px 6px rgba(115, 64, 96, 0.08);
-      transition: background 0.2s ease, transform 0.2s ease;
-    }
-
-    .settings li a:hover {
-      background: var(--poy-lavender);
-      color: #fff;
-      transform: translateX(4px);
-    }
-
-    /* Hidden file input */
-    #avatar-input {
-      display: none;
-    }
-
-    /* Upload success ring animation */
-    @keyframes avatarRing {
-      0% {
-        box-shadow: 0 0 0 0 rgba(115, 64, 96, 0.5);
-      }
-
-      70% {
-        box-shadow: 0 0 0 14px rgba(115, 64, 96, 0);
-      }
-
-      100% {
-        box-shadow: 0 0 0 0 rgba(115, 64, 96, 0);
-      }
-    }
-
-    .avatar-uploaded {
-      animation: avatarRing 0.6s ease-out;
-    }
-
-    /* Change photo text badge below avatar */
-    .avatar-hint {
+    .stat-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-xl);
+      padding: 24px 16px;
       text-align: center;
+      transition: all var(--t-normal);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      opacity: 0;
+      transition: opacity var(--t-normal);
+    }
+
+    .stat-card:hover { border-color: var(--border-primary); transform: translateY(-4px); box-shadow: var(--shadow-glow); }
+    .stat-card:hover::before { opacity: 1; }
+
+    .stat-emoji { font-size: 1.5rem; margin-bottom: 8px; display: block; }
+    .stat-number { font-family: var(--font-heading); font-size: 1.8rem; font-weight: 900; color: var(--primary); line-height: 1; margin-bottom: 4px; }
+    .stat-label { font-size: 0.72rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; }
+
+    /* ── Lists ── */
+    .badges-list { display: flex; flex-wrap: wrap; gap: 10px; list-style: none; padding: 0; margin: 0; }
+    .badges-list li {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-bright);
+      border-radius: var(--r-pill);
+      padding: 8px 18px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      transition: all var(--t-fast);
+    }
+    .badges-list li:hover { border-color: var(--primary); color: var(--primary); background: var(--primary-light); transform: translateY(-2px); }
+
+    .fav-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+    .fav-list li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      transition: all var(--t-fast);
+    }
+    .fav-list li::before { content: 'X'; font-size: 1rem; flex-shrink: 0; }
+    .fav-list li:hover { border-color: var(--border-primary); color: var(--text-primary); transform: translateX(4px); }
+
+    /* ── Table ── */
+    .orders-table { width: 100%; border-collapse: collapse; }
+    .orders-table th {
+      text-align: left;
       font-size: 0.72rem;
-      font-family: var(--font-body);
-      font-weight: 700;
-      letter-spacing: 0.06em;
+      font-weight: 600;
       text-transform: uppercase;
-      color: var(--poy-plum);
-      margin-top: 8px;
-      opacity: 0.75;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      padding: 0 12px 14px;
+    }
+    .orders-table td {
+      padding: 14px 12px;
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      border-top: 1px solid var(--border);
+    }
+    .orders-table tr:hover td { background: var(--bg-glass); color: var(--text-primary); }
+
+    .status-pill { display: inline-flex; align-items: center; gap: 5px; padding: 3px 10px; border-radius: var(--r-pill); font-size: 0.72rem; font-weight: 700; }
+    .status-delivered { background: rgba(34,197,94,0.12); color: #22c55e; border: 1px solid rgba(34,197,94,0.25); }
+    .status-cancelled { background: rgba(239,68,68,0.12); color: #ef4444; border: 1px solid rgba(239,68,68,0.25); }
+
+    /* ── Addresses ── */
+    .address-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .address-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: 18px;
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      transition: all var(--t-fast);
+      line-height: 1.7;
+    }
+    .address-card:hover { border-color: var(--border-primary); color: var(--text-primary); }
+    .address-card strong { display: block; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--primary); font-weight: 700; margin-bottom: 6px; }
+
+    /* ── Payment ── */
+    .payment-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+    .payment-list li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 18px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      transition: all var(--t-fast);
+    }
+    .payment-list li:hover { border-color: var(--border-primary); color: var(--text-primary); transform: translateY(-2px); }
+
+    /* ── Subscription ── */
+    .sub-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, rgba(255,184,0,0.15), rgba(255,107,53,0.1));
+      border: 1px solid rgba(255,184,0,0.35);
+      border-radius: var(--r-lg);
+      padding: 16px 22px;
+      margin-bottom: 14px;
+      width: 100%;
+    }
+    .sub-badge .sub-icon { font-size: 1.4rem; }
+    .sub-badge strong { display: block; font-size: 0.95rem; color: var(--accent); font-weight: 700; }
+    .sub-badge small { font-size: 0.78rem; color: var(--text-muted); }
+
+    /* ── Reservations ── */
+    .res-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+    .res-list li {
+      padding: 14px 16px;
+      background: var(--bg-surface);
+      border-left: 3px solid var(--primary);
+      border-radius: var(--r-lg);
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      transition: all var(--t-fast);
+      line-height: 1.6;
+    }
+    .res-list li:hover { background: var(--bg-glass-hover); color: var(--text-primary); transform: translateX(4px); }
+
+    /* ── Reviews ── */
+    .review-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+    .review-list li {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: 14px 16px;
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      transition: border-color var(--t-fast);
+      line-height: 1.6;
+    }
+    .review-list li:hover { border-color: var(--border-primary); }
+
+    /* ── Tickets ── */
+    .ticket-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+    .ticket-list li {
+      background: var(--bg-surface);
+      border: 1px dashed var(--border-bright);
+      border-radius: var(--r-lg);
+      padding: 14px 16px;
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+    }
+
+    /* ── Social / Settings ── */
+    .social-chips { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 10px; }
+    .social-chips li a, .social-chips li span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 18px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-bright);
+      border-radius: var(--r-pill);
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: all var(--t-fast);
+    }
+    .social-chips li a:hover { border-color: var(--primary); color: var(--primary); background: var(--primary-light); }
+
+    .settings-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
+    .settings-list li a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 18px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: all var(--t-fast);
+    }
+    .settings-list li a:hover { border-color: var(--border-primary); color: var(--text-primary); background: var(--bg-glass-hover); transform: translateX(4px); }
+    .settings-list li a.danger:hover { border-color: rgba(239,68,68,0.4); color: #ef4444; background: rgba(239,68,68,0.08); }
+
+    /* ── Preferences ── */
+    .pref-row { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--border); font-size: 0.88rem; }
+    .pref-row:last-child { border-bottom: none; }
+    .pref-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); font-weight: 600; min-width: 100px; }
+    .pref-val { color: var(--text-primary); font-weight: 500; }
+
+    .about-text { font-size: 0.95rem; color: var(--text-secondary); line-height: 1.8; }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .profile-body { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .profile-hero-inner { flex-direction: column; align-items: flex-start; }
+      .address-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -315,141 +455,133 @@
       <a href="menu.html">Menu</a>
       <a href="about.html">About</a>
       <a href="contact.html">Contact</a>
-      <a href="checkout.html" class="nav-cart">🛒 Cart<span class="cart-badge">0</span></a>
+      <a href="checkout.html" class="nav-cart">🛒 Cart<span class="cart-badge" id="cart-badge">0</span></a>
       <a href="profile.html" class="profile-link active">👤</a>
     </nav>
     <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
   </header>
+
   <div class="mobile-nav" id="mobile-nav">
     <a href="index.html">Home</a><a href="menu.html">Menu</a>
     <a href="about.html">About</a><a href="contact.html">Contact</a>
     <a href="checkout.html">🛒 Cart</a><a href="profile.html" class="active">👤 Profile</a>
   </div>
 
-  <!-- 🌟 Profile Page -->
-  <main class="profile-page">
-
-    <!-- Profile Header -->
-    <section class="profile-header">
-
-      <!-- ── Clickable Avatar with camera overlay ── -->
-      <div class="avatar-wrap" onclick="document.getElementById('avatar-input').click()" title="Click to change photo">
-        <img id="profile-avatar-img"
-          src="https://ui-avatars.com/api/?name=User&background=f0e8ec&color=734060&size=200&font-size=0.42&bold=true"
-          alt="Profile Picture" class="profile-avatar">
-
-        <!-- Hover overlay -->
-        <div class="avatar-overlay">
-          <span>📷</span>
-          <small>Change</small>
+  <!-- PROFILE HERO -->
+  <section class="profile-hero">
+    <div class="profile-hero-inner">
+      <div>
+        <div class="avatar-wrap" onclick="document.getElementById('avatar-input').click()" title="Click to change photo">
+          <img id="profile-avatar-img"
+            src="https://ui-avatars.com/api/?name=User&background=1a1010&color=FF6B35&size=200&font-size=0.42&bold=true"
+            alt="Profile Picture" class="profile-avatar">
+          <div class="avatar-overlay">
+            <span>📷</span>
+            <small>Change</small>
+          </div>
         </div>
+        <input type="file" id="avatar-input" accept="image/*" onchange="handleAvatarUpload(event)">
+        <p class="avatar-hint">📷 Click to change</p>
       </div>
 
-      <!-- Hidden file input -->
-      <input type="file" id="avatar-input" accept="image/*" onchange="handleAvatarUpload(event)">
-      <p class="avatar-hint">📷 Click photo to change</p>
-
-      <div class="profile-info">
-        <h2 id="profile-name">✨ Mr. Hardik ✨</h2>
-        <p class="email" id="profile-email">📧 hardik@example.com</p>
-        <p class="bio" id="profile-bio">🍱 Foodie | 🌏 Global cuisines | 💻 Developer &amp; Designer</p>
+      <div class="profile-hero-info">
+        <div class="eyebrow">⭐ Premium Member</div>
+        <h1 id="profile-name">Mr. Hardik</h1>
+        <p class="p-email" id="profile-email">📧 hardik@example.com</p>
+        <p class="p-bio" id="profile-bio">🍱 Foodie &nbsp;·&nbsp; 🌏 Global cuisines &nbsp;·&nbsp; 💻 Developer &amp; Designer</p>
         <div class="profile-actions">
-          <button class="btn primary-btn" onclick="editProfile()">✏️ Edit Profile</button>
-          <button class="btn secondary-btn" onclick="logout()">🚪 Logout</button>
+          <button class="btn btn-primary" onclick="editProfile()">✏️ Edit Profile</button>
+          <button class="btn btn-outline" onclick="logout()">🚪 Logout</button>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <hr />
+  <!-- PROFILE BODY -->
+  <div class="profile-body">
 
-    <!-- Quick Stats -->
-    <section class="profile-stats">
-      <h3>📊 Your Stats</h3>
+    <!-- Stats -->
+    <div class="prof-card profile-full">
+      <h3><span class="card-icon">📊</span> Your Stats</h3>
       <div class="stats-grid">
-        <div class="stat-card">🍽️ <p class="stat-number">28</p>
-          <p class="stat-label">Orders</p>
-        </div>
-        <div class="stat-card">⭐ <p class="stat-number">250</p>
-          <p class="stat-label">Points</p>
-        </div>
-        <div class="stat-card">🏅 <p class="stat-number">5</p>
-          <p class="stat-label">Badges</p>
-        </div>
-        <div class="stat-card">🌟 <p class="stat-number">4.8</p>
-          <p class="stat-label">Rating</p>
-        </div>
+        <div class="stat-card"><span class="stat-emoji">🍽️</span><p class="stat-number">28</p><p class="stat-label">Orders</p></div>
+        <div class="stat-card"><span class="stat-emoji">⭐</span><p class="stat-number">250</p><p class="stat-label">Points</p></div>
+        <div class="stat-card"><span class="stat-emoji">🏅</span><p class="stat-number">5</p><p class="stat-label">Badges</p></div>
+        <div class="stat-card"><span class="stat-emoji">🌟</span><p class="stat-number">4.8</p><p class="stat-label">Rating</p></div>
       </div>
-    </section>
+    </div>
 
-    <hr />
+    <!-- About Me -->
+    <div class="prof-card">
+      <h3><span class="card-icon">👋</span> About Me</h3>
+      <p class="about-text">Hi! I'm Mr. Hardik. I love spicy Indian dishes, trying Korean food, and building beautiful web apps. Food motto: <em>"Eat what makes you happy!"</em> 😋</p>
+    </div>
 
     <!-- Badges -->
-    <section class="achievements">
-      <h3>🏅 Badges & Achievements</h3>
-      <ul>
+    <div class="prof-card">
+      <h3><span class="card-icon">🏅</span> Badges &amp; Achievements</h3>
+      <ul class="badges-list">
         <li>🥇 Gold Foodie</li>
         <li>🔥 Spicy Lover</li>
         <li>🌱 Vegan Try-Out</li>
         <li>📝 Top Reviewer</li>
         <li>🍽️ Gourmet Explorer</li>
       </ul>
-    </section>
+    </div>
 
-    <hr />
+    <!-- Food Preferences -->
+    <div class="prof-card">
+      <h3><span class="card-icon">🍛</span> Food Preferences</h3>
+      <div class="pref-row"><span class="pref-label">Diet</span><span class="pref-val">🌿 Vegetarian</span></div>
+      <div class="pref-row"><span class="pref-label">Spice Level</span><span class="pref-val">🌶️ Medium to High</span></div>
+      <div class="pref-row"><span class="pref-label">Allergies</span><span class="pref-val">✅ None</span></div>
+    </div>
 
-    <!-- About -->
-    <section class="about-user">
-      <h3>👋 About Me</h3>
-      <p>Hi! I'm Mr. Hardik. I love spicy Indian dishes, trying Korean food, and building beautiful web apps. Food
-        motto: “Eat what makes you happy!” 😋</p>
-    </section>
-
-    <hr />
-
-    <!-- Favorites & Wishlist in a row -->
-    <section class="favorites-wishlist">
-      <div class="favorites">
-        <h3>❤️ Favorite Dishes</h3>
-        <ul>
-          <li>Paneer Butter Masala</li>
-          <li>Cheese Burst Pizza</li>
-          <li>Mexican Tacos</li>
-          <li>South Indian Dosa</li>
-          <li>Korean Bibimbap</li>
-        </ul>
+    <!-- Subscription -->
+    <div class="prof-card">
+      <h3><span class="card-icon">💎</span> Subscriptions &amp; Memberships</h3>
+      <div class="sub-badge">
+        <span class="sub-icon">💎</span>
+        <div>
+          <strong>Pipaliya Premium Member</strong>
+          <small>Valid till December 2025</small>
+        </div>
       </div>
-      <div class="wishlist">
-        <h3>🔖 Wishlist / Saved Dishes</h3>
-        <ul>
-          <li>Japanese Ramen</li>
-          <li>Thai Green Curry</li>
-          <li>Classic Italian Lasagna</li>
-        </ul>
-      </div>
-    </section>
+      <p style="font-size:0.85rem;color:var(--text-muted);">🚚 Free delivery on all orders &nbsp;·&nbsp; 🎁 Exclusive member offers</p>
+    </div>
 
-    <hr />
+    <!-- Favorite Dishes -->
+    <div class="prof-card">
+      <h3><span class="card-icon">❤️</span> Favorite Dishes</h3>
+      <ul class="fav-list">
+        <li>Paneer Butter Masala</li>
+        <li>Cheese Burst Pizza</li>
+        <li>Mexican Tacos</li>
+        <li>South Indian Dosa</li>
+        <li>Korean Bibimbap</li>
+      </ul>
+    </div>
 
-    <!-- Preferences -->
-    <section class="preferences">
-      <h3>🍛 Food Preferences</h3>
-      <p><strong>Diet:</strong> Vegetarian 🌿</p>
-      <p><strong>Spice Level:</strong> Medium to High 🌶️</p>
-      <p><strong>Allergies:</strong> None</p>
-    </section>
-
-    <hr />
+    <!-- Wishlist -->
+    <div class="prof-card">
+      <h3><span class="card-icon">🔖</span> Wishlist / Saved Dishes</h3>
+      <ul class="fav-list" style="--li-icon:'🔖'">
+        <li>Japanese Ramen</li>
+        <li>Thai Green Curry</li>
+        <li>Classic Italian Lasagna</li>
+      </ul>
+    </div>
 
     <!-- Recent Orders -->
-    <section class="order-history">
-      <h3>🍔 Recent Orders</h3>
-      <table>
+    <div class="prof-card profile-full">
+      <h3><span class="card-icon">🍔</span> Recent Orders</h3>
+      <table class="orders-table">
         <thead>
           <tr>
-            <th>🆔 Order ID</th>
-            <th>🍱 Items</th>
-            <th>📅 Date</th>
-            <th>✅ Status</th>
+            <th>Order ID</th>
+            <th>Items</th>
+            <th>Date</th>
+            <th>Status</th>
           </tr>
         </thead>
         <tbody>
@@ -457,120 +589,103 @@
             <td>#12345</td>
             <td>2x Paneer Wrap, Coke</td>
             <td>25 June 2025</td>
-            <td>Delivered</td>
+            <td><span class="status-pill status-delivered">✅ Delivered</span></td>
           </tr>
           <tr>
             <td>#12312</td>
             <td>Cheese Pizza</td>
             <td>18 June 2025</td>
-            <td>Delivered</td>
+            <td><span class="status-pill status-delivered">✅ Delivered</span></td>
           </tr>
           <tr>
             <td>#12298</td>
             <td>Veggie Burger, Fries</td>
             <td>10 June 2025</td>
-            <td>Cancelled</td>
+            <td><span class="status-pill status-cancelled">❌ Cancelled</span></td>
           </tr>
         </tbody>
       </table>
-    </section>
-
-    <hr />
+    </div>
 
     <!-- Saved Addresses -->
-    <section class="saved-addresses">
-      <h3>🏠 Saved Addresses</h3>
-      <div class="address-card">
-        🏡 <strong>Home:</strong> 12/34 Shyam Residency, Ahmedabad | 📞 +91 9876543210
+    <div class="prof-card profile-full">
+      <h3><span class="card-icon">🏠</span> Saved Addresses</h3>
+      <div class="address-grid">
+        <div class="address-card">
+          <strong>🏡 Home</strong>
+          12/34 Shyam Residency, Ahmedabad<br>
+          📞 +91 9876543210
+        </div>
+        <div class="address-card">
+          <strong>🏢 Office</strong>
+          ABC Tech Park, SG Highway, Ahmedabad<br>
+          📞 +91 9876501234
+        </div>
       </div>
-      <div class="address-card">
-        🏢 <strong>Office:</strong> ABC Tech Park, SG Highway | 📞 +91 9876501234
-      </div>
-    </section>
+    </div>
 
-    <hr />
-
-    <!-- Payment -->
-    <section class="payment-methods">
-      <h3>💳 Payment Methods</h3>
-      <ul>
+    <!-- Payment Methods -->
+    <div class="prof-card">
+      <h3><span class="card-icon">💳</span> Payment Methods</h3>
+      <ul class="payment-list">
         <li>💳 Visa **** 1234</li>
         <li>📱 Paytm Wallet</li>
         <li>🪙 UPI: hardik@upi</li>
       </ul>
-    </section>
+    </div>
 
-    <hr />
-
-    <!-- Subscriptions -->
-    <section class="subscriptions">
-      <h3>💎 Subscriptions & Memberships</h3>
-      <p>✔️ Pipaliya Premium Member (till Dec 2025)</p>
-      <p>🚚 Free delivery, exclusive offers</p>
-    </section>
-
-    <hr />
-
-    <!-- Reservations -->
-    <section class="reservations">
-      <h3>📅 Upcoming Reservations</h3>
-      <ul>
-        <li>🍽️ Table for 2 at Punjabi Bistro - 2 July 2025, 7:30 PM</li>
-        <li>🥘 Buffet at South Spice - 10 July 2025, 8:00 PM</li>
+    <!-- Upcoming Reservations -->
+    <div class="prof-card">
+      <h3><span class="card-icon">📅</span> Upcoming Reservations</h3>
+      <ul class="res-list">
+        <li>🍽️ Table for 2 — Punjabi Bistro<br><small>2 July 2025 · 7:30 PM</small></li>
+        <li>🥘 Buffet — South Spice<br><small>10 July 2025 · 8:00 PM</small></li>
       </ul>
-    </section>
+    </div>
 
-    <hr />
-
-    <!-- Reviews -->
-    <section class="reviews">
-      <h3>📝 Recent Reviews</h3>
-      <ul>
-        <li>⭐⭐⭐⭐⭐ Loved the spicy paneer wrap! - 24 June</li>
-        <li>⭐⭐⭐⭐ Amazing pizza! - 18 June</li>
-        <li>⭐⭐⭐ Burger ok, fries cold. - 10 June</li>
+    <!-- Recent Reviews -->
+    <div class="prof-card">
+      <h3><span class="card-icon">📝</span> Recent Reviews</h3>
+      <ul class="review-list">
+        <li>⭐⭐⭐⭐⭐ Loved the spicy paneer wrap! — <small>24 June</small></li>
+        <li>⭐⭐⭐⭐ Amazing pizza, would order again! — <small>18 June</small></li>
+        <li>⭐⭐⭐ Burger ok, but fries were cold. — <small>10 June</small></li>
       </ul>
-    </section>
+    </div>
 
-    <hr />
-
-    <!-- Support -->
-    <section class="support-tickets">
-      <h3>🛠️ Support Requests</h3>
-      <ul>
-        <li>📄 Ticket #789: Refund request (Closed)</li>
-        <li>📄 Ticket #790: Change address (Resolved)</li>
+    <!-- Support Tickets -->
+    <div class="prof-card">
+      <h3><span class="card-icon">🛠️</span> Support Requests</h3>
+      <ul class="ticket-list">
+        <li>📄 Ticket #789 — Refund request &nbsp;<span style="color:var(--success);font-size:0.75rem;font-weight:700;">● Closed</span></li>
+        <li>📄 Ticket #790 — Change address &nbsp;<span style="color:var(--success);font-size:0.75rem;font-weight:700;">● Resolved</span></li>
       </ul>
-    </section>
+    </div>
 
-    <hr />
-
-    <!-- Social -->
-    <section class="social-links">
-      <h3>🌐 Connected Social Accounts</h3>
-      <ul>
-        <li>📘 Facebook: <a href="#">hardik.fb</a></li>
-        <li>📸 Instagram: <a href="#">@mrhardik</a></li>
-        <li>🟢 Google Account linked</li>
+    <!-- Connected Social -->
+    <div class="prof-card">
+      <h3><span class="card-icon">🌐</span> Connected Social Accounts</h3>
+      <ul class="social-chips">
+        <li><a href="#">📘 Facebook: hardik.fb</a></li>
+        <li><a href="#">📸 Instagram: @mrhardik</a></li>
+        <li><span>🟢 Google Linked</span></li>
       </ul>
-    </section>
+    </div>
 
-    <hr />
-
-    <!-- Settings -->
-    <section class="settings">
-      <h3>⚙️ Account Settings</h3>
-      <ul>
+    <!-- Account Settings -->
+    <div class="prof-card profile-full">
+      <h3><span class="card-icon">⚙️</span> Account Settings</h3>
+      <ul class="settings-list">
         <li><a href="#" onclick="changePassword(); return false;">🔒 Change Password</a></li>
         <li><a href="#" onclick="editPrivacySettings(); return false;">🛡️ Privacy Settings</a></li>
         <li><a href="#">🔔 Notification Preferences</a></li>
-        <li><a href="#" onclick="deleteAccount(); return false;">🗑️ Delete Account</a></li>
+        <li><a href="#" onclick="deleteAccount(); return false;" class="danger">🗑️ Delete Account</a></li>
       </ul>
-    </section>
+    </div>
 
-  </main>
+  </div>
 
-  <!-- 📜 Footer -->
+  <!-- FOOTER -->
   <footer class="main-footer">
     <p>© 2025 PipaliyaPlates. All Rights Reserved.</p>
     <nav class="footer-nav">
@@ -578,219 +693,142 @@
     </nav>
   </footer>
 
+  <script src="script.js"></script>
   <script>
-    // Check if logged in
     if (sessionStorage.getItem("isLoggedIn") !== "true") {
       window.location.href = "login.html";
     }
 
-    // ── Load all user data on page load ──
     document.addEventListener("DOMContentLoaded", () => {
-      const emailEl = document.getElementById("profile-email");
-      const nameEl = document.getElementById("profile-name");
-      const bioEl = document.getElementById("profile-bio");
+      const emailEl  = document.getElementById("profile-email");
+      const nameEl   = document.getElementById("profile-name");
+      const bioEl    = document.getElementById("profile-bio");
       const avatarEl = document.getElementById("profile-avatar-img");
 
       const loggedEmail = sessionStorage.getItem("userEmail") || "hardik@example.com";
       emailEl.textContent = "📧 " + loggedEmail;
 
-      // Load saved name
       const savedName = localStorage.getItem("profileName_" + loggedEmail);
       if (savedName) {
-        nameEl.textContent = "✨ " + savedName + " ✨";
+        nameEl.textContent = savedName;
       } else {
-        const defaultName = loggedEmail.split("@")[0];
-        nameEl.textContent = "✨ " + defaultName.charAt(0).toUpperCase() + defaultName.slice(1) + " ✨";
+        const def = loggedEmail.split("@")[0];
+        nameEl.textContent = def.charAt(0).toUpperCase() + def.slice(1);
       }
 
-      // Load saved bio
       const savedBio = localStorage.getItem("profileBio_" + loggedEmail);
-      if (savedBio) bioEl.textContent = "🍱 " + savedBio;
+      if (savedBio) bioEl.textContent = savedBio;
 
-      // ── Load saved profile picture ──
       const savedAvatar = localStorage.getItem("profileAvatar_" + loggedEmail);
       if (savedAvatar) {
         avatarEl.src = savedAvatar;
       } else {
-        // Generate a nice initials avatar as default
         const initials = (savedName || loggedEmail.split("@")[0]).charAt(0).toUpperCase();
-        avatarEl.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(initials)}&background=f0e8ec&color=734060&size=200&font-size=0.5&bold=true`;
+        avatarEl.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(initials)}&background=1a1010&color=FF6B35&size=200&font-size=0.5&bold=true`;
       }
     });
 
-    // ── Handle avatar file upload ──
     function handleAvatarUpload(event) {
       const file = event.target.files[0];
       if (!file) return;
-
-      // Only allow images
-      if (!file.type.startsWith('image/')) {
-        alert('Please select an image file!');
-        return;
-      }
-
-      // Max 5MB check
-      if (file.size > 5 * 1024 * 1024) {
-        alert('Image is too large! Please choose an image under 5MB.');
-        return;
-      }
-
+      if (!file.type.startsWith("image/")) { alert("Please select an image file!"); return; }
+      if (file.size > 5 * 1024 * 1024) { alert("Image too large! Max 5MB."); return; }
       const reader = new FileReader();
       reader.onload = function (e) {
-        const avatarEl = document.getElementById('profile-avatar-img');
+        const avatarEl = document.getElementById("profile-avatar-img");
         avatarEl.src = e.target.result;
-
-        // Play ring animation
-        avatarEl.classList.remove('avatar-uploaded');
-        void avatarEl.offsetWidth; // reflow to restart animation
-        avatarEl.classList.add('avatar-uploaded');
-
-        // Save to localStorage
-        const loggedEmail = sessionStorage.getItem('userEmail') || 'hardik@example.com';
-        try {
-          localStorage.setItem('profileAvatar_' + loggedEmail, e.target.result);
-        } catch (err) {
-          // localStorage quota exceeded — image too large
-          console.warn('Could not save avatar to localStorage:', err);
-          alert('Photo displayed but could not be saved (storage full). Try a smaller image.');
-        }
+        avatarEl.classList.remove("avatar-uploaded");
+        void avatarEl.offsetWidth;
+        avatarEl.classList.add("avatar-uploaded");
+        const loggedEmail = sessionStorage.getItem("userEmail") || "hardik@example.com";
+        try { localStorage.setItem("profileAvatar_" + loggedEmail, e.target.result); }
+        catch (err) { alert("Photo shown but could not be saved (storage full). Try a smaller image."); }
       };
       reader.readAsDataURL(file);
-
-      // Reset input so same file can be picked again
-      event.target.value = '';
+      event.target.value = "";
     }
 
-    // Edit Profile Handler
     function editProfile() {
       const nameEl = document.getElementById("profile-name");
-      const bioEl = document.getElementById("profile-bio");
-
+      const bioEl  = document.getElementById("profile-bio");
       const loggedEmail = sessionStorage.getItem("userEmail") || "hardik@example.com";
-      const currentName = nameEl.textContent.replace(/✨/g, "").trim();
-      const currentBio = bioEl.textContent.replace(/🍱/g, "").trim();
-
-      const newName = prompt("Enter new name:", currentName);
+      const newName = prompt("Enter new name:", nameEl.textContent.trim());
       if (newName === null) return;
-      const newBio = prompt("Enter new bio:", currentBio);
+      const newBio  = prompt("Enter new bio:", bioEl.textContent.trim());
       if (newBio === null) return;
-
-      if (newName.trim() === "") {
-        alert("Name cannot be empty!");
-        return;
-      }
-
-      nameEl.textContent = "✨ " + newName.trim() + " ✨";
-      bioEl.textContent = "🍱 " + newBio.trim();
-
+      if (!newName.trim()) { alert("Name cannot be empty!"); return; }
+      nameEl.textContent = newName.trim();
+      bioEl.textContent  = newBio.trim();
       localStorage.setItem("profileName_" + loggedEmail, newName.trim());
-      localStorage.setItem("profileBio_" + loggedEmail, newBio.trim());
-
-      // Also update default avatar if no custom photo yet
+      localStorage.setItem("profileBio_"  + loggedEmail, newBio.trim());
       const savedAvatar = localStorage.getItem("profileAvatar_" + loggedEmail);
       if (!savedAvatar) {
         const initials = newName.trim().charAt(0).toUpperCase();
-        document.getElementById('profile-avatar-img').src =
-          `https://ui-avatars.com/api/?name=${encodeURIComponent(initials)}&background=f0e8ec&color=734060&size=200&font-size=0.5&bold=true`;
+        document.getElementById("profile-avatar-img").src =
+          `https://ui-avatars.com/api/?name=${encodeURIComponent(initials)}&background=1a1010&color=FF6B35&size=200&font-size=0.5&bold=true`;
       }
-
       alert("Profile updated successfully!");
     }
 
-    // Logout Handler
     function logout() {
       if (confirm("Are you sure you want to logout?")) {
         sessionStorage.removeItem("isLoggedIn");
         sessionStorage.removeItem("userEmail");
-        alert("Logged out successfully!");
         window.location.href = "login.html";
       }
     }
 
-    // Change Password Handler
     function changePassword() {
       const loggedEmail = sessionStorage.getItem("userEmail") || "hardik@example.com";
       const currentPass = prompt("Enter current password:");
       if (currentPass === null) return;
-
-      // Retrieve user's actual password
       let registeredUsers = JSON.parse(localStorage.getItem("registeredUsers")) || [];
       let userIndex = registeredUsers.findIndex(u => u.email === loggedEmail);
-
-      let actualPassword = "Hardik@2005"; // Default
-      if (userIndex !== -1) {
-        actualPassword = registeredUsers[userIndex].password;
-      } else {
-        // Check custom default password if changed
-        actualPassword = localStorage.getItem("defaultUserPassword") || "Hardik@2005";
-      }
-
-      if (currentPass !== actualPassword) {
-        alert("Incorrect current password!");
-        return;
-      }
-
+      let actualPassword = (userIndex !== -1)
+        ? registeredUsers[userIndex].password
+        : (localStorage.getItem("defaultUserPassword") || "Hardik@2005");
+      if (currentPass !== actualPassword) { alert("Incorrect current password!"); return; }
       const newPass = prompt("Enter new password:");
-      if (!newPass) {
-        alert("Password cannot be empty!");
-        return;
-      }
-
-      // Save new password
+      if (!newPass) { alert("Password cannot be empty!"); return; }
       if (userIndex !== -1) {
         registeredUsers[userIndex].password = newPass;
         localStorage.setItem("registeredUsers", JSON.stringify(registeredUsers));
       } else {
         localStorage.setItem("defaultUserPassword", newPass);
       }
-
       alert("Password changed successfully!");
     }
 
-    // Privacy Settings Handler
     function editPrivacySettings() {
-      const loggedEmail = sessionStorage.getItem("userEmail") || "hardik@example.com";
+      const loggedEmail    = sessionStorage.getItem("userEmail") || "hardik@example.com";
       const currentSetting = localStorage.getItem("privacy_" + loggedEmail) || "Public";
-      const newSetting = prompt("Enter privacy setting (Public / Private):", currentSetting);
+      const newSetting     = prompt("Enter privacy setting (Public / Private):", currentSetting);
       if (newSetting === null) return;
-
-      if (newSetting.trim().toLowerCase() === "public" || newSetting.trim().toLowerCase() === "private") {
-        const capitalizedSetting = newSetting.trim().charAt(0).toUpperCase() + newSetting.trim().slice(1).toLowerCase();
-        localStorage.setItem("privacy_" + loggedEmail, capitalizedSetting);
-        alert("Privacy settings updated to: " + capitalizedSetting);
+      const lc = newSetting.trim().toLowerCase();
+      if (lc === "public" || lc === "private") {
+        const cap = lc.charAt(0).toUpperCase() + lc.slice(1);
+        localStorage.setItem("privacy_" + loggedEmail, cap);
+        alert("Privacy updated to: " + cap);
       } else {
-        alert("Invalid input! Please enter either 'Public' or 'Private'.");
+        alert("Invalid! Enter 'Public' or 'Private'.");
       }
     }
 
-    // Delete Account Handler
     function deleteAccount() {
       const loggedEmail = sessionStorage.getItem("userEmail") || "hardik@example.com";
-
-      const confirmText = `Are you sure you want to delete your account (${loggedEmail})?\nThis action is permanent and cannot be undone!`;
-      if (!confirm(confirmText)) return;
-
-      // Delete from registered users if registered
+      if (!confirm(`Delete account (${loggedEmail})?\nThis is permanent and cannot be undone!`)) return;
       let registeredUsers = JSON.parse(localStorage.getItem("registeredUsers")) || [];
-      const filteredUsers = registeredUsers.filter(u => u.email !== loggedEmail);
-      localStorage.setItem("registeredUsers", JSON.stringify(filteredUsers));
-
-      // Remove specific local settings
-      localStorage.removeItem("profileName_" + loggedEmail);
-      localStorage.removeItem("profileBio_" + loggedEmail);
-      localStorage.removeItem("privacy_" + loggedEmail);
-      if (loggedEmail === "hardik@gmail.com") {
-        localStorage.removeItem("defaultUserPassword");
-      }
-
-      // Clear session and redirect
+      localStorage.setItem("registeredUsers", JSON.stringify(registeredUsers.filter(u => u.email !== loggedEmail)));
+      localStorage.removeItem("profileName_"   + loggedEmail);
+      localStorage.removeItem("profileBio_"    + loggedEmail);
+      localStorage.removeItem("privacy_"       + loggedEmail);
+      if (loggedEmail === "hardik@gmail.com") localStorage.removeItem("defaultUserPassword");
       sessionStorage.removeItem("isLoggedIn");
       sessionStorage.removeItem("userEmail");
-
       alert("Your account has been successfully deleted.");
       window.location.href = "register.html";
     }
   </script>
-</body>
 
+</body>
 </html>
