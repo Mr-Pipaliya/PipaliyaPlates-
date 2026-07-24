@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -430,6 +430,363 @@
 
     .about-text { font-size: 0.95rem; color: var(--text-secondary); line-height: 1.8; }
 
+    /* ══════════════════════════════════════════════════
+       EDIT PROFILE DRAWER MODAL
+    ══════════════════════════════════════════════════ */
+
+    /* Backdrop */
+    .ep-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 2000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s ease;
+    }
+    .ep-backdrop.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    /* Drawer panel */
+    .ep-drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      height: 100%;
+      width: min(520px, 100vw);
+      background: var(--bg-card);
+      border-left: 1px solid var(--border-bright);
+      z-index: 2001;
+      display: flex;
+      flex-direction: column;
+      transform: translateX(100%);
+      transition: transform 0.4s cubic-bezier(0.32, 0.72, 0, 1);
+      box-shadow: -20px 0 60px rgba(0,0,0,0.6);
+    }
+    .ep-drawer.open {
+      transform: translateX(0);
+    }
+
+    /* Drawer header */
+    .ep-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 28px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+    .ep-header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .ep-header-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--primary-light);
+      border: 1px solid var(--border-primary);
+      border-radius: var(--r-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+    }
+    .ep-header h2 {
+      font-family: var(--font-heading);
+      font-size: 1.3rem;
+      color: var(--text-primary);
+      margin: 0;
+    }
+    .ep-header p {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin: 2px 0 0;
+    }
+    .ep-close {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-bright);
+      color: var(--text-secondary);
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all var(--t-fast);
+      flex-shrink: 0;
+    }
+    .ep-close:hover {
+      background: rgba(239,68,68,0.15);
+      border-color: rgba(239,68,68,0.4);
+      color: #ef4444;
+    }
+
+    /* Scrollable body */
+    .ep-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .ep-body::-webkit-scrollbar { width: 4px; }
+    .ep-body::-webkit-scrollbar-track { background: transparent; }
+    .ep-body::-webkit-scrollbar-thumb { background: var(--border-bright); border-radius: 4px; }
+
+    /* Avatar section inside drawer */
+    .ep-avatar-section {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 20px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-xl);
+    }
+    .ep-avatar-preview {
+      position: relative;
+      width: 80px;
+      height: 80px;
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+    .ep-avatar-preview img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--border-primary);
+      transition: filter 0.25s ease;
+    }
+    .ep-avatar-preview:hover img { filter: brightness(0.6); }
+    .ep-avatar-badge {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 26px;
+      height: 26px;
+      background: var(--primary);
+      border-radius: 50%;
+      border: 2px solid var(--bg-card);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      pointer-events: none;
+    }
+    .ep-avatar-info strong {
+      display: block;
+      font-size: 0.88rem;
+      color: var(--text-primary);
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .ep-avatar-info p {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 10px;
+    }
+    .ep-avatar-btn {
+      padding: 7px 16px;
+      background: var(--primary-light);
+      border: 1px solid var(--border-primary);
+      border-radius: var(--r-pill);
+      color: var(--primary);
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--t-fast);
+    }
+    .ep-avatar-btn:hover {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    /* Section divider label */
+    .ep-section-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 4px;
+    }
+
+    /* Form fields */
+    .ep-field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .ep-field label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+    }
+    .ep-field input,
+    .ep-field textarea,
+    .ep-field select {
+      background: var(--bg-surface);
+      border: 1.5px solid var(--border-bright);
+      border-radius: var(--r-md);
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      padding: 12px 16px;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .ep-field textarea {
+      resize: vertical;
+      min-height: 80px;
+      line-height: 1.6;
+    }
+    .ep-field select option {
+      background: var(--bg-card);
+      color: var(--text-primary);
+    }
+    .ep-field input:focus,
+    .ep-field textarea:focus,
+    .ep-field select:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(255,107,53,0.12);
+    }
+    .ep-field input::placeholder,
+    .ep-field textarea::placeholder {
+      color: var(--text-dim);
+    }
+    .ep-field-hint {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+    .ep-field-error {
+      font-size: 0.72rem;
+      color: #ef4444;
+      margin-top: 2px;
+      display: none;
+    }
+    .ep-field.has-error input,
+    .ep-field.has-error textarea {
+      border-color: #ef4444;
+      box-shadow: 0 0 0 3px rgba(239,68,68,0.12);
+    }
+    .ep-field.has-error .ep-field-error { display: block; }
+
+    /* Two-column row */
+    .ep-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    /* Spice level radio pills */
+    .spice-options {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .spice-options input[type="radio"] { display: none; }
+    .spice-options label {
+      padding: 8px 16px;
+      background: var(--bg-surface);
+      border: 1.5px solid var(--border-bright);
+      border-radius: var(--r-pill);
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all var(--t-fast);
+      text-transform: none;
+      letter-spacing: 0;
+    }
+    .spice-options input[type="radio"]:checked + label {
+      background: var(--primary-light);
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+    .spice-options label:hover {
+      border-color: var(--border-primary);
+      color: var(--text-primary);
+    }
+
+    /* Drawer footer */
+    .ep-footer {
+      padding: 20px 28px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+    .ep-save-btn {
+      flex: 1;
+      padding: 14px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: #fff;
+      border: none;
+      border-radius: var(--r-pill);
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all var(--t-fast);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .ep-save-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(255,107,53,0.4);
+    }
+    .ep-save-btn:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none;
+    }
+    .ep-cancel-btn {
+      padding: 14px 24px;
+      background: transparent;
+      color: var(--text-secondary);
+      border: 1.5px solid var(--border-bright);
+      border-radius: var(--r-pill);
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--t-fast);
+    }
+    .ep-cancel-btn:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    /* Success checkmark animation */
+    @keyframes popIn {
+      0% { transform: scale(0.5); opacity: 0; }
+      70% { transform: scale(1.15); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    .ep-saved-check {
+      animation: popIn 0.4s ease both;
+    }
+
     /* ── Responsive ── */
     @media (max-width: 900px) {
       .profile-body { grid-template-columns: 1fr; }
@@ -438,6 +795,8 @@
     @media (max-width: 600px) {
       .profile-hero-inner { flex-direction: column; align-items: flex-start; }
       .address-grid { grid-template-columns: 1fr; }
+      .ep-row { grid-template-columns: 1fr; }
+      .ep-drawer { width: 100vw; }
     }
   </style>
 </head>
@@ -685,6 +1044,111 @@
 
   </div>
 
+  <!-- ══ EDIT PROFILE DRAWER ══ -->
+  <div class="ep-backdrop" id="ep-backdrop" onclick="closeEditDrawer()"></div>
+
+  <div class="ep-drawer" id="ep-drawer" role="dialog" aria-modal="true" aria-label="Edit Profile">
+
+    <!-- Header -->
+    <div class="ep-header">
+      <div class="ep-header-left">
+        <div class="ep-header-icon">✏️</div>
+        <div>
+          <h2>Edit Profile</h2>
+          <p>Update your personal info</p>
+        </div>
+      </div>
+      <button class="ep-close" onclick="closeEditDrawer()" aria-label="Close">✕</button>
+    </div>
+
+    <!-- Scrollable Body -->
+    <div class="ep-body">
+
+      <!-- Avatar inside drawer -->
+      <div class="ep-avatar-section">
+        <div class="ep-avatar-preview" onclick="document.getElementById('avatar-input').click()" title="Change photo">
+          <img id="ep-avatar-thumb" src="" alt="avatar">
+          <div class="ep-avatar-badge">📷</div>
+        </div>
+        <div class="ep-avatar-info">
+          <strong>Profile Photo</strong>
+          <p>JPG, PNG or GIF · Max 5 MB<br>Click photo to change</p>
+          <button class="ep-avatar-btn" onclick="document.getElementById('avatar-input').click()">📷 Change Photo</button>
+        </div>
+      </div>
+
+      <!-- Basic Info -->
+      <p class="ep-section-label">Basic Information</p>
+
+      <div class="ep-field" id="ep-name-field">
+        <label for="ep-name">Display Name *</label>
+        <input type="text" id="ep-name" placeholder="e.g. Mr. Hardik" maxlength="50">
+        <span class="ep-field-error" id="ep-name-err">Name cannot be empty</span>
+      </div>
+
+      <div class="ep-row">
+        <div class="ep-field">
+          <label for="ep-phone">Phone Number</label>
+          <input type="tel" id="ep-phone" placeholder="+91 98765 43210" maxlength="15">
+          <span class="ep-field-hint">Optional · for delivery updates</span>
+        </div>
+        <div class="ep-field">
+          <label for="ep-location">City</label>
+          <input type="text" id="ep-location" placeholder="e.g. Ahmedabad" maxlength="40">
+        </div>
+      </div>
+
+      <div class="ep-field" id="ep-bio-field">
+        <label for="ep-bio">Bio / Tagline</label>
+        <textarea id="ep-bio" placeholder="Tell us about yourself..."></textarea>
+        <span class="ep-field-hint" id="ep-bio-count">0 / 120 characters</span>
+      </div>
+
+      <!-- Food Preferences -->
+      <p class="ep-section-label">Food Preferences</p>
+
+      <div class="ep-field">
+        <label for="ep-diet">Diet Type</label>
+        <select id="ep-diet">
+          <option value="Vegetarian">🌿 Vegetarian</option>
+          <option value="Non-Vegetarian">🍗 Non-Vegetarian</option>
+          <option value="Vegan">🌱 Vegan</option>
+          <option value="Eggetarian">🥚 Eggetarian</option>
+          <option value="Jain">🙏 Jain</option>
+        </select>
+      </div>
+
+      <div class="ep-field">
+        <label>Spice Level</label>
+        <div class="spice-options">
+          <input type="radio" name="spice" id="sp-mild" value="Mild 🌿">
+          <label for="sp-mild">🌿 Mild</label>
+          <input type="radio" name="spice" id="sp-medium" value="Medium 🌶️">
+          <label for="sp-medium">🌶️ Medium</label>
+          <input type="radio" name="spice" id="sp-hot" value="Hot 🔥" checked>
+          <label for="sp-hot">🔥 Hot</label>
+          <input type="radio" name="spice" id="sp-xhot" value="Extra Hot 💥">
+          <label for="sp-xhot">💥 Extra Hot</label>
+        </div>
+      </div>
+
+      <div class="ep-field">
+        <label for="ep-allergies">Allergies / Notes</label>
+        <input type="text" id="ep-allergies" placeholder="e.g. Peanuts, Gluten" maxlength="80">
+      </div>
+
+    </div><!-- /ep-body -->
+
+    <!-- Footer Buttons -->
+    <div class="ep-footer">
+      <button class="ep-cancel-btn" onclick="closeEditDrawer()">Cancel</button>
+      <button class="ep-save-btn" id="ep-save-btn" onclick="saveProfile()">
+        <span id="ep-save-label">💾 Save Changes</span>
+      </button>
+    </div>
+
+  </div><!-- /ep-drawer -->
+
   <!-- FOOTER -->
   <footer class="main-footer">
     <p>© 2025 PipaliyaPlates. All Rights Reserved.</p>
@@ -748,26 +1212,142 @@
       event.target.value = "";
     }
 
+    /* ── Edit Profile Drawer ── */
     function editProfile() {
-      const nameEl = document.getElementById("profile-name");
-      const bioEl  = document.getElementById("profile-bio");
       const loggedEmail = sessionStorage.getItem("userEmail") || "hardik@example.com";
-      const newName = prompt("Enter new name:", nameEl.textContent.trim());
-      if (newName === null) return;
-      const newBio  = prompt("Enter new bio:", bioEl.textContent.trim());
-      if (newBio === null) return;
-      if (!newName.trim()) { alert("Name cannot be empty!"); return; }
-      nameEl.textContent = newName.trim();
-      bioEl.textContent  = newBio.trim();
-      localStorage.setItem("profileName_" + loggedEmail, newName.trim());
-      localStorage.setItem("profileBio_"  + loggedEmail, newBio.trim());
-      const savedAvatar = localStorage.getItem("profileAvatar_" + loggedEmail);
-      if (!savedAvatar) {
-        const initials = newName.trim().charAt(0).toUpperCase();
-        document.getElementById("profile-avatar-img").src =
-          `https://ui-avatars.com/api/?name=${encodeURIComponent(initials)}&background=1a1010&color=FF6B35&size=200&font-size=0.5&bold=true`;
+
+      // Sync avatar thumb
+      const mainAvatar = document.getElementById("profile-avatar-img").src;
+      document.getElementById("ep-avatar-thumb").src = mainAvatar;
+
+      // Pre-fill fields
+      document.getElementById("ep-name").value =
+        document.getElementById("profile-name").textContent.trim();
+
+      const bioRaw = document.getElementById("profile-bio").textContent.trim();
+      document.getElementById("ep-bio").value = bioRaw;
+      document.getElementById("ep-bio-count").textContent = bioRaw.length + " / 120 characters";
+
+      // Load extra saved fields
+      document.getElementById("ep-phone").value    = localStorage.getItem("profilePhone_"    + loggedEmail) || "";
+      document.getElementById("ep-location").value = localStorage.getItem("profileLocation_" + loggedEmail) || "";
+      document.getElementById("ep-allergies").value= localStorage.getItem("profileAllergies_"+ loggedEmail) || "";
+
+      // Diet
+      const savedDiet = localStorage.getItem("profileDiet_" + loggedEmail) || "Vegetarian";
+      document.getElementById("ep-diet").value = savedDiet;
+
+      // Spice
+      const savedSpice = localStorage.getItem("profileSpice_" + loggedEmail) || "Hot 🔥";
+      document.querySelectorAll('input[name="spice"]').forEach(r => {
+        r.checked = (r.value === savedSpice);
+      });
+
+      // Clear errors
+      document.getElementById("ep-name-field").classList.remove("has-error");
+
+      // Open drawer
+      document.getElementById("ep-backdrop").classList.add("open");
+      document.getElementById("ep-drawer").classList.add("open");
+      document.body.style.overflow = "hidden";
+
+      // Focus name field
+      setTimeout(() => document.getElementById("ep-name").focus(), 400);
+    }
+
+    function closeEditDrawer() {
+      document.getElementById("ep-backdrop").classList.remove("open");
+      document.getElementById("ep-drawer").classList.remove("open");
+      document.body.style.overflow = "";
+    }
+
+    // Bio character counter
+    document.addEventListener("DOMContentLoaded", () => {
+      const bioInput = document.getElementById("ep-bio");
+      if (bioInput) {
+        bioInput.addEventListener("input", () => {
+          const len = bioInput.value.length;
+          const counter = document.getElementById("ep-bio-count");
+          counter.textContent = len + " / 120 characters";
+          counter.style.color = len > 110 ? "var(--primary)" : "";
+          if (len > 120) bioInput.value = bioInput.value.slice(0, 120);
+        });
       }
-      alert("Profile updated successfully!");
+    });
+
+    // Close on Escape key
+    document.addEventListener("keydown", e => {
+      if (e.key === "Escape") closeEditDrawer();
+    });
+
+    function saveProfile() {
+      const loggedEmail = sessionStorage.getItem("userEmail") || "hardik@example.com";
+      const name        = document.getElementById("ep-name").value.trim();
+      const bio         = document.getElementById("ep-bio").value.trim();
+      const phone       = document.getElementById("ep-phone").value.trim();
+      const location    = document.getElementById("ep-location").value.trim();
+      const allergies   = document.getElementById("ep-allergies").value.trim();
+      const diet        = document.getElementById("ep-diet").value;
+      const spiceEl     = document.querySelector('input[name="spice"]:checked');
+      const spice       = spiceEl ? spiceEl.value : "Medium 🌶️";
+
+      // Validate
+      let valid = true;
+      const nameField = document.getElementById("ep-name-field");
+      if (!name) {
+        nameField.classList.add("has-error");
+        document.getElementById("ep-name").focus();
+        valid = false;
+      } else {
+        nameField.classList.remove("has-error");
+      }
+      if (!valid) return;
+
+      // Animate button
+      const saveBtn   = document.getElementById("ep-save-btn");
+      const saveLabel = document.getElementById("ep-save-label");
+      saveBtn.disabled = true;
+      saveLabel.textContent = "Saving...";
+
+      setTimeout(() => {
+        // Save to localStorage
+        localStorage.setItem("profileName_"      + loggedEmail, name);
+        localStorage.setItem("profileBio_"       + loggedEmail, bio);
+        localStorage.setItem("profilePhone_"     + loggedEmail, phone);
+        localStorage.setItem("profileLocation_"  + loggedEmail, location);
+        localStorage.setItem("profileAllergies_" + loggedEmail, allergies);
+        localStorage.setItem("profileDiet_"      + loggedEmail, diet);
+        localStorage.setItem("profileSpice_"     + loggedEmail, spice);
+
+        // Update hero display
+        document.getElementById("profile-name").textContent = name;
+        if (bio) document.getElementById("profile-bio").textContent = bio;
+
+        // Update avatar initials if no custom photo
+        const savedAvatar = localStorage.getItem("profileAvatar_" + loggedEmail);
+        if (!savedAvatar) {
+          const initials = name.charAt(0).toUpperCase();
+          const avatarEl = document.getElementById("profile-avatar-img");
+          avatarEl.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(initials)}&background=1a1010&color=FF6B35&size=200&font-size=0.5&bold=true`;
+        }
+
+        // Show success state
+        saveLabel.innerHTML = '<span class="ep-saved-check">✅</span> Saved!';
+        saveBtn.style.background = "linear-gradient(135deg, #22c55e, #16a34a)";
+
+        // Close drawer after brief success display
+        setTimeout(() => {
+          closeEditDrawer();
+          saveBtn.disabled = false;
+          saveLabel.innerHTML = "💾 Save Changes";
+          saveBtn.style.background = "";
+
+          // Show toast if available
+          if (typeof showToast === "function") {
+            showToast("Profile updated successfully! 🎉", "success");
+          }
+        }, 1000);
+      }, 600);
     }
 
     function logout() {
