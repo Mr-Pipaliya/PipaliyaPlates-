@@ -8,6 +8,14 @@
   <meta name="description" content="Your order has been placed! PipaliyaPlates is preparing your delicious food." />
   <link rel="stylesheet" href="style.css" />
   <style>
+    /* ── Thank You Page ── */
+    .thankyou-wrap {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: calc(var(--nav-h) + 40px) 24px 80px;
+      text-align: center;
+    }
+
     .thankyou-wrap .order-details p {
       display: flex;
       justify-content: space-between;
@@ -15,71 +23,299 @@
       border-bottom: 1px solid var(--border);
       font-size: 0.9rem;
     }
-
     .thankyou-wrap .order-details p:last-child {
       border-bottom: none;
     }
 
     .success-ring {
-      width: 100px;
-      height: 100px;
+      width: 110px;
+      height: 110px;
       border-radius: 50%;
-      background: linear-gradient(135deg, rgba(34, 197, 94, 0.15), rgba(34, 197, 94, 0.05));
-      border: 2px solid rgba(34, 197, 94, 0.3);
+      background: linear-gradient(135deg, rgba(34,197,94,0.15), rgba(34,197,94,0.05));
+      border: 2px solid rgba(34,197,94,0.4);
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0 auto 24px;
+      margin: 0 auto 28px;
       animation: pulse 2s ease-in-out infinite;
     }
 
-    .delivery-track {
-      display: flex;
-      justify-content: space-between;
-      margin: 24px 0;
-      position: relative;
+    /* ════════════════════════════════════
+       LIVE ORDER TRACKER
+    ════════════════════════════════════ */
+    .tracker-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--r-2xl);
+      padding: 32px 28px;
+      margin: 28px 0;
+      text-align: left;
     }
 
-    .delivery-track::before {
+    .tracker-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .tracker-title {
+      font-family: var(--font-heading);
+      font-size: 1.1rem;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .tracker-eta {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+    }
+
+    .tracker-eta .eta-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .tracker-eta .eta-time {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--primary);
+      line-height: 1;
+    }
+
+    .tracker-eta .eta-unit {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* Progress bar */
+    .tracker-progress-bar {
+      width: 100%;
+      height: 4px;
+      background: var(--border);
+      border-radius: 99px;
+      overflow: hidden;
+      margin-bottom: 28px;
+    }
+
+    .tracker-progress-fill {
+      height: 100%;
+      border-radius: 99px;
+      background: linear-gradient(90deg, var(--success, #22c55e), var(--primary));
+      width: 0%;
+      transition: width 1s ease;
+    }
+
+    /* Steps */
+    .tracker-steps {
+      display: flex;
+      position: relative;
+      justify-content: space-between;
+    }
+
+    .tracker-steps::before {
       content: '';
       position: absolute;
-      top: 20px;
+      top: 22px;
       left: 10%;
       right: 10%;
       height: 2px;
-      background: linear-gradient(90deg, var(--success), var(--primary));
+      background: var(--border);
+      z-index: 0;
+    }
+
+    .tracker-line-fill {
+      position: absolute;
+      top: 22px;
+      left: 10%;
+      height: 2px;
+      background: linear-gradient(90deg, #22c55e, var(--primary));
+      z-index: 1;
+      width: 0%;
+      transition: width 1.5s ease;
     }
 
     .track-step {
       text-align: center;
       flex: 1;
       position: relative;
+      z-index: 2;
     }
 
     .track-dot {
-      width: 40px;
-      height: 40px;
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
-      background: var(--bg-card);
-      border: 2px solid var(--success);
+      background: var(--bg-surface);
+      border: 2px solid var(--border-bright);
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0 auto 8px;
-      font-size: 1rem;
+      margin: 0 auto 10px;
+      font-size: 1.1rem;
+      transition: all 0.5s ease;
+      position: relative;
     }
 
     .track-dot.active {
-      background: linear-gradient(135deg, var(--success), #16a34a);
-      box-shadow: 0 0 16px rgba(34, 197, 94, 0.4);
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      border-color: #22c55e;
+      box-shadow: 0 0 20px rgba(34,197,94,0.45);
+    }
+
+    .track-dot.current {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark, #e05b25));
+      border-color: var(--primary);
+      box-shadow: 0 0 20px rgba(255,107,53,0.5);
+      animation: currentPulse 1.5s ease-in-out infinite;
+    }
+
+    @keyframes currentPulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(255,107,53,0.5); }
+      50%       { box-shadow: 0 0 0 10px rgba(255,107,53,0); }
     }
 
     .track-label {
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       color: var(--text-muted);
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: .04em;
+      line-height: 1.4;
+    }
+
+    .track-label.active { color: #22c55e; }
+    .track-label.current { color: var(--primary); }
+
+    .track-time {
+      font-size: 0.65rem;
+      color: var(--text-dim, var(--text-muted));
+      margin-top: 2px;
+    }
+
+    /* Live status badge */
+    .live-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      background: rgba(34,197,94,0.12);
+      border: 1px solid rgba(34,197,94,0.3);
+      border-radius: var(--r-pill);
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #22c55e;
+      margin-bottom: 20px;
+    }
+
+    .live-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #22c55e;
+      animation: liveBlink 1s ease-in-out infinite;
+    }
+
+    @keyframes liveBlink {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.2; }
+    }
+
+    /* Delivery rider animation */
+    .rider-track-wrap {
+      position: relative;
+      height: 50px;
+      margin: 16px 0 4px;
+      overflow: hidden;
+      border-radius: var(--r-lg);
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+    }
+
+    .rider-road {
+      position: absolute;
+      bottom: 10px;
+      left: 16px;
+      right: 16px;
+      height: 2px;
+      background: repeating-linear-gradient(90deg, var(--border-bright) 0, var(--border-bright) 10px, transparent 10px, transparent 20px);
+    }
+
+    .rider-emoji {
+      position: absolute;
+      bottom: 12px;
+      font-size: 1.4rem;
+      transition: left 2s ease;
+      left: 5%;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+    }
+
+    /* Order info table */
+    .order-info-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--r-2xl);
+      padding: 28px;
+      text-align: left;
+      margin-bottom: 20px;
+    }
+
+    .order-info-card h3 {
+      font-family: var(--font-heading);
+      font-size: 1.05rem;
+      color: var(--text-primary);
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .oi-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.88rem;
+    }
+
+    .oi-row:last-child { border-bottom: none; }
+    .oi-label { color: var(--text-muted); font-weight: 500; }
+    .oi-val { color: var(--text-primary); font-weight: 600; }
+
+    /* Help strip */
+    .help-strip {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 20px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    .help-strip-icon { font-size: 1.5rem; flex-shrink: 0; }
+    .help-strip-text { font-size: 0.84rem; color: var(--text-secondary); line-height: 1.5; }
+    .help-strip-text strong { color: var(--text-primary); }
+
+    .redirect-msg {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 16px;
     }
   </style>
 </head>
@@ -88,7 +324,7 @@
 
   <!-- Confetti -->
   <script>
-    const colors = ['#FF6B35', '#FFB800', '#22C55E', '#fff', 'rgba(255,107,53,0.6)'];
+    const colors = ['#FF6B35','#FFB800','#22C55E','#fff','rgba(255,107,53,0.6)'];
     for (let i = 0; i < 80; i++) {
       const piece = document.createElement('div');
       piece.classList.add('confetti-piece');
@@ -98,7 +334,6 @@
       piece.style.animationDelay = (Math.random() * 2) + 's';
       document.body.appendChild(piece);
     }
-    setTimeout(() => { window.location.href = 'index.html'; }, 7000);
   </script>
 
   <!-- HEADER -->
@@ -129,67 +364,120 @@
 
     <!-- Success icon -->
     <div class="success-ring">
-      <span class="thank-you-icon" style="font-size:3rem;animation:none;">🎉</span>
+      <span class="thank-you-icon" style="font-size:3.2rem;animation:none;">🎉</span>
     </div>
 
-    <h1>Payment Successful!</h1>
+    <h1>Order Placed Successfully!</h1>
     <p>
       Thank you for ordering from <strong style="color:var(--primary);">PipaliyaPlates</strong>!<br>
-      Your delicious meal is being prepared. 🚀🍽️
+      Your delicious meal is on its way. 🚀🍽️
     </p>
 
-    <!-- Order Details -->
-    <div class="order-details">
-      <h2>📦 Order Summary</h2>
-
-      <!-- Delivery tracking -->
-      <div class="delivery-track">
-        <div class="track-step">
-          <div class="track-dot active">✅</div>
-          <div class="track-label">Confirmed</div>
+    <!-- ══ LIVE TRACKER CARD ══ -->
+    <div class="tracker-card">
+      <div class="tracker-header">
+        <div class="tracker-title">
+          🛵 Live Order Tracking
         </div>
-        <div class="track-step">
-          <div class="track-dot active">👨‍🍳</div>
-          <div class="track-label">Preparing</div>
-        </div>
-        <div class="track-step">
-          <div class="track-dot">🛵</div>
-          <div class="track-label">On the Way</div>
-        </div>
-        <div class="track-step">
-          <div class="track-dot">🏠</div>
-          <div class="track-label">Delivered</div>
+        <div class="tracker-eta">
+          <span class="eta-label">Estimated Delivery</span>
+          <span class="eta-time" id="eta-countdown">35</span>
+          <span class="eta-unit">minutes</span>
         </div>
       </div>
 
-      <p>
-        <strong>Order Number</strong>
-        <span id="order-id-display">#PP-XXXXXX</span>
-      </p>
-      <p>
-        <strong>Amount Paid</strong>
-        <span id="order-total-display">—</span>
-      </p>
-      <p>
-        <strong>Estimated Delivery</strong>
-        <span>30–40 Minutes</span>
-      </p>
-      <p>
-        <strong>Payment Method</strong>
-        <span>Online (UPI / Card)</span>
-      </p>
-      <p>
-        <strong>Need Help?</strong>
-        <a href="tel:1800800600" style="color:var(--primary);font-weight:700;">1800-800-600</a>
-      </p>
+      <div class="live-badge">
+        <span class="live-dot"></span>
+        LIVE TRACKING
+      </div>
+
+      <!-- Progress bar -->
+      <div class="tracker-progress-bar">
+        <div class="tracker-progress-fill" id="progress-fill"></div>
+      </div>
+
+      <!-- Steps -->
+      <div class="tracker-steps" id="tracker-steps">
+        <div class="tracker-line-fill" id="tracker-line"></div>
+
+        <div class="track-step" id="step-0">
+          <div class="track-dot active" id="dot-0">✅</div>
+          <div class="track-label active" id="lbl-0">Confirmed</div>
+          <div class="track-time" id="tm-0"></div>
+        </div>
+
+        <div class="track-step" id="step-1">
+          <div class="track-dot" id="dot-1">👨‍🍳</div>
+          <div class="track-label" id="lbl-1">Preparing</div>
+          <div class="track-time" id="tm-1"></div>
+        </div>
+
+        <div class="track-step" id="step-2">
+          <div class="track-dot" id="dot-2">🛵</div>
+          <div class="track-label" id="lbl-2">On the Way</div>
+          <div class="track-time" id="tm-2"></div>
+        </div>
+
+        <div class="track-step" id="step-3">
+          <div class="track-dot" id="dot-3">🏠</div>
+          <div class="track-label" id="lbl-3">Delivered</div>
+          <div class="track-time" id="tm-3"></div>
+        </div>
+      </div>
+
+      <!-- Rider animation strip -->
+      <div class="rider-track-wrap" id="rider-strip">
+        <div class="rider-road"></div>
+        <div class="rider-emoji" id="rider-emoji">🛵</div>
+      </div>
+
+      <!-- Status message -->
+      <p id="status-msg"
+        style="font-size:0.88rem;color:var(--text-secondary);margin:12px 0 0;text-align:center;font-weight:500;"></p>
     </div>
 
-    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:24px;">
+    <!-- ══ ORDER INFO CARD ══ -->
+    <div class="order-info-card">
+      <h3>📦 Order Summary</h3>
+      <div class="oi-row">
+        <span class="oi-label">Order Number</span>
+        <span class="oi-val" id="order-id-display" style="color:var(--primary);">#PP-XXXXXX</span>
+      </div>
+      <div class="oi-row">
+        <span class="oi-label">Amount Paid</span>
+        <span class="oi-val" id="order-total-display">—</span>
+      </div>
+      <div class="oi-row">
+        <span class="oi-label">Payment Method</span>
+        <span class="oi-val" id="pay-method-display">—</span>
+      </div>
+      <div class="oi-row">
+        <span class="oi-label">Estimated Time</span>
+        <span class="oi-val">30–40 Minutes</span>
+      </div>
+      <div class="oi-row">
+        <span class="oi-label">Order Status</span>
+        <span class="oi-val" style="color:#22c55e;">✅ Confirmed</span>
+      </div>
+    </div>
+
+    <!-- Help strip -->
+    <div class="help-strip">
+      <div class="help-strip-icon">🎧</div>
+      <div class="help-strip-text">
+        <strong>Need help with your order?</strong><br>
+        Call us at <a href="tel:1800800600" style="color:var(--primary);font-weight:700;">1800-800-600</a>
+        or visit <a href="contact.html" style="color:var(--primary);">Contact Us</a>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:8px;">
       <a href="menu.html" class="btn btn-primary">🍽️ Order Again</a>
+      <a href="profile.html" class="btn btn-outline">📋 My Orders</a>
       <a href="index.html" class="btn btn-outline">🏠 Go Home</a>
     </div>
 
-    <p class="redirect-msg">Redirecting you back to Home in 7 seconds…</p>
+    <p class="redirect-msg" id="redirect-msg">Redirecting you to Home in <span id="redirect-timer">15</span> seconds…</p>
   </div>
 
   <!-- FOOTER -->
@@ -204,12 +492,108 @@
 
   <script src="script.js"></script>
   <script>
+    // ── Populate order data ──
     const orderId = sessionStorage.getItem('lastOrderId');
     const orderTotal = sessionStorage.getItem('lastOrderTotal');
+    const payMethod = sessionStorage.getItem('lastPayMethod');
+
     if (orderId) document.getElementById('order-id-display').textContent = orderId;
     if (orderTotal) document.getElementById('order-total-display').textContent = orderTotal;
+    if (payMethod) document.getElementById('pay-method-display').textContent = payMethod;
+
     sessionStorage.removeItem('lastOrderId');
     sessionStorage.removeItem('lastOrderTotal');
+    sessionStorage.removeItem('lastPayMethod');
+
+    // ── Live tracking simulation ──
+    const steps = [
+      { msg: '✅ Order confirmed! Kitchen is getting ready…', prog: 10, line: 0, riderPos: '5%' },
+      { msg: '👨‍🍳 Your food is being prepared with love!', prog: 35, line: 30, riderPos: '15%' },
+      { msg: '🛵 Rider picked up your order and is on the way!', prog: 68, line: 62, riderPos: '55%' },
+      { msg: '🏠 Order delivered! Enjoy your meal! 😋', prog: 100, line: 95, riderPos: '90%' }
+    ];
+
+    // Timing (ms): 0s, 8s, 18s, 32s
+    const stepTimes = [0, 8000, 18000, 32000];
+    let currentStep = 0;
+
+    function now12() {
+      return new Date().toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: true });
+    }
+
+    function applyStep(idx) {
+      currentStep = idx;
+      const s = steps[idx];
+
+      // Progress bar
+      document.getElementById('progress-fill').style.width = s.prog + '%';
+      document.getElementById('tracker-line').style.width = s.line + '%';
+
+      // Rider emoji
+      document.getElementById('rider-emoji').style.left = s.riderPos;
+
+      // Status msg
+      document.getElementById('status-msg').textContent = s.msg;
+
+      // Dots & labels
+      for (let i = 0; i <= 3; i++) {
+        const dot = document.getElementById('dot-' + i);
+        const lbl = document.getElementById('lbl-' + i);
+        const tm  = document.getElementById('tm-' + i);
+
+        dot.classList.remove('active', 'current');
+        lbl.classList.remove('active', 'current');
+
+        if (i < idx) {
+          dot.classList.add('active');
+          lbl.classList.add('active');
+        } else if (i === idx) {
+          dot.classList.add('current');
+          lbl.classList.add('current');
+          if (!tm.textContent) tm.textContent = now12();
+        }
+      }
+
+      // ETA countdown
+      const etaMinutes = [35, 25, 12, 0];
+      document.getElementById('eta-countdown').textContent = etaMinutes[idx];
+      if (idx === 3) {
+        document.getElementById('eta-countdown').textContent = '🎉';
+        document.querySelector('.tracker-eta .eta-unit').textContent = 'Delivered!';
+      }
+    }
+
+    // Start at step 0 immediately
+    applyStep(0);
+
+    // Schedule each subsequent step
+    stepTimes.forEach((t, i) => {
+      if (i === 0) return;
+      setTimeout(() => applyStep(i), t);
+    });
+
+    // Real-time minute countdown for ETA
+    let etaStart = 35;
+    const etaInterval = setInterval(() => {
+      if (currentStep < 3) {
+        etaStart = Math.max(0, etaStart - 1);
+        document.getElementById('eta-countdown').textContent = etaStart;
+      } else {
+        clearInterval(etaInterval);
+      }
+    }, 60000);
+
+    // ── Redirect countdown ──
+    let redirectSec = 15;
+    const rTimer = setInterval(() => {
+      redirectSec--;
+      const el = document.getElementById('redirect-timer');
+      if (el) el.textContent = redirectSec;
+      if (redirectSec <= 0) {
+        clearInterval(rTimer);
+        window.location.href = 'index.html';
+      }
+    }, 1000);
   </script>
 </body>
 

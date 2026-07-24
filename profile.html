@@ -798,6 +798,198 @@
       .ep-row { grid-template-columns: 1fr; }
       .ep-drawer { width: 100vw; }
     }
+
+    /* ══════════════════════════════════════════════════
+       GENERIC MODAL (Change Password / Delete Account)
+    ══════════════════════════════════════════════════ */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.75);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 3000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      padding: 20px;
+    }
+    .modal-backdrop.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .modal-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-bright);
+      border-radius: var(--r-2xl);
+      padding: 0;
+      width: 100%;
+      max-width: 460px;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.6);
+      transform: scale(0.9) translateY(20px);
+      transition: transform 0.35s cubic-bezier(0.32,0.72,0,1);
+      overflow: hidden;
+    }
+    .modal-backdrop.open .modal-box {
+      transform: scale(1) translateY(0);
+    }
+    .modal-top {
+      padding: 28px 28px 20px;
+      border-bottom: 1px solid var(--border);
+    }
+    .modal-top-inner {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 6px;
+    }
+    .modal-icon {
+      width: 46px;
+      height: 46px;
+      border-radius: var(--r-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+    .modal-icon.blue  { background: rgba(59,130,246,0.15); border: 1px solid rgba(59,130,246,0.3); }
+    .modal-icon.red   { background: rgba(239,68,68,0.12);  border: 1px solid rgba(239,68,68,0.3); }
+    .modal-top h2 {
+      font-family: var(--font-heading);
+      font-size: 1.25rem;
+      color: var(--text-primary);
+      margin: 0;
+    }
+    .modal-top p {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin: 0;
+      line-height: 1.5;
+    }
+    .modal-body { padding: 24px 28px; display: flex; flex-direction: column; gap: 16px; }
+    .modal-field { display: flex; flex-direction: column; gap: 6px; }
+    .modal-field label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+    }
+    .modal-field input {
+      background: var(--bg-surface);
+      border: 1.5px solid var(--border-bright);
+      border-radius: var(--r-md);
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      font-size: 0.92rem;
+      padding: 12px 16px;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .modal-field input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(255,107,53,0.12);
+    }
+    .modal-field .hint {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+    .modal-field .err {
+      font-size: 0.72rem;
+      color: #ef4444;
+      display: none;
+    }
+    .modal-field.has-error input  { border-color: #ef4444; box-shadow: 0 0 0 3px rgba(239,68,68,0.12); }
+    .modal-field.has-error .err   { display: block; }
+    .password-wrap { position: relative; }
+    .password-wrap input { padding-right: 44px; }
+    .pw-toggle {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      color: var(--text-muted);
+      padding: 4px;
+      transition: color 0.2s;
+    }
+    .pw-toggle:hover { color: var(--text-primary); }
+    .modal-footer {
+      padding: 16px 28px 24px;
+      display: flex;
+      gap: 10px;
+    }
+    .modal-btn-primary {
+      flex: 1;
+      padding: 13px;
+      background: linear-gradient(135deg, var(--primary), #e05b25);
+      color: #fff;
+      border: none;
+      border-radius: var(--r-pill);
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .modal-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(255,107,53,0.4); }
+    .modal-btn-primary.danger {
+      background: linear-gradient(135deg, #ef4444, #b91c1c);
+    }
+    .modal-btn-primary.danger:hover { box-shadow: 0 8px 24px rgba(239,68,68,0.4); }
+    .modal-btn-cancel {
+      padding: 13px 22px;
+      background: transparent;
+      color: var(--text-secondary);
+      border: 1.5px solid var(--border-bright);
+      border-radius: var(--r-pill);
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .modal-btn-cancel:hover { border-color: var(--primary); color: var(--primary); }
+    /* Delete confirm box */
+    .del-warn-box {
+      background: rgba(239,68,68,0.08);
+      border: 1px solid rgba(239,68,68,0.25);
+      border-radius: var(--r-lg);
+      padding: 16px;
+      font-size: 0.84rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+    .del-warn-box strong { color: #ef4444; display: block; margin-bottom: 6px; font-size: 0.9rem; }
+    .del-confirm-input-wrap { position: relative; }
+    /* Strength bar */
+    .strength-bar {
+      height: 4px;
+      border-radius: 99px;
+      background: var(--border);
+      overflow: hidden;
+      margin-top: 6px;
+    }
+    .strength-fill {
+      height: 100%;
+      border-radius: 99px;
+      transition: width 0.3s, background 0.3s;
+      width: 0%;
+    }
+    .strength-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      margin-top: 4px;
+    }
   </style>
 </head>
 
@@ -1149,6 +1341,94 @@
 
   </div><!-- /ep-drawer -->
 
+  <!-- ══ CHANGE PASSWORD MODAL ══ -->
+  <div class="modal-backdrop" id="cp-modal" role="dialog" aria-modal="true" aria-label="Change Password">
+    <div class="modal-box">
+      <div class="modal-top">
+        <div class="modal-top-inner">
+          <div class="modal-icon blue">🔒</div>
+          <div>
+            <h2>Change Password</h2>
+          </div>
+        </div>
+        <p>Enter your current password, then set a new secure password.</p>
+      </div>
+      <div class="modal-body">
+        <div class="modal-field" id="cp-curr-field">
+          <label>Current Password</label>
+          <div class="password-wrap">
+            <input type="password" id="cp-curr" placeholder="Enter current password" autocomplete="current-password" />
+            <button type="button" class="pw-toggle" onclick="togglePw('cp-curr',this)" tabindex="-1">👁️</button>
+          </div>
+          <span class="err" id="cp-curr-err">Incorrect current password</span>
+        </div>
+        <div class="modal-field" id="cp-new-field">
+          <label>New Password</label>
+          <div class="password-wrap">
+            <input type="password" id="cp-new" placeholder="Min 8 characters" autocomplete="new-password"
+              oninput="checkPwStrength(this.value)" />
+            <button type="button" class="pw-toggle" onclick="togglePw('cp-new',this)" tabindex="-1">👁️</button>
+          </div>
+          <div class="strength-bar"><div class="strength-fill" id="pw-strength-fill"></div></div>
+          <span class="strength-label" id="pw-strength-label" style="color:var(--text-muted);"></span>
+          <span class="err" id="cp-new-err">Password must be at least 8 characters</span>
+        </div>
+        <div class="modal-field" id="cp-conf-field">
+          <label>Confirm New Password</label>
+          <div class="password-wrap">
+            <input type="password" id="cp-conf" placeholder="Re-enter new password" autocomplete="new-password" />
+            <button type="button" class="pw-toggle" onclick="togglePw('cp-conf',this)" tabindex="-1">👁️</button>
+          </div>
+          <span class="err" id="cp-conf-err">Passwords do not match</span>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="modal-btn-cancel" onclick="closeModal('cp-modal')">Cancel</button>
+        <button class="modal-btn-primary" id="cp-save-btn" onclick="doChangePassword()">🔒 Update Password</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ DELETE ACCOUNT MODAL ══ -->
+  <div class="modal-backdrop" id="da-modal" role="dialog" aria-modal="true" aria-label="Delete Account">
+    <div class="modal-box">
+      <div class="modal-top">
+        <div class="modal-top-inner">
+          <div class="modal-icon red">🗑️</div>
+          <div>
+            <h2 style="color:#ef4444;">Delete Account</h2>
+          </div>
+        </div>
+        <p>This action is permanent and cannot be undone.</p>
+      </div>
+      <div class="modal-body">
+        <div class="del-warn-box">
+          <strong>⚠️ You will permanently lose:</strong>
+          • Your order history &amp; saved addresses<br>
+          • Loyalty points &amp; badges<br>
+          • All profile data &amp; preferences
+        </div>
+        <div class="modal-field" id="da-pass-field">
+          <label>Enter Password to Confirm</label>
+          <div class="password-wrap del-confirm-input-wrap">
+            <input type="password" id="da-password" placeholder="Enter your password" autocomplete="current-password" />
+            <button type="button" class="pw-toggle" onclick="togglePw('da-password',this)" tabindex="-1">👁️</button>
+          </div>
+          <span class="err" id="da-pass-err">Incorrect password. Please try again.</span>
+        </div>
+        <div class="modal-field" id="da-confirm-field">
+          <label>Type <strong style="color:#ef4444;">DELETE</strong> to confirm</label>
+          <input type="text" id="da-confirm-text" placeholder="Type DELETE here" />
+          <span class="err" id="da-confirm-err">Please type DELETE to confirm</span>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="modal-btn-cancel" onclick="closeModal('da-modal')">Cancel</button>
+        <button class="modal-btn-primary danger" id="da-delete-btn" onclick="doDeleteAccount()">🗑️ Delete My Account</button>
+      </div>
+    </div>
+  </div>
+
   <!-- FOOTER -->
   <footer class="main-footer">
     <p>© 2025 PipaliyaPlates. All Rights Reserved.</p>
@@ -1358,55 +1638,213 @@
       }
     }
 
+    /* ── Modal helpers ── */
+    function openModal(id) {
+      document.getElementById(id).classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    // Close on backdrop click
+    document.querySelectorAll('.modal-backdrop').forEach(m => {
+      m.addEventListener('click', e => { if (e.target === m) closeModal(m.id); });
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') {
+        closeModal('cp-modal');
+        closeModal('da-modal');
+        closeEditDrawer();
+      }
+    });
+
+    /* ── Toggle password visibility ── */
+    function togglePw(inputId, btn) {
+      const inp = document.getElementById(inputId);
+      if (inp.type === 'password') { inp.type = 'text'; btn.textContent = '🙈'; }
+      else { inp.type = 'password'; btn.textContent = '👁️'; }
+    }
+
+    /* ── Password strength checker ── */
+    function checkPwStrength(val) {
+      const fill  = document.getElementById('pw-strength-fill');
+      const label = document.getElementById('pw-strength-label');
+      let score = 0;
+      if (val.length >= 8)  score++;
+      if (/[A-Z]/.test(val)) score++;
+      if (/[0-9]/.test(val)) score++;
+      if (/[^A-Za-z0-9]/.test(val)) score++;
+      const levels = [
+        { w: '0%',   bg: 'transparent', txt: '' },
+        { w: '25%',  bg: '#ef4444',     txt: '😟 Weak' },
+        { w: '50%',  bg: '#f97316',     txt: '😐 Fair' },
+        { w: '75%',  bg: '#eab308',     txt: '😊 Good' },
+        { w: '100%', bg: '#22c55e',     txt: '💪 Strong' },
+      ];
+      const lv = val.length === 0 ? levels[0] : levels[score] || levels[1];
+      fill.style.width = lv.w;
+      fill.style.background = lv.bg;
+      label.textContent = lv.txt;
+      label.style.color = lv.bg;
+    }
+
+    /* ── Open Change Password Modal ── */
     function changePassword() {
-      const loggedEmail = sessionStorage.getItem("userEmail") || "hardik@example.com";
-      const currentPass = prompt("Enter current password:");
-      if (currentPass === null) return;
-      let registeredUsers = JSON.parse(localStorage.getItem("registeredUsers")) || [];
+      // Clear fields and errors
+      ['cp-curr','cp-new','cp-conf'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.value = '';
+      });
+      ['cp-curr-field','cp-new-field','cp-conf-field'].forEach(id => {
+        document.getElementById(id).classList.remove('has-error');
+      });
+      document.getElementById('pw-strength-fill').style.width = '0%';
+      document.getElementById('pw-strength-label').textContent = '';
+      openModal('cp-modal');
+      setTimeout(() => document.getElementById('cp-curr').focus(), 300);
+    }
+
+    /* ── Actually change password ── */
+    function doChangePassword() {
+      const loggedEmail = sessionStorage.getItem('userEmail') || 'hardik@example.com';
+      const currVal = document.getElementById('cp-curr').value;
+      const newVal  = document.getElementById('cp-new').value;
+      const confVal = document.getElementById('cp-conf').value;
+
+      let valid = true;
+
+      // Check current password
+      let registeredUsers = JSON.parse(localStorage.getItem('registeredUsers')) || [];
       let userIndex = registeredUsers.findIndex(u => u.email === loggedEmail);
       let actualPassword = (userIndex !== -1)
         ? registeredUsers[userIndex].password
-        : (localStorage.getItem("defaultUserPassword") || "Hardik@2005");
-      if (currentPass !== actualPassword) { alert("Incorrect current password!"); return; }
-      const newPass = prompt("Enter new password:");
-      if (!newPass) { alert("Password cannot be empty!"); return; }
-      if (userIndex !== -1) {
-        registeredUsers[userIndex].password = newPass;
-        localStorage.setItem("registeredUsers", JSON.stringify(registeredUsers));
+        : (localStorage.getItem('defaultUserPassword') || 'Hardik@2005');
+
+      const currField = document.getElementById('cp-curr-field');
+      if (!currVal || currVal !== actualPassword) {
+        currField.classList.add('has-error');
+        valid = false;
       } else {
-        localStorage.setItem("defaultUserPassword", newPass);
+        currField.classList.remove('has-error');
       }
-      alert("Password changed successfully!");
+
+      // Check new password length
+      const newField = document.getElementById('cp-new-field');
+      if (!newVal || newVal.length < 8) {
+        newField.classList.add('has-error');
+        valid = false;
+      } else {
+        newField.classList.remove('has-error');
+      }
+
+      // Check confirm
+      const confField = document.getElementById('cp-conf-field');
+      if (!confVal || confVal !== newVal) {
+        confField.classList.add('has-error');
+        valid = false;
+      } else {
+        confField.classList.remove('has-error');
+      }
+
+      if (!valid) return;
+
+      // Save
+      const btn = document.getElementById('cp-save-btn');
+      btn.textContent = '⏳ Saving…';
+      btn.disabled = true;
+
+      setTimeout(() => {
+        if (userIndex !== -1) {
+          registeredUsers[userIndex].password = newVal;
+          localStorage.setItem('registeredUsers', JSON.stringify(registeredUsers));
+        } else {
+          localStorage.setItem('defaultUserPassword', newVal);
+        }
+        closeModal('cp-modal');
+        btn.textContent = '🔒 Update Password';
+        btn.disabled = false;
+        if (typeof showToast === 'function') showToast('Password changed successfully! 🔒', 'success');
+      }, 700);
     }
 
     function editPrivacySettings() {
-      const loggedEmail    = sessionStorage.getItem("userEmail") || "hardik@example.com";
-      const currentSetting = localStorage.getItem("privacy_" + loggedEmail) || "Public";
-      const newSetting     = prompt("Enter privacy setting (Public / Private):", currentSetting);
+      const loggedEmail    = sessionStorage.getItem('userEmail') || 'hardik@example.com';
+      const currentSetting = localStorage.getItem('privacy_' + loggedEmail) || 'Public';
+      const newSetting     = prompt('Enter privacy setting (Public / Private):', currentSetting);
       if (newSetting === null) return;
       const lc = newSetting.trim().toLowerCase();
-      if (lc === "public" || lc === "private") {
+      if (lc === 'public' || lc === 'private') {
         const cap = lc.charAt(0).toUpperCase() + lc.slice(1);
-        localStorage.setItem("privacy_" + loggedEmail, cap);
-        alert("Privacy updated to: " + cap);
+        localStorage.setItem('privacy_' + loggedEmail, cap);
+        if (typeof showToast === 'function') showToast('Privacy updated to: ' + cap, 'success');
       } else {
-        alert("Invalid! Enter 'Public' or 'Private'.");
+        if (typeof showToast === 'function') showToast("Enter 'Public' or 'Private'", 'error');
       }
     }
 
+    /* ── Open Delete Account Modal ── */
     function deleteAccount() {
-      const loggedEmail = sessionStorage.getItem("userEmail") || "hardik@example.com";
-      if (!confirm(`Delete account (${loggedEmail})?\nThis is permanent and cannot be undone!`)) return;
-      let registeredUsers = JSON.parse(localStorage.getItem("registeredUsers")) || [];
-      localStorage.setItem("registeredUsers", JSON.stringify(registeredUsers.filter(u => u.email !== loggedEmail)));
-      localStorage.removeItem("profileName_"   + loggedEmail);
-      localStorage.removeItem("profileBio_"    + loggedEmail);
-      localStorage.removeItem("privacy_"       + loggedEmail);
-      if (loggedEmail === "hardik@gmail.com") localStorage.removeItem("defaultUserPassword");
-      sessionStorage.removeItem("isLoggedIn");
-      sessionStorage.removeItem("userEmail");
-      alert("Your account has been successfully deleted.");
-      window.location.href = "register.html";
+      // Clear fields
+      const pw = document.getElementById('da-password');
+      const ct = document.getElementById('da-confirm-text');
+      if (pw) pw.value = '';
+      if (ct) ct.value = '';
+      ['da-pass-field','da-confirm-field'].forEach(id => {
+        document.getElementById(id).classList.remove('has-error');
+      });
+      openModal('da-modal');
+      setTimeout(() => document.getElementById('da-password').focus(), 300);
+    }
+
+    /* ── Actually delete account ── */
+    function doDeleteAccount() {
+      const loggedEmail = sessionStorage.getItem('userEmail') || 'hardik@example.com';
+      const pwVal   = document.getElementById('da-password').value;
+      const confVal = document.getElementById('da-confirm-text').value.trim();
+
+      let valid = true;
+
+      // Password check
+      let registeredUsers = JSON.parse(localStorage.getItem('registeredUsers')) || [];
+      let userIndex = registeredUsers.findIndex(u => u.email === loggedEmail);
+      let actualPassword = (userIndex !== -1)
+        ? registeredUsers[userIndex].password
+        : (localStorage.getItem('defaultUserPassword') || 'Hardik@2005');
+
+      const passField = document.getElementById('da-pass-field');
+      if (!pwVal || pwVal !== actualPassword) {
+        passField.classList.add('has-error');
+        valid = false;
+      } else {
+        passField.classList.remove('has-error');
+      }
+
+      const confField = document.getElementById('da-confirm-field');
+      if (confVal !== 'DELETE') {
+        confField.classList.add('has-error');
+        valid = false;
+      } else {
+        confField.classList.remove('has-error');
+      }
+
+      if (!valid) return;
+
+      const btn = document.getElementById('da-delete-btn');
+      btn.textContent = '⏳ Deleting…';
+      btn.disabled = true;
+
+      setTimeout(() => {
+        localStorage.setItem('registeredUsers', JSON.stringify(registeredUsers.filter(u => u.email !== loggedEmail)));
+        ['profileName_','profileBio_','profilePhone_','profileLocation_','profileAllergies_',
+         'profileDiet_','profileSpice_','profileAvatar_','privacy_'].forEach(key => {
+          localStorage.removeItem(key + loggedEmail);
+        });
+        if (loggedEmail === 'hardik@gmail.com') localStorage.removeItem('defaultUserPassword');
+        sessionStorage.removeItem('isLoggedIn');
+        sessionStorage.removeItem('userEmail');
+        window.location.href = 'register.html';
+      }, 800);
     }
   </script>
 
